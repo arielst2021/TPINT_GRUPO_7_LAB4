@@ -15,7 +15,7 @@
 	href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css" />
 </head>
 
-<body class="bg-light">
+<body style="background-color: #F6F9FF">
 
 	<!--
 ----------------------------------------------------
