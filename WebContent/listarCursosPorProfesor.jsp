@@ -87,21 +87,21 @@ N A V B A R
 									for (Curso item : listarCursos) {
 							%>
 
-							
-								<tr>
-									<td><%=item.getMateria().getId()%></td>
-									<td><%=item.getMateria().getNombre()%></td>
-									<td><%=item.getSemestre().getNombre()%></td>
-									<td><%=item.getAnio()%></td>
-									<td><button type="submit" class="btn btn-sm btn-primary">Ver
-											Alumnos</button></td>
-								</tr>
-								<%
+
+							<tr>
+								<td><%=item.getMateria().getId()%></td>
+								<td><%=item.getMateria().getNombre()%></td>
+								<td><%=item.getSemestre().getNombre()%></td>
+								<td><%=item.getAnio()%></td>
+								<td><button type="submit" class="btn btn-sm btn-primary">Ver
+										Alumnos</button></td>
+							</tr>
+							<%
 									}
 									}
 								%>
 
-							
+
 						</table>
 						<!-- FIN DE LA TABLA -->
 					</div>
@@ -124,8 +124,8 @@ N A V B A R
 		src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 	<script type="text/javascript"
 		src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
-  
-  <script>
+
+	<script>
 //IDIOMAS ESPAÑOL DEL DATATABLE   
 $(document).ready(function() {
 	$('#myTable').DataTable({ 
@@ -134,6 +134,6 @@ $(document).ready(function() {
 		}
 	});
 });
-</script>  
+</script>
 </body>
 </html>
