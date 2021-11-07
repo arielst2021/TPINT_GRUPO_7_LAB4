@@ -36,17 +36,18 @@
 ----------------------------------------------------
 N A V B A R
 ---------------------------------------------------- -->
-	<% 
-if (session.getAttribute("perfil") != null) {%>
+	<%
+		if (session.getAttribute("perfil") != null) {
+	%>
 	<jsp:include page="logout.jsp"></jsp:include>
 	<jsp:include page="navTabs.jsp"></jsp:include>
-	<%    	 
-}
-else{%>
+	<%
+		} else {
+	%>
 	<jsp:include page="login.jsp"></jsp:include>
-	<%    	 	
-}
-%>
+	<%
+		}
+	%>
 
 
 	<main id="main" class="main">
@@ -75,20 +76,20 @@ else{%>
 							</thead>
 
 							<%
-							ArrayList<Curso> listarCursos = null;
-							if (request.getAttribute("listaCursos") != null) {
-								listarCursos = (ArrayList<Curso>) request.getAttribute("listaCursos");
-							}
+								ArrayList<Curso> listarCursos = null;
+								if (request.getAttribute("listaCursos") != null) {
+									listarCursos = (ArrayList<Curso>) request.getAttribute("listaCursos");
+								}
 							%>
 
 							<%
-							if (listarCursos != null){
-							for (Curso item : listarCursos) {
+								if (listarCursos != null) {
+									for (Curso item : listarCursos) {
 							%>
 
-							<tbody>
+							
 								<tr>
-									<th scope="row"><%=item.getMateria().getId()%></th>
+									<td><%=item.getMateria().getId()%></td>
 									<td><%=item.getMateria().getNombre()%></td>
 									<td><%=item.getSemestre().getNombre()%></td>
 									<td><%=item.getAnio()%></td>
@@ -96,11 +97,11 @@ else{%>
 											Alumnos</button></td>
 								</tr>
 								<%
-								}
-							}
-							%>
+									}
+									}
+								%>
 
-							</tbody>
+							
 						</table>
 						<!-- FIN DE LA TABLA -->
 					</div>
@@ -113,7 +114,6 @@ else{%>
 
 	<!-- ======= Footer ======= -->
 
-	<!-- End Footer -->
 	<script type="text/javascript"
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script type="text/javascript"
@@ -124,8 +124,8 @@ else{%>
 		src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 	<script type="text/javascript"
 		src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
-
-	<script>
+  
+  <script>
 //IDIOMAS ESPAÑOL DEL DATATABLE   
 $(document).ready(function() {
 	$('#myTable').DataTable({ 
@@ -134,6 +134,6 @@ $(document).ready(function() {
 		}
 	});
 });
-</script>
+</script>  
 </body>
 </html>
