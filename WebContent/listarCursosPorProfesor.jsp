@@ -89,12 +89,23 @@ N A V B A R
 
 
 							<tr>
+
 								<td><%=item.getMateria().getId()%></td>
 								<td><%=item.getMateria().getNombre()%></td>
 								<td><%=item.getSemestre().getNombre()%></td>
 								<td><%=item.getAnio()%></td>
-								<td><button type="submit" class="btn btn-sm btn-primary">Ver
-										Alumnos</button></td>
+								<td>
+								
+								<form action="ServletControlador" method="post">
+								    <input type="hidden" id="txtMateriaId" name="txtMateriaId" value="<%=item.getMateria().getId()%>">
+								    <input type="hidden" id="txtSemestreId" name="txtSemestreId" value="<%=item.getSemestre().getNombre()%>">
+								    <input type="hidden" id="txtAnio" name="txtAnio" value="<%=item.getAnio()%>">
+								    <input type="hidden" id="txtLegajo" name="txtLegajo" value="<%=Profesor2.getLegajo()%>">
+								<input type="submit" name="btnObtenerAlumnosPorCurso" value="Ver Alumnos" class="btn btn-sm btn-outline-primary waves-effect">
+								</form>
+								
+								</td>
+							
 							</tr>
 							<%
 									}

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.Year;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,11 +20,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import entidades.Curso;
+import entidades.Materia;
 
 //import com.sun.tools.javac.util.Convert;
 
 import entidades.Profesor;
 import entidades.Profesor2;
+import entidades.Semestre;
 import negocio.NegocioCurso;
 import negocio.NegocioProfesor;
 import negocioImpl.NegocioCursoImpl;
@@ -56,6 +59,7 @@ public class ServletControlador extends HttpServlet {
 				rd.forward(request, response);
 			}
 		}
+				
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -102,7 +106,7 @@ public class ServletControlador extends HttpServlet {
 		// doGet(request, response);
 
 		// ####################################################
-		// S E S I O N - I N G R E S O
+		// S E S I O N - I N G R E S O - S A L I D A
 		// ####################################################
 		// INGRESA EL USUARIO CON SU USER Y PASS
 		if (request.getParameter("btnIngresarUsuario") != null) {
@@ -143,8 +147,33 @@ public class ServletControlador extends HttpServlet {
 			response.sendRedirect("index.jsp");
 		}
 		// ####################################################
-		// S E S I O N - S A L I D A
+		// O B T E N E R   A L U M N O S   P O R   C U R S O
 		// ####################################################
+		
+		if (request.getParameter("btnObtenerAlumnosPorCurso") != null) {
+			
+			int MateriaId = Integer.parseInt(request.getParameter("txtMateriaId"));
+			int SemestreId = Integer.parseInt(request.getParameter("txtSemestreId"));
+			Year Anio = Year.of(Integer.parseInt(request.getParameter("txtAnio")));
+			int Legajo = Integer.parseInt(request.getParameter("txtLegajo"));
+			
+			Materia Materia = new Materia();
+			Materia.setId(MateriaId);
+			
+			Semestre Semestre = new Semestre();
+			Semestre.setId(SemestreId);
+			
+			Profesor2 Profesor2 = new Profesor2();
+			Profesor2.setLegajo(Legajo);
+			
+			Curso Curso = new Curso(Materia, Semestre, Anio, Profesor2);			
+//			ArrayList<Curso> lista = NegocioCurso.ObtenerCursosPorLegajoProfesor(Curso);			
+//			request.setAttribute("listaCursos", lista);
+//
+//			RequestDispatcher rd = request.getRequestDispatcher("/listarCursosPorProfesor.jsp");
+//			rd.forward(request, response);
+			
+		}
 	}
 }
 // Probando repositorio
