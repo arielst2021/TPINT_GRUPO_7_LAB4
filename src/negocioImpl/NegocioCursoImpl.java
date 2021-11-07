@@ -15,4 +15,9 @@ public class NegocioCursoImpl implements NegocioCurso{
 	public ArrayList<Curso> ObtenerCursosPorLegajoProfesor(int NroLegajo) {
 		return dao.ObtenerCursosPorLegajoProfesor(NroLegajo);
 	}
+
+	@Override
+	public ArrayList<Curso> ObtenerAlumnosPorCurso(Curso Curso) {
+		return dao.ObtenerAlumnosPorCurso(Curso);
+	}
 }
