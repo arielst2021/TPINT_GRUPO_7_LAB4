@@ -1,7 +1,5 @@
 package entidades;
 
-import java.util.Date;
-
 public class Alumno {
 	private int Legajo;
 	private Persona2 Persona2;
@@ -21,8 +19,8 @@ public class Alumno {
 		return Legajo;
 	}
 
-	public void setLegajo(int legajo) {
-		Legajo = legajo;
+	public void setLegajo(int Legajo) {
+		this.Legajo = Legajo;
 	}
 
 	public Persona2 getPersona2() {
@@ -37,9 +35,7 @@ public class Alumno {
 		return Estado;
 	}
 
-	public void setEstado(Estado estado) {
-		Estado = estado;
+	public void setEstado(Estado Estado) {
+		this.Estado = Estado;
 	}
-
 }
-
