@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -17,11 +18,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import entidades.Curso;
+
 //import com.sun.tools.javac.util.Convert;
 
 import entidades.Profesor;
 import entidades.Profesor2;
+import negocio.NegocioCurso;
 import negocio.NegocioProfesor;
+import negocioImpl.NegocioCursoImpl;
 import negocioImpl.NegocioProfesorImpl;
 
 @WebServlet("/ServletControlador")
@@ -35,7 +40,22 @@ public class ServletControlador extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		if (request.getParameter("Param").equals("ObtenerCursosPorLegajoProfesor")) {
+			NegocioCurso NegocioCurso = new NegocioCursoImpl();
+
+			HttpSession session = request.getSession();
+			if (session.getAttribute("perfil") != null) {
+				Profesor2 Profesor2 = (Profesor2) session.getAttribute("perfil");
+				int NroLegajo = Profesor2.getLegajo();
+
+				ArrayList<Curso> lista = NegocioCurso.ObtenerCursosPorLegajoProfesor(NroLegajo);
+
+				request.setAttribute("listaCursos", lista);
+
+				RequestDispatcher rd = request.getRequestDispatcher("/listarCursosPorProfesor.jsp");
+				rd.forward(request, response);
+			}
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -81,9 +101,9 @@ public class ServletControlador extends HttpServlet {
 
 		// doGet(request, response);
 
-//		####################################################
-//		S E S I O N - I N G R E S O
-//		####################################################
+		// ####################################################
+		// S E S I O N - I N G R E S O
+		// ####################################################
 		// INGRESA EL USUARIO CON SU USER Y PASS
 		if (request.getParameter("btnIngresarUsuario") != null) {
 			String paginaDestino = "";
@@ -114,17 +134,17 @@ public class ServletControlador extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher(paginaDestino);
 			dispatcher.forward(request, response);
 		}
-		
+
 		// SALE EL USUARIO DE LA SESION
-		if(request.getParameter("btnSalirUsuario") != null){
-		    HttpSession session = request.getSession(false); 
-		    session.setAttribute("perfil", null);
-	        session.invalidate();
-	        response.sendRedirect("index.jsp");			
+		if (request.getParameter("btnSalirUsuario") != null) {
+			HttpSession session = request.getSession(false);
+			session.setAttribute("perfil", null);
+			session.invalidate();
+			response.sendRedirect("index.jsp");
 		}
-//		####################################################
-//		S E S I O N - S A L I D A
-//		####################################################		
+		// ####################################################
+		// S E S I O N - S A L I D A
+		// ####################################################
 	}
 }
 // Probando repositorio

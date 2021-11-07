@@ -1,5 +1,20 @@
+<%@page import="entidades.Curso"%>
+<%@page import="entidades.Profesor2"%>
+<%@page import="java.util.ArrayList"%>
+
+<%@page session="true"%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+
+<%!Profesor2 Profesor2 = new Profesor2();%>
+<%
+	if (session.getAttribute("perfil") != null) {
+		Profesor2 = (Profesor2) session.getAttribute("perfil");
+	} else {
+		response.sendRedirect("index.jsp");
+	}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,12 +36,18 @@
 ----------------------------------------------------
 N A V B A R
 ---------------------------------------------------- -->
+	<% 
+if (session.getAttribute("perfil") != null) {%>
 	<jsp:include page="logout.jsp"></jsp:include>
 	<jsp:include page="navTabs.jsp"></jsp:include>
+	<%    	 
+}
+else{%>
+	<jsp:include page="login.jsp"></jsp:include>
+	<%    	 	
+}
+%>
 
-	<!-- ======= Sidebar ======= -->
-
-	<!-- End Sidebar-->
 
 	<main id="main" class="main">
 	<section class="section">
@@ -35,7 +56,9 @@ N A V B A R
 
 				<div class="card">
 					<div class="card-body">
-						<p>Profesor/a: Usuario Logueado</p>
+						<p><%=Profesor2.getPersona2().getNombre()%>
+							<%=Profesor2.getPersona2().getApellido()%>
+						</p>
 						<h5 class="card-title">Mis Cursos</h5>
 						<hr>
 						<!-- INICIO DE LA TABLA -->
@@ -50,56 +73,32 @@ N A V B A R
 									<th scope="col">Acciones</th>
 								</tr>
 							</thead>
+
+							<%
+							ArrayList<Curso> listarCursos = null;
+							if (request.getAttribute("listaCursos") != null) {
+								listarCursos = (ArrayList<Curso>) request.getAttribute("listaCursos");
+							}
+							%>
+
+							<%
+							if (listarCursos != null){
+							for (Curso item : listarCursos) {
+							%>
+
 							<tbody>
 								<tr>
-									<th scope="row">1</th>
-									<td>Geografía I</td>
-									<td>1er. Semestre</td>
-									<td>2020</td>
+									<th scope="row"><%=item.getMateria().getId()%></th>
+									<td><%=item.getMateria().getNombre()%></td>
+									<td><%=item.getSemestre().getNombre()%></td>
+									<td><%=item.getAnio()%></td>
 									<td><button type="submit" class="btn btn-sm btn-primary">Ver
 											Alumnos</button></td>
 								</tr>
-								<tr>
-									<th scope="row">2</th>
-									<td>Formación Cívica</td>
-									<td>2do. Semestre</td>
-									<td>2021</td>
-									<td><button type="submit" class="btn btn-sm btn-primary">Ver
-											Alumnos</button></td>
-								</tr>
-								<tr>
-									<th scope="row">2</th>
-									<td>Formación Cívica</td>
-									<td>1er. Semestre</td>
-									<td>2019</td>
-									<td><button type="submit" class="btn btn-sm btn-primary">Ver
-											Alumnos</button></td>
-								</tr>
-								<tr>
-									<th scope="row">1</th>
-									<td>Geografía I</td>
-									<td>1do. Semestre</td>
-									<td>2018</td>
-									<td><button type="submit" class="btn btn-sm btn-primary">Ver
-											Alumnos</button></td>
-								</tr>
-								<tr>
-									<th scope="row">5</th>
-									<td>Historia</td>
-									<td>1er. Semestre</td>
-									<td>2019</td>
-									<td><button type="submit" class="btn btn-sm btn-primary">Ver
-											Alumnos</button></td>
-								</tr>
-
-								<tr>
-									<th scope="row">6</th>
-									<td>Geografía II</td>
-									<td>2do. Semestre</td>
-									<td>2020</td>
-									<td><button type="submit" class="btn btn-sm btn-primary">Ver
-											Alumnos</button></td>
-								</tr>
+								<%
+								}
+							}
+							%>
 
 							</tbody>
 						</table>

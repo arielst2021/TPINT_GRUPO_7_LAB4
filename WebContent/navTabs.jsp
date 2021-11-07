@@ -11,6 +11,8 @@
 
 </head>
 <body class="bg-light">
+	
+	<form action="ServletControlador" method="get">	
 	<%
 		if (session.getAttribute("perfil") != null) {
 			Profesor2 Profesor2 = new Profesor2();
@@ -59,7 +61,9 @@
 				class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
 				role="button" aria-expanded="false">Cursos</a>
 				<ul class="dropdown-menu">
-					<li><a class="dropdown-item" href="#">Listado</a></li>
+
+						<li><a class="dropdown-item" href="ServletControlador?Param=ObtenerCursosPorLegajoProfesor">Listado</a></li>
+					
 				</ul></li>
 		</ul>
 	</div>
@@ -68,7 +72,8 @@
 		}
 		}
 	%>
-
+	</form>
+	
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script

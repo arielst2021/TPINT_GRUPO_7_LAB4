@@ -43,7 +43,8 @@ public class CursoDaoImpl implements CursoDao {
 				String nombreMateria = miResultSet.getString("mat_nombre");
 				int idSemestre = miResultSet.getInt("cur_semestre_id");
 				String nombreSemestre = miResultSet.getString("sem_nombre");
-				Year anio = Year.of(Integer.parseInt(miResultSet.getString("cur_anio")));
+				Year anio = Year.of(2020);
+						//Year.of(Integer.parseInt(miResultSet.getString("cur_anio")));
 
 				Materia Materia = new Materia(idMateria, nombreMateria);
 				Semestre Semestre = new Semestre(idSemestre, nombreSemestre);
