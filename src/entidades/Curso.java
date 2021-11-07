@@ -13,11 +13,16 @@ public class Curso {
 	}
 
 	public Curso(Materia Materia, Semestre Semestre, Year Anio, Profesor2 Profesor2) {
-		super();
 		this.Materia = Materia;
 		this.Semestre = Semestre;
 		this.Anio = Anio;
 		this.Profesor2 = Profesor2;
+	}
+	
+	public Curso(Materia Materia, Semestre Semestre, Year Anio) {
+		this.Materia = Materia;
+		this.Semestre = Semestre;
+		this.Anio = Anio;
 	}
 
 	public Materia getMateria() {
