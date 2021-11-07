@@ -19,7 +19,7 @@
 
 </head>
 
-<body class="bg-light">
+<body style="background-color: #F6F9FF">
 
 	<main>
 	<div class="container">
