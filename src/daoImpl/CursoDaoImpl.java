@@ -7,13 +7,19 @@ import java.sql.SQLException;
 import java.time.Year;
 import java.util.ArrayList;
 
+
 import dao.CursoDao;
+import entidades.Alumno;
 import entidades.Curso;
+import entidades.Estado;
 import entidades.Materia;
+import entidades.Persona2;
 import entidades.Semestre;
 
 public class CursoDaoImpl implements CursoDao {
 	private static final String ObtenerCursosPorLegajoProfesor = "SELECT cur_materia_id, mat_nombre, cur_semestre_id, sem_nombre, cur_anio FROM cursos INNER JOIN materias ON materias.mat_id=cursos.cur_materia_id INNER JOIN semestres ON semestres.sem_id=cursos.cur_semestre_id WHERE cur_profesor_legajo=?";
+	
+	private static final String ObtenerAlumnosPorCurso = "SELECT alu_nombre, alu_apellido, alu_legajo, axc_calificacion1, axc_calificacion2, axc_calificacion3, axc_calificacion4, axc_estado_id, est_nombre FROM alumnos_cursos INNER JOIN alumnos ON alumnos.alu_legajo=alumnos_cursos.axc_alumno_legajo INNER JOIN estados ON alumnos_cursos.axc_estado_id=estados.est_id WHERE axc_materia_id=? AND axc_semestre_id=? AND axc_anio=? AND axc_profesor_legajo=?";
 
 	Connection miConnection = null;
 	PreparedStatement miPreparedStatement = null;
@@ -43,8 +49,11 @@ public class CursoDaoImpl implements CursoDao {
 				String nombreMateria = miResultSet.getString("mat_nombre");
 				int idSemestre = miResultSet.getInt("cur_semestre_id");
 				String nombreSemestre = miResultSet.getString("sem_nombre");
-				Year anio = Year.of(2020);
-						//Year.of(Integer.parseInt(miResultSet.getString("cur_anio")));
+				
+				//
+				Year anio = Year.of(Integer.parseInt(miResultSet.getString("cur_anio").substring(0, 4)));
+				
+				System.out.println(anio);
 
 				Materia Materia = new Materia(idMateria, nombreMateria);
 				Semestre Semestre = new Semestre(idSemestre, nombreSemestre);
@@ -62,5 +71,64 @@ public class CursoDaoImpl implements CursoDao {
 			}
 		}
 		return Curso;
+	}
+
+	@Override
+	public ArrayList<Curso> ObtenerAlumnosPorCurso(Curso Curso) {
+		ArrayList<Curso> AlumnosPorCurso = new ArrayList<Curso>();
+
+		try {
+			// 1. OBTENER UNA CONEXIÓN A LA BASE DE DATOS
+			miConnection = Conexion.getConexion().getSQLConexion();
+
+			// 2. PREPARAR DECLARACIÓN
+			miPreparedStatement = miConnection.prepareStatement(ObtenerAlumnosPorCurso);
+
+			// 3. ESTABLECER LOS PARÁMETROS
+			miPreparedStatement.setInt(1, Curso.getMateria().getId());
+			miPreparedStatement.setInt(2, Curso.getSemestre().getId());
+			String anio = String.valueOf(Curso.getAnio());
+			miPreparedStatement.setString(3, anio);
+			miPreparedStatement.setInt(4, Curso.getProfesor2().getLegajo());
+			
+			// 4. EJECUTAR CONSULTA SQL
+			miResultSet = miPreparedStatement.executeQuery();
+
+			// 5. AGREGAR EL CONJUNTO DE RESULTADOS EN UN ARRAY
+			while (miResultSet.next()) {
+				String AlumnoNombre = miResultSet.getString("alu_nombre");
+				String AlumnoApellido = miResultSet.getString("alu_apellido");
+				int AlumnoLegajo = miResultSet.getInt("alu_legajo");
+				Float Nota1 = miResultSet.getFloat("axc_calificacion1");
+				Float Nota2 = miResultSet.getFloat("axc_calificacion2");
+				Float Nota3 = miResultSet.getFloat("axc_calificacion3");
+				Float Nota4 = miResultSet.getFloat("axc_calificacion4");
+				int EstadoId = miResultSet.getInt("alu_legajo");
+				String EstadoNombre = miResultSet.getString("alu_apellido");
+				
+				//
+				Persona2 Persona2 = new Persona2();
+				Persona2.setNombre(AlumnoNombre);
+				Persona2.setApellido(AlumnoApellido);
+				//
+				Alumno Alumno = new Alumno();
+				Alumno.setLegajo(AlumnoLegajo);
+				Alumno.setPersona2(Persona2);
+				//
+				Estado Estado = new Estado(EstadoId, EstadoNombre);
+				//
+
+				AlumnosPorCurso.add(new Curso(Alumno, Nota1, Nota2, Nota3, Nota4, Estado));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			try {
+				// SI ALGO HA IDO MAL Y QUEREMOS DESHACER LOS CAMBIOS
+				miConnection.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
+		return AlumnosPorCurso;
 	}
 }
