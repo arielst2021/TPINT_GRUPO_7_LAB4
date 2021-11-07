@@ -88,7 +88,7 @@
                             <option value=6>Córdoba<option>
                             <option value=7>Corrientes<option>
                             <option value=8>EntreRíos<option>
-                            <option value=9>Formosa<option>
+                            <option value=9>Formosa <option>
                             <option value=10>Jujuy<option>
                             <option value=11>La Pampa<option>
                             <option value=12>La Rioja<option>
