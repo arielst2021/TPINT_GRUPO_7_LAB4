@@ -76,31 +76,31 @@
                       <label for="Provincia" class="form-label">Provincia</label>
                       <select name=provincias>
                       
-                 <option value=1>BuenosAires<option>
-                 <option value=2>BuenosAires-GBA<option>
-                 <option value=3>CapitalFederal<option>
-                 <option value=4>Catamarca<option>
-                 <option value=5>Chaco<option>
-                 <option value=6>Chubut<option>
-                 <option value=7>Córdoba<option>
-                 <option value=8>Corrientes<option>
-                 <option value=9>EntreRíos<option>
-                 <option value=10>Formosa<option>
-                 <option value=11>Jujuy<option>
-                 <option value=12>LaPampa<option>
-                 <option value=13>LaRioja<option>
-                 <option value=14>Mendoza<option>
-                 <option value=15>Misiones<option>
-                 <option value=16>Neuquén<option>
-                 <option value=17>RíoNegro<option>
-                 <option value=18>Salta<option>
-                 <option value=19>SanJuan<option>
-                 <option value=20>SanLuis<option>
-                 <option value=21>SantaCruz<option>
-                 <option value=22>SantaFe<option>
-                 <option value=23>SantiagodelEstero<option>
-                 <option value=24>TierradelFuego<option>
-                 <option value=25>Tucumán<option>
+                           
+                            <optionvalue=1>BuenosAires
+                            <optionvalue=2>Catamarca
+                            <optionvalue=3>Chaco
+                            <optionvalue=4>Chubut<option>
+                            <optionvalue=5>CiudaddeBs.As.<option>
+                            <optionvalue=6>Córdoba<option>
+                            <optionvalue=7>Corrientes<option>
+                            <optionvalue=8>EntreRíos<option>
+                            <optionvalue=9>Formosa<option>
+                            <optionvalue=10>Jujuy<option>
+                            <optionvalue=11>LaPampa<option>
+                            <optionvalue=12>LaRioja<option>
+                            <optionvalue=13>Mendoza<option>
+                            <optionvalue=14>Misiones<option>
+                            <optionvalue=15>Neuquén<option>
+                            <optionvalue=16>RíoNegro<option>
+                            <optionvalue=17>Salta<option>
+                            <optionvalue=18>SanJuan<option>
+                            <optionvalue=19>SanLuis<option>
+                            <optionvalue=20>SantaCruz<option>
+                            <optionvalue=21>SantaFe<option>
+                            <optionvalue=22>SantiagodelEstero<option>
+                            <optionvalue=23>TierradelFuego<option>
+                            <optionvalue=24>Tucumán<option>
 
                       
                       </select>
