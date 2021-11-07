@@ -1,508 +1,196 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@page import="entidades.Curso"%>
+<%@page import="entidades.Estado"%>
+<%@page import="entidades.Profesor2"%>
+<%@page import="java.util.ArrayList"%>
+
+<%@page session="true"%>
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+
+<%!Profesor2 Profesor2 = new Profesor2();%>
+<%
+	if (session.getAttribute("perfil") != null) {
+		Profesor2 = (Profesor2) session.getAttribute("perfil");
+	} else {
+		response.sendRedirect("index.jsp");
+	}
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Agregar Nota</title>
-
+<title>Mis Cursos</title>
+<!--
+----------------------------------------------------
+	 C S S - BOOTSTRAP, CUSTOM STYLES 
+---------------------------------------------------- -->
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css" />
 </head>
 
-<body class="bg-light">
+<body style="background-color: #F6F9FF">
 
-<!--
+	<!--
 ----------------------------------------------------
 N A V B A R
----------------------------------------------------- -->  
+---------------------------------------------------- -->
 
-<jsp:include page="logout.jsp"></jsp:include>
+	<%
+	if (session.getAttribute("perfil") != null) {
+%>
+	<jsp:include page="logout.jsp"></jsp:include>
+	<jsp:include page="navTabs.jsp"></jsp:include>
+	<%
+	} else {
+%>
+	<jsp:include page="login.jsp"></jsp:include>
+	<%
+	}
+%>
 
-  <!-- ======= Sidebar ======= -->
-   
-  <!-- End Sidebar-->
 
-   <main id="main" class="main">
+	<main id="main" class="main">
 
-    <section class="section">
-      <div class="row">
-        <div class="col-lg-12">
+	<section class="section">
+		<div class="row">
+			<div class="col-lg-12">
 
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Calificaciones</h5>
-			  <hr>
-              <p>Materia: Laboratorio IV</p>
-              <p>Cuatrimestre: Segundo Cuatrimestre</p>
-              <p>Año: 2021</p>
-              <p>Profesor/a: Usuario Logueado</p>
-			  <hr>
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Calificaciones</h5>
+						<hr>
 
-              <!-- INICIO DE LA TABLA -->
-				<table id="myTable" class="table table-striped" style="width:100%">
-                <thead>
-                  <tr>
-                    <th scope="col">Apellido y Nombre</th>
-                    <th scope="col">Parcial 1</th>
-                    <th scope="col">Rec. 1</th>
-                    <th scope="col">Parcial 2</th>
-                    <th scope="col">Rec. 2</th>
-                    <th scope="col">Estado</th> 					
-                  </tr>
-                </thead>
-                <tbody>
-                  
-                  <tr>
-                    <td class="text-primary">Sosa Alexis</td>
-					<td>
-						<select class="form-select form-select-sm">
-							<option></option>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-							<option value="6">6</option>
-							<option value="7">7</option>
-							<option value="8">8</option>	
-							<option value="9">9</option>
-							<option value="10">10</option>
-						</select>
-					</td>
-					<td>
-						<select class="form-select form-select-sm">
-							<option></option>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-							<option value="6">6</option>
-							<option value="7">7</option>
-							<option value="8">8</option>	
-							<option value="9">9</option>
-							<option value="10">10</option>
-						</select>
-					</td> 	
-					<td>
-						<select class="form-select form-select-sm">
-							<option></option>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-							<option value="6">6</option>
-							<option value="7">7</option>
-							<option value="8">8</option>	
-							<option value="9">9</option>
-							<option value="10">10</option>
-						</select>
-					</td> 	
-					<td>
-						<select class="form-select form-select-sm">
-							<option></option>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-							<option value="6">6</option>
-							<option value="7">7</option>
-							<option value="8">8</option>	
-							<option value="9">9</option>
-							<option value="10">10</option>
-						</select>
-					</td> 	
-					<td>
-						<select class="form-select form-select-sm">
-							<option></option>
-							<option value="1">Regular</option>
-							<option value="2">Libre</option>
-						</select>
-					</td> 		
-                  </tr>
-                  <tr>
-                    <td class="text-primary">Frutos Ada</td>
-					<td>
-						<select class="form-select form-select-sm">
-							<option></option>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-							<option value="6">6</option>
-							<option value="7">7</option>
-							<option value="8">8</option>	
-							<option value="9">9</option>
-							<option value="10">10</option>
-						</select>
-					</td>
-					<td>
-						<select class="form-select form-select-sm">
-							<option></option>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-							<option value="6">6</option>
-							<option value="7">7</option>
-							<option value="8">8</option>	
-							<option value="9">9</option>
-							<option value="10">10</option>
-						</select>
-					</td> 	
-					<td>
-						<select class="form-select form-select-sm">
-							<option></option>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-							<option value="6">6</option>
-							<option value="7">7</option>
-							<option value="8">8</option>	
-							<option value="9">9</option>
-							<option value="10">10</option>
-						</select>
-					</td> 	
-					<td>
-						<select class="form-select form-select-sm">
-							<option></option>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-							<option value="6">6</option>
-							<option value="7">7</option>
-							<option value="8">8</option>	
-							<option value="9">9</option>
-							<option value="10">10</option>
-						</select>
-					</td> 	
-					<td>
-						<select class="form-select form-select-sm">
-							<option></option>
-							<option value="1">Regular</option>
-							<option value="2">Libre</option>
-						</select>
-					</td> 	              
-                  </tr>
-                  <tr>
-                    <td class="text-primary">Rodríguez Jennifer</td>
-					<td>
-						<select class="form-select form-select-sm">
-							<option></option>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-							<option value="6">6</option>
-							<option value="7">7</option>
-							<option value="8">8</option>	
-							<option value="9">9</option>
-							<option value="10">10</option>
-						</select>
-					</td>
-					<td>
-						<select class="form-select form-select-sm">
-							<option></option>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-							<option value="6">6</option>
-							<option value="7">7</option>
-							<option value="8">8</option>	
-							<option value="9">9</option>
-							<option value="10">10</option>
-						</select>
-					</td> 	
-					<td>
-						<select class="form-select form-select-sm">
-							<option></option>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-							<option value="6">6</option>
-							<option value="7">7</option>
-							<option value="8">8</option>	
-							<option value="9">9</option>
-							<option value="10">10</option>
-						</select>
-					</td> 	
-					<td>
-						<select class="form-select form-select-sm">
-							<option></option>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-							<option value="6">6</option>
-							<option value="7">7</option>
-							<option value="8">8</option>	
-							<option value="9">9</option>
-							<option value="10">10</option>
-						</select>
-					</td> 	
-					<td>
-						<select class="form-select form-select-sm">
-							<option></option>
-							<option value="1">Regular</option>
-							<option value="2">Libre</option>
-						</select>
-					</td> 	                  
-                  </tr>
-                  <tr>
-                    <td class="text-primary">Díaz Leandro</td>
-					<td>
-						<select class="form-select form-select-sm">
-							<option></option>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-							<option value="6">6</option>
-							<option value="7">7</option>
-							<option value="8">8</option>	
-							<option value="9">9</option>
-							<option value="10">10</option>
-						</select>
-					</td>
-					<td>
-						<select class="form-select form-select-sm">
-							<option></option>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-							<option value="6">6</option>
-							<option value="7">7</option>
-							<option value="8">8</option>	
-							<option value="9">9</option>
-							<option value="10">10</option>
-						</select>
-					</td> 	
-					<td>
-						<select class="form-select form-select-sm">
-							<option></option>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-							<option value="6">6</option>
-							<option value="7">7</option>
-							<option value="8">8</option>	
-							<option value="9">9</option>
-							<option value="10">10</option>
-						</select>
-					</td> 	
-					<td>
-						<select class="form-select form-select-sm">
-							<option></option>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-							<option value="6">6</option>
-							<option value="7">7</option>
-							<option value="8">8</option>	
-							<option value="9">9</option>
-							<option value="10">10</option>
-						</select>
-					</td> 	
-					<td>
-						<select class="form-select form-select-sm">
-							<option></option>
-							<option value="1">Regular</option>
-							<option value="2">Libre</option>
-						</select>
-					</td> 	                  
-                  </tr>
-                  <tr>
-                    <td class="text-primary">Gómez Barbara</td>
-					<td>
-						<select class="form-select form-select-sm">
-							<option></option>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-							<option value="6">6</option>
-							<option value="7">7</option>
-							<option value="8">8</option>	
-							<option value="9">9</option>
-							<option value="10">10</option>
-						</select>
-					</td>
-					<td>
-						<select class="form-select form-select-sm">
-							<option></option>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-							<option value="6">6</option>
-							<option value="7">7</option>
-							<option value="8">8</option>	
-							<option value="9">9</option>
-							<option value="10">10</option>
-						</select>
-					</td> 	
-					<td>
-						<select class="form-select form-select-sm">
-							<option></option>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-							<option value="6">6</option>
-							<option value="7">7</option>
-							<option value="8">8</option>	
-							<option value="9">9</option>
-							<option value="10">10</option>
-						</select>
-					</td> 	
-					<td>
-						<select class="form-select form-select-sm">
-							<option></option>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-							<option value="6">6</option>
-							<option value="7">7</option>
-							<option value="8">8</option>	
-							<option value="9">9</option>
-							<option value="10">10</option>
-						</select>
-					</td> 	
-					<td>
-						<select class="form-select form-select-sm">
-							<option></option>
-							<option value="1">Regular</option>
-							<option value="2">Libre</option>
-						</select>
-					</td> 	                  
-                  </tr>
+						<%!Curso Curso = new Curso();%>
+						<% 		  
+			  	if (session.getAttribute("DatosDelCurso") != null) {
+		Curso = (Curso) session.getAttribute("DatosDelCurso");
+			  	}
+		%>
 
-                  <tr>
-                    <td class="text-primary">Gómez Barbara</td>
-					<td>
-						<select class="form-select form-select-sm">
-							<option></option>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-							<option value="6">6</option>
-							<option value="7">7</option>
-							<option value="8">8</option>	
-							<option value="9">9</option>
-							<option value="10">10</option>
-						</select>
-					</td>
-					<td>
-						<select class="form-select form-select-sm">
-							<option></option>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-							<option value="6">6</option>
-							<option value="7">7</option>
-							<option value="8">8</option>	
-							<option value="9">9</option>
-							<option value="10">10</option>
-						</select>
-					</td> 	
-					<td>
-						<select class="form-select form-select-sm">
-							<option></option>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-							<option value="6">6</option>
-							<option value="7">7</option>
-							<option value="8">8</option>	
-							<option value="9">9</option>
-							<option value="10">10</option>
-						</select>
-					</td> 	
-					<td>
-						<select class="form-select form-select-sm">
-							<option></option>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-							<option value="6">6</option>
-							<option value="7">7</option>
-							<option value="8">8</option>	
-							<option value="9">9</option>
-							<option value="10">10</option>
-						</select>
-					</td> 	
-					<td>
-						<select class="form-select form-select-sm">
-							<option></option>
-							<option value="1">Regular</option>
-							<option value="2">Libre</option>
-						</select>
-					</td> 					
-                  </tr>
-                </tbody>
-			<tfoot>
-	
-            <tr>
-                <th></th>
-                <th><input type="submit" class="btn btn-sm btn-outline-success" style="float: right" value="Guardar"></th>
-                <th><input type="submit" class="btn btn-sm btn-outline-success" style="float: right" value="Guardar"></th>
-                <th><input type="submit" class="btn btn-sm btn-outline-success" style="float: right" value="Guardar"></th>
-                <th><input type="submit" class="btn btn-sm btn-outline-success" style="float: right" value="Guardar"></th>
-                <th><input type="submit" class="btn btn-sm btn-outline-success" style="float: right" value="Guardar"></th>
-            </tr>
-			</tfoot>
-              </table>
-              <!-- FIN DE LA TABLA -->
 
-            </div>
-          </div>
 
-        </div>
-      </div>
-    </section>
+						<p><strong>Materia: </strong><%=Curso.getMateria().getNombre()%></p>
+						<p><strong>Período: </strong><%=Curso.getSemestre().getNombre()%></p>
+						<p><strong>Año: </strong><%=Curso.getAnio()%></p>
+						<p><strong>Profesor/a: </strong><%=Profesor2.getPersona2().getNombre()%> <%=Profesor2.getPersona2().getApellido()%></p>
 
-  </main>
-  <!-- End #main -->
 
-  <!-- ======= Footer ======= -->
 
-  <!-- End Footer -->
+						<hr>
+
+						<!-- INICIO DE LA TABLA -->
+						<table id="myTable" class="table table-striped"
+							style="width: 100%">
+							<thead>
+								<tr>
+									<th scope="col">Apellido y Nombre</th>
+									<th scope="col">Primer Parcial</th>
+									<th scope="col">Primer Recuperatorio</th>
+									<th scope="col">Segundo Parcial</th>
+									<th scope="col">Segundo Recuperatorio</th>
+									<th scope="col">Estado</th>
+								</tr>
+							</thead>
+
+							<%
+								ArrayList<Curso> listaAlumnosPorCursos = null;
+								if (request.getAttribute("listaAlumnosPorCursos") != null) {
+									listaAlumnosPorCursos = (ArrayList<Curso>) request.getAttribute("listaAlumnosPorCursos");
+								}
+							%>
+
+							<%
+								if (listaAlumnosPorCursos != null) {
+									for (Curso item : listaAlumnosPorCursos) {
+							%>							
+							
+							
+							
+							
+							
+							<tbody>
+
+								<tr>
+									<td class="text-primary"><%=item.getAlumno().getPersona2().getNombre()%> <%=item.getAlumno().getPersona2().getApellido()%></td>
+									<td><input type="text" name="Nota1" class="form-control" value="<%=item.getNotaPrimerParcial()%>"></td>
+									<td><input type="text" name="Nota2" class="form-control" value="<%=item.getNotaPrimerRecuperatorio()%>"></td>
+									<td><input type="text" name="Nota3" class="form-control" value="<%=item.getNotaSegundoParcial()%>"></td>
+									<td><input type="text" name="Nota4" class="form-control" value="<%=item.getNotaSegundoRecuperatorio()%>"></td>
+									
+									
+
+									<td><select class="form-select form-select">
+																									<%
+								ArrayList<Estado> listaEstados = null;
+								if (request.getAttribute("listaEstados") != null) {
+									listaEstados = (ArrayList<Estado>) request.getAttribute("listaEstados");
+								}
+							%>
+
+							<%
+								if (listaAlumnosPorCursos != null) {
+									for (Estado item2 : listaEstados) {
+										if(item2.getNombre().equals("Libre") || item2.getNombre().equals("Regular") || item2.getNombre().equals("Sin calificar")){
+							%>			
+									
+											<option value="<%=item2.getId()%>"><%=item2.getNombre()%> </option>
+									
+								
+								
+															<%
+									}
+									}
+									}
+								%>			
+								</select></td>
+								
+							<%
+									}
+									}
+								%>				
+								
+								</tr>
+							</tbody>
+							<tfoot>
+
+								<tr>
+									<th></th>
+									<th><input type="submit"
+										class="btn btn-sm btn-outline-success" style="float: right"
+										value="Guardar"></th>
+									<th><input type="submit"
+										class="btn btn-sm btn-outline-success" style="float: right"
+										value="Guardar"></th>
+									<th><input type="submit"
+										class="btn btn-sm btn-outline-success" style="float: right"
+										value="Guardar"></th>
+									<th><input type="submit"
+										class="btn btn-sm btn-outline-success" style="float: right"
+										value="Guardar"></th>
+									<th><input type="submit"
+										class="btn btn-sm btn-outline-success" style="float: right"
+										value="Guardar"></th>
+								</tr>
+							</tfoot>
+						</table>
+						<!-- FIN DE LA TABLA -->
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</section>
+
+	</main>
+	<!-- End #main -->
+
+	<!-- ======= Footer ======= -->
+
+	<!-- End Footer -->
 
 	<script type="text/javascript"
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -514,8 +202,8 @@ N A V B A R
 		src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 	<script type="text/javascript"
 		src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
-  
-  <script>
+
+	<script>
 //IDIOMAS ESPAÑOL DEL DATATABLE   
 $(document).ready(function() {
 	$('#myTable').DataTable({ 
@@ -524,6 +212,6 @@ $(document).ready(function() {
 		}
 	});
 });
-</script>   
+</script>
 </body>
 </html>
