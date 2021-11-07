@@ -2,9 +2,11 @@ package entidades;
 
 public class Provincia {
 	private int Id;
-	private int Nombre;
+	private String Nombre;
+	
+	public Provincia () {}
 		
-	public Provincia(int Id, int Nombre) {
+	public Provincia(int Id, String Nombre) {
 		super();
 		this.Id = Id;
 		this.Nombre = Nombre;
@@ -18,11 +20,11 @@ public class Provincia {
 		this.Id = Id;
 	}
 
-	public int getNombre() {
+	public String getNombre() {
 		return Nombre;
 	}
 
-	public void setNombre(int Nombre) {
+	public void setNombre(String Nombre) {
 		this.Nombre = Nombre;
 	}
 }
