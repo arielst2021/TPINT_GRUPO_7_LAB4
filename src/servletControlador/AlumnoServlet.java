@@ -14,8 +14,11 @@ import javax.servlet.http.HttpSession;
 
 import entidades.Alumno;
 import entidades.Curso;
+import entidades.Provincia;
 import negocio.NegocioAlumno;
+import negocio.NegocioProvincia;
 import negocioImpl.NegocioAlumnoImpl;
+import negocioImpl.NegocioProvinciaImpl;
 
 
 @WebServlet("/AlumnoServlet")
@@ -33,6 +36,11 @@ public class AlumnoServlet extends HttpServlet {
     	if (request.getParameter("btnEditarAlumno") != null) {
     		int Legajo = Integer.parseInt(request.getParameter("txtLegajoAlumno"));
     		Alumno alum = negocioA.obtenerAlumnoLegajo(Legajo);
+    		
+    		//OBTENGO LISTADO DE PROVINCIAS
+			NegocioProvincia NegocioProvincia = new NegocioProvinciaImpl();
+			ArrayList<Provincia> lista = NegocioProvincia.listaProvincias();
+			request.setAttribute("listarProvincias", lista);    		
 
     		request.setAttribute("AlumnoEditar", alum);
     		RequestDispatcher dispatcher = request.getRequestDispatcher("/editarAlumno.jsp");

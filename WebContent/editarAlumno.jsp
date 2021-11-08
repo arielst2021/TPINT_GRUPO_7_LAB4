@@ -1,7 +1,7 @@
 <%@page import="entidades.Alumno"%>
 <%@page import="entidades.Provincia"%>
-<%@page import="negocio.NegocioProvincia"%>
-<%@page import="negocioImpl.NegocioProvinciaImpl"%>
+<%@page import="java.util.ArrayList"%>
+
 <%@page import="java.util.*"%>
 <%@page session="true"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -23,9 +23,6 @@
 </head>
 
 <body style="background-color: #F6F9FF">
-<%
-	NegocioProvincia Np = new NegocioProvinciaImpl();
-%>
 	<!--
 ----------------------------------------------------
 N A V B A R
@@ -72,12 +69,18 @@ N A V B A R
                 		<div class="col-8">
                     		<select class="form-select" aria-label="Default select example">
                 			<!-- Carga Provincias -->
-              				<%
-              					ArrayList<Provincia> provincias = Np.listaProvincias();
-                    			if(provincias != null){
-                    			for (Provincia prov : provincias){
-                    		%>	
-							<option value=<%=prov.getId()%>><%=prov.getNombre()%><option>
+                			
+						<% 		 
+						ArrayList<Provincia> lista = null;
+			  	if (request.getAttribute("listarProvincias") != null) {
+			  		lista =  (ArrayList<Provincia>) request.getAttribute("listarProvincias");
+			  	}
+		%>      			<%
+								if (lista != null) {
+									for (Provincia prov : lista) {
+							%>	
+                			
+<option value="<%=prov.getId()%>"><%=prov.getNombre()%> </option>
                     		<%}}%>
                   			</select>
                 		</div>	

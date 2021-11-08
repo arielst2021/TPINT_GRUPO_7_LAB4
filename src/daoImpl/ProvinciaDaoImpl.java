@@ -26,6 +26,8 @@ public class ProvinciaDaoImpl implements ProvinciaDao {
 			
 			while(rs.next()) {
 				Provincia prov = new Provincia();
+				System.out.println(rs.getInt("prov_id"));
+				System.out.println(rs.getString("prov_nombre"));
 				prov.setId(rs.getInt("prov_id"));
 				prov.setNombre(rs.getString("prov_nombre"));
 				provincias.add(prov);

@@ -12,9 +12,6 @@ public class NegocioProvinciaImpl implements NegocioProvincia {
 	
 	@Override
 	public ArrayList<Provincia> listaProvincias(){
-		ProvinciaDao provDao = new ProvinciaDaoImpl();
-		return provDao.listaProvincias();
+		return dao.listaProvincias();
 	}
 }
-
-
