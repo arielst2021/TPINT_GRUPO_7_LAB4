@@ -52,8 +52,6 @@ public class CursoDaoImpl implements CursoDao {
 				
 				//
 				Year anio = Year.of(Integer.parseInt(miResultSet.getString("cur_anio").substring(0, 4)));
-				
-				System.out.println(anio);
 
 				Materia Materia = new Materia(idMateria, nombreMateria);
 				Semestre Semestre = new Semestre(idSemestre, nombreSemestre);
