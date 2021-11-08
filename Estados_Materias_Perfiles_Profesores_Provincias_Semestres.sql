@@ -86,3 +86,16 @@ INSERT INTO `laboratorio4`.`alumnos` (`alu_dni`, `alu_nombre`, `alu_apellido`, `
 
 
 INSERT INTO `laboratorio4`.`alumnos_cursos` (`axc_materia_id`, `axc_semestre_id`, `axc_anio`, `axc_profesor_legajo`, `axc_alumno_legajo`) VALUES ('1', '1', 2020, '2', '1');
+
+
+/* AGREGADO EL 7-11 */
+/* ALUMNOS
+ */
+INSERT INTO `laboratorio4`.`alumnos` (`alu_legajo`, `alu_dni`, `alu_nombre`, `alu_apellido`, `alu_fechanac`, `alu_direccion`, `alu_provincia_id`, `alu_email`, `alu_telefono`, `alu_estado_id`) VALUES ('999', '36666666', 'Javier', 'Gomez', '1996/06/22','Calle 100','1','javier@gmail.com','11562222221','1');
+INSERT INTO `laboratorio4`.`alumnos` (`alu_legajo`, `alu_dni`, `alu_nombre`, `alu_apellido`, `alu_fechanac`, `alu_direccion`, `alu_provincia_id`, `alu_email`, `alu_telefono`, `alu_estado_id`) VALUES ('1000', '36666667', 'Marta', 'Diaz', '1998/02/15','Calle 101','4','marta@gmail.com','11562222222','1');
+INSERT INTO `laboratorio4`.`alumnos` (`alu_legajo`, `alu_dni`, `alu_nombre`, `alu_apellido`, `alu_fechanac`, `alu_direccion`, `alu_provincia_id`, `alu_email`, `alu_telefono`, `alu_estado_id`) VALUES ('1001', '36666668', 'Analia', 'Ruiz', '1999/07/12','Calle 102','5','analia@gmail.com','11562222223','1');
+INSERT INTO `laboratorio4`.`alumnos` (`alu_legajo`, `alu_dni`, `alu_nombre`, `alu_apellido`, `alu_fechanac`, `alu_direccion`, `alu_provincia_id`, `alu_email`, `alu_telefono`, `alu_estado_id`) VALUES ('1002', '36666669', 'Lautaro', 'Gonzalez', '1993/011/26','Calle 103','6','lautaro@gmail.com','11562222224','1');
+INSERT INTO `laboratorio4`.`alumnos` (`alu_legajo`, `alu_dni`, `alu_nombre`, `alu_apellido`, `alu_fechanac`, `alu_direccion`, `alu_provincia_id`, `alu_email`, `alu_telefono`, `alu_estado_id`) VALUES ('1003', '36666670', 'Claudia', 'Rodriguez', '1994/09/27','Calle 104','7','claudia@gmail.com','11562222225','1');
+INSERT INTO `laboratorio4`.`alumnos` (`alu_legajo`, `alu_dni`, `alu_nombre`, `alu_apellido`, `alu_fechanac`, `alu_direccion`, `alu_provincia_id`, `alu_email`, `alu_telefono`, `alu_estado_id`) VALUES ('1004', '36666671', 'Esteban', 'Blanco', '1994/04/04','Calle 105','8','esteban@gmail.com','11562222226','1');
+INSERT INTO `laboratorio4`.`alumnos` (`alu_legajo`, `alu_dni`, `alu_nombre`, `alu_apellido`, `alu_fechanac`, `alu_direccion`, `alu_provincia_id`, `alu_email`, `alu_telefono`, `alu_estado_id`) VALUES ('1005', '36666672', 'Pedro', 'Sanchez', '1995/03/10','Calle 106','2','pedro@gmail.com','11562222227','1');
+INSERT INTO `laboratorio4`.`alumnos` (`alu_legajo`, `alu_dni`, `alu_nombre`, `alu_apellido`, `alu_fechanac`, `alu_direccion`, `alu_provincia_id`, `alu_email`, `alu_telefono`, `alu_estado_id`) VALUES ('1006', '36666673', 'Christian', 'Smith', '1995/12/11','Calle 107','1','christian@gmail.com','11562222228','1');

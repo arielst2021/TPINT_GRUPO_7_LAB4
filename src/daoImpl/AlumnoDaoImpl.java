@@ -137,20 +137,20 @@ public class AlumnoDaoImpl implements AlumnoDao{
 			ResultSet rs = ps.executeQuery();
 			if(rs.next())
 			{
+				// Carga Objecto de Alumno
 				Persona2 per = new Persona2();
-				Estado est = new Estado();		
 				alum.setLegajo(rs.getInt("alu_legajo"));
-				
-				
-				
-				// Persona2
-				//DNI
+
 				per.setDni(rs.getString("alu_dni"));
 				per.setNombre(rs.getString("alu_nombre"));
 				per.setApellido(rs.getString("alu_apellido"));
 				//fechanac
 				per.setDireccion(rs.getString("alu_direccion"));
 				//pronvicia
+				Provincia prov = new Provincia();
+				prov.setId(rs.getInt("prov_id"));
+				prov.setNombre(rs.getString("prov_nombre"));
+				per.setProvincia(prov);
 				//email
 				per.setEmail(rs.getString("alu_email"));
 				//telefono
@@ -158,6 +158,7 @@ public class AlumnoDaoImpl implements AlumnoDao{
 				per.setTelefono(rs.getString("alu_telefono"));
 				alum.setPersona2(per);
 				//estado
+				Estado est = new Estado();
 				est.setIdEstado(rs.getInt("est_id"));
 				est.setNombre(rs.getString("est_nombre"));
 				alum.setEstado(est);

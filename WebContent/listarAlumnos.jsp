@@ -9,7 +9,6 @@
 <html>
 <head>
 
-<link href="assets/css/style.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css"
@@ -23,6 +22,12 @@
 	NegocioAlumno Na = new NegocioAlumnoImpl();
 %>
  
+ 
+ 	<!--
+----------------------------------------------------
+N A V B A R
+---------------------------------------------------- -->
+	
   <main id="main" class="main">
 
     <div class="pagetitle">
@@ -56,8 +61,7 @@
                     <th scope="col">Provincia</th>
                     <th scope="col">Estado</th>
                     <th scope="col">Fecha Nacimiento</th>
-                    <th scope="col">Editar</th>
-                    <th scope="col">Estado</th>
+                    <th scope="col">Modificar</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -75,15 +79,18 @@
                     	 <td><%=alum.getEstado().getNombre()%></td>
                     	 <td>Fecha Nacimiento</td>
                     	 <td>
-                          <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modificarAlumnoModal">Modificar</button>
+                          <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modificarAlumnoModal" class="editar">Datos</button>/
+                          <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#estadoAlumnoModal" class="estado">Estado</button>
                         </td>
                         <td>
-                          <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#estadoAlumnoModal">Modificar</button>
+                        	<form action="AlumnoServlet" method="post">
+								<input type="hidden" id="txtLegajoAlumno" name="txtLegajoAlumno" value="<%=alum.getLegajo()%>" >
+																
+								<input type="submit" name="btnEditarAlumno" value="Datos" class="btn btn-warning">
+							</form>
                         </td>
                     	 </tr> 	 
-                     	<%}}else{ %>
-                  <tr><td><%=alumnoTodos%></td>
-                  <td>No se han encontrado resultados.</td></tr><%}%>
+                     	<%}}else{ %><tr><td>No se han encontrado resultados.</td></tr><%}%>
                 </tbody>
               </table>
             </div>
@@ -226,8 +233,8 @@
           </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btn-primary">Guardar Cambios</button>
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-danger">Modificar Estado</button>
           </div>
         </div>
       </div>
@@ -254,6 +261,16 @@
 		src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 	<script type="text/javascript"
 	src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
+		<script>
+//IDIOMAS ESPAÑOL DEL DATATABLE   
+$(document).ready(function() {
+	$('#myTable').DataTable({ 
+	"language": {
+		"url": "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
+		}
+	});
+});
+</script>
 </body>
 
 </html>
