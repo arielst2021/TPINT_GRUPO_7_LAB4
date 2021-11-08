@@ -38,7 +38,6 @@ N A V B A R
 				<h5 class="card-title">Editar Alumno</h5>
 				<hr>
 				<!-- INICIO DE LA TABLA -->
-				<div class="modal-body">
             <div class="card-body">
               <div class="pt-4 pb-2">
                 <h5 class="card-title text-center pb-0 fs-4">Editar Información</h5>
@@ -69,21 +68,19 @@ N A V B A R
                 		<div class="col-8"><input type="text" name="nacimiento" class="form-control" required value=<%=alum.getPersona2().getApellido()%>></div>
               		</div>
               		<div class="row pb-2">
-                	<div class="col-4 label">Provincia</div>
-                	<div class="col-8">
-                    				<select class="form-select">
-                	<!-- Carga Provincias -->
-                	
-              		<%
-              			ArrayList<Provincia> provincias = Np.listaProvincias();
-                    	if(provincias != null){
-                    		for (Provincia prov : provincias){
+                		<div class="col-4 label">Provincia</div>
+                		<div class="col-8">
+                    		<select class="form-select" aria-label="Default select example">
+                			<!-- Carga Provincias -->
+              				<%
+              					ArrayList<Provincia> provincias = Np.listaProvincias();
+                    			if(provincias != null){
+                    			for (Provincia prov : provincias){
                     		%>	
 							<option value=<%=prov.getId()%>><%=prov.getNombre()%><option>
-                    		<%
-                    		}}%>
+                    		<%}}%>
                   			</select>
-                		</div>
+                		</div>	
               		</div>
               		<div class="row pb-2">
                 		<div class="col-4 label">Direccion</div>
@@ -94,8 +91,6 @@ N A V B A R
                 		<div class="col-4 label">Email</div>
                 		<div class="col-8"><input type="text" class="form-control" name="email" required value=<%=alum.getPersona2().getEmail()%>></div>
               		</div>
-
-                	
             	  <%
               }else
               {%><div>No se ha encontrado el alumno.</div><%}%>
@@ -104,21 +99,19 @@ N A V B A R
                 <div class="col-4 label">Estado</div>
                 <div class="col-8">
                   <select class="form-select" aria-label="Default select example">
-                    <option selected>Activo</option>
-                    <option value="1">Baja</option>
+                    <option selected value="1">Activo</option>
+                    <option value="2">Baja</option>
                   </select>
                 </div>
               </div>
             </div>
-          </div>
-          </div>
-						<!-- FIN DE LA TABLA -->
-					</div>
-				</div>
+			<button class="btn btn-primary">Cancelar</button>
+			<button class="btn btn-danger">Guardar Cambios</button>
 			</div>
-		
+          </div>
 		</div>
-
+		</div>
+	</div>
 	</main>
 	<!-- End #main -->
 
