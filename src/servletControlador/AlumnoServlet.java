@@ -47,6 +47,15 @@ public class AlumnoServlet extends HttpServlet {
     		dispatcher.forward(request, response);
 
     	}
+    	
+    	if (request.getParameter("btnEditarEstado") != null){
+    		int Legajo = Integer.parseInt(request.getParameter("txtLegajoAlumno"));
+    		int resp = negocioA.modificarAlumnoEstado(Legajo);
+    		System.out.println("hola");
+    		System.out.println(resp);
+    		RequestDispatcher dispatcher = request.getRequestDispatcher("/listarAlumnos.jsp");
+    		dispatcher.forward(request, response);
+    	}
 	}
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -4,7 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import dao.AlumnoDao;
 import entidades.Alumno;
@@ -22,7 +25,6 @@ public class AlumnoDaoImpl implements AlumnoDao{
 		
 		// CONEXION
 		Connection con = Conexion.getConexion().getSQLConexion();
-		
 		try{
 			// Declaracion y ejecución
 			PreparedStatement ps = con.prepareStatement(str);
@@ -37,8 +39,16 @@ public class AlumnoDaoImpl implements AlumnoDao{
 				per.setDni(rs.getString("alu_dni"));
 				per.setNombre(rs.getString("alu_nombre"));
 				per.setApellido(rs.getString("alu_apellido"));
-				//fechanac
 				per.setDireccion(rs.getString("alu_direccion"));
+				//fechanac
+				try {
+					SimpleDateFormat formato =new SimpleDateFormat("yyyy-MM-dd"); 
+					Date fecha = formato.parse(rs.getString("alu_fechanac"));
+					per.setFechaNacimiento(fecha);
+				} catch (ParseException e) {
+					e.printStackTrace();
+					System.out.println("No se pudo castear el date");
+				}
 				//pronvicia
 				Provincia prov = new Provincia();
 				prov.setId(rs.getInt("prov_id"));
@@ -55,7 +65,6 @@ public class AlumnoDaoImpl implements AlumnoDao{
 				est.setIdEstado(rs.getInt("est_id"));
 				est.setNombre(rs.getString("est_nombre"));
 				alum.setEstado(est);
-				
 				listaAlumnos.add(alum);
 			}
 			
@@ -97,6 +106,14 @@ public class AlumnoDaoImpl implements AlumnoDao{
 					per.setNombre(rs.getString("alu_nombre"));
 					per.setApellido(rs.getString("alu_apellido"));
 					//fechanac
+					try {
+						SimpleDateFormat formato =new SimpleDateFormat("yyyy-MM-dd"); 
+						Date fecha = formato.parse(rs.getString("alu_fechanac"));
+						per.setFechaNacimiento(fecha);
+					} catch (ParseException e) {
+						e.printStackTrace();
+						System.out.println("No se pudo castear el date");
+					}
 					per.setDireccion(rs.getString("alu_direccion"));
 					//pronvicia
 					//email
@@ -145,6 +162,14 @@ public class AlumnoDaoImpl implements AlumnoDao{
 				per.setNombre(rs.getString("alu_nombre"));
 				per.setApellido(rs.getString("alu_apellido"));
 				//fechanac
+				try {
+					SimpleDateFormat formato =new SimpleDateFormat("yyyy-MM-dd"); 
+					Date fecha = formato.parse(rs.getString("alu_fechanac"));
+					per.setFechaNacimiento(fecha);
+				} catch (ParseException e) {
+					e.printStackTrace();
+					System.out.println("No se pudo castear el date");
+				}	
 				per.setDireccion(rs.getString("alu_direccion"));
 				//pronvicia
 				Provincia prov = new Provincia();
@@ -175,5 +200,71 @@ public class AlumnoDaoImpl implements AlumnoDao{
 		return alum;
 	}
 	
-	
+	@Override
+	public int modificarAlumno(Alumno alu) {
+		Alumno alum = alu;
+		int legajo = alum.getLegajo();
+		String str = "UPDATE laboratorio4.alumnos SET alu_dni=?, alu_nombre=?,alu_apellido=?, alu_fechanac=?, alu_direccion=?, alu_provincia_id=?, alu_email=?, alu_telefono=?, alu_estado_id=? WHERE alu_legajo="+legajo;
+		Connection con = Conexion.getConexion().getSQLConexion();
+		try{
+			PreparedStatement ps = con.prepareStatement(str);
+			// Se ordenan los campos para el statement
+			Date fecha = alum.getPersona2().getFechaNacimiento();
+			java.sql.Date fechaSql = new java.sql.Date(fecha.getDay(), fecha.getMonth(), fecha.getYear());
+			
+			ps.setString(1,alum.getPersona2().getDni());
+			ps.setString(2,alum.getPersona2().getNombre());
+			ps.setString(3,alum.getPersona2().getApellido());
+			ps.setDate(4,fechaSql);
+			ps.setString(5,alum.getPersona2().getDireccion());
+			ps.setInt(6,alum.getPersona2().getProvincia().getId());
+			ps.setString(7,alum.getPersona2().getEmail());
+			ps.setString(8,alum.getPersona2().getTelefono());
+			ps.setInt(9,alum.getEstado().getId());
+
+			if(ps.executeLargeUpdate() > 0)
+			{
+				con.commit();
+				return 1;
+			}
+			
+		}
+		catch (SQLException e) {
+		e.printStackTrace();
+		try {
+			con.rollback();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}	
+		}
+		return 0;
+	}
+	@Override
+	public int modificarAlumnoEstado(int Legajo) {
+	Alumno alum = obtenerAlumnoLegajo(Legajo);
+	String str = "UPDATE laboratorio4.alumnos SET alu_estado_id=? WHERE alu_legajo="+Legajo;
+	Connection con = Conexion.getConexion().getSQLConexion();
+	int nuevoEstado=1;
+	if(alum.getEstado().getId()==1) {
+		nuevoEstado=2;
+	}
+	try{
+		PreparedStatement ps = con.prepareStatement(str);
+		ps.setInt(1, nuevoEstado);
+		if(ps.executeLargeUpdate() > 0)
+		{
+			con.commit();
+			return 1;
+		}
+	}
+	catch (SQLException e) {
+	e.printStackTrace();
+	try {
+		con.rollback();
+	} catch (SQLException e1) {
+		e1.printStackTrace();
+	}	
+	}
+	return 0;
+	}
 }

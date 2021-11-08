@@ -8,7 +8,8 @@ import entidades.Alumno;
 		ArrayList<Alumno> obtenerAlumnosTodos();
 		public ArrayList<Alumno> obtenerAlumnosEstado(int Estado);
 		public Alumno obtenerAlumnoLegajo(int Legajo);
-		public int editarAlumno(int legajo, Alumno alum);
+		public int modificarAlumno(Alumno alu);
+		public int modificarAlumnoEstado(int Legajo);
 	
 }
 

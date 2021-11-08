@@ -27,12 +27,15 @@ public class NegocioAlumnoImpl implements NegocioAlumno {
 		AlumnoDao alumnoDao = new AlumnoDaoImpl();
 		return alumnoDao.obtenerAlumnoLegajo(Legajo);
 	}
-	
 	@Override
-	public int editarAlumno(int legajo, Alumno alum) {
+	public int modificarAlumno(Alumno alu) {
 		AlumnoDao alumnoDao = new AlumnoDaoImpl();
-		//return alumnoDao.editarAlumno(1,alum);
-		return 1;
+		return alumnoDao.modificarAlumno(alu);
+	}
+	@Override
+	public int modificarAlumnoEstado(int Legajo) {
+		AlumnoDao alumnoDao = new AlumnoDaoImpl();
+		return alumnoDao.modificarAlumnoEstado(Legajo);
 	}
 }
 

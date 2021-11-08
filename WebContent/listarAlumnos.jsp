@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@page import="java.util.*"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="entidades.Alumno"%>
 <%@page import="negocio.NegocioAlumno"%>
 <%@page import="negocioImpl.NegocioAlumnoImpl"%>
@@ -77,16 +78,17 @@ N A V B A R
                     	 <td><%=alum.getPersona2().getDni()%></td>
                     	 <td><%=alum.getPersona2().getProvincia().getNombre()%></td>
                     	 <td><%=alum.getEstado().getNombre()%></td>
-                    	 <td>Fecha Nacimiento</td>
-                    	 <td>
-                          <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modificarAlumnoModal" class="editar">Datos</button>/
-                          <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#estadoAlumnoModal" class="estado">Estado</button>
-                        </td>
+                    	 <td><%=alum.getPersona2().getFechaNacimiento()%></td>
                         <td>
                         	<form action="AlumnoServlet" method="post">
 								<input type="hidden" id="txtLegajoAlumno" name="txtLegajoAlumno" value="<%=alum.getLegajo()%>" >
 																
 								<input type="submit" name="btnEditarAlumno" value="Datos" class="btn btn-warning">
+							</form>
+							<form action="AlumnoServlet" method="post">
+								<input type="hidden" id="txtLegajoAlumno" name="txtLegajoAlumno" value="<%=alum.getLegajo()%>" >
+																
+								<input type="submit" name="btnEditarEstado" value="Estado" class="btn btn-danger">
 							</form>
                         </td>
                     	 </tr> 	 

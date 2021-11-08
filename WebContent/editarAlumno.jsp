@@ -43,8 +43,8 @@ N A V B A R
 						</div>
 						<div class="container text-center">
 							<% if(request.getAttribute("AlumnoEditar") != null){
-            	  Alumno alum = (Alumno) request.getAttribute("AlumnoEditar");
-            	  %>
+            	 				 Alumno alum = (Alumno) request.getAttribute("AlumnoEditar");
+            	  			%>
 							<div class="row pb-4">
 								<div class="col-4">Legajo</div>
 								<div class="col-8"><%=alum.getLegajo()%></div>
@@ -74,7 +74,7 @@ N A V B A R
 								<div class="col-4 label ">Nacimiento</div>
 								<div class="col-8">
 									<input type="text" name="nacimiento" class="form-control"
-										required value=<%=alum.getPersona2().getApellido()%>>
+										required value=<%=alum.getPersona2().getFechaNacimiento()%>>
 								</div>
 							</div>
 							<div class="row pb-2">
