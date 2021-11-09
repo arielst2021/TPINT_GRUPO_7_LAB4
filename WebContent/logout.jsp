@@ -44,7 +44,8 @@
 							<!-- USUARIO EN LA SESION -->
 
 							<small><%=Profesor2.getPersona2().getNombre()%> <%=Profesor2.getPersona2().getApellido()%></small>
-
+							<br>
+							<small><%=Profesor2.getPerfil().getNombrePerfil()%> </small>
 						</h6>
 					</div>
 					<div class="col-md-1 align-self-center">
