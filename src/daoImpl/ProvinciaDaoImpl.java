@@ -4,8 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+
 import dao.ProvinciaDao;
+import entidades.Estado;
+import entidades.Persona2;
 import entidades.Provincia;
 
 public class ProvinciaDaoImpl implements ProvinciaDao {
@@ -26,8 +32,6 @@ public class ProvinciaDaoImpl implements ProvinciaDao {
 			
 			while(rs.next()) {
 				Provincia prov = new Provincia();
-				System.out.println(rs.getInt("prov_id"));
-				System.out.println(rs.getString("prov_nombre"));
 				prov.setId(rs.getInt("prov_id"));
 				prov.setNombre(rs.getString("prov_nombre"));
 				provincias.add(prov);
@@ -41,6 +45,24 @@ public class ProvinciaDaoImpl implements ProvinciaDao {
 			e1.printStackTrace();}	
 		}
 		return provincias;
+	}
+	
+	@Override
+	public Provincia obtenerProvinciaID(int ID) {
+		Provincia prov = new Provincia();
+		String str = "SELECT * FROM laboratorio4.provincias WHERE prov_id="+ID;
+		Connection con = Conexion.getConexion().getSQLConexion();
+		try{
+			PreparedStatement ps = con.prepareStatement(str);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next())
+			{
+				prov.setId(rs.getInt("prov_id"));
+				prov.setNombre(rs.getString("prov_nombre"));
+			}
+		}
+		catch (SQLException e) {e.printStackTrace();try {con.rollback();} catch (SQLException e1) {e1.printStackTrace();}}
+		return prov;
 	}
 }
 

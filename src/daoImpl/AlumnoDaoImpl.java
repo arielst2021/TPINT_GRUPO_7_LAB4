@@ -202,28 +202,35 @@ public class AlumnoDaoImpl implements AlumnoDao{
 	
 	@Override
 	public int modificarAlumno(Alumno alu) {
-		Alumno alum = alu;
-		int legajo = alum.getLegajo();
-		String str = "UPDATE laboratorio4.alumnos SET alu_dni=?, alu_nombre=?,alu_apellido=?, alu_fechanac=?, alu_direccion=?, alu_provincia_id=?, alu_email=?, alu_telefono=?, alu_estado_id=? WHERE alu_legajo="+legajo;
+		int Legajo = alu.getLegajo();
+		String str = "UPDATE laboratorio4.alumnos SET alu_dni=?, alu_nombre=?, alu_apellido=?, alu_direccion=?, alu_provincia_id=?, alu_email=?, alu_telefono=?, alu_estado_id=? WHERE alu_legajo="+Legajo;
 		Connection con = Conexion.getConexion().getSQLConexion();
+		System.out.println(str);
 		try{
 			PreparedStatement ps = con.prepareStatement(str);
 			// Se ordenan los campos para el statement
-			Date fecha = alum.getPersona2().getFechaNacimiento();
-			java.sql.Date fechaSql = new java.sql.Date(fecha.getDay(), fecha.getMonth(), fecha.getYear());
 			
-			ps.setString(1,alum.getPersona2().getDni());
-			ps.setString(2,alum.getPersona2().getNombre());
-			ps.setString(3,alum.getPersona2().getApellido());
-			ps.setDate(4,fechaSql);
-			ps.setString(5,alum.getPersona2().getDireccion());
-			ps.setInt(6,alum.getPersona2().getProvincia().getId());
-			ps.setString(7,alum.getPersona2().getEmail());
-			ps.setString(8,alum.getPersona2().getTelefono());
-			ps.setInt(9,alum.getEstado().getId());
+			
+			System.out.println(alu.getPersona2().getDni());
+			ps.setString(1, alu.getPersona2().getDni());
+			System.out.println(alu.getPersona2().getNombre());
+			ps.setString(2, alu.getPersona2().getNombre());
+			System.out.println(alu.getPersona2().getApellido());
+			ps.setString(3, alu.getPersona2().getApellido());
+			System.out.println(alu.getPersona2().getDireccion());
+			ps.setString(4, alu.getPersona2().getDireccion());
+			System.out.println(alu.getPersona2().getProvincia().getId());
+			ps.setInt(5, alu.getPersona2().getProvincia().getId());
+			System.out.println(alu.getPersona2().getEmail());
+			ps.setString(6, alu.getPersona2().getEmail());
+			System.out.println(alu.getPersona2().getTelefono());
+			ps.setString(7, alu.getPersona2().getTelefono());
+			System.out.println(alu.getEstado().getId());
+			ps.setInt(8, alu.getEstado().getId());
 
 			if(ps.executeLargeUpdate() > 0)
 			{
+				System.out.println("Modificado");
 				con.commit();
 				return 1;
 			}
@@ -237,8 +244,10 @@ public class AlumnoDaoImpl implements AlumnoDao{
 			e1.printStackTrace();
 		}	
 		}
+		System.out.println("NO Modificado");
 		return 0;
 	}
+	
 	@Override
 	public int modificarAlumnoEstado(int Legajo) {
 	Alumno alum = obtenerAlumnoLegajo(Legajo);

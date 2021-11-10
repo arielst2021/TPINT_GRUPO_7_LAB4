@@ -15,4 +15,9 @@ public class NegocioEstadoImpl implements NegocioEstado {
 	public ArrayList<Estado> obtenerEstados() {
 		return dao.obtenerEstados();
 	}
+	
+	@Override
+	public Estado obtenerEstadoAlumno(int ID) {
+		return dao.obtenerEstadoAlumno(ID);
+	}
 }

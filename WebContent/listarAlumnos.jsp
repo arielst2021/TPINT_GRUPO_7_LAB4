@@ -83,7 +83,7 @@ N A V B A R
                         	<form action="AlumnoServlet" method="post">
 								<input type="hidden" id="txtLegajoAlumno" name="txtLegajoAlumno" value="<%=alum.getLegajo()%>" >
 																
-								<input type="submit" name="btnEditarAlumno" value="Datos" class="btn btn-warning">
+								<input type="submit" name="btnIrEditarAlumno" value="Datos" class="btn btn-warning">
 							</form>
 							<form action="AlumnoServlet" method="post">
 								<input type="hidden" id="txtLegajoAlumno" name="txtLegajoAlumno" value="<%=alum.getLegajo()%>" >

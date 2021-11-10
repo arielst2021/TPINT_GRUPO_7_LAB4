@@ -45,4 +45,22 @@ public class EstadoDaoImpl implements EstadoDao {
 		}
 		return Estado;
 	}
+	
+	@Override
+	public Estado obtenerEstadoAlumno(int ID) {
+		Estado est = new Estado();
+		String str = "SELECT * FROM laboratorio4.estados WHERE est_id="+ID;
+		Connection con = Conexion.getConexion().getSQLConexion();
+		try{
+			PreparedStatement ps = con.prepareStatement(str);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next())
+			{
+				est.setIdEstado(rs.getInt("est_id"));
+				est.setNombre(rs.getString("est_nombre"));
+			}
+		}
+		catch (SQLException e) {e.printStackTrace();try {con.rollback();} catch (SQLException e1) {e1.printStackTrace();}}
+		return est;
+	}
 }

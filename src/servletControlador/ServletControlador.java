@@ -99,7 +99,6 @@ public class ServletControlador extends HttpServlet {
 			profesor.setMail(request.getParameter("mail"));
 			profesor.setFechanacimiento(fecha);
 			profesor.setProvincia(idprovincia);
-
 			negocioprofesor.guardarprofesor(profesor);
 
 			RequestDispatcher miRequestDispatcher = request.getRequestDispatcher("/registro.jsp");

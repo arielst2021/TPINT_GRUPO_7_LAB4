@@ -14,4 +14,10 @@ public class NegocioProvinciaImpl implements NegocioProvincia {
 	public ArrayList<Provincia> listaProvincias(){
 		return dao.listaProvincias();
 	}
+	
+	@Override
+	public Provincia obtenerProvinciaID(int ID) {
+		return dao.obtenerProvinciaID(ID);
+	}
+
 }

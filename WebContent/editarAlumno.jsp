@@ -35,6 +35,7 @@ N A V B A R
 					<h5 class="card-title">Editar Alumno</h5>
 					<hr>
 					<!-- INICIO DE LA TABLA -->
+					<form action="AlumnoServlet" method="post">
 					<div class="card-body">
 						<div class="pt-4 pb-2">
 							<h5 class="card-title text-center pb-0 fs-4">Editar
@@ -48,76 +49,58 @@ N A V B A R
 							<div class="row pb-4">
 								<div class="col-4">Legajo</div>
 								<div class="col-8"><%=alum.getLegajo()%></div>
+								<input type="hidden" name="txtLegajo" class="form-control" value=<%=alum.getLegajo()%>>
+								
 							</div>
 							<div class="row pb-2">
 								<div class="col-4 label ">Nombre</div>
-								<div class="col-8">
-									<input type="text" name="nombre" class="form-control" required
-										value=<%=alum.getPersona2().getNombre()%>>
-								</div>
+								<div class="col-8"><input type="text" name="txtNombre" class="form-control" required value=<%=alum.getPersona2().getNombre()%>></div>
 							</div>
 							<div class="row pb-2">
 								<div class="col-4 label ">Apellido</div>
-								<div class="col-8">
-									<input type="text" name="apellido" class="form-control"
-										required value=<%=alum.getPersona2().getApellido()%>>
-								</div>
+								<div class="col-8"><input type="text" name="txtApellido" class="form-control" required value=<%=alum.getPersona2().getApellido()%>></div>
 							</div>
 							<div class="row pb-2">
 								<div class="col-4 label ">DNI</div>
-								<div class="col-8">
-									<input type="text" name="dni" class="form-control" required
-										value=<%=alum.getPersona2().getDni()%>>
-								</div>
+								<div class="col-8"><input type="text" name="txtDni" class="form-control" required value=<%=alum.getPersona2().getDni()%>></div>
 							</div>
 							<div class="row pb-2">
 								<div class="col-4 label ">Nacimiento</div>
 								<div class="col-8">
-									<input type="text" name="nacimiento" class="form-control"
-										required value=<%=alum.getPersona2().getFechaNacimiento()%>>
-								</div>
+									<input type="text" name="txtNacimiento" class="form-control" required value=<%=alum.getPersona2().getFechaNacimiento()%>></div>
 							</div>
 							<div class="row pb-2">
 								<div class="col-4 label">Provincia</div>
 								<div class="col-8">
-									<select class="form-select" aria-label="Default select example">
-										
+									<select class="form-select" aria-label="Default select example" name="txtProvincia">	
 										<!-- CARGA PROVINCIAS -->
-
 										<% 		 
 										ArrayList<Provincia> lista = null;
 			  							if (request.getAttribute("listarProvincias") != null) {
 			  								lista =  (ArrayList<Provincia>) request.getAttribute("listarProvincias");
-			  								}
-										%>
-										<%
-										if (lista != null) {
-											for (Provincia prov : lista) {
-										%>
-										<option value="<%=prov.getId()%>"><%=prov.getNombre()%></option>
-										<%
-											}
-										}
-										%>
+			  								}%><%
+										if (lista != null) {for (Provincia prov : lista) {%>
+										<option value="<%=prov.getId()%>"><%=prov.getNombre()%></option><%}}%>
 									</select>
 								</div>
 							</div>
 							<div class="row pb-2">
 								<div class="col-4 label">Direccion</div>
 								<div class="col-8">
-									<input type="text" class="form-control" name="direccion"
-										required value=<%=alum.getPersona2().getDireccion()%>>
-								</div>
+									<input type="text" class="form-control" name="txtDireccion" required value=<%=alum.getPersona2().getDireccion()%>></div>
+							</div>
+							<div class="row pb-2">
+								<div class="col-4 label">Telefono</div>
+								<div class="col-8">
+									<input type="text" class="form-control" name="txtTelefono" required value=<%=alum.getPersona2().getTelefono()%>></div>
 							</div>
 
 							<div class="row pb-2">
 								<div class="col-4 label">Email</div>
 								<div class="col-8">
-									<input type="text" class="form-control" name="email" required
-										value=<%=alum.getPersona2().getEmail()%>>
-								</div>
-							</div>
-							<%
+								
+									<input type="text" class="form-control" name="txtEmail" required value=<%=alum.getPersona2().getEmail()%>></div>
+							</div><%
               }else
               {%><div>No se ha encontrado el alumno.</div>
 							<%}%>
@@ -125,16 +108,17 @@ N A V B A R
 							<div class="row pb-2">
 								<div class="col-4 label">Estado</div>
 								<div class="col-8">
-									<select class="form-select" aria-label="Default select example">
+									<select class="form-select" aria-label="Default select example" name="txtEstado">
 										<option selected value="1">Activo</option>
 										<option value="2">Baja</option>
 									</select>
 								</div>
 							</div>
 						</div>
-						<button class="btn btn-primary">Cancelar</button>
-						<button class="btn btn-danger">Guardar Cambios</button>
+						<button class="btn btn-primary" type="submit" name="btnCancelarEditarAlumno">Cancelar</button>
+						<button class="btn-danger" type="submit"  name="btnEditarAlumno">Guardar Cambios</button>
 					</div>
+					</form>
 				</div>
 			</div>
 		</div>
