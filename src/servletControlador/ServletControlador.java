@@ -206,6 +206,14 @@ public class ServletControlador extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/agregarNota.jsp");
 			rd.forward(request, response);			
 		}
+		
+		if (request.getParameter("btnGuardarNota1") != null) {
+			
+
+			String MateriaNombre = request.getParameter("txtLegajoAlumno");		
+			System.out.println(MateriaNombre);
+		
+		}
 	}
 }
 // Probando repositorio
