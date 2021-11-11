@@ -78,7 +78,7 @@ N A V B A R
                     	 <td><%=alum.getPersona2().getDni()%></td>
                     	 <td><%=alum.getPersona2().getProvincia().getNombre()%></td>
                     	 <td><%=alum.getEstado().getNombre()%></td>
-                    	 <td><%=alum.getPersona2().getFechaNacimiento()%></td>
+                    	 <td><%=alum.getPersona2().getFechaNacimiento() %></td>
                         <td>
                         	<form action="AlumnoServlet" method="post">
 								<input type="hidden" id="txtLegajoAlumno" name="txtLegajoAlumno" value="<%=alum.getLegajo()%>" >

@@ -1,5 +1,6 @@
 package entidades;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Persona2 {
@@ -7,7 +8,7 @@ public class Persona2 {
 	private String Dni;
 	private String Nombre;
 	private String Apellido;
-	private Date FechaNacimiento;
+	private LocalDate FechaNacimiento;
 	private String Direccion;
 	private Provincia Provincia;
 	private String Email;
@@ -21,7 +22,7 @@ public class Persona2 {
 		this.Apellido = Apellido;
 	}
 
-	public Persona2(String Dni, String Nombre, String Apellido, Date FechaNacimiento, String Direccion,
+	public Persona2(String Dni, String Nombre, String Apellido, LocalDate FechaNacimiento, String Direccion,
 			Provincia Provincia, String Email, String Telefono) {
 		this.Dni = Dni;
 		this.Nombre = Nombre;
@@ -57,11 +58,11 @@ public class Persona2 {
 		this.Apellido = Apellido;
 	}
 
-	public Date getFechaNacimiento() {
+	public LocalDate getFechaNacimiento() {
 		return FechaNacimiento;
 	}
 
-	public void setFechaNacimiento(Date FechaNacimiento) {
+	public void setFechaNacimiento(LocalDate FechaNacimiento) {
 		this.FechaNacimiento = FechaNacimiento;
 	}
 
