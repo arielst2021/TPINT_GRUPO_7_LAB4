@@ -67,7 +67,7 @@ N A V B A R
 							<div class="row pb-2">
 								<div class="col-4 label ">Nacimiento</div>
 								<div class="col-8">
-									<input type="text" name="txtNacimiento" class="form-control" required value=<%=alum.getPersona2().getFechaNacimiento()%>></div>
+									<input type="text" name="txtNacimiento" class="form-control" required value=<%=alum.getPersona2().getFechaNacimiento() %> ></div>
 							</div>
 							<div class="row pb-2">
 								<div class="col-4 label">Provincia</div>
