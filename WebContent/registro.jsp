@@ -136,7 +136,7 @@
                       
                     </div>
                     <div class="col-12">
-                      <p class="small mb-0">Ya tengo una cuenta <a href=""></a></p>
+                      
                     </div>
                      </form>
                   
