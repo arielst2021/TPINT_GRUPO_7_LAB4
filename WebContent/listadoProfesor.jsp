@@ -35,7 +35,7 @@ N A V B A R
 				<div class="card">
 					<div class="card-body">
 						<p></p>
-						<h5 class="card-title">Listado de docentes</h5>
+						<h5 class="card-title">Listado de profesores</h5>
 						<hr>
 						<!-- INICIO DE LA TABLA -->
 						<table id="myTable" class="table table-striped"
