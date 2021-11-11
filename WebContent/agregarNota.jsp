@@ -47,11 +47,9 @@ if(listaNotas==null){
 	
 	<script type="text/javascript">
 	
-	function fn1(){
-		var str= document.getElementById("Nota1").value;
-		alert("El valor asignado es; " + str);
-	}
-	
+	var Capturar = function(){
+        var nota = document.getElementsByClassName("numero"),   
+   }
 	
 	</script>
 	
@@ -113,7 +111,7 @@ N A V B A R
 						<hr>
 
 						<!-- INICIO DE LA TABLA -->
-<!-- 									<form action="ServletControlador" method="post">					 -->
+									<form action="ServletControlador" method="post">					
 						<table id="myTable" class="table table-striped"
 							style="width: 100%">
 							<thead>
@@ -157,7 +155,7 @@ N A V B A R
 									
 									<%=item.getAlumno().getPersona2().getNombre()%>
 										<%=item.getAlumno().getPersona2().getApellido()%></td>
-									<td><input type="text" id="nota1" name="Nota1" class="form-control"
+									<td><input type="text" id="nota1" name="Nota1" class="numero"
 										value="<%=item.getNotaPrimerParcial()%>"></td>
 									<td><input type="text" name="Nota2" class="form-control"
 										value="<%=item.getNotaPrimerRecuperatorio()%>"></td>
@@ -233,13 +231,18 @@ N A V B A R
 									//
 									Profesor2.setLegajo(Profesor2.getLegajo());
 									//
+// 									if(request.getParameter("nota1") != null){
+										
+// 									}
+									Float nota1 = Float.parseFloat(nota);
 									
+// 									System.out.println(nota1);
 									
 									%>
 										<button type="submit" name="btnGuardarNota1" 
 										
 										onclick="fn1()"
-										class="btn btn-sm btn-outline-success" style="float: right">
+										class="btn btn-sm btn-outline-success" style="float: right" onclick="Capturar()">
 										Guardar</button>
 									
 										</th>
@@ -258,7 +261,7 @@ N A V B A R
 								</tr>
 							</tfoot>
 						</table>
-<!-- 													</form> -->
+													</form>
 						<!-- FIN DE LA TABLA -->
 
 					</div>
