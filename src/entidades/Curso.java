@@ -42,6 +42,16 @@ public class Curso {
 	}
 
 	public Curso(Materia materia, Semestre semestre, Year anio, Profesor2 profesor2, Alumno alumno,
+			Float notaPrimerParcial) {
+		Materia = materia;
+		Semestre = semestre;
+		Anio = anio;
+		Profesor2 = profesor2;
+		Alumno = alumno;
+		this.notaPrimerParcial = notaPrimerParcial;
+	}
+
+	public Curso(Materia materia, Semestre semestre, Year anio, Profesor2 profesor2, Alumno alumno,
 			Float notaPrimerParcial, Float notaPrimerRecuperatorio, Float notaSegundoParcial,
 			Float notaSegundoRecuperatorio, Estado estado) {
 		Materia = materia;

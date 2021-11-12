@@ -20,4 +20,9 @@ public class NegocioCursoImpl implements NegocioCurso{
 	public ArrayList<Curso> ObtenerAlumnosPorCurso(Curso Curso) {
 		return dao.ObtenerAlumnosPorCurso(Curso);
 	}
+
+	@Override
+	public boolean AgregarNotasCurso(ArrayList<Curso> Curso) {
+		return dao.AgregarNotasCurso(Curso);
+	}
 }

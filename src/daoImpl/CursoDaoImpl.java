@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.Year;
 import java.util.ArrayList;
-
+import java.util.Iterator;
 
 import dao.CursoDao;
 import entidades.Alumno;
@@ -128,5 +128,45 @@ public class CursoDaoImpl implements CursoDao {
 			}
 		}
 		return AlumnosPorCurso;
+	}
+	
+	private static final String AgregarNotasCurso = "UPDATE alumnos_cursos SET axc_calificacion1=? WHERE axc_materia_id=? AND axc_semestre_id=? AND axc_anio=? AND axc_profesor_legajo=? AND axc_alumno_legajo=?";
+	
+	@Override
+	public boolean AgregarNotasCurso(ArrayList<Curso> Curso) {
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean isInsertExitoso = false;
+		try {			
+			statement = conexion.prepareStatement(AgregarNotasCurso);
+			Iterator<Curso> iterador = Curso.iterator();
+			while(iterador.hasNext()) {
+				Curso miCurso = (Curso)iterador.next();
+				statement.setFloat(1, miCurso.getNotaPrimerParcial());
+				statement.setInt(2, miCurso.getMateria().getId());
+				statement.setInt(3, miCurso.getSemestre().getId());
+				//
+				statement.setString(4, miCurso.getAnio().toString());
+				//
+				statement.setInt(5, miCurso.getProfesor().getLegajo());
+				statement.setInt(6, miCurso.getAlumno().getLegajo());
+//				statement.setFloat(7, miCurso.getSegurosCostoContratacion());
+//				statement.setFloat(8, miCurso.getSegurosCostoAsegurado());
+//				statement.setFloat(9, miCurso.getSegurosCostoContratacion());
+//				statement.setFloat(10, miCurso.getSegurosCostoAsegurado());	
+				if (statement.executeUpdate() > 0) {
+					conexion.commit();
+					isInsertExitoso = true;
+				}								
+			}			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			try {
+				conexion.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
+		return isInsertExitoso;
 	}
 }
