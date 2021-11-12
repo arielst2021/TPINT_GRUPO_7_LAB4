@@ -209,9 +209,22 @@ public class ServletControlador extends HttpServlet {
 		
 		if (request.getParameter("btnGuardarNota1") != null) {
 			
+			String []n1 = request.getParameterValues("Nota1");
+			String []l1 = request.getParameterValues("txtLegajoAlumno");
+			
+			for(int i = 0; i < n1.length; i++) {
+				System.out.println("legajo: "+l1[i]+ " nota: " +n1[i]);
+			}
 
-			String MateriaNombre = request.getParameter("txtLegajoAlumno");		
-			System.out.println(MateriaNombre);
+//			if(n1!=null)
+//				System.out.println(n1.length);
+//			for(String n : n1) {
+//				System.out.println(n);
+//			}
+
+			
+//			String MateriaNombre = request.getParameter("txtLegajoAlumno");		
+//			System.out.println(MateriaNombre);
 		
 		}
 	}
