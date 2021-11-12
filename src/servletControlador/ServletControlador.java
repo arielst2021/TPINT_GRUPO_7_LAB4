@@ -214,30 +214,25 @@ public class ServletControlador extends HttpServlet {
 			String Anio = request.getParameter("txtAnio");
 			String LegajoDocente = request.getParameter("txtLegajoDocente");
 			
-			
-			
 			String []Nota1 = request.getParameterValues("Nota1");
 			String []LegajoAlumno = request.getParameterValues("txtLegajoAlumno");
 			
-			for(int i = 0; i < LegajoAlumno.length; i++) {
-				System.out.println("Id Materia: " + MateriaId);
-				System.out.println("Id Semestre: "+ SemestreId);
-				System.out.println("Anio: "+ Anio);
-				System.out.println("Legajo docente: " + LegajoDocente);
-				System.out.println("Legajo Alumno: " + LegajoAlumno[i]);
-				System.out.println("Nota 1 : " + Nota1[i]);
-			}
-
-//			if(n1!=null)
-//				System.out.println(n1.length);
-//			for(String n : n1) {
-//				System.out.println(n);
-//			}
-
-			
-//			String MateriaNombre = request.getParameter("txtLegajoAlumno");		
-//			System.out.println(MateriaNombre);
-		
+			for(int i = 0; i < LegajoAlumno.length; i++) {			
+				try {
+					Float notaDecimal = Float.parseFloat(Nota1[i]);
+					if(notaDecimal >=0 &&  notaDecimal <= 10) {
+						System.out.println("Id Materia: " + MateriaId);
+						System.out.println("Id Semestre: "+ SemestreId);
+						System.out.println("Anio: "+ Anio);
+						System.out.println("Legajo docente: " + LegajoDocente);
+						System.out.println("Legajo Alumno: " + LegajoAlumno[i]);
+					System.out.println("Nota 1 : " + notaDecimal);
+					}
+					
+				} catch (Exception e) {
+					//System.out.println("Nota 1 : " + "ERROR");
+				}
+			}	
 		}
 	}
 }
