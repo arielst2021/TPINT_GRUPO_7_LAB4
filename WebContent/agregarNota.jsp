@@ -86,7 +86,7 @@ B O D Y
 									Curso = (Curso) session.getAttribute("DatosDelCurso");
 							  	}
 							%>	
-							<p><strong>Materia: </strong><%=Curso.getMateria().getId()%> <%=Curso.getMateria().getNombre()%></p>
+							<p><strong>Materia: </strong><%=Curso.getMateria().getNombre()%></p>
 							<p><strong>Período: </strong><%=Curso.getSemestre().getNombre()%></p>
 							<p><strong>Año: </strong><%=Curso.getAnio()%></p>
 							<p><strong>Profesor/a: </strong><%=Profesor2.getPersona2().getNombre()%> <%=Profesor2.getPersona2().getApellido()%></p>			
@@ -143,9 +143,13 @@ B O D Y
 												if (listaAlumnosPorCursos != null) {
 													for (Estado item2 : listaEstados) {
 														if(item2.getNombre().equals("Libre") || item2.getNombre().equals("Regular") || item2.getNombre().equals("Sin calificar")){
+// 															while(item.getEstado().getId()==item2.getId()){
 												%>		
-												<option value="<%=item2.getId()%>"><%=item2.getNombre()%></option>
-												<%
+												<option   value="<%=item2.getId()%>"   <%if(item.getEstado().getId()==item2.getId()){%> selected<% }%>><%=item2.getNombre()%></option>
+												<%		
+															
+														
+// 															}
 														}
 													}
 												}

@@ -101,8 +101,8 @@ public class CursoDaoImpl implements CursoDao {
 				Float Nota2 = miResultSet.getFloat("axc_calificacion2");
 				Float Nota3 = miResultSet.getFloat("axc_calificacion3");
 				Float Nota4 = miResultSet.getFloat("axc_calificacion4");
-				int EstadoId = miResultSet.getInt("alu_legajo");
-				String EstadoNombre = miResultSet.getString("alu_apellido");
+				int EstadoId = miResultSet.getInt("axc_estado_id");
+				String EstadoNombre = miResultSet.getString("est_nombre");
 				
 				//
 				Persona2 Persona2 = new Persona2();
