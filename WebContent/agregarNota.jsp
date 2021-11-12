@@ -31,7 +31,25 @@ H E A D
 	<link rel="stylesheet" type="text/css"
 		href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css"
-		href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css" />	
+		href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css" />
+        
+    <script type="text/javascript">
+	function valideKey(evt){
+			
+	// EL CÓDIGO ES LA REPRESENTACIÓN DECIMAL ASCII DE LA TECLA PRESIONADA.
+	var code = (evt.which) ? evt.which : evt.keyCode;
+			
+	if(code==46) { // PUNTO
+		return true;
+	} else if(code>=48 && code<=57) { // ES NUMERO.
+		return true;
+	} else{ // OTRAS TECLAS.
+		return false;
+	}
+	}
+	</script>		
+		
+		
 </head>
 <!--
 ----------------------------------------------------
@@ -99,17 +117,21 @@ B O D Y
 									%>						
 									<tbody>	
 										<tr>
-											<td class="text-primary">											
-												<input type="hidden" id="txtLegajoAlumno" name="txtLegajoAlumno" value="<%=item.getAlumno().getLegajo() %>">												
+											<td class="text-primary">
+												<input type="hidden" id="txtMateriaId" name="txtMateriaId" value="<%=Curso.getMateria().getId()%>">
+												<input type="hidden" id="txtSemestreId" name="txtSemestreId" value="<%=Curso.getSemestre().getId()%>">
+												<input type="hidden" id="txtAnio" name="txtAnio" value="<%=Curso.getAnio()%>">
+												<input type="hidden" id="txtLegajoDocente" name="txtLegajoDocente" value="<%=Profesor2.getLegajo()%>">											
+												<input type="hidden" id="txtLegajoAlumno" name="txtLegajoAlumno" value="<%=item.getAlumno().getLegajo()%>">												
 												<%=item.getAlumno().getPersona2().getNombre()%>
 												<%=item.getAlumno().getPersona2().getApellido()%></td>
-											<td><input type="text" name="Nota1" class="form-control"
+											<td><input type="text" id="nota" name="Nota1" class="form-control" onkeypress="return valideKey(event);" pattern="^\d{1,2}+(\.\d{1})?$"
 												value="<%=item.getNotaPrimerParcial()%>"></td>
-											<td><input type="text" name="Nota2" class="form-control"
+											<td><input type="text" id="nota" name="Nota2" class="form-control" onkeypress="return valideKey(event);" pattern="^\d{1,2}+(\.\d{1})?$"
 												value="<%=item.getNotaPrimerRecuperatorio()%>"></td>
-											<td><input type="text" name="Nota3" class="form-control"
+											<td><input type="text" id="nota" name="Nota3" class="form-control" onkeypress="return valideKey(event);" pattern="^\d{1,2}+(\.\d{1})?$"
 												value="<%=item.getNotaSegundoParcial()%>"></td>
-											<td><input type="text" name="Nota4" class="form-control"
+											<td><input type="text" id="nota" name="Nota4" class="form-control" onkeypress="return valideKey(event);" pattern="^\d{1,2}+(\.\d{1})?$"
 												value="<%=item.getNotaSegundoRecuperatorio()%>"></td>						
 											<td><select class="form-select form-select">
 												<%
@@ -194,5 +216,17 @@ B O D Y
 		});
 	});
 </script>
+
+<script type="text/javascript">
+// Initialize our function when the document is ready for events.
+// jQuery(document).ready(function(){
+// 	// Listen for the input event.
+// 	jQuery("#nota").on('input', function (evt) {
+// 		// Allow only numbers.
+// 		jQuery(this).val(jQuery(this).val().replace(/[^0-9]/g, ''));
+// 	});
+// });
+</script> 
+
 </body>
 </html>

@@ -208,12 +208,24 @@ public class ServletControlador extends HttpServlet {
 		}
 		
 		if (request.getParameter("btnGuardarNota1") != null) {
+
+			String MateriaId = request.getParameter("txtMateriaId");			
+			String SemestreId = request.getParameter("txtSemestreId");
+			String Anio = request.getParameter("txtAnio");
+			String LegajoDocente = request.getParameter("txtLegajoDocente");
 			
-			String []n1 = request.getParameterValues("Nota1");
-			String []l1 = request.getParameterValues("txtLegajoAlumno");
 			
-			for(int i = 0; i < n1.length; i++) {
-				System.out.println("legajo: "+l1[i]+ " nota: " +n1[i]);
+			
+			String []Nota1 = request.getParameterValues("Nota1");
+			String []LegajoAlumno = request.getParameterValues("txtLegajoAlumno");
+			
+			for(int i = 0; i < LegajoAlumno.length; i++) {
+				System.out.println("Id Materia: " + MateriaId);
+				System.out.println("Id Semestre: "+ SemestreId);
+				System.out.println("Anio: "+ Anio);
+				System.out.println("Legajo docente: " + LegajoDocente);
+				System.out.println("Legajo Alumno: " + LegajoAlumno[i]);
+				System.out.println("Nota 1 : " + Nota1[i]);
 			}
 
 //			if(n1!=null)
