@@ -46,9 +46,6 @@ N A V B A R
 		}
 	%>
 
-
-LISTADO DE CURSOS
-
 	<main id="main" class="main">
 	<section class="section">
 		<div class="row">
@@ -56,71 +53,111 @@ LISTADO DE CURSOS
 
 				<div class="card">
 					<div class="card-body">
-						<p>
-						</p>
+						<p></p>
 						<h5 class="card-title">Agregar Nuevo Curso</h5>
 						<hr>
 
-                <div class="row mb-3">
-                  <label class="col-sm-2 col-form-label">Materia</label>
-                  <div class="col-sm-10">
-                    <select class="form-select" aria-label="Default select example">
-                      <option selected>--Seleccione una Materia--</option>
-                      <option value="1">Buenos Aires</option>
-                      <option value="2">Entre Ríos</option>
-                      <option value="3">Salta</option>
-                    </select>
-                  </div>
-                </div>
-                
-                <div class="row mb-3">
-                  <label class="col-sm-2 col-form-label">Semestre</label>
-                  <div class="col-sm-10">
-                    <select class="form-select" aria-label="Default select example">
-                      <option selected>--Seleccione un Semestre--</option>
-                      <option value="1">Buenos Aires</option>
-                      <option value="2">Entre Ríos</option>
-                      <option value="3">Salta</option>
-                    </select>
-                  </div>
-                </div>
-                
-                <div class="row mb-3">
-                  <label for="inputText" class="col-sm-2 col-form-label">Año</label>
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control">
-                  </div>
-                </div>
-                                
-                
-                                                <div class="row mb-3">
-                  <label class="col-sm-2 col-form-label">Profesores</label>
-                  <div class="col-sm-10">
-                    <select class="form-select" aria-label="Default select example">
-                      <option selected>--Seleccione un profesor--</option>
-                      <option value="1">Buenos Aires</option>
-                      <option value="2">Entre Ríos</option>
-                      <option value="3">Salta</option>
-                    </select>
-                  </div>
-                </div>
-                
-                                <!-- BOTON DE AGREGAR-->
-                <div class="row mb-3">
-                  <label class="col-sm-2 col-form-label"></label>
-                  <div class="col-sm-10">
-                    <button type="submit" class="btn btn-primary" style="float: right">Agregar Curso</button>
-                  </div>
-                </div>
+						<div class="row mb-3">
+							<label class="col-sm-2 col-form-label">Materia</label>
+							<div class="col-sm-10">
+								<select class="form-select" aria-label="Default select example">
+									<option selected>--Seleccione una Materia--</option>
+									<option value="1">Buenos Aires</option>
+									<option value="2">Entre Ríos</option>
+									<option value="3">Salta</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="row mb-3">
+							<label class="col-sm-2 col-form-label">Semestre</label>
+							<div class="col-sm-10">
+								<select class="form-select" aria-label="Default select example">
+									<option selected>--Seleccione un Semestre--</option>
+									<option value="1">Buenos Aires</option>
+									<option value="2">Entre Ríos</option>
+									<option value="3">Salta</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="row mb-3">
+							<label for="inputText" class="col-sm-2 col-form-label">Año</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control">
+							</div>
+						</div>
+						<br>
+
+						<h6 class="card-title">Seleccione un profesor</h6>
+						<hr>
+						<table id="myTable" class="table table-striped"
+							style="width: 100%">
+							<thead>
+								<tr>
+									<th scope="col">Leg.</th>
+									<th scope="col">DNI</th>
+									<th scope="col">Apellido y Nombre</th>
+									<th scope="col">Acciones</th>
+								</tr>
+							</thead>
+
+							<%
+								ArrayList<Profesor> listaProfesores = null;
+								if (request.getAttribute("listaProfesores") != null) {
+									listaProfesores = (ArrayList<Profesor>) request.getAttribute("listaProfesores");
+								}
+							%>
+
+							<%
+								if (listaProfesores != null) {
+									for (Profesor item : listaProfesores) {
+							%>
 
 
+							<tr>
 
+								<td><%=item.getLegajo()%></td>
+								<td><%=item.getPersona().getDni()%></td>
+								<td><%=item.getPersona().getApellido()%>, <%=item.getPersona().getNombre()%></td>
+								<td>
+
+									<form action="ProfCursoServlet" method="post">
+
+										<input type="submit" name="btnObtenerAlumnosPorCurso"
+											value="Agregar al curso"
+											class="btn btn-sm btn-outline-primary waves-effect">
+									</form>
+
+								</td>
+
+							</tr>
+							<%
+									}
+									}
+								%>
+
+
+						</table>
+						<!-- FIN DE LA TABLA -->
+						<br>
+						<hr>
+												<!-- BOTON DE AGREGAR-->
+						<div class="row mb-3">
+							<label class="col-sm-2 col-form-label"></label>
+							<div class="col-sm-10">
+								<button type="submit" class="btn btn-primary"
+									style="float: right">Agregar nuevo curso</button>
+							</div>
+						</div>
 					</div>
+
 				</div>
 			</div>
 		</div>
+	
 	</section>
-	</main>             
+	</main>
 	<script type="text/javascript"
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script type="text/javascript"
@@ -132,5 +169,15 @@ LISTADO DE CURSOS
 	<script type="text/javascript"
 		src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
 
+<script>
+	//IDIOMAS ESPAÑOL DEL DATATABLE   
+	$(document).ready(function() {
+		$('#myTable').DataTable({ 
+		"language": {
+			"url": "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
+			}
+		});
+	});
+</script>
 </body>
 </html>

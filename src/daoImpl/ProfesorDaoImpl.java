@@ -182,6 +182,5 @@ public class ProfesorDaoImpl implements ProfesorDao {
 			e.printStackTrace();
 		}
 		return Profesor;
-
 	}
 }

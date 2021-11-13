@@ -51,5 +51,4 @@ public class NegocioProfesorImpl implements NegocioProfesor{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }
