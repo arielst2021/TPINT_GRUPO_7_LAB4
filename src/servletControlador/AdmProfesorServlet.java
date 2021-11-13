@@ -35,8 +35,19 @@ public class AdmProfesorServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		if(request.getParameter("Param")!=null)
+		{
+			if(request.getParameter("Param").equals("4")) {
+				RequestDispatcher rd = request.getRequestDispatcher("/registro.jsp");   
+		        rd.forward(request, response);		
+		        
+			}
+		
+		}
+		
+		
+		
 	}
 
 	/**

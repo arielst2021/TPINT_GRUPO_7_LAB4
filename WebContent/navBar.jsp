@@ -37,7 +37,7 @@
 				class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
 				role="button" aria-expanded="false">Profesores</a>
 				<ul class="dropdown-menu">
-					<li><a class="dropdown-item" href="#">Alta</a></li>
+					<li><a class="dropdown-item" href="AdmProfesorServlet?Param=4">Alta</a></li>
 					<li><a class="dropdown-item" href="#">Modificar</a></li>
 					<li><a class="dropdown-item" href="#">Listar</a></li>
 					<li><a class="dropdown-item" href="#">Baja</a></li>
