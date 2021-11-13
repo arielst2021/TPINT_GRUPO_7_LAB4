@@ -40,7 +40,7 @@ N A V B A R
 		if (session.getAttribute("perfil") != null) {
 	%>
 	<jsp:include page="logout.jsp"></jsp:include>
-	<jsp:include page="navTabs.jsp"></jsp:include>
+	<jsp:include page="navBar.jsp"></jsp:include>
 	<%
 		} else {
 	%>
