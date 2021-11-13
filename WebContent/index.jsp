@@ -9,14 +9,14 @@
 
 <%
 	if (session.getAttribute("perfil") != null) {
-	Profesor Profesor2 = new Profesor();
-	Profesor2 = (Profesor) session.getAttribute("perfil");
+	Profesor Profesor = new Profesor();
+	Profesor = (Profesor) session.getAttribute("perfil");
 
-	if (Profesor2.getPerfil().getId() == 1) {
+	if (Profesor.getPerfil().getId() == 1) {
 		//REDIRIGIR A PAGINA ADMINISTRADOR -->
 		response.sendRedirect("adm_inicio.jsp");
 	}
-	if (Profesor2.getPerfil().getId() == 2) {
+	if (Profesor.getPerfil().getId() == 2) {
 		//REDIRIGIR A PAGINA DOCENTE -->
 		response.sendRedirect("prof_inicio.jsp");
 	}

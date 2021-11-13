@@ -7,10 +7,10 @@
 <!-- EN CASO DE QUE EXISTA UNA SESION INICIADA REDIRECCIONO A ADMINISTRADOR.JSP O -->
 <!-- PROFESOR.JSP, NO TIENE CASO MOSTRAR ESTE FORMULARIO CUANDO HAY UNA SESION INICIADA -->
 
-<%!Profesor Profesor2 = new Profesor();%>
+<%!Profesor Profesor = new Profesor();%>
 <%
 	if (session.getAttribute("perfil") != null) {
-		Profesor2 = (Profesor) session.getAttribute("perfil");
+		Profesor = (Profesor) session.getAttribute("perfil");
 	} else {
 		response.sendRedirect("index.jsp");
 	}
@@ -43,9 +43,9 @@
 
 							<!-- USUARIO EN LA SESION -->
 
-							<span class="fw-bold"><%=Profesor2.getPersona2().getNombre()%> <%=Profesor2.getPersona2().getApellido()%></span>
+							<span class="fw-bold"><%=Profesor.getPersona().getNombre()%> <%=Profesor.getPersona().getApellido()%></span>
 							<br>
-							<small class="text-danger"><%=Profesor2.getPerfil().getNombrePerfil()%> </small>
+							<small class="text-danger"><%=Profesor.getPerfil().getNombrePerfil()%> </small>
 						</h6>
 					</div>
 					<div class="col-md-1 align-self-center">

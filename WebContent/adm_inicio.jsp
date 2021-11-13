@@ -52,8 +52,8 @@ N A V B A R
 
 	<div class="w3-display-middle w3-margin-top w3-center">
 		<h3>ADMINISTRADOR</h3>
-		<h1 CLASS="text-primary"><%=Profesor.getPersona2().getNombre()%>
-			<%=Profesor.getPersona2().getApellido()%></h1>
+		<h1 CLASS="text-primary"><%=Profesor.getPersona().getNombre()%>
+			<%=Profesor.getPersona().getApellido()%></h1>
 	</div>
 
 	<script type="text/javascript"

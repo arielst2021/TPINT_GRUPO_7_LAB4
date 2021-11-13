@@ -6,11 +6,11 @@
 <!-- EN CASO DE QUE EXISTA UNA SESION INICIADA REDIRECCIONO A ADMINISTRADOR.JSP O -->
 <!-- PROFESOR.JSP, NO TIENE CASO MOSTRAR ESTE FORMULARIO CUANDO HAY UNA SESION INICIADA -->
 
-<%!Profesor Profesor2 = new Profesor();%>
+<%!Profesor Profesor = new Profesor();%>
 <%
 	if (session.getAttribute("perfil") != null) {
-		Profesor2 = (Profesor) session.getAttribute("perfil");
-		if (Profesor2.getPerfil().getId() == 1){
+		Profesor = (Profesor) session.getAttribute("perfil");
+		if (Profesor.getPerfil().getId() == 1){
 		//REDIRIGIR A PAGINA PROFESOR
 	response.sendRedirect("adm_inicio.jsp");
 		}
@@ -51,8 +51,8 @@ if (session.getAttribute("perfil") != null) {%>
 
 	<div class="w3-display-middle w3-margin-top w3-center">
 		<h3>PROFESOR/A</h3>
-		<h1 CLASS="text-primary"><%=Profesor2.getPersona2().getNombre()%>
-			<%=Profesor2.getPersona2().getApellido()%></h1>
+		<h1 CLASS="text-primary"><%=Profesor.getPersona().getNombre()%>
+			<%=Profesor.getPersona().getApellido()%></h1>
 	</div>
 
 	<script type="text/javascript"

@@ -100,7 +100,7 @@ B O D Y
 									<div class="bg-light py-2">
 										<div>
 							<p><strong>Año: </strong><%=Curso.getAnio()%></p>
-							<p><strong>Profesor/a: </strong><%=Profesor2.getPersona2().getNombre()%> <%=Profesor2.getPersona2().getApellido()%></p>	
+							<p><strong>Profesor/a: </strong><%=Profesor2.getPersona().getNombre()%> <%=Profesor2.getPersona().getApellido()%></p>	
 										</div>
 									</div>
 								</div>

@@ -2,7 +2,7 @@ package entidades;
 
 public class Profesor {
 	private int Legajo;
-	private Persona Persona2;
+	private Persona Persona;
 	private Estado Estado;
 	private Perfil Perfil;
 	private String Usuario;
@@ -11,10 +11,10 @@ public class Profesor {
 	public Profesor() {
 	}
 
-	public Profesor(int Legajo, Persona Persona2, Estado Estado, Perfil Perfil, String Usuario, String Contrasenia) {
+	public Profesor(int Legajo, Persona Persona, Estado Estado, Perfil Perfil, String Usuario, String Contrasenia) {
 		super();
 		this.Legajo = Legajo;
-		this.Persona2 = Persona2;
+		this.Persona = Persona;
 		this.Estado = Estado;
 		this.Perfil = Perfil;
 		this.Usuario = Usuario;
@@ -29,12 +29,12 @@ public class Profesor {
 		this.Legajo = Legajo;
 	}
 
-	public Persona getPersona2() {
-		return Persona2;
+	public Persona getPersona() {
+		return Persona;
 	}
 
-	public void setPersona2(Persona persona2) {
-		Persona2 = persona2;
+	public void setPersona(Persona Persona) {
+		this.Persona = Persona;
 	}
 
 	public Estado getEstado() {

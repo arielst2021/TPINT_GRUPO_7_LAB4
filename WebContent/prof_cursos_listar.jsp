@@ -57,8 +57,8 @@ N A V B A R
 
 				<div class="card">
 					<div class="card-body">
-						<p><%=Profesor2.getPersona2().getNombre()%>
-							<%=Profesor2.getPersona2().getApellido()%>
+						<p><%=Profesor2.getPersona().getNombre()%>
+							<%=Profesor2.getPersona().getApellido()%>
 						</p>
 						<h5 class="card-title">Mis Cursos</h5>
 						<hr>

@@ -98,12 +98,12 @@ public class ProfesorDaoImpl implements ProfesorDao {
 
 				Perfil Perfil = new Perfil(idPerfil, nombrePerfil);
 				Estado Estado = new Estado(idEstado, nombreEstado);
-				Persona Persona2 = new Persona(nombreProfesor, apellidoProfesor);
+				Persona Persona = new Persona(nombreProfesor, apellidoProfesor);
 
 				Profesor2.setLegajo(legajoProfesor);
 				Profesor2.setPerfil(Perfil);
 				Profesor2.setEstado(Estado);
-				Profesor2.setPersona2(Persona2);
+				Profesor2.setPersona(Persona);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
