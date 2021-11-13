@@ -1,4 +1,4 @@
-<%@page import="entidades.Profesor2"%>
+<%@page import="entidades.Profesor"%>
 <%@page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -15,13 +15,13 @@
 	
 	<form action="LoginServlet" method="get">	
 	<%
-		if (session.getAttribute("perfil") != null) {
-			Profesor2 Profesor2 = new Profesor2();
-			Profesor2 = (Profesor2) session.getAttribute("perfil");
+			if (session.getAttribute("perfil") != null) {
+			Profesor Profesor2 = new Profesor();
+			Profesor2 = (Profesor) session.getAttribute("perfil");
 
 			if (Profesor2.getPerfil().getId() == 1) {
 				// ADMINISTRADOR
-	%>
+		%>
 	<div class="navbar justify-content-center">
 		<ul class="nav nav-pills">
 			<li class="nav-item dropdown"><a

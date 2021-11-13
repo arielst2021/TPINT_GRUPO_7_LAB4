@@ -16,7 +16,7 @@ import entidades.Alumno;
 import entidades.Curso;
 import entidades.Estado;
 import entidades.Materia;
-import entidades.Profesor2;
+import entidades.Profesor;
 import entidades.Semestre;
 import negocio.NegocioCurso;
 import negocio.NegocioEstado;
@@ -47,7 +47,7 @@ public class ProfCursoServlet extends HttpServlet {
 
 			HttpSession session = request.getSession();
 			if (session.getAttribute("perfil") != null) {
-				Profesor2 Profesor2 = (Profesor2) session.getAttribute("perfil");
+				Profesor Profesor2 = (Profesor) session.getAttribute("perfil");
 				int NroLegajo = Profesor2.getLegajo();
 
 				ArrayList<Curso> lista = NegocioCurso.ObtenerCursosPorLegajoProfesor(NroLegajo);
@@ -95,7 +95,7 @@ public class ProfCursoServlet extends HttpServlet {
 			session.setAttribute("DatosDelCurso", Curso);
 			//
 		
-			Profesor2 Profesor2 = new Profesor2();
+			Profesor Profesor2 = new Profesor();
 			Profesor2.setLegajo(Legajo);
 			
 			NegocioCurso NegocioCurso = new NegocioCursoImpl();
@@ -138,7 +138,7 @@ public class ProfCursoServlet extends HttpServlet {
 			Semestre Semestre = new Semestre();
 			Semestre.setId(SemestreId);
 			//
-			Profesor2 Profesor2 = new Profesor2();
+			Profesor Profesor2 = new Profesor();
 			Profesor2.setLegajo(LegajoDocente);
 					
 			for(int i = 0; i < LegajoAlumno.length; i++) {			

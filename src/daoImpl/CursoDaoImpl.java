@@ -13,7 +13,7 @@ import entidades.Alumno;
 import entidades.Curso;
 import entidades.Estado;
 import entidades.Materia;
-import entidades.Persona2;
+import entidades.Persona;
 import entidades.Semestre;
 
 public class CursoDaoImpl implements CursoDao {
@@ -105,7 +105,7 @@ public class CursoDaoImpl implements CursoDao {
 				String EstadoNombre = miResultSet.getString("est_nombre");
 				
 				//
-				Persona2 Persona2 = new Persona2();
+				Persona Persona2 = new Persona();
 				Persona2.setNombre(AlumnoNombre);
 				Persona2.setApellido(AlumnoApellido);
 				//

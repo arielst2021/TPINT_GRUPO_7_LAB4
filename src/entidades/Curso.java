@@ -6,7 +6,7 @@ public class Curso {
 	private Materia Materia;
 	private Semestre Semestre;
 	private Year Anio;
-	private Profesor2 Profesor2;
+	private Profesor Profesor2;
 	private Alumno Alumno;
 	private Float notaPrimerParcial;
 	private Float notaPrimerRecuperatorio;
@@ -24,7 +24,7 @@ public class Curso {
 		this.Anio = Anio;
 	}
 
-	public Curso(Materia Materia, Semestre Semestre, Year Anio, Profesor2 Profesor2) {
+	public Curso(Materia Materia, Semestre Semestre, Year Anio, Profesor Profesor2) {
 		this.Materia = Materia;
 		this.Semestre = Semestre;
 		this.Anio = Anio;
@@ -41,7 +41,7 @@ public class Curso {
 		this.estado = estado;
 	}
 
-	public Curso(Materia materia, Semestre semestre, Year anio, Profesor2 profesor2, Alumno alumno,
+	public Curso(Materia materia, Semestre semestre, Year anio, Profesor profesor2, Alumno alumno,
 			Float notaPrimerParcial) {
 		Materia = materia;
 		Semestre = semestre;
@@ -51,7 +51,7 @@ public class Curso {
 		this.notaPrimerParcial = notaPrimerParcial;
 	}
 
-	public Curso(Materia materia, Semestre semestre, Year anio, Profesor2 profesor2, Alumno alumno,
+	public Curso(Materia materia, Semestre semestre, Year anio, Profesor profesor2, Alumno alumno,
 			Float notaPrimerParcial, Float notaPrimerRecuperatorio, Float notaSegundoParcial,
 			Float notaSegundoRecuperatorio, Estado estado) {
 		Materia = materia;
@@ -90,19 +90,19 @@ public class Curso {
 		this.Anio = Anio;
 	}
 
-	public Profesor2 getProfesor() {
+	public Profesor getProfesor() {
 		return Profesor2;
 	}
 
-	public void setProfesor(Profesor2 Profesor2) {
+	public void setProfesor(Profesor Profesor2) {
 		this.Profesor2 = Profesor2;
 	}
 
-	public Profesor2 getProfesor2() {
+	public Profesor getProfesor2() {
 		return Profesor2;
 	}
 
-	public void setProfesor2(Profesor2 profesor2) {
+	public void setProfesor2(Profesor profesor2) {
 		Profesor2 = profesor2;
 	}
 

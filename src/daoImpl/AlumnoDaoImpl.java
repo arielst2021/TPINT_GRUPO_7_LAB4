@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import dao.AlumnoDao;
 import entidades.Alumno;
-import entidades.Persona2;
+import entidades.Persona;
 import entidades.Provincia;
 import entidades.Estado;
 
@@ -30,7 +30,7 @@ public class AlumnoDaoImpl implements AlumnoDao {
 			while (rs.next()) {
 				// Carga Objecto de Alumno y lo agrega al ArrayList
 				Alumno alum = new Alumno();
-				Persona2 per = new Persona2();
+				Persona per = new Persona();
 				alum.setLegajo(rs.getInt("alu_legajo"));
 
 				per.setDni(rs.getString("alu_dni"));
@@ -88,7 +88,7 @@ public class AlumnoDaoImpl implements AlumnoDao {
 
 			while (rs.next()) {
 				Alumno alum = new Alumno();
-				Persona2 per = new Persona2();
+				Persona per = new Persona();
 				Estado est = new Estado();
 				alum.setLegajo(rs.getInt("alu_legajo"));
 
@@ -144,7 +144,7 @@ public class AlumnoDaoImpl implements AlumnoDao {
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
 				// Carga Objecto de Alumno
-				Persona2 per = new Persona2();
+				Persona per = new Persona();
 				alum.setLegajo(rs.getInt("alu_legajo"));
 
 				per.setDni(rs.getString("alu_dni"));

@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
 import entidades.Alumno;
 import entidades.Curso;
 import entidades.Estado;
-import entidades.Persona2;
+import entidades.Persona;
 import entidades.Provincia;
 import negocio.NegocioAlumno;
 import negocio.NegocioEstado;
@@ -65,7 +65,7 @@ public class AdmAlumnoServlet extends HttpServlet {
     	
     	if (request.getParameter("btnEditarAlumno") != null){
     		Alumno alum = new Alumno();
-    		Persona2 per = new Persona2();
+    		Persona per = new Persona();
     		// Se completa el objeto de alumno con los datos del formulario.
     		
     		// Se valida que el DNI ya no este en uso

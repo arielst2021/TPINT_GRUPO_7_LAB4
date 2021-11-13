@@ -61,20 +61,20 @@ public class AdmProfesorServlet extends HttpServlet {
 			int idprovincia = Integer.parseInt(request.getParameter("provincias"));
 
 			NegocioProfesor negocioprofesor = new NegocioProfesorImpl();
-			Profesor profesor = new Profesor();
-			profesor.setNombre(request.getParameter("name"));
-			profesor.setApellido(request.getParameter("apellido"));
-			profesor.setContraseña(request.getParameter("password"));
-			profesor.setDireccion(request.getParameter("direccion"));
-			profesor.setDni(request.getParameter("dni"));
-			profesor.setEstado(1);
-			profesor.setPerfil(1);
-			profesor.setTelefono(request.getParameter("telefono"));
-			profesor.setUsuario(request.getParameter("dni"));
-			profesor.setMail(request.getParameter("mail"));
-			profesor.setFechanacimiento(fecha);
-			profesor.setProvincia(idprovincia);
-			negocioprofesor.guardarprofesor(profesor);
+//			Profesor profesor = new Profesor();
+//			profesor.setNombre(request.getParameter("name"));
+//			profesor.setApellido(request.getParameter("apellido"));
+//			profesor.setContraseña(request.getParameter("password"));
+//			profesor.setDireccion(request.getParameter("direccion"));
+//			profesor.setDni(request.getParameter("dni"));
+//			profesor.setEstado(1);
+//			profesor.setPerfil(1);
+//			profesor.setTelefono(request.getParameter("telefono"));
+//			profesor.setUsuario(request.getParameter("dni"));
+//			profesor.setMail(request.getParameter("mail"));
+//			profesor.setFechanacimiento(fecha);
+//			profesor.setProvincia(idprovincia);
+//			negocioprofesor.guardarprofesor(profesor);
 
 			RequestDispatcher miRequestDispatcher = request.getRequestDispatcher("/registro.jsp");
 			miRequestDispatcher.forward(request, response);

@@ -1,4 +1,4 @@
-<%@page import="entidades.Profesor2"%>
+<%@page import="entidades.Profesor"%>
 <%@page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!-- ATRIBUTO SESSION DE LA DIRECTIVA PAGE-->
@@ -7,11 +7,11 @@
 <!-- EN CASO DE QUE EXISTA UNA SESION INICIADA REDIRECCIONO A ADMINISTRADOR.JSP O -->
 <!-- PROFESOR.JSP, NO TIENE CASO MOSTRAR ESTE FORMULARIO CUANDO HAY UNA SESION INICIADA -->
 
-<%!Profesor2 Profesor2 = new Profesor2();%>
+<%!Profesor Profesor = new Profesor();%>
 <%
 	if (session.getAttribute("perfil") != null) {
-		Profesor2 = (Profesor2) session.getAttribute("perfil");
-		if (Profesor2.getPerfil().getId() == 2) {
+		Profesor = (Profesor) session.getAttribute("perfil");
+		if (Profesor.getPerfil().getId() == 2) {
 			//REDIRIGIR A PAGINA PROFESOR
 			response.sendRedirect("prof_inicio.jsp");
 		}
@@ -45,15 +45,15 @@ N A V B A R
 		if (session.getAttribute("perfil") != null) {
 	%>
 	<jsp:include page="logout.jsp"></jsp:include>
-	<jsp:include page="navTabs.jsp"></jsp:include>
+	<jsp:include page="navBar.jsp"></jsp:include>
 	<%
 		}
 	%>
 
 	<div class="w3-display-middle w3-margin-top w3-center">
 		<h3>ADMINISTRADOR</h3>
-		<h1 CLASS="text-primary"><%=Profesor2.getPersona2().getNombre()%>
-			<%=Profesor2.getPersona2().getApellido()%></h1>
+		<h1 CLASS="text-primary"><%=Profesor.getPersona2().getNombre()%>
+			<%=Profesor.getPersona2().getApellido()%></h1>
 	</div>
 
 	<script type="text/javascript"

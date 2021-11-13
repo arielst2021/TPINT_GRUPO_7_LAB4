@@ -11,65 +11,65 @@ import java.sql.ResultSet;
 import dao.ProfesorDao;
 import entidades.Estado;
 import entidades.Perfil;
-import entidades.Persona2;
+import entidades.Persona;
 import entidades.Profesor;
-import entidades.Profesor2;
+import entidades.Profesor;
 
 public class ProfesorDaoImpl implements ProfesorDao {
 	private static final String iniciarSesion = "SELECT pro_perfil_id, per_nombre, pro_estado_id, est_nombre, pro_nombre, pro_apellido, pro_legajo FROM profesores INNER JOIN perfiles ON perfiles.per_id=profesores.pro_perfil_id INNER JOIN estados ON estados.est_id=profesores.pro_estado_id WHERE pro_usuario = ? AND pro_contrasenia = ? AND pro_estado_id = 1";
 
+//	@Override
+//	public int guardarprofesor(Profesor profesor) {
+//		String agregarprofesor = "INSERT INTO profesores(pro_dni, pro_nombre, pro_apellido, pro_fechanac,pro_direccion,pro_provincia_id,pro_email,pro_telefono,pro_estado_id,pro_perfil_id,pro_usuario,pro_contrasenia) values (?,?,?,?,?,?,?,?,?,?,?,?);";
+//		Profesor prof = new Profesor();
+
+//		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+//		String fechaComoCadena = sdf.format(profesor.getFechanacimiento());
+//
+//		Date fecha = new Date(fechaComoCadena);
+//
+//		java.sql.Date date2 = new java.sql.Date(fecha.getDay(), fecha.getMonth(), fecha.getYear());
+//
+//		Connection conexion = Conexion.getConexion().getSQLConexion();
+//		try {
+//			PreparedStatement statement = (PreparedStatement) conexion.prepareStatement(agregarprofesor);
+//			statement.setString(1, profesor.getDni());
+//			statement.setString(2, profesor.getNombre());
+//			statement.setString(3, profesor.getApellido());
+//			statement.setDate(4, date2);
+//			statement.setString(5, profesor.getDireccion());
+//			statement.setInt(6, profesor.getProvincia());
+//			statement.setString(7, profesor.getMail());
+//			statement.setString(8, profesor.getTelefono());
+//			statement.setInt(9, profesor.getEstado());
+//			statement.setInt(10, profesor.getPerfil());
+//			statement.setString(11, profesor.getUsuario());
+//			statement.setString(12, profesor.getContraseña());
+//
+//			if (statement.executeLargeUpdate() > 0) {
+//				conexion.commit();
+//				return 1;
+//
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//			try {
+//				conexion.rollback();
+//			} catch (SQLException e1) {
+//				e1.printStackTrace();
+//			}
+//		}
+//
+//		return 0;
+//	}
+
 	@Override
-	public int guardarprofesor(Profesor profesor) {
-		String agregarprofesor = "INSERT INTO profesores(pro_dni, pro_nombre, pro_apellido, pro_fechanac,pro_direccion,pro_provincia_id,pro_email,pro_telefono,pro_estado_id,pro_perfil_id,pro_usuario,pro_contrasenia) values (?,?,?,?,?,?,?,?,?,?,?,?);";
-		Profesor prof = new Profesor();
-
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		String fechaComoCadena = sdf.format(profesor.getFechanacimiento());
-
-		Date fecha = new Date(fechaComoCadena);
-
-		java.sql.Date date2 = new java.sql.Date(fecha.getDay(), fecha.getMonth(), fecha.getYear());
-
-		Connection conexion = Conexion.getConexion().getSQLConexion();
-		try {
-			PreparedStatement statement = (PreparedStatement) conexion.prepareStatement(agregarprofesor);
-			statement.setString(1, profesor.getDni());
-			statement.setString(2, profesor.getNombre());
-			statement.setString(3, profesor.getApellido());
-			statement.setDate(4, date2);
-			statement.setString(5, profesor.getDireccion());
-			statement.setInt(6, profesor.getProvincia());
-			statement.setString(7, profesor.getMail());
-			statement.setString(8, profesor.getTelefono());
-			statement.setInt(9, profesor.getEstado());
-			statement.setInt(10, profesor.getPerfil());
-			statement.setString(11, profesor.getUsuario());
-			statement.setString(12, profesor.getContraseña());
-
-			if (statement.executeLargeUpdate() > 0) {
-				conexion.commit();
-				return 1;
-
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			try {
-				conexion.rollback();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
-		}
-
-		return 0;
-	}
-
-	@Override
-	public Profesor2 iniciarSesion(String userProfesor, String passProfesor) {
+	public Profesor iniciarSesion(String userProfesor, String passProfesor) {
 
 		Connection miConnection = null;
 		PreparedStatement miPreparedStatement = null;
 		ResultSet miResultSet = null;
-		Profesor2 Profesor2 = new Profesor2();
+		Profesor Profesor2 = new Profesor();
 
 		try {
 			// 1. OBTENER UNA CONEXIÓN A LA BASE DE DATOS
@@ -98,7 +98,7 @@ public class ProfesorDaoImpl implements ProfesorDao {
 
 				Perfil Perfil = new Perfil(idPerfil, nombrePerfil);
 				Estado Estado = new Estado(idEstado, nombreEstado);
-				Persona2 Persona2 = new Persona2(nombreProfesor, apellidoProfesor);
+				Persona Persona2 = new Persona(nombreProfesor, apellidoProfesor);
 
 				Profesor2.setLegajo(legajoProfesor);
 				Profesor2.setPerfil(Perfil);

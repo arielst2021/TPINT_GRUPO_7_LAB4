@@ -1,11 +1,11 @@
 package dao;
 
 import entidades.Profesor;
-import entidades.Profesor2;
+import entidades.Profesor;
 
 public interface ProfesorDao {
 	
-	public int guardarprofesor (Profesor profesor);
-	public Profesor2 iniciarSesion(String userProfesor, String passProfesor);
+//	public int guardarprofesor (Profesor profesor);
+	public Profesor iniciarSesion(String userProfesor, String passProfesor);
 
 }

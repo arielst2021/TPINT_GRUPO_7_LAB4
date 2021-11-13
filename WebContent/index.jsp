@@ -1,4 +1,4 @@
-<%@page import="entidades.Profesor2"%>
+<%@page import="entidades.Profesor"%>
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!-- ATRIBUTO SESSION DE LA DIRECTIVA PAGE-->
@@ -8,9 +8,9 @@
 <!-- PROFESOR.JSP, NO TIENE CASO MOSTRAR ESTE FORMULARIO CUANDO HAY UNA SESION INICIADA -->
 
 <%
-if (session.getAttribute("perfil") != null) {
-	Profesor2 Profesor2 = new Profesor2();
-	Profesor2 = (Profesor2) session.getAttribute("perfil");
+	if (session.getAttribute("perfil") != null) {
+	Profesor Profesor2 = new Profesor();
+	Profesor2 = (Profesor) session.getAttribute("perfil");
 
 	if (Profesor2.getPerfil().getId() == 1) {
 		//REDIRIGIR A PAGINA ADMINISTRADOR -->

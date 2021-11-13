@@ -1,5 +1,5 @@
 <%@page import="entidades.Curso"%>
-<%@page import="entidades.Profesor2"%>
+<%@page import="entidades.Profesor"%>
 <%@page import="java.util.ArrayList"%>
 
 <%@page session="true"%>
@@ -7,10 +7,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 
-<%!Profesor2 Profesor2 = new Profesor2();%>
+<%!Profesor Profesor2 = new Profesor();%>
 <%
 	if (session.getAttribute("perfil") != null) {
-		Profesor2 = (Profesor2) session.getAttribute("perfil");
+		Profesor2 = (Profesor) session.getAttribute("perfil");
 	} else {
 		response.sendRedirect("index.jsp");
 	}

@@ -1,69 +1,100 @@
 package entidades;
+
 import java.time.LocalDate;
 import java.util.Date;
 
 public class Persona {
-	
-	private String nombre ;
-	private String apellido ;
-	private String telefono ;
-	private String mail ;
-	private String dni ;
-	private String direccion ;
-	private int provincia ;
-	private Date fechanacimiento;
-	public String getNombre() {
-		return nombre;
-	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-	public String getApellido() {
-		return apellido;
-	}
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
-	}
-	public String getTelefono() {
-		return telefono;
-	}
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
-	}
-	public String getMail() {
-		return mail;
-	}
-	public void setMail(String mail) {
-		this.mail = mail;
-	}
-	public String getDni() {
-		return dni;
-	}
-	public void setDni(String dni) {
-		this.dni = dni;
-	}
-	public String getDireccion() {
-		return direccion;
-	}
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
-	}
-	public int getProvincia() {
-		return provincia;
-	}
-	public void setProvincia(int provincia) {
-		this.provincia = provincia;
-	}
-	public Date getFechanacimiento() {
-		
-		
-		
-		
-		return fechanacimiento;
-	}
-	public void setFechanacimiento(Date fechanacimiento) {
-		this.fechanacimiento = fechanacimiento;
-	}
-	
 
+	private String Dni;
+	private String Nombre;
+	private String Apellido;
+	private LocalDate FechaNacimiento;
+	private String Direccion;
+	private Provincia Provincia;
+	private String Email;
+	private String Telefono;
+
+	public Persona() {
+	}
+	
+	public Persona(String Nombre, String Apellido) {
+		this.Nombre = Nombre;
+		this.Apellido = Apellido;
+	}
+
+	public Persona(String Dni, String Nombre, String Apellido, LocalDate FechaNacimiento, String Direccion,
+			Provincia Provincia, String Email, String Telefono) {
+		this.Dni = Dni;
+		this.Nombre = Nombre;
+		this.Apellido = Apellido;
+		this.FechaNacimiento = FechaNacimiento;
+		this.Direccion = Direccion;
+		this.Provincia = Provincia;
+		this.Email = Email;
+		this.Telefono = Telefono;
+	}
+
+	public String getDni() {
+		return Dni;
+	}
+
+	public void setDni(String Dni) {
+		this.Dni = Dni;
+	}
+
+	public String getNombre() {
+		return Nombre;
+	}
+
+	public void setNombre(String Nombre) {
+		this.Nombre = Nombre;
+	}
+
+	public String getApellido() {
+		return Apellido;
+	}
+
+	public void setApellido(String Apellido) {
+		this.Apellido = Apellido;
+	}
+
+	public LocalDate getFechaNacimiento() {
+		return FechaNacimiento;
+	}
+
+	public void setFechaNacimiento(LocalDate FechaNacimiento) {
+		this.FechaNacimiento = FechaNacimiento;
+	}
+
+	public String getDireccion() {
+		return Direccion;
+	}
+
+	public void setDireccion(String Direccion) {
+		this.Direccion = Direccion;
+	}
+
+	public Provincia getProvincia() {
+		return Provincia;
+	}
+
+	public void setProvincia(Provincia Provincia) {
+		this.Provincia = Provincia;
+	}
+
+	public String getEmail() {
+		return Email;
+	}
+
+	public void setEmail(String Email) {
+		this.Email = Email;
+	}
+
+	public String getTelefono() {
+		return Telefono;
+	}
+
+	public void setTelefono(String Telefono) {
+		this.Telefono = Telefono;
+	}
 }

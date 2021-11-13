@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import entidades.Curso;
-import entidades.Profesor2;
+import entidades.Profesor;
 import negocio.NegocioCurso;
 import negocio.NegocioProfesor;
 import negocioImpl.NegocioCursoImpl;
@@ -43,7 +43,7 @@ public class InicioServlet extends HttpServlet {
 
 			HttpSession session = request.getSession();
 			if (session.getAttribute("perfil") != null) {
-				Profesor2 Profesor2 = (Profesor2) session.getAttribute("perfil");
+				Profesor Profesor2 = (Profesor) session.getAttribute("perfil");
 				int NroLegajo = Profesor2.getLegajo();
 
 				ArrayList<Curso> lista = NegocioCurso.ObtenerCursosPorLegajoProfesor(NroLegajo);
@@ -70,7 +70,7 @@ public class InicioServlet extends HttpServlet {
 			String passProfesor = request.getParameter("txtContrasenia");
 			//
 			NegocioProfesor NegocioProfesor = new NegocioProfesorImpl();
-			Profesor2 Profesor2 = NegocioProfesor.iniciarSesion(userProfesor, passProfesor);
+			Profesor Profesor2 = NegocioProfesor.iniciarSesion(userProfesor, passProfesor);
 			//
 			if (Profesor2 == null) {
 				RequestDispatcher dispatcher = request.getRequestDispatcher(paginaDestino);

@@ -11,7 +11,7 @@ import java.util.Date;
 
 import dao.ProvinciaDao;
 import entidades.Estado;
-import entidades.Persona2;
+import entidades.Persona;
 import entidades.Provincia;
 
 public class ProvinciaDaoImpl implements ProvinciaDao {
