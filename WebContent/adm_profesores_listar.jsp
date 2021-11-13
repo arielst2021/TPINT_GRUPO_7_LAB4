@@ -71,9 +71,6 @@ N A V B A R
 											<input type="submit" name="btnObtenerAlumnosPorCurso"
 												value="Editar"
 												class="btn btn-sm btn-outline-success waves-effect">
-											<input type="submit" name="btnObtenerAlumnosPorCurso"
-												value="Baja"
-												class="btn btn-sm btn-outline-danger waves-effect"></td>
 							</tr>
 
 								<tr>
@@ -86,7 +83,7 @@ N A V B A R
 
 									<td>
 
-										<form action="ServletControlador" method="post">
+										<form action="AdmProfesorServlet" method="post">
 
 
 											<input type="submit" name="btnObtenerAlumnosPorCurso"
@@ -95,9 +92,6 @@ N A V B A R
 											<input type="submit" name="btnObtenerAlumnosPorCurso"
 												value="Editar"
 												class="btn btn-sm btn-outline-success waves-effect">
-											<input type="submit" name="btnObtenerAlumnosPorCurso"
-												value="Baja"
-												class="btn btn-sm btn-outline-danger waves-effect">
 										</form>
 
 									</td>
