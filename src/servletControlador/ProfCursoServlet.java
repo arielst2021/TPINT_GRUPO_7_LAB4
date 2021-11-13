@@ -26,14 +26,14 @@ import negocioImpl.NegocioEstadoImpl;
 /**
  * Servlet implementation class ProfesorLogueadoServlet
  */
-@WebServlet("/ProfesorLogueadoServlet")
-public class ProfesorLogueadoServlet extends HttpServlet {
+@WebServlet("/ProfCursoServlet")
+public class ProfCursoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProfesorLogueadoServlet() {
+    public ProfCursoServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
