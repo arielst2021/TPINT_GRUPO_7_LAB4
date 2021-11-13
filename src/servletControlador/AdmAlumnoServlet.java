@@ -51,7 +51,7 @@ public class AdmAlumnoServlet extends HttpServlet {
 			request.setAttribute("listarProvincias", lista);    		
 
     		request.setAttribute("AlumnoEditar", alum);
-    		RequestDispatcher dispatcher = request.getRequestDispatcher("/editarAlumno.jsp");
+    		RequestDispatcher dispatcher = request.getRequestDispatcher("/adm_alumnos_editar.jsp");
     		dispatcher.forward(request, response);
 
     	}
@@ -59,7 +59,7 @@ public class AdmAlumnoServlet extends HttpServlet {
     	if (request.getParameter("btnEditarEstado") != null){
     		int Legajo = Integer.parseInt(request.getParameter("txtLegajoAlumno"));
     		int resp = negocioA.modificarAlumnoEstado(Legajo);
-    		RequestDispatcher dispatcher = request.getRequestDispatcher("/listarAlumnos.jsp");
+    		RequestDispatcher dispatcher = request.getRequestDispatcher("/adm_alumnos_listar.jsp");
     		dispatcher.forward(request, response);
     	}
     	
@@ -89,12 +89,12 @@ public class AdmAlumnoServlet extends HttpServlet {
 			estAlumno.setIdEstado(Integer.parseInt(request.getParameter("txtEstado")));
 			alum.setEstado(estAlumno);
 			int resp = negocioA.modificarAlumno(alum);
-    		RequestDispatcher dispatcher = request.getRequestDispatcher("/listarAlumnos.jsp");
+    		RequestDispatcher dispatcher = request.getRequestDispatcher("/adm_alumnos_listar.jsp");
     		dispatcher.forward(request, response);
     	}
     	
     	if (request.getParameter("btnCancelarEditarAlumno") != null){
-      		RequestDispatcher dispatcher = request.getRequestDispatcher("/listarAlumnos.jsp");
+      		RequestDispatcher dispatcher = request.getRequestDispatcher("/adm_alumnos_listar.jsp");
     		dispatcher.forward(request, response);
     	}
 	}
@@ -110,7 +110,7 @@ public class AdmAlumnoServlet extends HttpServlet {
 		ArrayList<Alumno> alumnosTodos = negocioA.obtenerAlumnosTodos();
 		request.setAttribute("alumnosTodos", alumnosTodos);
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/listarAlumnos.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/adm_alumnos_listar.jsp");
 		dispatcher.forward(request, response);
 	}
 	
