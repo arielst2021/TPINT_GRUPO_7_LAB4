@@ -14,11 +14,11 @@ if (session.getAttribute("perfil") != null) {
 
 	if (Profesor2.getPerfil().getId() == 1) {
 		//REDIRIGIR A PAGINA ADMINISTRADOR -->
-		response.sendRedirect("administrador.jsp");
+		response.sendRedirect("adm_inicio.jsp");
 	}
 	if (Profesor2.getPerfil().getId() == 2) {
 		//REDIRIGIR A PAGINA DOCENTE -->
-		response.sendRedirect("profesor.jsp");
+		response.sendRedirect("prof_inicio.jsp");
 	}
 }
 %>

@@ -12,7 +12,7 @@
 	if (session.getAttribute("perfil") != null) {
 		Profesor2 = (Profesor2) session.getAttribute("perfil");
 	} else {
-		response.sendRedirect("inicio.jsp");
+		response.sendRedirect("index.jsp");
 	}
 %>
 
@@ -70,7 +70,7 @@
 				</div>
 
 				<!-- COMUNICACION CON EL SERVLET -->
-				<form action="ServletControlador" method="post">
+				<form action="InicioServlet" method="post">
 					<!-- SUBMIT -->
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary"

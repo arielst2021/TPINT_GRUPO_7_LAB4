@@ -13,7 +13,7 @@
 </head>
 <body class="bg-light">
 	
-	<form action="ServletControlador" method="get">	
+	<form action="LoginServlet" method="get">	
 	<%
 		if (session.getAttribute("perfil") != null) {
 			Profesor2 Profesor2 = new Profesor2();
@@ -63,7 +63,7 @@
 				role="button" aria-expanded="false">Cursos</a>
 				<ul class="dropdown-menu">
 
-						<li><a class="dropdown-item" href="ServletControlador?Param=ObtenerCursosPorLegajoProfesor">Listado de cursos</a></li>
+						<li><a class="dropdown-item" href="ProfesorLogueadoServlet?Param=ObtenerCursosPorLegajoProfesor">Listado de cursos</a></li>
 					
 				</ul></li>
 		</ul>

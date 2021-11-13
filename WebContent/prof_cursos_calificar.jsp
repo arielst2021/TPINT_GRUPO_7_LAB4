@@ -109,7 +109,7 @@ B O D Y
 							<h5 class="card-title">Calificaciones de los alumnos</h5>	
 							<hr>	
 							<!-- INICIO DE LA TABLA -->
-							<form action="ServletControlador" method="post">					
+							<form action="ProfesorLogueadoServlet" method="post">					
 								<table id="myTable" class="table table-striped" style="width: 100%">
 									<thead>
 										<tr>

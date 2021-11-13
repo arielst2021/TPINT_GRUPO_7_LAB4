@@ -96,7 +96,7 @@ N A V B A R
 								<td><%=item.getAnio()%></td>
 								<td>
 								
-								<form action="ServletControlador" method="post">
+								<form action="ProfesorLogueadoServlet" method="post">
 								    <input type="hidden" id="txtMateriaId" name="txtMateriaId" value="<%=item.getMateria().getId()%>">
 								    <input type="hidden" id="txtMateriaNombre" name="txtMateriaNombre" value="<%=item.getMateria().getNombre()%>">
 								    <input type="hidden" id="txtSemestreId" name="txtSemestreId" value="<%=item.getSemestre().getId()%>">

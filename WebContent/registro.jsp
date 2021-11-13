@@ -44,7 +44,7 @@
                     <p class="text-center small">Ingrese los datos personales para crear una usuario</p>
                   </div>
 
-                  <form class="row g-3 needs-validation"   action="ServletControlador" method="post">
+                  <form class="row g-3 needs-validation"   action="ProfesorServlet" method="post">
                     <div class="col-12">
                       <label for="yourName" class="form-label">Nombre</label>
                       <input type="text" name="name" class="form-control" id="Nombre" required>

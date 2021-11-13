@@ -44,7 +44,7 @@
 										contraseña para iniciar sesión</p>
 								</div>
 
-								<form action="ServletControlador" method="post">
+								<form action="InicioServlet" method="post">
 
 									<div class="col-12">
 										<label for="txtUsuario" class="form-label">Nombre de
