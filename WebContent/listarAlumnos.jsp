@@ -80,12 +80,12 @@ N A V B A R
                     	 <td><%=alum.getEstado().getNombre()%></td>
                     	 <td><%=alum.getPersona2().getFechaNacimiento().getDayOfMonth()%>-<%=alum.getPersona2().getFechaNacimiento().getMonthValue()%>-<%=alum.getPersona2().getFechaNacimiento().getYear()%></td>
                         <td>
-                        	<form action="AlumnoServlet" method="post">
+                        	<form action="AdmAlumnoServlet" method="post">
 								<input type="hidden" id="txtLegajoAlumno" name="txtLegajoAlumno" value="<%=alum.getLegajo()%>" >
 																
 								<input type="submit" name="btnIrEditarAlumno" value="Datos" class="btn btn-warning">
 							</form>
-							<form action="AlumnoServlet" method="post">
+							<form action="AdmAlumnoServlet" method="post">
 								<input type="hidden" id="txtLegajoAlumno" name="txtLegajoAlumno" value="<%=alum.getLegajo()%>" >
 																
 								<input type="submit" name="btnEditarEstado" value="Estado" class="btn btn-danger">

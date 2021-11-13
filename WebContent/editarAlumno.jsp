@@ -35,7 +35,7 @@ N A V B A R
 					<h5 class="card-title">Editar Alumno</h5>
 					<hr>
 					<!-- INICIO DE LA TABLA -->
-					<form action="AlumnoServlet" method="post">
+					<form action="AdmAlumnoServlet" method="post">
 					<div class="card-body">
 						<div class="pt-4 pb-2">
 							<h5 class="card-title text-center pb-0 fs-4">Editar

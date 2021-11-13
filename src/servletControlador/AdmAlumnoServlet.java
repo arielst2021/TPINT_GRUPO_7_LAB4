@@ -27,15 +27,15 @@ import negocioImpl.NegocioAlumnoImpl;
 import negocioImpl.NegocioProvinciaImpl;
 
 
-@WebServlet("/AlumnoServlet")
-public class AlumnoServlet extends HttpServlet {
+@WebServlet("/AdmAlumnoServlet")
+public class AdmAlumnoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private NegocioAlumno negocioA;
 	private NegocioProvincia negocioP; 
 	private NegocioEstado negocioE;
        
 
-    public AlumnoServlet() {
+    public AdmAlumnoServlet() {
         this.negocioA = new NegocioAlumnoImpl();
 
     }
