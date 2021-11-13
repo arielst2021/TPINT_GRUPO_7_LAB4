@@ -80,18 +80,33 @@ B O D Y
 				<div class="col-lg-12">
 					<div class="card">
 						<div class="card-body">
-							<h5 class="card-title">Calificaciones</h5>
-							<hr>	
 							<%!Curso Curso = new Curso();%>
 							<% 		  
 							  	if (session.getAttribute("DatosDelCurso") != null) {
 									Curso = (Curso) session.getAttribute("DatosDelCurso");
 							  	}
-							%>	
+							%>
+							
+							<div class="row bg-light">
+								<div class="col-md-6 text-left">
+									<div class="bg-light py-2">
+										<div>
 							<p><strong>Materia: </strong><%=Curso.getMateria().getNombre()%></p>
 							<p><strong>Período: </strong><%=Curso.getSemestre().getNombre()%></p>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-6 text-left">
+									<div class="bg-light py-2">
+										<div>
 							<p><strong>Año: </strong><%=Curso.getAnio()%></p>
-							<p><strong>Profesor/a: </strong><%=Profesor2.getPersona2().getNombre()%> <%=Profesor2.getPersona2().getApellido()%></p>			
+							<p><strong>Profesor/a: </strong><%=Profesor2.getPersona2().getNombre()%> <%=Profesor2.getPersona2().getApellido()%></p>	
+										</div>
+									</div>
+								</div>
+							</div>
+							<br>						
+							<h5 class="card-title">Calificaciones de los alumnos</h5>	
 							<hr>	
 							<!-- INICIO DE LA TABLA -->
 							<form action="ServletControlador" method="post">					
