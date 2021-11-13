@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,9 +13,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 import entidades.Profesor;
+import entidades.Provincia;
 import negocio.NegocioProfesor;
+
 import negocioImpl.NegocioProfesorImpl;
+
 
 /**
  * Servlet implementation class ProfesorServlet
@@ -39,6 +44,20 @@ public class AdmProfesorServlet extends HttpServlet {
 		if(request.getParameter("Param")!=null)
 		{
 			if(request.getParameter("Param").equals("4")) {
+				NegocioProfesor negocioprofesor = new NegocioProfesorImpl();
+				List<Provincia> ListaProvincias= negocioprofesor.obtenerprovincias();
+				System.out.println("Comienzo a recorrer la lista en servelet ");
+				for(Provincia provincias : ListaProvincias)
+				{
+					
+					System.out.println("Provincia :  "+provincias.getId()+ "  "+ provincias.getNombre().toString());
+					
+					
+				}
+				
+				
+				request.setAttribute("ListaProvincias", ListaProvincias);
+				
 				RequestDispatcher rd = request.getRequestDispatcher("/registro.jsp");   
 		        rd.forward(request, response);		
 		        

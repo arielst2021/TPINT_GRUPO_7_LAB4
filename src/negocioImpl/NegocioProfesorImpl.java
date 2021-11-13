@@ -1,13 +1,24 @@
 package negocioImpl;
 
 import entidades.Profesor;
+import entidades.Provincia;
 import entidades.Profesor;
 import negocio.NegocioProfesor;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 import dao.ProfesorDao;
+import daoImpl.Conexion;
 import daoImpl.ProfesorDaoImpl;
 
-public class NegocioProfesorImpl implements NegocioProfesor {
 
+public class NegocioProfesorImpl implements NegocioProfesor {
+	
 	ProfesorDao dao = new ProfesorDaoImpl();
 
 //	@Override
@@ -30,4 +41,15 @@ public class NegocioProfesorImpl implements NegocioProfesor {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	@Override
+	public List<Provincia> obtenerprovincias() {
+		
+		 ProfesorDao profesordaoimp= new ProfesorDaoImpl();
+		 
+		 return  profesordaoimp.obtenerprovincias();
+		 
+	}
+		
+		
 }

@@ -4,20 +4,24 @@ import java.sql.Connection;
 
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import dao.ProfesorDao;
+
 import entidades.Estado;
 import entidades.Perfil;
 import entidades.Persona;
 import entidades.Profesor;
+import entidades.Provincia;
 import entidades.Profesor;
 
 public class ProfesorDaoImpl implements ProfesorDao {
 	private static final String iniciarSesion = "SELECT pro_perfil_id, per_nombre, pro_estado_id, est_nombre, pro_nombre, pro_apellido, pro_legajo FROM profesores INNER JOIN perfiles ON perfiles.per_id=profesores.pro_perfil_id INNER JOIN estados ON estados.est_id=profesores.pro_estado_id WHERE pro_usuario = ? AND pro_contrasenia = ? AND pro_estado_id = 1";
-
+	private String getprovincias = "SELECT * FROM provincias";
 //	@Override
 //	public int guardarprofesor(Profesor profesor) {
 //		String agregarprofesor = "INSERT INTO profesores(pro_dni, pro_nombre, pro_apellido, pro_fechanac,pro_direccion,pro_provincia_id,pro_email,pro_telefono,pro_estado_id,pro_perfil_id,pro_usuario,pro_contrasenia) values (?,?,?,?,?,?,?,?,?,?,?,?);";
@@ -116,4 +120,34 @@ public class ProfesorDaoImpl implements ProfesorDao {
 		}
 		return Profesor2;
 	}
+
+	@Override
+	public List<Provincia> obtenerprovincias() {
+		
+		ArrayList<Provincia> listadoprovincia = new ArrayList<Provincia>();
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		Provincia provincia = new Provincia();
+		
+		try {
+			PreparedStatement miPreparedStatement = conexion.prepareStatement(getprovincias);
+			miPreparedStatement.execute();
+		 ResultSet miResultSet = miPreparedStatement.getResultSet();		
+			while (miResultSet.next()) {
+				
+				provincia.setId(miResultSet.getInt("prov_id"));
+				provincia.setNombre(miResultSet.getString("prov_nombre"));
+				
+				
+				
+				listadoprovincia.add(provincia);
+				System.out.println(provincia.getId()+ "   "+provincia.getNombre().toString());
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return listadoprovincia;
+		 
+	}
+	
 }
