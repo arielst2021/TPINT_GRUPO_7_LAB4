@@ -7,10 +7,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 
-<%!Profesor Profesor2 = new Profesor();%>
+<%!Profesor Profesor = new Profesor();%>
 <%
 	if (session.getAttribute("perfil") != null) {
-		Profesor2 = (Profesor) session.getAttribute("perfil");
+		Profesor = (Profesor) session.getAttribute("perfil");
 	} else {
 		response.sendRedirect("index.jsp");
 	}
@@ -57,8 +57,8 @@ N A V B A R
 
 				<div class="card">
 					<div class="card-body">
-						<p><%=Profesor2.getPersona().getNombre()%>
-							<%=Profesor2.getPersona().getApellido()%>
+						<p><%=Profesor.getPersona().getNombre()%>
+							<%=Profesor.getPersona().getApellido()%>
 						</p>
 						<h5 class="card-title">Mis Cursos</h5>
 						<hr>
@@ -102,7 +102,7 @@ N A V B A R
 								    <input type="hidden" id="txtSemestreId" name="txtSemestreId" value="<%=item.getSemestre().getId()%>">
 								    <input type="hidden" id="txtSemestreNombre" name="txtSemestreNombre" value="<%=item.getSemestre().getNombre()%>">
 								    <input type="hidden" id="txtAnio" name="txtAnio" value="<%=item.getAnio()%>">
-								    <input type="hidden" id="txtLegajo" name="txtLegajo" value="<%=Profesor2.getLegajo()%>">
+								    <input type="hidden" id="txtLegajo" name="txtLegajo" value="<%=Profesor.getLegajo()%>">
 								<input type="submit" name="btnObtenerAlumnosPorCurso" value="Ver Alumnos" class="btn btn-sm btn-outline-primary waves-effect">
 								</form>
 								

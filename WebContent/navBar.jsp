@@ -46,7 +46,7 @@
 				class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
 				role="button" aria-expanded="false">Cursos</a>
 				<ul class="dropdown-menu">
-					<li><a class="dropdown-item" href="#">Alta</a></li>
+						<li><a class="dropdown-item" href="AdmCursoServlet?Param=AgregarCursos">Agregar cursos</a></li>
 				</ul></li>
 		</ul>
 	</div>

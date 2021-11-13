@@ -1,6 +1,21 @@
+<%@page import="entidades.Curso"%>
+<%@page import="entidades.Profesor"%>
+<%@page import="java.util.ArrayList"%>
+
+<%@page session="true"%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+	pageEncoding="ISO-8859-1"%>
+
+<%!Profesor Profesor = new Profesor();%>
+<%
+	if (session.getAttribute("perfil") != null) {
+		Profesor = (Profesor) session.getAttribute("perfil");
+	} else {
+		response.sendRedirect("index.jsp");
+	}
+%>
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -13,6 +28,27 @@
 </head>
 
 <body style="background-color: #F6F9FF">
+
+	<!--
+----------------------------------------------------
+N A V B A R
+---------------------------------------------------- -->
+	<%
+		if (session.getAttribute("perfil") != null) {
+	%>
+	<jsp:include page="logout.jsp"></jsp:include>
+	<jsp:include page="navBar.jsp"></jsp:include>
+	<%
+		} else {
+	%>
+	<jsp:include page="login.jsp"></jsp:include>
+	<%
+		}
+	%>
+
+
+LISTADO DE CURSOS
+
 	<main id="main" class="main">
 	<section class="section">
 		<div class="row">

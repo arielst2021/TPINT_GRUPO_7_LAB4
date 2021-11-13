@@ -6,17 +6,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import dao.EstadoDao;
-import entidades.Curso;
 import entidades.Estado;
 
 public class EstadoDaoImpl implements EstadoDao {
 
 	private static final String obtenerEstados = "SELECT est_id, est_nombre FROM estados";
 
-	Connection miConnection = null;
-	PreparedStatement miPreparedStatement = null;
-	ResultSet miResultSet = null;
-	Curso Curso = new Curso();
+	private Connection miConnection = null;
+	private PreparedStatement miPreparedStatement = null;
+	private ResultSet miResultSet = null;
+
 
 	@Override
 	public ArrayList<Estado> obtenerEstados() {

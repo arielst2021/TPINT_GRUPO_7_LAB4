@@ -4,20 +4,41 @@ import java.sql.Connection;
 
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+<<<<<<< HEAD
+import java.time.LocalDate;
+=======
+>>>>>>> bf78a33ad98d988885ce809e29e6557d68d73211
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import dao.ProfesorDao;
+
 import entidades.Estado;
 import entidades.Perfil;
 import entidades.Persona;
 import entidades.Profesor;
+import entidades.Provincia;
+<<<<<<< HEAD
+
+public class ProfesorDaoImpl implements ProfesorDao {
+	private static final String iniciarSesion = "SELECT pro_perfil_id, per_nombre, pro_estado_id, est_nombre, pro_nombre, pro_apellido, pro_legajo FROM profesores INNER JOIN perfiles ON perfiles.per_id=profesores.pro_perfil_id INNER JOIN estados ON estados.est_id=profesores.pro_estado_id WHERE pro_usuario = ? AND pro_contrasenia = ? AND pro_estado_id = 1";
+	private static final String obtenerTodosLosProfesores = "SELECT pro_legajo, pro_dni, pro_nombre, pro_apellido, pro_fechanac, pro_direccion, pro_provincia_id, prov_nombre, pro_email, pro_telefono, pro_estado_id, est_nombre, pro_perfil_id, per_nombre, pro_usuario, pro_contrasenia FROM profesores INNER JOIN provincias ON provincias.prov_id=profesores.pro_provincia_id INNER JOIN perfiles ON perfiles.per_id=profesores.pro_perfil_id INNER JOIN estados ON estados.est_id= profesores.pro_estado_id WHERE pro_estado_id=1 AND pro_perfil_id=2";
+	//
+	private Connection miConnection = null;
+	private PreparedStatement miPreparedStatement = null;
+	private ResultSet miResultSet = null;
+	
+	
+=======
 import entidades.Profesor;
 
 public class ProfesorDaoImpl implements ProfesorDao {
 	private static final String iniciarSesion = "SELECT pro_perfil_id, per_nombre, pro_estado_id, est_nombre, pro_nombre, pro_apellido, pro_legajo FROM profesores INNER JOIN perfiles ON perfiles.per_id=profesores.pro_perfil_id INNER JOIN estados ON estados.est_id=profesores.pro_estado_id WHERE pro_usuario = ? AND pro_contrasenia = ? AND pro_estado_id = 1";
-
+	private String getprovincias = "SELECT * FROM provincias";
+>>>>>>> bf78a33ad98d988885ce809e29e6557d68d73211
 //	@Override
 //	public int guardarprofesor(Profesor profesor) {
 //		String agregarprofesor = "INSERT INTO profesores(pro_dni, pro_nombre, pro_apellido, pro_fechanac,pro_direccion,pro_provincia_id,pro_email,pro_telefono,pro_estado_id,pro_perfil_id,pro_usuario,pro_contrasenia) values (?,?,?,?,?,?,?,?,?,?,?,?);";
@@ -116,4 +137,96 @@ public class ProfesorDaoImpl implements ProfesorDao {
 		}
 		return Profesor2;
 	}
+
+<<<<<<< HEAD
+@Override
+public ArrayList<Profesor> listaProfesores() {
+
+	ArrayList<Profesor> Profesor = new ArrayList<Profesor>();
+
+	try {
+		// 1. OBTENER UNA CONEXIÓN A LA BASE DE DATOS
+		miConnection = Conexion.getConexion().getSQLConexion();
+
+		// 2. PREPARAR DECLARACIÓN // 3. ESTABLECER LOS PARÁMETROS
+		miPreparedStatement = miConnection.prepareStatement(obtenerTodosLosProfesores);
+
+		// 4. EJECUTAR CONSULTA SQL
+		miResultSet = miPreparedStatement.executeQuery();
+
+		// 5. AGREGAR EL CONJUNTO DE RESULTADOS EN UN ARRAY
+		while (miResultSet.next()) {
+			int legajoProfesor = miResultSet.getInt("pro_legajo");
+			String dniProfesor = miResultSet.getString("pro_dni");
+			String nombreProfesor = miResultSet.getString("pro_nombre");
+			String apellidoProfesor = miResultSet.getString("pro_apellido");
+			//FECHA NACIMIENTO
+			int anio = Integer.parseInt(miResultSet.getString("pro_fechanac").substring(0, 4));
+			int mes = Integer.parseInt(miResultSet.getString("pro_fechanac").substring(5, 7));
+			int dia = Integer.parseInt(miResultSet.getString("pro_fechanac").substring(8, 10));
+			LocalDate fechaNacimientoProfesor = LocalDate.of(anio, mes, dia);
+			//						
+			String direccionProfesor = miResultSet.getString("pro_direccion");
+			//
+			int idProvincia = miResultSet.getInt("pro_provincia_id");
+			String nombreProvincia = miResultSet.getString("prov_nombre");
+			//
+			String emailProfesor = miResultSet.getString("pro_email");
+			String telefonoProfesor = miResultSet.getString("pro_telefono");
+			//
+			int idEstado = miResultSet.getInt("pro_estado_id");
+			String nombreEstado = miResultSet.getString("est_nombre");
+			//
+			int idPerfil = miResultSet.getInt("pro_perfil_id");
+			String nombrePerfil = miResultSet.getString("per_nombre");
+			//
+			String usuarioProfesor = miResultSet.getString("pro_usuario");		
+			String contraseniaProfesor = miResultSet.getString("pro_contrasenia");
+			//
+			
+			//public Profesor(int Legajo, Persona Persona, Estado Estado, Perfil Perfil, String Usuario, String Contrasenia) {
+			
+//			public Persona(String Dni, String Nombre, String Apellido, LocalDate FechaNacimiento, String Direccion,
+//					Provincia Provincia, String Email, String Telefono) {			
+				
+
+			Profesor.add(new Profesor(legajoProfesor, new Persona(dniProfesor, nombreProfesor, apellidoProfesor, fechaNacimientoProfesor, direccionProfesor, new Provincia(idProvincia, nombreProvincia), emailProfesor, telefonoProfesor), new Estado(idEstado, nombreEstado), new Perfil(idPerfil, nombrePerfil), usuarioProfesor, contraseniaProfesor));
+		}
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+	return Profesor;
+
+}
+=======
+	@Override
+	public List<Provincia> obtenerprovincias() {
+		
+		ArrayList<Provincia> listadoprovincia = new ArrayList<Provincia>();
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		Provincia provincia = new Provincia();
+		
+		try {
+			PreparedStatement miPreparedStatement = conexion.prepareStatement(getprovincias);
+			miPreparedStatement.execute();
+		 ResultSet miResultSet = miPreparedStatement.getResultSet();		
+			while (miResultSet.next()) {
+				
+				provincia.setId(miResultSet.getInt("prov_id"));
+				provincia.setNombre(miResultSet.getString("prov_nombre"));
+				
+				
+				
+				listadoprovincia.add(provincia);
+				System.out.println(provincia.getId()+ "   "+provincia.getNombre().toString());
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return listadoprovincia;
+		 
+	}
+	
+>>>>>>> bf78a33ad98d988885ce809e29e6557d68d73211
 }

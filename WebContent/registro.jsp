@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@page import="java.util.List"%>
+    <%@page import="entidades.Provincia"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -76,34 +78,26 @@
                      <div class="col-12">
                       <label for="Provincia" class="form-label">Provincia</label>
                       <select name=provincias>
-                      
+                      <%
+				List<Provincia> ListaProvincias = null;
+				if(request.getAttribute("ListaProvincias")!=null)
+				{
+					ListaProvincias = (List<Provincia>) request.getAttribute("ListaProvincias");
+				}
+				%>
                            
+                           <%
+                           if(ListaProvincias!=null)
+                           for(Provincia  p : ListaProvincias){
+                        	   
+                           %>
                            
-                           
-                            <option value=1>Buenos Aires<option>
-                            <option value=2>Catamarca<option>
-                            <option value=3>Chaco<option>
-                            <option value=4>Chubut<option>
-                            <option value=5>Ciudad de Bs.As.<option>
-                            <option value=6>Córdoba<option>
-                            <option value=7>Corrientes<option>
-                            <option value=8>EntreRíos<option>
-                            <option value=9>Formosa <option>
-                            <option value=10>Jujuy<option>
-                            <option value=11>La Pampa<option>
-                            <option value=12>La Rioja<option>
-                            <option value=13>Mendoza<option>
-                            <option value=14>Misiones<option>
-                            <option value=15>Neuquén<option>
-                            <option value=16>Río Negro<option>
-                            <option value=17>Salta<option>
-                            <option value=18>San Juan<option>
-                            <option value=19>San Luis<option>
-                            <option value=20>Santa Cruz<option>
-                            <option value=21>Santa Fe<option>
-                            <option value=22>Santiago del Estero<option>
-                            <option value=23>Tierra del Fuego<option>
-                            <option value=24>Tucumán<option>
+                            <option value="<%=p.getId() %>"><%=p.getNombre() %></option>
+                            
+                            <%
+                            
+                           }
+                            %>
 
                       
                       </select>
