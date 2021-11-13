@@ -4,10 +4,7 @@ import java.sql.Connection;
 
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-<<<<<<< HEAD
 import java.time.LocalDate;
-=======
->>>>>>> bf78a33ad98d988885ce809e29e6557d68d73211
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -21,7 +18,6 @@ import entidades.Perfil;
 import entidades.Persona;
 import entidades.Profesor;
 import entidades.Provincia;
-<<<<<<< HEAD
 
 public class ProfesorDaoImpl implements ProfesorDao {
 	private static final String iniciarSesion = "SELECT pro_perfil_id, per_nombre, pro_estado_id, est_nombre, pro_nombre, pro_apellido, pro_legajo FROM profesores INNER JOIN perfiles ON perfiles.per_id=profesores.pro_perfil_id INNER JOIN estados ON estados.est_id=profesores.pro_estado_id WHERE pro_usuario = ? AND pro_contrasenia = ? AND pro_estado_id = 1";
@@ -31,14 +27,11 @@ public class ProfesorDaoImpl implements ProfesorDao {
 	private PreparedStatement miPreparedStatement = null;
 	private ResultSet miResultSet = null;
 	
-	
-=======
-import entidades.Profesor;
+	private String getprovincias = "SELECT * FROM provincias";
 
 public class ProfesorDaoImpl implements ProfesorDao {
 	private static final String iniciarSesion = "SELECT pro_perfil_id, per_nombre, pro_estado_id, est_nombre, pro_nombre, pro_apellido, pro_legajo FROM profesores INNER JOIN perfiles ON perfiles.per_id=profesores.pro_perfil_id INNER JOIN estados ON estados.est_id=profesores.pro_estado_id WHERE pro_usuario = ? AND pro_contrasenia = ? AND pro_estado_id = 1";
-	private String getprovincias = "SELECT * FROM provincias";
->>>>>>> bf78a33ad98d988885ce809e29e6557d68d73211
+
 //	@Override
 //	public int guardarprofesor(Profesor profesor) {
 //		String agregarprofesor = "INSERT INTO profesores(pro_dni, pro_nombre, pro_apellido, pro_fechanac,pro_direccion,pro_provincia_id,pro_email,pro_telefono,pro_estado_id,pro_perfil_id,pro_usuario,pro_contrasenia) values (?,?,?,?,?,?,?,?,?,?,?,?);";
@@ -138,7 +131,6 @@ public class ProfesorDaoImpl implements ProfesorDao {
 		return Profesor2;
 	}
 
-<<<<<<< HEAD
 @Override
 public ArrayList<Profesor> listaProfesores() {
 
@@ -183,13 +175,6 @@ public ArrayList<Profesor> listaProfesores() {
 			String usuarioProfesor = miResultSet.getString("pro_usuario");		
 			String contraseniaProfesor = miResultSet.getString("pro_contrasenia");
 			//
-			
-			//public Profesor(int Legajo, Persona Persona, Estado Estado, Perfil Perfil, String Usuario, String Contrasenia) {
-			
-//			public Persona(String Dni, String Nombre, String Apellido, LocalDate FechaNacimiento, String Direccion,
-//					Provincia Provincia, String Email, String Telefono) {			
-				
-
 			Profesor.add(new Profesor(legajoProfesor, new Persona(dniProfesor, nombreProfesor, apellidoProfesor, fechaNacimientoProfesor, direccionProfesor, new Provincia(idProvincia, nombreProvincia), emailProfesor, telefonoProfesor), new Estado(idEstado, nombreEstado), new Perfil(idPerfil, nombrePerfil), usuarioProfesor, contraseniaProfesor));
 		}
 	} catch (SQLException e) {
@@ -198,7 +183,7 @@ public ArrayList<Profesor> listaProfesores() {
 	return Profesor;
 
 }
-=======
+
 	@Override
 	public List<Provincia> obtenerprovincias() {
 		
@@ -227,6 +212,4 @@ public ArrayList<Profesor> listaProfesores() {
 		return listadoprovincia;
 		 
 	}
-	
->>>>>>> bf78a33ad98d988885ce809e29e6557d68d73211
 }

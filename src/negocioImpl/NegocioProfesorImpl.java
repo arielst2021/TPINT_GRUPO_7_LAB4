@@ -1,11 +1,9 @@
 package negocioImpl;
 
 import entidades.Profesor;
-<<<<<<< HEAD
 import negocio.NegocioProfesor;
 
 import java.util.ArrayList;
-=======
 import entidades.Provincia;
 import entidades.Profesor;
 import negocio.NegocioProfesor;
@@ -16,7 +14,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
->>>>>>> bf78a33ad98d988885ce809e29e6557d68d73211
 
 import dao.ProfesorDao;
 import daoImpl.Conexion;
@@ -49,11 +46,9 @@ public class NegocioProfesorImpl implements NegocioProfesor {
 	}
 
 	@Override
-<<<<<<< HEAD
 	public ArrayList<Profesor> listaProfesores() {
 		return dao.listaProfesores();
 	}
-=======
 	public List<Provincia> obtenerprovincias() {
 		
 		 ProfesorDao profesordaoimp= new ProfesorDaoImpl();
@@ -61,7 +56,4 @@ public class NegocioProfesorImpl implements NegocioProfesor {
 		 return  profesordaoimp.obtenerprovincias();
 		 
 	}
-		
-		
->>>>>>> bf78a33ad98d988885ce809e29e6557d68d73211
 }

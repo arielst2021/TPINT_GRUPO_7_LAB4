@@ -1,11 +1,5 @@
-/servletControlador/
-<<<<<<< HEAD
 /dao/
 /daoImpl/
 /negocio/
 /negocioImpl/
-=======
-/negocio/
-/negocioImpl/
-/dao/
->>>>>>> bf78a33ad98d988885ce809e29e6557d68d73211
+/servletControlador/
