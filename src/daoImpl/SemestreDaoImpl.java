@@ -10,7 +10,7 @@ import entidades.Semestre;
 
 public class SemestreDaoImpl implements SemestreDao{
 	
-	private static final String obtenerSemestres = "SELECT sem_id, sem_nombre FROM materias";
+	private static final String obtenerSemestres = "SELECT sem_id, sem_nombre FROM semestres";
 
 	private Connection miConnection = null;
 	private PreparedStatement miPreparedStatement = null;

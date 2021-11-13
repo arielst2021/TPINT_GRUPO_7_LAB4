@@ -1,7 +1,6 @@
 package entidades;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class Persona {
 

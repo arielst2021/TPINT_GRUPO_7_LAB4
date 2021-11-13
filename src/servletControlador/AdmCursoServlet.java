@@ -11,10 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import entidades.Materia;
 import entidades.Profesor;
+import entidades.Semestre;
 import negocio.NegocioMateria;
 import negocio.NegocioProfesor;
+import negocio.NegocioSemestre;
 import negocioImpl.NegocioMateriaImpl;
 import negocioImpl.NegocioProfesorImpl;
+import negocioImpl.NegocioSemestreImpl;
 
 @WebServlet("/AdmCursoServlet")
 public class AdmCursoServlet extends HttpServlet {
@@ -36,7 +39,12 @@ public class AdmCursoServlet extends HttpServlet {
 			//OBTENGO LISTA DE MATERIAS
 			NegocioMateria NegocioMateria = new NegocioMateriaImpl();
 			ArrayList<Materia> listaMaterias = NegocioMateria.obtenerMaterias();
-			request.setAttribute("listaMaterias", listaMaterias);		
+			request.setAttribute("listaMaterias", listaMaterias);
+			
+			//OBTENGO LISTA DE SEMESTRES
+			NegocioSemestre NegocioSemestre = new NegocioSemestreImpl();
+			ArrayList<Semestre> listaSemestres = NegocioSemestre.obtenerSemestres();
+			request.setAttribute("listaSemestres", listaSemestres);	
 
 			RequestDispatcher rd = request.getRequestDispatcher("/adm_cursos_agregar.jsp");
 			rd.forward(request, response);

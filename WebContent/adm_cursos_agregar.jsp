@@ -88,11 +88,26 @@ N A V B A R
 						<div class="row mb-3">
 							<label class="col-sm-2 col-form-label">Semestre</label>
 							<div class="col-sm-10">
+
+
+								<%
+				List<Semestre> listaSemestres = null;
+				if(request.getAttribute("listaSemestres")!=null)
+				{
+					listaSemestres = (List<Semestre>) request.getAttribute("listaSemestres");
+				}
+				%>
+
+
 								<select class="form-select" aria-label="Default select example">
-									<option selected>--Seleccione un Semestre--</option>
-									<option value="1">Buenos Aires</option>
-									<option value="2">Entre Ríos</option>
-									<option value="3">Salta</option>
+									<%
+				if(listaSemestres!=null)
+					for(Semestre item : listaSemestres) {
+				%>
+									<option value="<%=item.getId()%>"><%=item.getNombre() %></option>
+									<%
+				}
+				%>
 								</select>
 							</div>
 						</div>
