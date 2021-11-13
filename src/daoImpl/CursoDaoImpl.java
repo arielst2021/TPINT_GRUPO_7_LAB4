@@ -130,7 +130,7 @@ public class CursoDaoImpl implements CursoDao {
 		return AlumnosPorCurso;
 	}
 	
-	private static final String AgregarNotasCurso = "UPDATE alumnos_cursos SET axc_calificacion1=? WHERE axc_materia_id=? AND axc_semestre_id=? AND axc_anio=? AND axc_profesor_legajo=? AND axc_alumno_legajo=?";
+	private static final String AgregarNotasCurso = "UPDATE alumnos_cursos SET axc_calificacion1=?, axc_calificacion2=?, axc_calificacion3=?, axc_calificacion4=?, axc_estado_id=? WHERE axc_materia_id=? AND axc_semestre_id=? AND axc_anio=? AND axc_profesor_legajo=? AND axc_alumno_legajo=?";
 	
 	@Override
 	public boolean AgregarNotasCurso(ArrayList<Curso> Curso) {
@@ -143,17 +143,17 @@ public class CursoDaoImpl implements CursoDao {
 			while(iterador.hasNext()) {
 				Curso miCurso = (Curso)iterador.next();
 				statement.setFloat(1, miCurso.getNotaPrimerParcial());
-				statement.setInt(2, miCurso.getMateria().getId());
-				statement.setInt(3, miCurso.getSemestre().getId());
+				statement.setFloat(2, miCurso.getNotaPrimerRecuperatorio());
+				statement.setFloat(3, miCurso.getNotaSegundoParcial());
+				statement.setFloat(4, miCurso.getNotaSegundoRecuperatorio());
+				statement.setInt(5, miCurso.getEstado().getId());		
+				statement.setInt(6, miCurso.getMateria().getId());
+				statement.setInt(7, miCurso.getSemestre().getId());
 				//
-				statement.setString(4, miCurso.getAnio().toString());
+				statement.setString(8, miCurso.getAnio().toString());
 				//
-				statement.setInt(5, miCurso.getProfesor().getLegajo());
-				statement.setInt(6, miCurso.getAlumno().getLegajo());
-//				statement.setFloat(7, miCurso.getSegurosCostoContratacion());
-//				statement.setFloat(8, miCurso.getSegurosCostoAsegurado());
-//				statement.setFloat(9, miCurso.getSegurosCostoContratacion());
-//				statement.setFloat(10, miCurso.getSegurosCostoAsegurado());	
+				statement.setInt(9, miCurso.getProfesor().getLegajo());
+				statement.setInt(10, miCurso.getAlumno().getLegajo());
 				if (statement.executeUpdate() > 0) {
 					conexion.commit();
 					isInsertExitoso = true;

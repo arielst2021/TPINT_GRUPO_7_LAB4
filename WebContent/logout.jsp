@@ -29,7 +29,7 @@
 <body class="bg-light">
 	<div class="content">
 		<div class="content-fluid">
-			<nav style="background-color: #BEE5EB;">
+			<nav style="background-color: #F6F9FF;">
 				<div class="row">
 					<div class="col-md-9 align-self-center">
 						<!-- BARRA DE NAVEGACIÓN CON IMAGEN DE LOGOTIPO --ACA HAY QUE REDIRECCIONAR A LA PAGINA DE INICIO -->
@@ -39,17 +39,17 @@
 						</div>
 					</div>
 					<div class="col-md-2 align-self-center">
-						<h6 class="h6 text-primary">
+						<h6 class="h6 text-primary text-center">
 
 							<!-- USUARIO EN LA SESION -->
 
-							<small><%=Profesor2.getPersona2().getNombre()%> <%=Profesor2.getPersona2().getApellido()%></small>
+							<span class="fw-bold"><%=Profesor2.getPersona2().getNombre()%> <%=Profesor2.getPersona2().getApellido()%></span>
 							<br>
-							<small><%=Profesor2.getPerfil().getNombrePerfil()%> </small>
+							<small class="text-danger"><%=Profesor2.getPerfil().getNombrePerfil()%> </small>
 						</h6>
 					</div>
 					<div class="col-md-1 align-self-center">
-						<button type="button" class="btn btn-primary btn-sm"
+						<button type="button" class="btn btn-primary"
 							data-bs-toggle="modal" data-bs-target="#exampleModal">
 							Salir</button>
 					</div>

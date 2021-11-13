@@ -29,6 +29,8 @@
 	 C S S - BOOTSTRAP, CUSTOM STYLES 
 ---------------------------------------------------- -->
 <link rel="stylesheet" type="text/css"
+	href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" type="text/css"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css" />
@@ -47,7 +49,11 @@ if (session.getAttribute("perfil") != null) {%>
 }
 %>
 
-HOLA PROFESOR
+	<div class="w3-display-middle w3-margin-top w3-center">
+		<h3>PROFESOR/A</h3>
+		<h1 CLASS="text-primary"><%=Profesor2.getPersona2().getNombre()%>
+			<%=Profesor2.getPersona2().getApellido()%></h1>
+	</div>
 
 	<script type="text/javascript"
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

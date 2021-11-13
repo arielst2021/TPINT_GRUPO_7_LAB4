@@ -186,8 +186,7 @@ public class ServletControlador extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("DatosDelCurso", Curso);
 			//
-
-			
+		
 			Profesor2 Profesor2 = new Profesor2();
 			Profesor2.setLegajo(Legajo);
 			
@@ -208,7 +207,7 @@ public class ServletControlador extends HttpServlet {
 			rd.forward(request, response);			
 		}
 		
-		if (request.getParameter("btnGuardarNota1") != null) {
+		if (request.getParameter("btnGuardarNotas") != null) {
 
 			ArrayList<Curso> Curso = new ArrayList<Curso>();
 			NegocioCurso NegocioCurso = new NegocioCursoImpl();
@@ -219,6 +218,11 @@ public class ServletControlador extends HttpServlet {
 			int LegajoDocente = Integer.parseInt(request.getParameter("txtLegajoDocente"));
 			
 			String []Nota1 = request.getParameterValues("Nota1");
+			String []Nota2 = request.getParameterValues("Nota2");
+			String []Nota3 = request.getParameterValues("Nota3");
+			String []Nota4 = request.getParameterValues("Nota4");
+			String []EstadoId = request.getParameterValues("estadoAlumno");
+			
 			String []LegajoAlumno = request.getParameterValues("txtLegajoAlumno");
 			//
 			Materia Materia = new Materia();
@@ -231,22 +235,27 @@ public class ServletControlador extends HttpServlet {
 					
 			for(int i = 0; i < LegajoAlumno.length; i++) {			
 				try {
-					Float notaDecimal = Float.parseFloat(Nota1[i]);
-					if(notaDecimal >=0 &&  notaDecimal <= 10) {
+					Float notaDecimal1 = Float.parseFloat(Nota1[i]);
+					Float notaDecimal2 = Float.parseFloat(Nota2[i]);
+					Float notaDecimal3 = Float.parseFloat(Nota3[i]);
+					Float notaDecimal4 = Float.parseFloat(Nota4[i]);
+					int EstadoNuevo = Integer.parseInt(EstadoId[i]);
+					if(notaDecimal1 >= 0 && notaDecimal1 <= 10 && notaDecimal2 >= 0 && notaDecimal2 <= 10 && notaDecimal3 >= 0 && notaDecimal3 <= 10 && notaDecimal4 >= 0 && notaDecimal4 <= 10) { // LA NOTA INGRESADA DEBE SER ENTRE 0 Y 10
 						Alumno Alumno = new Alumno();
-						Alumno.setLegajo(Integer.parseInt(LegajoAlumno[i]));						
-						Curso.add(new Curso(Materia,Semestre,Anio, Profesor2, Alumno, notaDecimal));
-					}
-					
+						Alumno.setLegajo(Integer.parseInt(LegajoAlumno[i]));
+						Estado Estado = new Estado();
+						Estado.setIdEstado(EstadoNuevo);
+						Curso.add(new Curso(Materia,Semestre,Anio, Profesor2, Alumno, notaDecimal1, notaDecimal2, notaDecimal3, notaDecimal4, Estado));
+					}					
 				} catch (Exception e) {
-					//System.out.println("Nota 1 : " + "ERROR");
+					// SI EL VALOR INGRESADO EN EL TEXT NO ES VALIDO NO SE AGREGA LA NOTA EN LA BASE DE DATOS
 				}
 			}
 			
-			if(Curso!=null) {
-				
+			if(Curso!=null) {			
 				NegocioCurso.AgregarNotasCurso(Curso);
 			}
+			
 			Curso CursoLista = new Curso(Materia, Semestre, Anio, Profesor2);
 
 			ArrayList<Curso> lista = NegocioCurso.ObtenerAlumnosPorCurso(CursoLista);				

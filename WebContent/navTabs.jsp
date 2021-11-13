@@ -63,7 +63,7 @@
 				role="button" aria-expanded="false">Cursos</a>
 				<ul class="dropdown-menu">
 
-						<li><a class="dropdown-item" href="ServletControlador?Param=ObtenerCursosPorLegajoProfesor">Listado</a></li>
+						<li><a class="dropdown-item" href="ServletControlador?Param=ObtenerCursosPorLegajoProfesor">Listado de cursos</a></li>
 					
 				</ul></li>
 		</ul>

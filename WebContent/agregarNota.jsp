@@ -35,23 +35,22 @@ H E A D
 	href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css" />
 </head>
 
-    <script type="text/javascript">
-	function valideKey(evt){
-			
-	// EL CÓDIGO ES LA REPRESENTACIÓN DECIMAL ASCII DE LA TECLA PRESIONADA.
-	var code = (evt.which) ? evt.which : evt.keyCode;
-			
-	if(code==46) { // PUNTO
-		return true;
-	} else if(code>=48 && code<=57) { // ES NUMERO.
-		return true;
-	} else{ // OTRAS TECLAS.
-		return false;
+<script type="text/javascript">
+	function valideKey(evt) {
+
+		// EL CÓDIGO ES LA REPRESENTACIÓN DECIMAL ASCII DE LA TECLA PRESIONADA.
+		var code = (evt.which) ? evt.which : evt.keyCode;
+
+		if (code == 46) { // PUNTO
+			return true;
+		} else if (code >= 48 && code <= 57) { // ES NUMERO.
+			return true;
+		} else { // OTRAS TECLAS.
+			return false;
+		}
 	}
-	}
-	</script>  
-	
-				
+</script>
+
 </head>
 <!--
 ----------------------------------------------------
@@ -119,14 +118,17 @@ B O D Y
 									%>						
 							
 										<tr>
-											<td class="text-primary">
+											<td class="text-primary align-middle">
 												<input type="hidden" id="txtMateriaId" name="txtMateriaId" value="<%=Curso.getMateria().getId()%>">
 												<input type="hidden" id="txtSemestreId" name="txtSemestreId" value="<%=Curso.getSemestre().getId()%>">
 												<input type="hidden" id="txtAnio" name="txtAnio" value="<%=Curso.getAnio()%>">
 												<input type="hidden" id="txtLegajoDocente" name="txtLegajoDocente" value="<%=Profesor2.getLegajo()%>">											
-												<input type="hidden" id="txtLegajoAlumno" name="txtLegajoAlumno" value="<%=item.getAlumno().getLegajo()%>">												
-												<%=item.getAlumno().getPersona2().getNombre()%>
-												<%=item.getAlumno().getPersona2().getApellido()%></td>
+												<input type="hidden" id="txtLegajoAlumno" name="txtLegajoAlumno" value="<%=item.getAlumno().getLegajo()%>">
+												<span class="text-uppercase fw-bold"><%=item.getAlumno().getPersona2().getApellido()%></span>, <%=item.getAlumno().getPersona2().getNombre()%></td>
+												
+											<!-- AGREGO UN JAVASCRIPT PARA PERMITIR EL INGRESO DE VALORES NUMÉRICOS Y UN DISEÑO DE PATRÓN DE ETIQUETAS HTML PARA SOLO VALORES NUMÉRICOS  -->
+											<!-- EL ATRIBUTO PATTERN ESPECIFICA UNA EXPRESIÓN REGULAR CON LA QUE <INPUT>SE VERIFICA EL VALOR DEL ELEMENTO AL ENVIAR EL FORMULARIO. -->
+											
 											<td><input type="text" id="nota" name="Nota1" class="form-control" onkeypress="return valideKey(event)" pattern="^\d{1,2}+(\.\d{1})?$"
 												value="<%=item.getNotaPrimerParcial()%>"></td>
 											<td><input type="text" id="nota" name="Nota2" class="form-control" onkeypress="return valideKey(event)" pattern="^\d{1,2}+(\.\d{1})?$"
@@ -135,7 +137,7 @@ B O D Y
 												value="<%=item.getNotaSegundoParcial()%>"></td>
 											<td><input type="text" id="nota" name="Nota4" class="form-control" onkeypress="return valideKey(event)" pattern="^\d{1,2}+(\.\d{1})?$"
 												value="<%=item.getNotaSegundoRecuperatorio()%>"></td>						
-											<td><select class="form-select form-select">
+											<td><select class="form-select form-select selectpicker" data-style="btn-info" name="estadoAlumno">
 												<%
 												ArrayList<Estado> listaEstados = null;
 													if (request.getAttribute("listaEstados") != null) {
@@ -146,19 +148,16 @@ B O D Y
 												if (listaAlumnosPorCursos != null) {
 													for (Estado item2 : listaEstados) {
 														if(item2.getNombre().equals("Libre") || item2.getNombre().equals("Regular") || item2.getNombre().equals("Sin calificar")){
-// 															while(item.getEstado().getId()==item2.getId()){
+												
+												// POR MEDIO DEL ATRIBUTO SELECTED ESTABLEZCO LA OPCIÓN INICIALMENTE SELECCIONADA
 												%>		
 												<option   value="<%=item2.getId()%>"   <%if(item.getEstado().getId()==item2.getId()){%> selected<% }%>><%=item2.getNombre()%></option>
-												<%		
-															
-														
-// 															}
+												<%																
 														}
 													}
 												}
 												%>
-												</select></td>
-		
+												</select></td>		
 									<%
 											}
 										}
@@ -168,25 +167,13 @@ B O D Y
 									<tfoot>
 										<tr>
 											<th></th>
-											<th>						
-												<input type="submit" name="btnGuardarNota1" 
-												class="btn btn-sm btn-outline-success" style="float: right" value="Guardar">											
-											</th>
+											<th></th>
+											<th></th>
+											<th></th>
+											<th></th>
 											<th>
-												<input type="submit" name="btnGuardarNota2" 
-												class="btn btn-sm btn-outline-success" style="float: right" value="Guardar">	
-											</th>
-											<th>
-												<input type="submit" name="btnGuardarNota3" 
-												class="btn btn-sm btn-outline-success" style="float: right" value="Guardar">	
-											</th>
-											<th>
-												<input type="submit" name="btnGuardarNota4" 
-												class="btn btn-sm btn-outline-success" style="float: right" value="Guardar">	
-											</th>
-											<th>
-												<input type="submit" name="btnGuardarEstado" 
-												class="btn btn-sm btn-outline-success" style="float: right" value="Guardar">	
+												<input type="submit" name="btnGuardarNotas" 
+												class="btn btn-primary" style="float: right" value="Guardar">	
 											</th>
 										</tr>
 									</tfoot>
@@ -222,8 +209,5 @@ B O D Y
 		});
 	});
 </script>
-
-	
-	
 </body>
 </html>
