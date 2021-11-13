@@ -1,6 +1,8 @@
 <%@page import="entidades.Curso"%>
 <%@page import="entidades.Profesor"%>
-<%@page import="java.util.ArrayList"%>
+<%@page import="entidades.Materia"%>
+<%@page import="entidades.Semestre"%>
+<%@page import="java.util.*"%>
 
 <%@page session="true"%>
 
@@ -60,11 +62,25 @@ N A V B A R
 						<div class="row mb-3">
 							<label class="col-sm-2 col-form-label">Materia</label>
 							<div class="col-sm-10">
+
+								<%
+				List<Materia> listaMaterias = null;
+				if(request.getAttribute("listaMaterias")!=null)
+				{
+					listaMaterias = (List<Materia>) request.getAttribute("listaMaterias");
+				}
+				%>
+
+
 								<select class="form-select" aria-label="Default select example">
-									<option selected>--Seleccione una Materia--</option>
-									<option value="1">Buenos Aires</option>
-									<option value="2">Entre Ríos</option>
-									<option value="3">Salta</option>
+									<%
+				if(listaMaterias!=null)
+					for(Materia item : listaMaterias) {
+				%>
+									<option value="<%=item.getId()%>"><%=item.getNombre() %></option>
+									<%
+				}
+				%>
 								</select>
 							</div>
 						</div>
@@ -142,7 +158,7 @@ N A V B A R
 						<!-- FIN DE LA TABLA -->
 						<br>
 						<hr>
-												<!-- BOTON DE AGREGAR-->
+						<!-- BOTON DE AGREGAR-->
 						<div class="row mb-3">
 							<label class="col-sm-2 col-form-label"></label>
 							<div class="col-sm-10">
@@ -155,7 +171,7 @@ N A V B A R
 				</div>
 			</div>
 		</div>
-	
+
 	</section>
 	</main>
 	<script type="text/javascript"
@@ -169,7 +185,7 @@ N A V B A R
 	<script type="text/javascript"
 		src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
 
-<script>
+	<script>
 	//IDIOMAS ESPAÑOL DEL DATATABLE   
 	$(document).ready(function() {
 		$('#myTable').DataTable({ 

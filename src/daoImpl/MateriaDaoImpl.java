@@ -44,5 +44,4 @@ public class MateriaDaoImpl implements MateriaDao {
 		}
 		return Materia;
 	}
-
 }
