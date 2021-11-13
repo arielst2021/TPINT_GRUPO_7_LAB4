@@ -6,8 +6,11 @@ public class Materia {
 
 	public Materia() {}
 
+	public Materia(int Id) {
+		this.Id = Id;
+	}
+	
 	public Materia(int Id, String Nombre) {
-		super();
 		this.Id = Id;
 		this.Nombre = Nombre;
 	}

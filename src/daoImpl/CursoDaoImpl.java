@@ -18,9 +18,11 @@ import entidades.Semestre;
 
 public class CursoDaoImpl implements CursoDao {
 	private static final String ObtenerCursosPorLegajoProfesor = "SELECT cur_materia_id, mat_nombre, cur_semestre_id, sem_nombre, cur_anio FROM cursos INNER JOIN materias ON materias.mat_id=cursos.cur_materia_id INNER JOIN semestres ON semestres.sem_id=cursos.cur_semestre_id WHERE cur_profesor_legajo=?";
-	
+	private static final String AgregarNotasCurso = "UPDATE alumnos_cursos SET axc_calificacion1=?, axc_calificacion2=?, axc_calificacion3=?, axc_calificacion4=?, axc_estado_id=? WHERE axc_materia_id=? AND axc_semestre_id=? AND axc_anio=? AND axc_profesor_legajo=? AND axc_alumno_legajo=?";
 	private static final String ObtenerAlumnosPorCurso = "SELECT alu_nombre, alu_apellido, alu_legajo, axc_calificacion1, axc_calificacion2, axc_calificacion3, axc_calificacion4, axc_estado_id, est_nombre FROM alumnos_cursos INNER JOIN alumnos ON alumnos.alu_legajo=alumnos_cursos.axc_alumno_legajo INNER JOIN estados ON alumnos_cursos.axc_estado_id=estados.est_id WHERE axc_materia_id=? AND axc_semestre_id=? AND axc_anio=? AND axc_profesor_legajo=?";
 
+	private static final String AgregarNuevoCurso = "INSERT INTO cursos (cur_materia_id, cur_semestre_id, cur_anio, cur_profesor_legajo) VALUES (?, ?, ?, ?);";
+	
 	Connection miConnection = null;
 	PreparedStatement miPreparedStatement = null;
 	ResultSet miResultSet = null;
@@ -87,7 +89,7 @@ public class CursoDaoImpl implements CursoDao {
 			miPreparedStatement.setInt(2, Curso.getSemestre().getId());
 			String anio = String.valueOf(Curso.getAnio());
 			miPreparedStatement.setString(3, anio);
-			miPreparedStatement.setInt(4, Curso.getProfesor2().getLegajo());
+			miPreparedStatement.setInt(4, Curso.getProfesor().getLegajo());
 			
 			// 4. EJECUTAR CONSULTA SQL
 			miResultSet = miPreparedStatement.executeQuery();
@@ -129,9 +131,7 @@ public class CursoDaoImpl implements CursoDao {
 		}
 		return AlumnosPorCurso;
 	}
-	
-	private static final String AgregarNotasCurso = "UPDATE alumnos_cursos SET axc_calificacion1=?, axc_calificacion2=?, axc_calificacion3=?, axc_calificacion4=?, axc_estado_id=? WHERE axc_materia_id=? AND axc_semestre_id=? AND axc_anio=? AND axc_profesor_legajo=? AND axc_alumno_legajo=?";
-	
+		
 	@Override
 	public boolean AgregarNotasCurso(ArrayList<Curso> Curso) {
 		PreparedStatement statement;
@@ -159,6 +159,35 @@ public class CursoDaoImpl implements CursoDao {
 					isInsertExitoso = true;
 				}								
 			}			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			try {
+				conexion.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
+		return isInsertExitoso;
+	}
+
+	@Override
+	public boolean AgregarNuevoCurso(Curso Curso) {
+		
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		
+		boolean isInsertExitoso = false;
+		try {
+			statement = conexion.prepareStatement(AgregarNuevoCurso);
+			statement.setInt(1, Curso.getMateria().getId());
+			statement.setInt(2, Curso.getSemestre().getId());
+			statement.setString(3, Curso.getAnio().toString()); // FORMATO YEAR
+			statement.setInt(4, Curso.getProfesor().getLegajo());
+			if (statement.executeUpdate() > 0) {
+				conexion.commit();
+				isInsertExitoso = true;
+			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			try {

@@ -6,9 +6,12 @@ public class Semestre {
 
 	public Semestre() {
 	}
+	
+	public Semestre(int Id) {
+		this.Id = Id;
+	}
 
 	public Semestre(int Id, String Nombre) {
-		super();
 		this.Id = Id;
 		this.Nombre = Nombre;
 	}

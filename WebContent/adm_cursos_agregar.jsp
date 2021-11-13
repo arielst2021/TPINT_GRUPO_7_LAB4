@@ -50,6 +50,7 @@ N A V B A R
 
 	<main id="main" class="main">
 	<section class="section">
+	<form action="AdmCursoServlet" method="post">
 		<div class="row">
 			<div class="col-lg-12">
 
@@ -70,9 +71,7 @@ N A V B A R
 					listaMaterias = (List<Materia>) request.getAttribute("listaMaterias");
 				}
 				%>
-
-
-								<select class="form-select" aria-label="Default select example">
+								<select class="form-select" aria-label="Default select example" name="materiaSeleccionada">
 									<%
 				if(listaMaterias!=null)
 					for(Materia item : listaMaterias) {
@@ -99,7 +98,7 @@ N A V B A R
 				%>
 
 
-								<select class="form-select" aria-label="Default select example">
+								<select class="form-select" aria-label="Default select example" name="semestreSeleccionado">
 									<%
 				if(listaSemestres!=null)
 					for(Semestre item : listaSemestres) {
@@ -115,7 +114,17 @@ N A V B A R
 						<div class="row mb-3">
 							<label for="inputText" class="col-sm-2 col-form-label">Año</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control">
+
+
+								<select class="form-select" aria-label="Default select example" name="anioSeleccionado">
+									<%
+					for(int i =2010; i<=2050;i++) {
+				%>
+									<option><%=i%></option>
+									<%
+				}
+				%>
+								</select>
 							</div>
 						</div>
 						<br>
@@ -129,7 +138,7 @@ N A V B A R
 									<th scope="col">Leg.</th>
 									<th scope="col">DNI</th>
 									<th scope="col">Apellido y Nombre</th>
-									<th scope="col">Acciones</th>
+									<th scope="col">Seleccionar</th>
 								</tr>
 							</thead>
 
@@ -144,21 +153,12 @@ N A V B A R
 								if (listaProfesores != null) {
 									for (Profesor item : listaProfesores) {
 							%>
-
-
 							<tr>
 
 								<td><%=item.getLegajo()%></td>
 								<td><%=item.getPersona().getDni()%></td>
 								<td><%=item.getPersona().getApellido()%>, <%=item.getPersona().getNombre()%></td>
-								<td>
-
-									<form action="ProfCursoServlet" method="post">
-
-										<input type="submit" name="btnObtenerAlumnosPorCurso"
-											value="Agregar al curso"
-											class="btn btn-sm btn-outline-primary waves-effect">
-									</form>
+								<td><input type="radio" name="profesorSeleccionado" value="<%=item.getLegajo()%>">
 
 								</td>
 
@@ -177,8 +177,11 @@ N A V B A R
 						<div class="row mb-3">
 							<label class="col-sm-2 col-form-label"></label>
 							<div class="col-sm-10">
-								<button type="submit" class="btn btn-primary"
-									style="float: right">Agregar nuevo curso</button>
+
+									<input type="submit" class="btn btn-primary"
+										style="float: right" name="agregarNuevoCurso" value="Agregar nuevo curso">
+
+
 							</div>
 						</div>
 					</div>
@@ -186,7 +189,7 @@ N A V B A R
 				</div>
 			</div>
 		</div>
-
+	</form>
 	</section>
 	</main>
 	<script type="text/javascript"

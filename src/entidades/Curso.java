@@ -6,7 +6,7 @@ public class Curso {
 	private Materia Materia;
 	private Semestre Semestre;
 	private Year Anio;
-	private Profesor Profesor2;
+	private Profesor Profesor;
 	private Alumno Alumno;
 	private Float notaPrimerParcial;
 	private Float notaPrimerRecuperatorio;
@@ -24,11 +24,11 @@ public class Curso {
 		this.Anio = Anio;
 	}
 
-	public Curso(Materia Materia, Semestre Semestre, Year Anio, Profesor Profesor2) {
+	public Curso(Materia Materia, Semestre Semestre, Year Anio, Profesor Profesor) {
 		this.Materia = Materia;
 		this.Semestre = Semestre;
 		this.Anio = Anio;
-		this.Profesor2 = Profesor2;
+		this.Profesor = Profesor;
 	}
 
 	public Curso(Alumno alumno, Float notaPrimerParcial, Float notaPrimerRecuperatorio, Float notaSegundoParcial,
@@ -41,23 +41,23 @@ public class Curso {
 		this.estado = estado;
 	}
 
-	public Curso(Materia materia, Semestre semestre, Year anio, Profesor profesor2, Alumno alumno,
+	public Curso(Materia materia, Semestre semestre, Year anio, Profesor profesor, Alumno alumno,
 			Float notaPrimerParcial) {
 		Materia = materia;
 		Semestre = semestre;
 		Anio = anio;
-		Profesor2 = profesor2;
+		Profesor = profesor;
 		Alumno = alumno;
 		this.notaPrimerParcial = notaPrimerParcial;
 	}
 
-	public Curso(Materia materia, Semestre semestre, Year anio, Profesor profesor2, Alumno alumno,
+	public Curso(Materia materia, Semestre semestre, Year anio, Profesor profesor, Alumno alumno,
 			Float notaPrimerParcial, Float notaPrimerRecuperatorio, Float notaSegundoParcial,
 			Float notaSegundoRecuperatorio, Estado estado) {
 		Materia = materia;
 		Semestre = semestre;
 		Anio = anio;
-		Profesor2 = profesor2;
+		Profesor = profesor;
 		Alumno = alumno;
 		this.notaPrimerParcial = notaPrimerParcial;
 		this.notaPrimerRecuperatorio = notaPrimerRecuperatorio;
@@ -91,20 +91,17 @@ public class Curso {
 	}
 
 	public Profesor getProfesor() {
-		return Profesor2;
+		return Profesor;
 	}
 
-	public void setProfesor(Profesor Profesor2) {
-		this.Profesor2 = Profesor2;
+	public void setProfesor(Profesor Profesor) {
+		this.Profesor = Profesor;
 	}
 
-	public Profesor getProfesor2() {
-		return Profesor2;
+	public Profesor getProfeso() {
+		return Profesor;
 	}
 
-	public void setProfesor2(Profesor profesor2) {
-		Profesor2 = profesor2;
-	}
 
 	public Alumno getAlumno() {
 		return Alumno;

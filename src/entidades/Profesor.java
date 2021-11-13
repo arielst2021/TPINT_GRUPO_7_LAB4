@@ -8,7 +8,11 @@ public class Profesor {
 	private String Usuario;
 	private String Contrasenia;
 
-	public Profesor() {
+	public Profesor() {	
+	}
+	
+	public Profesor(int Legajo) {
+		this.Legajo = Legajo;
 	}
 
 	public Profesor(int Legajo, Persona Persona, Estado Estado, Perfil Perfil, String Usuario, String Contrasenia) {
