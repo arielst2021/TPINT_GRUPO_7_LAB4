@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import entidades.Curso;
 import entidades.Materia;
@@ -67,6 +68,11 @@ public class AdmCursoServlet extends HttpServlet {
 			String SemestreId = request.getParameter("semestreSeleccionado");
 			String Anio = request.getParameter("anioSeleccionado");
 			String LegajoProfesor = request.getParameter("profesorSeleccionado");
+			//
+//			String profesorNombre = request.getParameter("profesorNombre");
+//			String profesorApellido = request.getParameter("profesorApellido");
+//			String semestreNombre = request.getParameter("semestreNombre");
+//			String materiaNombre = request.getParameter("materiaNombre");
 
 			if (MateriaId != null && SemestreId != null && Anio != null && LegajoProfesor != null) {
 
@@ -80,10 +86,14 @@ public class AdmCursoServlet extends HttpServlet {
 					Curso = new Curso(new Materia(Materia), new Semestre(Semestre), AnioCurso,
 							new Profesor(Legajo));
 
-					System.out.println("materia: " + MateriaId);
-					System.out.println("semestre: " + SemestreId);
+					System.out.println("materiaId: " + MateriaId);
+//					System.out.println("materia Nombre: " + materiaNombre);
+					System.out.println("semestreId: " + SemestreId);
+//					System.out.println("semestre Nombre: " + semestreNombre);
 					System.out.println("anio: " + Anio);
-					System.out.println("legajo: " + LegajoProfesor);
+					System.out.println("legajoId: " + LegajoProfesor);					
+//					System.out.println("profesor Nombre: " + profesorNombre);
+//					System.out.println("profesor Apellido: " + profesorApellido);
 
 				} catch (Exception e) {
 					// TODO: handle exception
@@ -94,7 +104,17 @@ public class AdmCursoServlet extends HttpServlet {
 					// SI PUDO AGREGAR EL CURSO EXITOSAMENTE
 					// SI EL CURSO ES DISTINTO DE NULL LO AGREGO A LA BD
 					if(NegocioCurso.AgregarNuevoCurso(Curso)) {
-						System.out.println("curso agregago");
+						
+						// OBTENGO LOS ALUMNOS DEL CURSO		
+						ArrayList<Curso> lista = NegocioCurso.ObtenerAlumnosPorCurso(Curso);
+						request.setAttribute("listaCursos", lista);
+
+						RequestDispatcher rd = request.getRequestDispatcher("/adm_cursos_agregar_alumnos.jsp");
+						rd.forward(request, response);
+
+					}
+					else {
+						//EL CURSO NO FUE AGREGADO
 					}
 				}
 			}

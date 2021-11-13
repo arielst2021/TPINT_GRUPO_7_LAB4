@@ -83,7 +83,7 @@ public class AdmAlumnoServlet extends HttpServlet {
 			Provincia provAlumno = new Provincia();
 			provAlumno.setId(Integer.parseInt(request.getParameter("txtProvincia")));
 			per.setProvincia(provAlumno);
-			alum.setPersona2(per);
+			alum.setPersona(per);
     		// Estado
 			Estado estAlumno = new Estado();
 			estAlumno.setIdEstado(Integer.parseInt(request.getParameter("txtEstado")));

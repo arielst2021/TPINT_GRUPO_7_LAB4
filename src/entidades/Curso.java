@@ -31,9 +31,10 @@ public class Curso {
 		this.Profesor = Profesor;
 	}
 
-	public Curso(Alumno alumno, Float notaPrimerParcial, Float notaPrimerRecuperatorio, Float notaSegundoParcial,
+	public Curso(Profesor Profesor, Alumno Alumno, Float notaPrimerParcial, Float notaPrimerRecuperatorio, Float notaSegundoParcial,
 			Float notaSegundoRecuperatorio, Estado estado) {
-		Alumno = alumno;
+		this.Alumno = Alumno;
+		this.Profesor = Profesor;
 		this.notaPrimerParcial = notaPrimerParcial;
 		this.notaPrimerRecuperatorio = notaPrimerRecuperatorio;
 		this.notaSegundoParcial = notaSegundoParcial;
@@ -97,11 +98,6 @@ public class Curso {
 	public void setProfesor(Profesor Profesor) {
 		this.Profesor = Profesor;
 	}
-
-	public Profesor getProfeso() {
-		return Profesor;
-	}
-
 
 	public Alumno getAlumno() {
 		return Alumno;

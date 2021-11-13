@@ -55,7 +55,7 @@ public class AlumnoDaoImpl implements AlumnoDao {
 				// telefono
 				per.setEmail(rs.getString("alu_email"));
 				per.setTelefono(rs.getString("alu_telefono"));
-				alum.setPersona2(per);
+				alum.setPersona(per);
 				// estado
 				Estado est = new Estado();
 				est.setIdEstado(rs.getInt("est_id"));
@@ -112,7 +112,7 @@ public class AlumnoDaoImpl implements AlumnoDao {
 				// telefono
 				per.setEmail(rs.getString("alu_email"));
 				per.setTelefono(rs.getString("alu_telefono"));
-				alum.setPersona2(per);
+				alum.setPersona(per);
 				// estado
 				est.setIdEstado(rs.getInt("est_id"));
 				est.setNombre(rs.getString("est_nombre"));
@@ -169,7 +169,7 @@ public class AlumnoDaoImpl implements AlumnoDao {
 				// telefono
 				per.setEmail(rs.getString("alu_email"));
 				per.setTelefono(rs.getString("alu_telefono"));
-				alum.setPersona2(per);
+				alum.setPersona(per);
 				// estado
 				Estado est = new Estado();
 				est.setIdEstado(rs.getInt("est_id"));
@@ -198,20 +198,20 @@ public class AlumnoDaoImpl implements AlumnoDao {
 			PreparedStatement ps = con.prepareStatement(str);
 			// Se ordenan los campos para el statement
 
-			System.out.println(alu.getPersona2().getDni());
-			ps.setString(1, alu.getPersona2().getDni());
-			System.out.println(alu.getPersona2().getNombre());
-			ps.setString(2, alu.getPersona2().getNombre());
-			System.out.println(alu.getPersona2().getApellido());
-			ps.setString(3, alu.getPersona2().getApellido());
-			System.out.println(alu.getPersona2().getDireccion());
-			ps.setString(4, alu.getPersona2().getDireccion());
-			System.out.println(alu.getPersona2().getProvincia().getId());
-			ps.setInt(5, alu.getPersona2().getProvincia().getId());
-			System.out.println(alu.getPersona2().getEmail());
-			ps.setString(6, alu.getPersona2().getEmail());
-			System.out.println(alu.getPersona2().getTelefono());
-			ps.setString(7, alu.getPersona2().getTelefono());
+			System.out.println(alu.getPersona().getDni());
+			ps.setString(1, alu.getPersona().getDni());
+			System.out.println(alu.getPersona().getNombre());
+			ps.setString(2, alu.getPersona().getNombre());
+			System.out.println(alu.getPersona().getApellido());
+			ps.setString(3, alu.getPersona().getApellido());
+			System.out.println(alu.getPersona().getDireccion());
+			ps.setString(4, alu.getPersona().getDireccion());
+			System.out.println(alu.getPersona().getProvincia().getId());
+			ps.setInt(5, alu.getPersona().getProvincia().getId());
+			System.out.println(alu.getPersona().getEmail());
+			ps.setString(6, alu.getPersona().getEmail());
+			System.out.println(alu.getPersona().getTelefono());
+			ps.setString(7, alu.getPersona().getTelefono());
 			System.out.println(alu.getEstado().getId());
 			ps.setInt(8, alu.getEstado().getId());
 

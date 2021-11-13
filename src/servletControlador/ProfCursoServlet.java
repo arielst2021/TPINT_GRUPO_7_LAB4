@@ -95,18 +95,19 @@ public class ProfCursoServlet extends HttpServlet {
 			session.setAttribute("DatosDelCurso", Curso);
 			//
 		
-			Profesor Profesor2 = new Profesor();
-			Profesor2.setLegajo(Legajo);
+			Profesor Profesor = new Profesor();
+			Profesor.setLegajo(Legajo);
 			
+			// OBTENGO LOS ALUMNOS DEL CURSO
 			NegocioCurso NegocioCurso = new NegocioCursoImpl();
-			Curso = new Curso(Materia, Semestre, Anio, Profesor2);			
+			Curso = new Curso(Materia, Semestre, Anio, Profesor);			
 			ArrayList<Curso> lista = NegocioCurso.ObtenerAlumnosPorCurso(Curso);
 			
 			request.setAttribute("listaAlumnosPorCursos", lista);
 
 			//OBTENGO LOS ESTADOS PARA CALIFICAR AL ALUMNO
 			NegocioEstado NegocioEstado = new NegocioEstadoImpl();
-			Curso = new Curso(Materia, Semestre, Anio, Profesor2);			
+			Curso = new Curso(Materia, Semestre, Anio, Profesor);			
 			ArrayList<Estado> ListaEstados = NegocioEstado.obtenerEstados();
 			
 			request.setAttribute("listaEstados", ListaEstados);

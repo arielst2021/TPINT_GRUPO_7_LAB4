@@ -9,11 +9,11 @@
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 
-<%!Profesor Profesor2 = new Profesor();%>
+<%!Profesor Profesor = new Profesor();%>
 
 <%
 	if (session.getAttribute("perfil") != null) {
-		Profesor2 = (Profesor) session.getAttribute("perfil");
+		Profesor = (Profesor) session.getAttribute("perfil");
 	}
 	else {
 		response.sendRedirect("index.jsp");
@@ -100,7 +100,7 @@ B O D Y
 									<div class="bg-light py-2">
 										<div>
 							<p><strong>Año: </strong><%=Curso.getAnio()%></p>
-							<p><strong>Profesor/a: </strong><%=Profesor2.getPersona().getNombre()%> <%=Profesor2.getPersona().getApellido()%></p>	
+							<p><strong>Profesor/a: </strong><%=Profesor.getPersona().getNombre()%> <%=Profesor.getPersona().getApellido()%></p>	
 										</div>
 									</div>
 								</div>
@@ -137,7 +137,7 @@ B O D Y
 												<input type="hidden" id="txtMateriaId" name="txtMateriaId" value="<%=Curso.getMateria().getId()%>">
 												<input type="hidden" id="txtSemestreId" name="txtSemestreId" value="<%=Curso.getSemestre().getId()%>">
 												<input type="hidden" id="txtAnio" name="txtAnio" value="<%=Curso.getAnio()%>">
-												<input type="hidden" id="txtLegajoDocente" name="txtLegajoDocente" value="<%=Profesor2.getLegajo()%>">											
+												<input type="hidden" id="txtLegajoDocente" name="txtLegajoDocente" value="<%=Profesor.getLegajo()%>">											
 												<input type="hidden" id="txtLegajoAlumno" name="txtLegajoAlumno" value="<%=item.getAlumno().getLegajo()%>">
 												<span class="text-uppercase fw-bold"><%=item.getAlumno().getPersona2().getApellido()%></span>, <%=item.getAlumno().getPersona2().getNombre()%></td>
 												
