@@ -77,7 +77,6 @@ N A V B A R
 					for(Materia item : listaMaterias) {
 				%>
 									<option value="<%=item.getId()%>"><%=item.getNombre()%></option>
-<%-- 									<input type="hidden" id="materiaNombre" name="materiaNombre" value="<%=item.getNombre()%>" > --%>
 									<%
 				}
 				%>
@@ -105,8 +104,7 @@ N A V B A R
 					for(Semestre item : listaSemestres) {
 				%>
 									<option value="<%=item.getId()%>"><%=item.getNombre()%></option>
-<%-- 									<input type="hidden" id="semestreNombre" name="semestreNombre" value="<%=item.getNombre()%>">									 --%>
-									<%
+				<%
 				}
 				%>
 								</select>
@@ -161,8 +159,6 @@ N A V B A R
 								<td><%=item.getPersona().getDni()%></td>
 								<td><%=item.getPersona().getApellido()%>, <%=item.getPersona().getNombre()%></td>
 								<td><input type="radio" name="profesorSeleccionado" value="<%=item.getLegajo()%>">
-<%-- 								<input type="hidden" id="profesorNombre" name="profesorNombre" value="<%=item.getPersona().getNombre()%>">	 --%>
-<%-- 								<input type="hidden" id="profesorApellido" name="profesorApellido" value="<%=item.getPersona().getApellido()%>">	 --%>
 								</td>
 
 							</tr>

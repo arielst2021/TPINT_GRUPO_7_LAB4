@@ -11,4 +11,6 @@ public interface NegocioCurso {
 	public boolean AgregarNotasCurso(ArrayList<Curso> Curso);
 	//
 	public boolean AgregarNuevoCurso(Curso Curso);
+	//
+	public Curso ObtenerCurso(Curso Curso);
 }

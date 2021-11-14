@@ -15,6 +15,11 @@ public class Profesor {
 		this.Legajo = Legajo;
 	}
 
+	public Profesor(int Legajo, Persona Persona) {
+		this.Legajo = Legajo;
+		this.Persona = Persona;
+	}
+	
 	public Profesor(int Legajo, Persona Persona, Estado Estado, Perfil Perfil, String Usuario, String Contrasenia) {
 		super();
 		this.Legajo = Legajo;

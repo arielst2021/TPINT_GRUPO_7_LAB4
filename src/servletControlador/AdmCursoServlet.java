@@ -104,10 +104,15 @@ public class AdmCursoServlet extends HttpServlet {
 					// SI PUDO AGREGAR EL CURSO EXITOSAMENTE
 					// SI EL CURSO ES DISTINTO DE NULL LO AGREGO A LA BD
 					if(NegocioCurso.AgregarNuevoCurso(Curso)) {
+												
+						// OBTENGO DATOS DEL CURSO		
+						Curso = NegocioCurso.ObtenerCurso(Curso);
 						
-						// OBTENGO LOS ALUMNOS DEL CURSO		
-						ArrayList<Curso> lista = NegocioCurso.ObtenerAlumnosPorCurso(Curso);
-						request.setAttribute("listaCursos", lista);
+						// GUARDO LOS DATOS DEL CURSO EN UNA VARIABLE SESSION
+						HttpSession session = request.getSession();
+						session.setAttribute("DatosNuevoCurso", Curso);
+						//
+						request.setAttribute("NuevoCurso", Curso);
 
 						RequestDispatcher rd = request.getRequestDispatcher("/adm_cursos_agregar_alumnos.jsp");
 						rd.forward(request, response);
@@ -118,6 +123,23 @@ public class AdmCursoServlet extends HttpServlet {
 					}
 				}
 			}
+			// OBTENGO LISTA DE PROFESORES
+			NegocioProfesor NegocioProfesor = new NegocioProfesorImpl();
+			ArrayList<Profesor> lista = NegocioProfesor.listaProfesores();
+			request.setAttribute("listaProfesores", lista);
+
+			// OBTENGO LISTA DE MATERIAS
+			NegocioMateria NegocioMateria = new NegocioMateriaImpl();
+			ArrayList<Materia> listaMaterias = NegocioMateria.obtenerMaterias();
+			request.setAttribute("listaMaterias", listaMaterias);
+
+			// OBTENGO LISTA DE SEMESTRES
+			NegocioSemestre NegocioSemestre = new NegocioSemestreImpl();
+			ArrayList<Semestre> listaSemestres = NegocioSemestre.obtenerSemestres();
+			request.setAttribute("listaSemestres", listaSemestres);
+
+			RequestDispatcher rd = request.getRequestDispatcher("/adm_cursos_agregar.jsp");
+			rd.forward(request, response);
 		}
 	}
 }

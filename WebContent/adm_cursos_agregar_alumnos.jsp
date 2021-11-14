@@ -84,21 +84,22 @@ B O D Y
 						<%
 							// 							listaCursos
 
-							ArrayList<Curso> listaCursos = null;
-							if (request.getAttribute("listaCursos") != null) {
-								listaCursos = (ArrayList<Curso>) request.getAttribute("listaCursos");
-								Curso curso =  listaCursos.get(0);
+							Curso Curso = null;
+							if (request.getAttribute("NuevoCurso") != null) {														
+								
+								Curso = (Curso) request.getAttribute("NuevoCurso");
 							}
 						%>
-						<%
-						if (curso != null) {
+						<% 						
+						if (Curso != null) {
+
 						%>
 						<div class="row bg-light">
 							<div class="col-md-6 text-left">
 								<div class="bg-light py-2">
 									<div>
 										<p>
-											<strong>Materia: </strong><%=curso.getMateria().getNombre()%></p>
+											<strong>Materia: </strong><%=Curso.getMateria().getNombre().toString() %></p>
 										<p>
 											<strong>Período: </strong><%=Curso.getSemestre().getNombre()%></p>
 									</div>
@@ -117,7 +118,8 @@ B O D Y
 							</div>
 						</div>
 						<%
-							}
+								}
+// 							}
 						%>
 						<br>
 						<h5 class="card-title">Calificaciones de los alumnos</h5>

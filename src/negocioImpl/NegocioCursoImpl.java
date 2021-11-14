@@ -29,4 +29,9 @@ public class NegocioCursoImpl implements NegocioCurso{
 	public boolean AgregarNuevoCurso(Curso Curso) {
 		return dao.AgregarNuevoCurso(Curso);
 	}
+
+	@Override
+	public Curso ObtenerCurso(Curso Curso) {
+		return dao.ObtenerCurso(Curso);
+	}
 }

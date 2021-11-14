@@ -139,7 +139,7 @@ B O D Y
 												<input type="hidden" id="txtAnio" name="txtAnio" value="<%=Curso.getAnio()%>">
 												<input type="hidden" id="txtLegajoDocente" name="txtLegajoDocente" value="<%=Profesor.getLegajo()%>">											
 												<input type="hidden" id="txtLegajoAlumno" name="txtLegajoAlumno" value="<%=item.getAlumno().getLegajo()%>">
-												<span class="text-uppercase fw-bold"><%=item.getAlumno().getPersona2().getApellido()%></span>, <%=item.getAlumno().getPersona2().getNombre()%></td>
+												<span class="text-uppercase fw-bold"><%=item.getAlumno().getPersona().getApellido()%></span>, <%=item.getAlumno().getPersona().getNombre()%></td>
 												
 											<!-- AGREGO UN JAVASCRIPT PARA PERMITIR EL INGRESO DE VALORES NUMÉRICOS Y UN DISEÑO DE PATRÓN DE ETIQUETAS HTML PARA SOLO VALORES NUMÉRICOS  -->
 											<!-- EL ATRIBUTO PATTERN ESPECIFICA UNA EXPRESIÓN REGULAR CON LA QUE <INPUT>SE VERIFICA EL VALOR DEL ELEMENTO AL ENVIAR EL FORMULARIO. -->
