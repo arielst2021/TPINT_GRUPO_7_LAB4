@@ -34,4 +34,9 @@ public class NegocioCursoImpl implements NegocioCurso{
 	public Curso ObtenerCurso(Curso Curso) {
 		return dao.ObtenerCurso(Curso);
 	}
+	
+	@Override
+	public  ArrayList<Curso> ObtenerCursos() {
+		return dao.ObtenerCursos();
+	}
 }

@@ -12,8 +12,7 @@
 	href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css" />
 </head>
 <body class="bg-light">
-	
-	<form action="LoginServlet" method="get">	
+		
 	<%
 			if (session.getAttribute("perfil") != null) {
 			Profesor Profesor2 = new Profesor();
@@ -47,6 +46,7 @@
 				role="button" aria-expanded="false">Cursos</a>
 				<ul class="dropdown-menu">
 						<li><a class="dropdown-item" href="AdmCursoServlet?Param=AgregarCursos">Agregar cursos</a></li>
+						<li><a class="dropdown-item" href="AdmCursoServlet?Param=ListarCursos">Listar cursos</a></li>
 				</ul></li>
 		</ul>
 	</div>
@@ -73,7 +73,6 @@
 		}
 		}
 	%>
-	</form>
 	
 	<script type="text/javascript"
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

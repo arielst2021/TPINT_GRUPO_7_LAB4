@@ -38,22 +38,6 @@ public class InicioServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		if (request.getParameter("Param").equals("ObtenerCursosPorLegajoProfesor")) {
-			NegocioCurso NegocioCurso = new NegocioCursoImpl();
-
-			HttpSession session = request.getSession();
-			if (session.getAttribute("perfil") != null) {
-				Profesor Profesor2 = (Profesor) session.getAttribute("perfil");
-				int NroLegajo = Profesor2.getLegajo();
-
-				ArrayList<Curso> lista = NegocioCurso.ObtenerCursosPorLegajoProfesor(NroLegajo);
-
-				request.setAttribute("listaCursos", lista);
-
-				RequestDispatcher rd = request.getRequestDispatcher("/prof_cursos_listar.jsp");
-				rd.forward(request, response);
-			}
-		}
 	}
 
 	/**

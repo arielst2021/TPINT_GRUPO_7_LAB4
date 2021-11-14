@@ -132,7 +132,6 @@ public class CursoDaoImpl implements CursoDao {
 				e1.printStackTrace();
 			}
 		}
-		System.out.println("TAMAÑO..."+ AlumnosPorCurso.size());	
 		return AlumnosPorCurso;
 	}
 		
@@ -242,4 +241,46 @@ public class CursoDaoImpl implements CursoDao {
 			}
 			return miCurso;
 		}
+
+	@Override
+	public ArrayList<entidades.Curso> ObtenerCursos() {
+		ArrayList<Curso> Curso = new ArrayList<Curso>();
+
+		try {
+			// 1. OBTENER UNA CONEXIÓN A LA BASE DE DATOS
+			miConnection = Conexion.getConexion().getSQLConexion();
+
+			// 2. PREPARAR DECLARACIÓN // 3. ESTABLECER LOS PARÁMETROS
+			miPreparedStatement = miConnection.prepareStatement(ObtenerCurso);
+
+			// 4. EJECUTAR CONSULTA SQL
+			miResultSet = miPreparedStatement.executeQuery();
+
+			// 5. AGREGAR EL CONJUNTO DE RESULTADOS EN UN ARRAY
+			while (miResultSet.next()) {
+				int MateriaId = miResultSet.getInt("cur_materia_id");
+				String MateriaNombre = miResultSet.getString("mat_nombre");
+				int SemestreId = miResultSet.getInt("cur_semestre_id");
+				String SemestreNombre = miResultSet.getString("sem_nombre");		
+				//
+				Year anio = Year.of(Integer.parseInt(miResultSet.getString("cur_anio").substring(0, 4)));
+				//				
+				int ProfesorLegajo = miResultSet.getInt("pro_legajo");
+				String ProfesorNombre = miResultSet.getString("pro_nombre");
+				String ProfesorApellido = miResultSet.getString("pro_apellido");
+
+				// SET
+				Curso.add(new Curso(new Materia(MateriaId, MateriaNombre), new Semestre(SemestreId, SemestreNombre), anio, new Profesor(ProfesorLegajo, new Persona(ProfesorNombre, ProfesorApellido))));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			try {
+				// SI ALGO HA IDO MAL Y QUEREMOS DESHACER LOS CAMBIOS
+				miConnection.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
+		return Curso;
+	}
 }

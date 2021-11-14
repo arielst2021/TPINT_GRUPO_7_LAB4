@@ -34,6 +34,7 @@ public class AdmCursoServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		if (request.getParameter("Param").equals("AgregarCursos")) {
 
 			// OBTENGO LISTA DE PROFESORES
@@ -53,6 +54,18 @@ public class AdmCursoServlet extends HttpServlet {
 
 			RequestDispatcher rd = request.getRequestDispatcher("/adm_cursos_agregar.jsp");
 			rd.forward(request, response);
+		}
+		
+		if (request.getParameter("Param").equals("ListarCursos")) {
+			
+			NegocioCurso NegocioCurso = new NegocioCursoImpl();
+			ArrayList<Curso> lista = NegocioCurso.ObtenerCursos();
+
+			request.setAttribute("listaCursos", lista);
+
+			RequestDispatcher rd = request.getRequestDispatcher("/adm_cursos_listar.jsp");
+			rd.forward(request, response);
+			
 		}
 	}
 
