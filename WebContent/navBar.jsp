@@ -39,7 +39,6 @@
 					<li><a class="dropdown-item" href="AdmProfesorServlet?Param=4">Alta</a></li>
 					<li><a class="dropdown-item" href="#">Modificar</a></li>
 					<li><a class="dropdown-item" href="#">Listar</a></li>
-					<li><a class="dropdown-item" href="#">Baja</a></li>
 				</ul></li>
 			<li class="nav-item dropdown"><a
 				class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"

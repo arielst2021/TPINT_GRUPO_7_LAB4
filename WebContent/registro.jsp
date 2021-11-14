@@ -1,7 +1,24 @@
+<%@page import="entidades.Estado"%>
+<%@page import="entidades.Materia"%>
+<%@page import="entidades.Semestre"%>
+<%@page import="entidades.Profesor"%>
+<%@page import="entidades.Provincia"%>
+<%@page import="java.util.*"%>
+<%@page import="java.time.Year"%>
+<%@page session="true"%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    <%@page import="java.util.List"%>
-    <%@page import="entidades.Provincia"%>
+	pageEncoding="ISO-8859-1"%>
+
+<%!Profesor Profesor = new Profesor();%>
+
+<%
+	if (session.getAttribute("perfil") != null) {
+		Profesor = (Profesor) session.getAttribute("perfil");
+	} else {
+		response.sendRedirect("index.jsp");
+	}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,14 +30,32 @@
   <meta content="" name="keywords">
 
 <link href="Recursos/css/estilos.css" type ="text/css" rel="StyleSheet"/>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css" />
+
 </head>
 
 <body>
-
+<!--
+----------------------------------------------------
+N A V B A R
+---------------------------------------------------- -->
+	<%
+		if (session.getAttribute("perfil") != null) {
+	%>
+	<jsp:include page="logout.jsp"></jsp:include>
+	<jsp:include page="navBar.jsp"></jsp:include>
+	<%
+		} else {
+	%>
+	<jsp:include page="login.jsp"></jsp:include>
+	<%
+		}
+	%>
   <main>
-<%--   <jsp:include page="logout.jsp"></jsp:include> --%>
     <div >
 
       <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
@@ -79,16 +114,16 @@
                       <label for="Provincia" class="form-label">Provincia</label>
                       <select name=provincias>
                       <%
-				List<Provincia> ListaProvincias = null;
-				if(request.getAttribute("ListaProvincias")!=null)
+				List<Provincia> ListaProvincia = null;
+				if(request.getAttribute("ListaProvincia")!=null)
 				{
-					ListaProvincias = (List<Provincia>) request.getAttribute("ListaProvincias");
+					ListaProvincia = (List<Provincia>) request.getAttribute("ListaProvincia");
 				}
 				%>
                            
                            <%
-                           if(ListaProvincias!=null)
-                           for(Provincia  p : ListaProvincias){
+                           if(ListaProvincia!=null)
+                           for(Provincia  p : ListaProvincia){
                         	   
                            %>
                            
@@ -150,6 +185,16 @@
   </main><!-- End #main -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+	<script type="text/javascript"
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script type="text/javascript"
+		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+	<script type="text/javascript"
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+	<script type="text/javascript"
+		src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript"
+		src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
 
 
 </body>

@@ -3,6 +3,7 @@ package servletControlador;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -13,12 +14,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
+import entidades.Materia;
 import entidades.Profesor;
 import entidades.Provincia;
+import negocio.NegocioMateria;
 import negocio.NegocioProfesor;
-
+import negocio.NegocioProvincia;
+import negocioImpl.NegocioMateriaImpl;
 import negocioImpl.NegocioProfesorImpl;
+import negocioImpl.NegocioProvinciaImpl;
 
 
 /**
@@ -44,29 +48,16 @@ public class AdmProfesorServlet extends HttpServlet {
 		if(request.getParameter("Param")!=null)
 		{
 			if(request.getParameter("Param").equals("4")) {
-				NegocioProfesor negocioprofesor = new NegocioProfesorImpl();
-				List<Provincia> ListaProvincias= negocioprofesor.obtenerprovincias();
-				System.out.println("Comienzo a recorrer la lista en servelet ");
-				for(Provincia provincias : ListaProvincias)
-				{
-					
-					System.out.println("Provincia :  "+provincias.getId()+ "  "+ provincias.getNombre().toString());
-					
-					
-				}
 				
+				// OBTENGO LISTA DE PROVINCIAS
+				NegocioProvincia negocioProvincia = new NegocioProvinciaImpl();
+				List<Provincia> ListaProvincia= negocioProvincia.listaProvincias();
+				request.setAttribute("ListaProvincia", ListaProvincia);
 				
-				request.setAttribute("ListaProvincias", ListaProvincias);
-				
-				RequestDispatcher rd = request.getRequestDispatcher("/registro.jsp");   
-		        rd.forward(request, response);		
-		        
-			}
-		
-		}
-		
-		
-		
+				RequestDispatcher rd = request.getRequestDispatcher("/registro.jsp");
+				rd.forward(request, response);	        
+			}	
+		}		
 	}
 
 	/**

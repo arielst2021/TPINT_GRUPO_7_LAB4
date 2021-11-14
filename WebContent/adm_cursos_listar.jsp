@@ -11,9 +11,6 @@
 <%
 	if (session.getAttribute("perfil") != null) {
 		Profesor = (Profesor) session.getAttribute("perfil");
-		if(Profesor.getPerfil().getId()==2){
-			response.sendRedirect("index.jsp");
-		}
 	} else {
 		response.sendRedirect("index.jsp");
 	}
