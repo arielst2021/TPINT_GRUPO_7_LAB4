@@ -13,11 +13,11 @@ public class NegocioProfesorImpl implements NegocioProfesor{
 
 	ProfesorDao dao = new ProfesorDaoImpl();
 
-//	@Override
-//	public int guardarprofesor(Profesor profesor) {
-//		ProfesorDao profesordao = new ProfesorDaoImpl();
-//		return profesordao.guardarprofesor(profesor);
-//	}
+	@Override
+	public int guardarprofesor(Profesor profesor) {
+		ProfesorDao profesordao = new ProfesorDaoImpl();
+		return profesordao.guardarprofesor(profesor);
+	}
 
 	@Override
 	public Profesor iniciarSesion(String userUsuario, String passUsuario) {
@@ -28,11 +28,7 @@ public class NegocioProfesorImpl implements NegocioProfesor{
 		return obj;
 	}
 
-	@Override
-	public int guardarprofesor(Profesor profesor) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+
 
 	@Override
 	public ArrayList<Profesor> listaProfesores() {
