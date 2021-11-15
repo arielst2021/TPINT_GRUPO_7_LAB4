@@ -70,6 +70,7 @@ N A V B A R
 									<th scope="col">Cód.</th>
 									<th scope="col">Materia</th>
 									<th scope="col">Semestre</th>
+									<th scope="col">Docente</th>
 									<th scope="col">Año</th>
 									<th scope="col">Acciones</th>
 								</tr>
@@ -93,16 +94,19 @@ N A V B A R
 								<td><%=item.getMateria().getId()%></td>
 								<td><%=item.getMateria().getNombre()%></td>
 								<td><%=item.getSemestre().getNombre()%></td>
+								<td><%=item.getProfesor().getPersona().getApellido()%>, <%=item.getProfesor().getPersona().getNombre()%></td>
 								<td><%=item.getAnio()%></td>
 								<td>
 								
-								<form action="admCursoServlet" method="post">
+								<form action="AdmCursoServlet" method="post">
 								    <input type="hidden" id="txtMateriaId" name="txtMateriaId" value="<%=item.getMateria().getId()%>">
 								    <input type="hidden" id="txtMateriaNombre" name="txtMateriaNombre" value="<%=item.getMateria().getNombre()%>">
 								    <input type="hidden" id="txtSemestreId" name="txtSemestreId" value="<%=item.getSemestre().getId()%>">
 								    <input type="hidden" id="txtSemestreNombre" name="txtSemestreNombre" value="<%=item.getSemestre().getNombre()%>">
 								    <input type="hidden" id="txtAnio" name="txtAnio" value="<%=item.getAnio()%>">
-								    <input type="hidden" id="txtLegajo" name="txtLegajo" value="<%=Profesor.getLegajo()%>">
+								    <input type="hidden" id="txtProfesorLegajo" name="txtProfesorLegajo" value="<%=item.getProfesor().getLegajo()%>">
+								    <input type="hidden" id="txtProfesorApellido" name="txtProfesorApellido" value="<%=item.getProfesor().getPersona().getApellido()%>">
+								    <input type="hidden" id="txtProfesorNombre" name="txtProfesorNombre" value="<%=item.getProfesor().getPersona().getNombre()%>">
 								<input type="submit" name="btnAgregarAlumnos" value="Agregar Alumnos" class="btn btn-sm btn-outline-primary waves-effect">
 								</form>
 								

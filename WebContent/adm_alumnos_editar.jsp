@@ -54,20 +54,20 @@ N A V B A R
 							</div>
 							<div class="row pb-2">
 								<div class="col-4 label ">Nombre</div>
-								<div class="col-8"><input type="text" name="txtNombre" class="form-control" required value=<%=alum.getPersona2().getNombre()%>></div>
+								<div class="col-8"><input type="text" name="txtNombre" class="form-control" required value=<%=alum.getPersona().getNombre()%>></div>
 							</div>
 							<div class="row pb-2">
 								<div class="col-4 label ">Apellido</div>
-								<div class="col-8"><input type="text" name="txtApellido" class="form-control" required value=<%=alum.getPersona2().getApellido()%>></div>
+								<div class="col-8"><input type="text" name="txtApellido" class="form-control" required value=<%=alum.getPersona().getApellido()%>></div>
 							</div>
 							<div class="row pb-2">
 								<div class="col-4 label ">DNI</div>
-								<div class="col-8"><input type="text" name="txtDni" class="form-control" required value=<%=alum.getPersona2().getDni()%>></div>
+								<div class="col-8"><input type="text" name="txtDni" class="form-control" required value=<%=alum.getPersona().getDni()%>></div>
 							</div>
 							<div class="row pb-2">
 								<div class="col-4 label ">Nacimiento</div>
 								<div class="col-8">
-									<input type="text" name="txtNacimiento" class="form-control" required value="<%=alum.getPersona2().getFechaNacimiento().getDayOfMonth()%>-<%=alum.getPersona2().getFechaNacimiento().getMonthValue()%>-<%=alum.getPersona2().getFechaNacimiento().getYear()%>" ></div>
+									<input type="text" name="txtNacimiento" class="form-control" required value="<%=alum.getPersona().getFechaNacimiento().getDayOfMonth()%>-<%=alum.getPersona().getFechaNacimiento().getMonthValue()%>-<%=alum.getPersona().getFechaNacimiento().getYear()%>" ></div>
 							</div>
 							<div class="row pb-2">
 								<div class="col-4 label">Provincia</div>
@@ -87,19 +87,19 @@ N A V B A R
 							<div class="row pb-2">
 								<div class="col-4 label">Direccion</div>
 								<div class="col-8">
-									<input type="text" class="form-control" name="txtDireccion" required value=<%=alum.getPersona2().getDireccion()%>></div>
+									<input type="text" class="form-control" name="txtDireccion" required value=<%=alum.getPersona().getDireccion()%>></div>
 							</div>
 							<div class="row pb-2">
 								<div class="col-4 label">Telefono</div>
 								<div class="col-8">
-									<input type="text" class="form-control" name="txtTelefono" required value=<%=alum.getPersona2().getTelefono()%>></div>
+									<input type="text" class="form-control" name="txtTelefono" required value=<%=alum.getPersona().getTelefono()%>></div>
 							</div>
 
 							<div class="row pb-2">
 								<div class="col-4 label">Email</div>
 								<div class="col-8">
 								
-									<input type="text" class="form-control" name="txtEmail" required value=<%=alum.getPersona2().getEmail()%>></div>
+									<input type="text" class="form-control" name="txtEmail" required value=<%=alum.getPersona().getEmail()%>></div>
 							</div><%
               }else
               {%><div>No se ha encontrado el alumno.</div>

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import dao.CursoDao;
 import daoImpl.CursoDaoImpl;
+import entidades.Alumno;
 import entidades.Curso;
 import negocio.NegocioCurso;
 
@@ -31,12 +32,17 @@ public class NegocioCursoImpl implements NegocioCurso{
 	}
 
 	@Override
-	public Curso ObtenerCurso(Curso Curso) {
-		return dao.ObtenerCurso(Curso);
+	public Curso ObtenerUnCurso(Curso Curso) {
+		return dao.ObtenerUnCurso(Curso);
 	}
 	
 	@Override
-	public  ArrayList<Curso> ObtenerCursos() {
-		return dao.ObtenerCursos();
+	public  ArrayList<Curso> ObtenerTodosLosCursos() {
+		return dao.ObtenerTodosLosCursos();
+	}
+
+	@Override
+	public ArrayList<Alumno> ObtenerAlumnosNoEstanEnElCurso(Curso Curso) {
+		return dao.ObtenerAlumnosNoEstanEnElCurso(Curso);
 	}
 }

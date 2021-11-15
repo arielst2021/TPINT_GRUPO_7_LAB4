@@ -74,11 +74,11 @@ N A V B A R
                     	 <tr>
 
                     	 <td><%=alum.getLegajo()%></td>
-                    	 <td><%=alum.getPersona2().getNombre()%> <%=alum.getPersona2().getApellido()%></td>
-                    	 <td><%=alum.getPersona2().getDni()%></td>
-                    	 <td><%=alum.getPersona2().getProvincia().getNombre()%></td>
+                    	 <td><%=alum.getPersona().getNombre()%> <%=alum.getPersona().getApellido()%></td>
+                    	 <td><%=alum.getPersona().getDni()%></td>
+                    	 <td><%=alum.getPersona().getProvincia().getNombre()%></td>
                     	 <td><%=alum.getEstado().getNombre()%></td>
-                    	 <td><%=alum.getPersona2().getFechaNacimiento().getDayOfMonth()%>-<%=alum.getPersona2().getFechaNacimiento().getMonthValue()%>-<%=alum.getPersona2().getFechaNacimiento().getYear()%></td>
+                    	 <td><%=alum.getPersona().getFechaNacimiento().getDayOfMonth()%>-<%=alum.getPersona().getFechaNacimiento().getMonthValue()%>-<%=alum.getPersona().getFechaNacimiento().getYear()%></td>
                         <td>
                         	<form action="AdmAlumnoServlet" method="post">
 								<input type="hidden" id="txtLegajoAlumno" name="txtLegajoAlumno" value="<%=alum.getLegajo()%>" >

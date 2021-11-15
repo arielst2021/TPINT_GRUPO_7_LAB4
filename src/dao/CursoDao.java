@@ -1,6 +1,8 @@
 package dao;
 
 import java.util.ArrayList;
+
+import entidades.Alumno;
 import entidades.Curso;
 
 public interface CursoDao {	
@@ -11,7 +13,9 @@ public interface CursoDao {
 	//
 	public boolean AgregarNuevoCurso(Curso Curso);
 	//
-	public Curso ObtenerCurso(Curso Curso);
+	public Curso ObtenerUnCurso(Curso Curso);
 	//
-	public ArrayList<Curso> ObtenerCursos();
+	public ArrayList<Curso> ObtenerTodosLosCursos();
+	//	
+	public ArrayList<Alumno> ObtenerAlumnosNoEstanEnElCurso(Curso Curso);	
 }

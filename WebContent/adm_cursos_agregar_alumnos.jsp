@@ -1,3 +1,4 @@
+<%@page import="entidades.Alumno"%>
 <%@page import="entidades.Curso"%>
 <%@page import="entidades.Estado"%>
 <%@page import="entidades.Materia"%>
@@ -36,23 +37,6 @@ H E A D
 	href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css" />
 </head>
 
-<script type="text/javascript">
-	function valideKey(evt) {
-
-		// EL CÓDIGO ES LA REPRESENTACIÓN DECIMAL ASCII DE LA TECLA PRESIONADA.
-		var code = (evt.which) ? evt.which : evt.keyCode;
-
-		if (code == 46) { // PUNTO
-			return true;
-		} else if (code >= 48 && code <= 57) { // ES NUMERO.
-			return true;
-		} else { // OTRAS TECLAS.
-			return false;
-		}
-	}
-</script>
-
-</head>
 <!--
 ----------------------------------------------------
 B O D Y
@@ -85,21 +69,22 @@ B O D Y
 							// 							listaCursos
 
 							Curso Curso = null;
-							if (request.getAttribute("NuevoCurso") != null) {														
-								
+							if (request.getAttribute("NuevoCurso") != null) {
+
 								Curso = (Curso) request.getAttribute("NuevoCurso");
 							}
 						%>
-						<% 						
-						if (Curso != null) {
-
+						<%
+							if (Curso != null) {
 						%>
+						<h5 class="card-title">Alumnos actualmente en el curso</h5>
+						<hr>						
 						<div class="row bg-light">
 							<div class="col-md-6 text-left">
 								<div class="bg-light py-2">
 									<div>
 										<p>
-											<strong>Materia: </strong><%=Curso.getMateria().getNombre().toString() %></p>
+											<strong>Materia: </strong><%=Curso.getMateria().getNombre().toString()%></p>
 										<p>
 											<strong>Período: </strong><%=Curso.getSemestre().getNombre()%></p>
 									</div>
@@ -118,21 +103,103 @@ B O D Y
 							</div>
 						</div>
 						<%
-								}
-// 							}
+							}
 						%>
-						<br>
-						<h5 class="card-title">Calificaciones de los alumnos</h5>
-						<hr>
-						<!-- INICIO DE LA TABLA -->
+						
+						<!-- INICIO DE LA TABLA CON LOS ALUMNOS QUE ACTUALENTE ESTAN EN EL CURSO-->
 						<form action="ProfCursoServlet" method="post">
 
+							<table id="myTable2" class="table table-striped"
+								style="width: 100%">
+								<thead>
+									<tr>
+										<th scope="col">Apellido y Nombre</th>
+
+									</tr>
+								</thead>
+								<%
+									ArrayList<Curso> CursoAlumnosLista = null;
+									if (request.getAttribute("CursoAlumnosLista") != null) {
+										CursoAlumnosLista = (ArrayList<Curso>) request.getAttribute("CursoAlumnosLista");
+									}
+								%>
+								<%
+									if (CursoAlumnosLista != null) {
+										for (Curso item : CursoAlumnosLista) {
+								%>
+
+								<tr>
+									<td class="text-primary align-middle"><span
+										class="text-uppercase fw-bold"><%=item.getAlumno().getPersona().getApellido()%>
+									</span>, <%=item.getAlumno().getPersona().getNombre()%></td>
 
 
+									<%
+										}
+										}
+									%>
+								</tr>
+
+							</table>
 
 
+						<br>
+						<hr>
 
+						<h5 class="card-title">Agregar Alumnos</h5>
+						<hr>
+						<!-- INICIO DE LA TABLA CON LOS ALUMNOS QUE NO ESTAN EL EL CURSO -->
+							<table id="myTable" class="table table-striped"
+								style="width: 100%">
+								<thead>
+									<tr>
+										<th scope="col">Apellido y Nombre</th>
+
+										<th scope="col">Selecionar Alumno</th>
+									</tr>
+								</thead>
+								<%
+									ArrayList<Alumno> AlumnosNoEstanEnElCurso = null;
+									if (request.getAttribute("AlumnosNoEstanEnElCurso") != null) {
+										AlumnosNoEstanEnElCurso = (ArrayList<Alumno>) request.getAttribute("AlumnosNoEstanEnElCurso");
+									}
+								%>
+								<%
+									if (AlumnosNoEstanEnElCurso != null) {
+										for (Alumno item : AlumnosNoEstanEnElCurso) {
+								%>
+
+								<tr>
+									<td class="text-primary align-middle"><span
+										class="text-uppercase fw-bold"><%=item.getPersona().getApellido() %>
+									</span>, <%=item.getPersona().getNombre() %></td>
+
+									<td>
+
+									<input type="checkbox" name="alumnoSeleccionado" value="<%=item.getLegajo()%>"> Agregar Alumno
+									</td>
+															
+									<%
+										}
+										}
+									%>
+								</tr>
+									<tfoot>
+										<tr>
+											<th></th>
+
+											<th>
+												<input type="submit" name="btnAgregarAlumnosAlCurso" 
+												class="btn btn-primary" style="float: right" value="Agregar Alumnos">	
+											</th>
+										</tr>
+									</tfoot>
+							</table>
 						</form>
+
+
+
+
 						<!-- FIN DE LA TABLA -->
 					</div>
 				</div>
