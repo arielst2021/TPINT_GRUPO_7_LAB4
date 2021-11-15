@@ -149,6 +149,29 @@ N A V B A R
                       
                     </div>
                     
+                     <div class="row mb-3">
+                  <label class="col-sm-2 col-form-label">Estado</label>
+                  <div class="col-sm-10">
+                    <select class="form-select" aria-label="Default select example"  name=estado>
+                      <option selected>--Seleccione un estado--</option>
+                      <option value="1">Activo</option>
+                      <option value="2">Inactivo</option>
+                    </select>
+                  </div>
+                </div>  
+                
+                
+                   <div class="row mb-3">
+                  <label class="col-sm-2 col-form-label">Perfil</label>
+                  <div class="col-sm-10">
+                    <select class="form-select" aria-label="Default select example"  name=perfil>
+                      <option selected>--Seleccione un perfil--</option>
+                      <option value="1">Administrador</option>
+                      <option value="2">Docente</option>
+                    </select>
+                  </div>
+                </div>
+                    
                     
 
                    
