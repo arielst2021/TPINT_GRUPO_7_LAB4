@@ -138,7 +138,7 @@ N A V B A R
 									<th scope="col">Leg.</th>
 									<th scope="col">DNI</th>
 									<th scope="col">Apellido y Nombre</th>
-									<th scope="col">Seleccionar</th>
+									<th scope="col">Acción</th>
 								</tr>
 							</thead>
 
@@ -158,7 +158,7 @@ N A V B A R
 								<td><%=item.getLegajo()%></td>
 								<td><%=item.getPersona().getDni()%></td>
 								<td><%=item.getPersona().getApellido()%>, <%=item.getPersona().getNombre()%></td>
-								<td><input type="radio" name="profesorSeleccionado" value="<%=item.getLegajo()%>">
+								<td><input type="radio" name="profesorSeleccionado" value="<%=item.getLegajo()%>"> Agregar Profesor
 								</td>
 
 							</tr>
