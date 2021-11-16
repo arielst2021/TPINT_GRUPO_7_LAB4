@@ -7,6 +7,7 @@ import entidades.Curso;
 
 public interface CursoDao {	
 	public ArrayList<Curso> ObtenerCursosPorLegajoProfesor(int NroLegajo);
+	//
 	public ArrayList<Curso> ObtenerAlumnosPorCurso(Curso Curso);
 	//
 	public boolean AgregarNotasCurso(ArrayList<Curso> Curso);
@@ -17,5 +18,8 @@ public interface CursoDao {
 	//
 	public ArrayList<Curso> ObtenerTodosLosCursos();
 	//	
-	public ArrayList<Alumno> ObtenerAlumnosNoEstanEnElCurso(Curso Curso);	
+	public ArrayList<Alumno> ObtenerAlumnosNoEstanEnElCurso(Curso Curso);
+	//
+	public boolean AgregarAlumnosAlCurso(ArrayList<Curso> Curso);
+	
 }

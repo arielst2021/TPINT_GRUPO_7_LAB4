@@ -7,9 +7,12 @@ public class Alumno {
 
 	public Alumno() {
 	}
+	
+	public Alumno(int Legajo) {
+		this.Legajo = Legajo;
+	}
 
 	public Alumno(int Legajo, Persona Persona, Estado Estado) {
-		super();
 		this.Legajo = Legajo;
 		this.Persona = Persona;
 		this.Estado = Estado;

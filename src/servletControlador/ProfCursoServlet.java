@@ -139,8 +139,8 @@ public class ProfCursoServlet extends HttpServlet {
 			Semestre Semestre = new Semestre();
 			Semestre.setId(SemestreId);
 			//
-			Profesor Profesor2 = new Profesor();
-			Profesor2.setLegajo(LegajoDocente);
+			Profesor Profesor = new Profesor();
+			Profesor.setLegajo(LegajoDocente);
 					
 			for(int i = 0; i < LegajoAlumno.length; i++) {			
 				try {
@@ -154,7 +154,7 @@ public class ProfCursoServlet extends HttpServlet {
 						Alumno.setLegajo(Integer.parseInt(LegajoAlumno[i]));
 						Estado Estado = new Estado();
 						Estado.setIdEstado(EstadoNuevo);
-						Curso.add(new Curso(Materia,Semestre,Anio, Profesor2, Alumno, notaDecimal1, notaDecimal2, notaDecimal3, notaDecimal4, Estado));
+						Curso.add(new Curso(Materia,Semestre,Anio, Profesor, Alumno, notaDecimal1, notaDecimal2, notaDecimal3, notaDecimal4, Estado));
 					}					
 				} catch (Exception e) {
 					// SI EL VALOR INGRESADO EN EL TEXT NO ES VALIDO NO SE AGREGA LA NOTA EN LA BASE DE DATOS
@@ -165,7 +165,7 @@ public class ProfCursoServlet extends HttpServlet {
 				NegocioCurso.AgregarNotasCurso(Curso);
 			}
 			
-			Curso CursoLista = new Curso(Materia, Semestre, Anio, Profesor2);
+			Curso CursoLista = new Curso(Materia, Semestre, Anio, Profesor);
 
 			ArrayList<Curso> lista = NegocioCurso.ObtenerAlumnosPorCurso(CursoLista);				
 			request.setAttribute("listaAlumnosPorCursos", lista);

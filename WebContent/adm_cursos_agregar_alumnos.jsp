@@ -61,7 +61,7 @@ B O D Y
 		<div class="col-12">
 			<div class="card">
 				<div class="card-body">
-
+					<form action="AdmCursoServlet" method="post">
 					<!-- M A I N  -->
 					<main id="main" class="main">
 					<section class="section">
@@ -89,6 +89,10 @@ B O D Y
 												<div class="py-2">
 													<div>
 														<p>
+															<input type="hidden" id="txtMateriaId" name="txtMateriaId" value="<%=Curso.getMateria().getId()%>">
+															<input type="hidden" id="txtSemestreId" name="txtSemestreId" value="<%=Curso.getSemestre().getId()%>">
+															<input type="hidden" id="txtAnio" name="txtAnio" value="<%=Curso.getAnio()%>">
+															<input type="hidden" id="txtLegajoDocente" name="txtLegajoDocente" value="<%=Curso.getProfesor().getLegajo()%>">
 															<strong>Materia: </strong><%=Curso.getMateria().getNombre().toString()%></p>
 														<p>
 															<strong>Período: </strong><%=Curso.getSemestre().getNombre()%></p>
@@ -175,7 +179,7 @@ B O D Y
 										<h5 class="card-title text-success">Agregar Alumnos</h5>
 										<hr>
 										<!-- INICIO DE LA TABLA CON LOS ALUMNOS QUE NO ESTAN EL EL CURSO -->
-										<form action="ProfCursoServlet" method="post">
+
 											<table id="myTable" class="table table-striped"
 												style="width: 100%">
 												<thead>
@@ -202,7 +206,7 @@ B O D Y
 														class="text-uppercase fw-bold"><%=item.getPersona().getApellido()%>
 													</span>, <%=item.getPersona().getNombre()%></td>
 
-													<td><input type="checkbox" name="alumnoSeleccionado"
+													<td><input type="checkbox" id="txtAlumnoLegajo" name="txtAlumnoLegajo"
 														value="<%=item.getLegajo()%>"> Agregar Alumno</td>
 
 													<%
@@ -220,7 +224,7 @@ B O D Y
 													</tr>
 												</tfoot>
 											</table>
-										</form>
+										
 
 
 
@@ -233,6 +237,7 @@ B O D Y
 						</div>
 					</section>
 					</main>
+					</form>
 
 				</div>
 			</div>

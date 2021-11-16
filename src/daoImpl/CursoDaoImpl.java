@@ -25,11 +25,16 @@ public class CursoDaoImpl implements CursoDao {
 	private static final String AgregarNuevoCurso = "INSERT INTO cursos (cur_materia_id, cur_semestre_id, cur_anio, cur_profesor_legajo) VALUES (?, ?, ?, ?);";
 	//
 	private static final String ObtenerUnCurso = "SELECT cur_materia_id, mat_nombre, cur_semestre_id, sem_nombre, cur_anio, pro_legajo, pro_nombre, pro_apellido FROM cursos INNER JOIN materias ON materias.mat_id=cursos.cur_materia_id INNER JOIN semestres ON semestres.sem_id=cursos.cur_semestre_id INNER JOIN profesores ON profesores.pro_legajo=cursos.cur_profesor_legajo  WHERE cur_materia_id=? AND cur_semestre_id=? AND cur_anio=? AND cur_profesor_legajo=?";
-	private static final String ObtenerTodosLosCursos ="SELECT cur_materia_id, mat_nombre, cur_semestre_id, sem_nombre, cur_anio, pro_legajo, pro_nombre, pro_apellido FROM cursos INNER JOIN materias ON materias.mat_id=cursos.cur_materia_id INNER JOIN semestres ON semestres.sem_id=cursos.cur_semestre_id INNER JOIN profesores ON profesores.pro_legajo=cursos.cur_profesor_legajo";
+	private static final String ObtenerTodosLosCursos = "SELECT cur_materia_id, mat_nombre, cur_semestre_id, sem_nombre, cur_anio, pro_legajo, pro_nombre, pro_apellido FROM cursos INNER JOIN materias ON materias.mat_id=cursos.cur_materia_id INNER JOIN semestres ON semestres.sem_id=cursos.cur_semestre_id INNER JOIN profesores ON profesores.pro_legajo=cursos.cur_profesor_legajo";
 
-	// OBTIENE TODOS LOS ALUMNOS QUE NO ESTAN EN EL CURSO ESPECIFICADO Y QUE NO SE ENCUENTRAN INACTIVOS	
-	private static final String ObtenerAlumnosNoEstanEnElCurso = "SELECT alu_nombre, alu_apellido, alu_legajo, alu_estado_id FROM alumnos WHERE alu_legajo NOT IN (SELECT axc_alumno_legajo FROM alumnos_cursos WHERE axc_materia_id = ? AND axc_semestre_id = ? AND axc_anio = ? AND axc_profesor_legajo = ? AND alu_estado_id = ?)";
+	//
+	private static final String AgregarAlumnosAlCurso = "INSERT INTO alumnos_cursos (axc_materia_id, axc_semestre_id, axc_anio, axc_profesor_legajo, axc_alumno_legajo) VALUES (?, ?, ?, ?, ?);";
 	
+	
+	// OBTIENE TODOS LOS ALUMNOS QUE NO ESTAN EN EL CURSO ESPECIFICADO Y QUE NO SE
+	// ENCUENTRAN INACTIVOS
+	private static final String ObtenerAlumnosNoEstanEnElCurso = "SELECT alu_nombre, alu_apellido, alu_legajo, alu_estado_id FROM alumnos WHERE alu_legajo NOT IN (SELECT axc_alumno_legajo FROM alumnos_cursos WHERE axc_materia_id = ? AND axc_semestre_id = ? AND axc_anio = ? AND axc_profesor_legajo = ? AND alu_estado_id = ?)";
+
 	Connection miConnection = null;
 	PreparedStatement miPreparedStatement = null;
 	ResultSet miResultSet = null;
@@ -58,7 +63,7 @@ public class CursoDaoImpl implements CursoDao {
 				String nombreMateria = miResultSet.getString("mat_nombre");
 				int idSemestre = miResultSet.getInt("cur_semestre_id");
 				String nombreSemestre = miResultSet.getString("sem_nombre");
-				
+
 				//
 				Year anio = Year.of(Integer.parseInt(miResultSet.getString("cur_anio").substring(0, 4)));
 
@@ -97,7 +102,7 @@ public class CursoDaoImpl implements CursoDao {
 			String anio = String.valueOf(Curso.getAnio());
 			miPreparedStatement.setString(3, anio);
 			miPreparedStatement.setInt(4, Curso.getProfesor().getLegajo());
-			
+
 			// 4. EJECUTAR CONSULTA SQL
 			miResultSet = miPreparedStatement.executeQuery();
 
@@ -116,7 +121,7 @@ public class CursoDaoImpl implements CursoDao {
 				//
 				Persona Persona = new Persona();
 				Persona.setNombre(AlumnoNombre);
-				Persona.setApellido(AlumnoApellido);			
+				Persona.setApellido(AlumnoApellido);
 				//
 				Alumno Alumno = new Alumno();
 				Alumno.setLegajo(AlumnoLegajo);
@@ -138,22 +143,22 @@ public class CursoDaoImpl implements CursoDao {
 		}
 		return AlumnosPorCurso;
 	}
-		
+
 	@Override
 	public boolean AgregarNotasCurso(ArrayList<Curso> Curso) {
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		boolean isInsertExitoso = false;
-		try {			
+		try {
 			statement = conexion.prepareStatement(AgregarNotasCurso);
 			Iterator<Curso> iterador = Curso.iterator();
-			while(iterador.hasNext()) {
-				Curso miCurso = (Curso)iterador.next();
+			while (iterador.hasNext()) {
+				Curso miCurso = (Curso) iterador.next();
 				statement.setFloat(1, miCurso.getNotaPrimerParcial());
 				statement.setFloat(2, miCurso.getNotaPrimerRecuperatorio());
 				statement.setFloat(3, miCurso.getNotaSegundoParcial());
 				statement.setFloat(4, miCurso.getNotaSegundoRecuperatorio());
-				statement.setInt(5, miCurso.getEstado().getId());		
+				statement.setInt(5, miCurso.getEstado().getId());
 				statement.setInt(6, miCurso.getMateria().getId());
 				statement.setInt(7, miCurso.getSemestre().getId());
 				//
@@ -164,8 +169,8 @@ public class CursoDaoImpl implements CursoDao {
 				if (statement.executeUpdate() > 0) {
 					conexion.commit();
 					isInsertExitoso = true;
-				}								
-			}			
+				}
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			try {
@@ -179,10 +184,10 @@ public class CursoDaoImpl implements CursoDao {
 
 	@Override
 	public boolean AgregarNuevoCurso(Curso Curso) {
-		
+
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
-		
+
 		boolean isInsertExitoso = false;
 		try {
 			statement = conexion.prepareStatement(AgregarNuevoCurso);
@@ -194,7 +199,7 @@ public class CursoDaoImpl implements CursoDao {
 				conexion.commit();
 				isInsertExitoso = true;
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 			try {
@@ -209,49 +214,50 @@ public class CursoDaoImpl implements CursoDao {
 	@Override
 	public Curso ObtenerUnCurso(Curso Curso) {
 
-			Curso miCurso = null;
+		Curso miCurso = null;
 
-			try {
-				// 1. OBTENER UNA CONEXIÓN A LA BASE DE DATOS
-				miConnection = Conexion.getConexion().getSQLConexion();
+		try {
+			// 1. OBTENER UNA CONEXIÓN A LA BASE DE DATOS
+			miConnection = Conexion.getConexion().getSQLConexion();
 
-				// 2. PREPARAR DECLARACIÓN
-				miPreparedStatement = miConnection.prepareStatement(ObtenerUnCurso);
+			// 2. PREPARAR DECLARACIÓN
+			miPreparedStatement = miConnection.prepareStatement(ObtenerUnCurso);
 
-				// 3. ESTABLECER LOS PARÁMETROS
-				miPreparedStatement.setInt(1, Curso.getMateria().getId());
-				miPreparedStatement.setInt(2, Curso.getSemestre().getId());
-				String anio = String.valueOf(Curso.getAnio());
-				miPreparedStatement.setString(3, anio);
-				miPreparedStatement.setInt(4, Curso.getProfesor().getLegajo());
-				
-				// 4. EJECUTAR CONSULTA SQL
-				miResultSet = miPreparedStatement.executeQuery();				
-				
-				// 5. AGREGAR EL CONJUNTO DE RESULTADOS EN UN ARRAY
-				while (miResultSet.next()) {
-					
-					// CARGA DATOS
-															
-					int MateriaId = miResultSet.getInt("cur_materia_id");
-					String MateriaNombre = miResultSet.getString("mat_nombre");
-					
-					int SemestreId = miResultSet.getInt("cur_semestre_id");
-					String SemestreNombre = miResultSet.getString("sem_nombre");
-					//
-					Year anioCurso = Year.of(Integer.parseInt(miResultSet.getString("cur_anio").substring(0, 4)));					
-					//				
-					int ProfesorLegajo = miResultSet.getInt("pro_legajo");
-					String ProfesorNombre = miResultSet.getString("pro_nombre");
-					String ProfesorApellido = miResultSet.getString("pro_apellido");
+			// 3. ESTABLECER LOS PARÁMETROS
+			miPreparedStatement.setInt(1, Curso.getMateria().getId());
+			miPreparedStatement.setInt(2, Curso.getSemestre().getId());
+			String anio = String.valueOf(Curso.getAnio());
+			miPreparedStatement.setString(3, anio);
+			miPreparedStatement.setInt(4, Curso.getProfesor().getLegajo());
 
-					miCurso = new Curso(new Materia(MateriaId, MateriaNombre), new Semestre(SemestreId, SemestreNombre), anioCurso, new Profesor(ProfesorLegajo, new Persona(ProfesorNombre, ProfesorApellido)));
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
+			// 4. EJECUTAR CONSULTA SQL
+			miResultSet = miPreparedStatement.executeQuery();
+
+			// 5. AGREGAR EL CONJUNTO DE RESULTADOS EN UN ARRAY
+			while (miResultSet.next()) {
+
+				// CARGA DATOS
+
+				int MateriaId = miResultSet.getInt("cur_materia_id");
+				String MateriaNombre = miResultSet.getString("mat_nombre");
+
+				int SemestreId = miResultSet.getInt("cur_semestre_id");
+				String SemestreNombre = miResultSet.getString("sem_nombre");
+				//
+				Year anioCurso = Year.of(Integer.parseInt(miResultSet.getString("cur_anio").substring(0, 4)));
+				//
+				int ProfesorLegajo = miResultSet.getInt("pro_legajo");
+				String ProfesorNombre = miResultSet.getString("pro_nombre");
+				String ProfesorApellido = miResultSet.getString("pro_apellido");
+
+				miCurso = new Curso(new Materia(MateriaId, MateriaNombre), new Semestre(SemestreId, SemestreNombre),
+						anioCurso, new Profesor(ProfesorLegajo, new Persona(ProfesorNombre, ProfesorApellido)));
 			}
-			return miCurso;
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
+		return miCurso;
+	}
 
 	@Override
 	public ArrayList<Curso> ObtenerTodosLosCursos() {
@@ -272,16 +278,17 @@ public class CursoDaoImpl implements CursoDao {
 				int MateriaId = miResultSet.getInt("cur_materia_id");
 				String MateriaNombre = miResultSet.getString("mat_nombre");
 				int SemestreId = miResultSet.getInt("cur_semestre_id");
-				String SemestreNombre = miResultSet.getString("sem_nombre");		
+				String SemestreNombre = miResultSet.getString("sem_nombre");
 				//
 				Year anio = Year.of(Integer.parseInt(miResultSet.getString("cur_anio").substring(0, 4)));
-				//				
+				//
 				int ProfesorLegajo = miResultSet.getInt("pro_legajo");
 				String ProfesorNombre = miResultSet.getString("pro_nombre");
 				String ProfesorApellido = miResultSet.getString("pro_apellido");
 
 				// SET
-				Curso.add(new Curso(new Materia(MateriaId, MateriaNombre), new Semestre(SemestreId, SemestreNombre), anio, new Profesor(ProfesorLegajo, new Persona(ProfesorNombre, ProfesorApellido))));
+				Curso.add(new Curso(new Materia(MateriaId, MateriaNombre), new Semestre(SemestreId, SemestreNombre),
+						anio, new Profesor(ProfesorLegajo, new Persona(ProfesorNombre, ProfesorApellido))));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -313,19 +320,20 @@ public class CursoDaoImpl implements CursoDao {
 			miPreparedStatement.setString(3, anio);
 			miPreparedStatement.setInt(4, Curso.getProfesor().getLegajo());
 			miPreparedStatement.setInt(5, Integer.parseInt("1"));
-			
+
 			// 4. EJECUTAR CONSULTA SQL
 			miResultSet = miPreparedStatement.executeQuery();
 
 			// 5. AGREGAR EL CONJUNTO DE RESULTADOS EN UN ARRAY
 			while (miResultSet.next()) {
 				String AlumnoNombre = miResultSet.getString("alu_nombre");
-				
+
 				String AlumnoApellido = miResultSet.getString("alu_apellido");
 				int AlumnoLegajo = miResultSet.getInt("alu_legajo");
 				int AlumnoEstado = miResultSet.getInt("alu_estado_id");
 				//
-				Alumnos.add(new Alumno(AlumnoLegajo, new Persona(AlumnoNombre, AlumnoApellido), new Estado(AlumnoEstado)));
+				Alumnos.add(
+						new Alumno(AlumnoLegajo, new Persona(AlumnoNombre, AlumnoApellido), new Estado(AlumnoEstado)));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -337,5 +345,43 @@ public class CursoDaoImpl implements CursoDao {
 			}
 		}
 		return Alumnos;
+	}
+
+	@Override
+	public boolean AgregarAlumnosAlCurso(ArrayList<Curso> Curso) {
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean isInsertExitoso = false;
+		try {
+			statement = conexion.prepareStatement(AgregarAlumnosAlCurso);
+			Iterator<Curso> iterador = Curso.iterator();
+			while (iterador.hasNext()) {
+				Curso miCurso = (Curso) iterador.next();
+				statement.setInt(1, miCurso.getMateria().getId());
+				statement.setInt(2, miCurso.getSemestre().getId());
+				statement.setString(3, miCurso.getAnio().toString()); // FORMATO YEAR
+				statement.setInt(4, miCurso.getProfesor().getLegajo());				
+				statement.setInt(5, miCurso.getAlumno().getLegajo());	
+				
+				System.out.println("IMLEMENTACION");
+				if (statement.executeUpdate() > 0) {
+					conexion.commit();
+					isInsertExitoso = true;
+					
+					System.out.println(isInsertExitoso);
+				}
+				else {
+					System.out.println("ERROR");
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			try {
+				conexion.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
+		return isInsertExitoso;
 	}
 }

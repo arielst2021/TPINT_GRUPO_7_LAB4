@@ -12,14 +12,17 @@ import javax.servlet.http.HttpServletResponse;
 
 import entidades.Alumno;
 import entidades.Curso;
+import entidades.Estado;
 import entidades.Materia;
 import entidades.Profesor;
 import entidades.Semestre;
 import negocio.NegocioCurso;
+import negocio.NegocioEstado;
 import negocio.NegocioMateria;
 import negocio.NegocioProfesor;
 import negocio.NegocioSemestre;
 import negocioImpl.NegocioCursoImpl;
+import negocioImpl.NegocioEstadoImpl;
 import negocioImpl.NegocioMateriaImpl;
 import negocioImpl.NegocioProfesorImpl;
 import negocioImpl.NegocioSemestreImpl;
@@ -175,6 +178,59 @@ public class AdmCursoServlet extends HttpServlet {
 				RequestDispatcher rd = request.getRequestDispatcher("/adm_cursos_listar.jsp");
 				rd.forward(request, response);
 			}
+		}
+		
+		// AGREGA ALUMNOS AL CURSO
+		if (request.getParameter("btnAgregarAlumnosAlCurso") != null) {
+
+			ArrayList<Curso> ListaCurso = new ArrayList<Curso>();
+			NegocioCurso NegocioCurso = new NegocioCursoImpl();
+			
+			int MateriaId = Integer.parseInt(request.getParameter("txtMateriaId"));			
+			int SemestreId = Integer.parseInt(request.getParameter("txtSemestreId"));
+			Year Anio = Year.of(Integer.parseInt(request.getParameter("txtAnio")));
+			int LegajoDocente = Integer.parseInt(request.getParameter("txtLegajoDocente"));
+			
+			System.out.println(MateriaId);
+			System.out.println(SemestreId);
+			System.out.println(Anio);
+			System.out.println(LegajoDocente);
+			System.out.println("ALUMNO: "+ request.getParameter("txtAlumnoLegajo"));
+			
+			// OBTENGO EL LEGAJO DEL ALUMNO
+			String []LegajoAlumno = request.getParameterValues("txtAlumnoLegajo");		
+			//
+			for(int i = 0; i < LegajoAlumno.length; i++) {	
+//				ListaCurso = new ArrayList<Curso>();
+				int alumno = Integer.parseInt(LegajoAlumno[i]);
+				System.out.println("ALUMNO: --->"+ alumno);
+				ListaCurso.add(new Curso(new Materia(MateriaId), new Semestre(SemestreId), Anio, new Profesor(LegajoDocente), new Alumno(alumno)));
+				
+
+				System.out.println("ACALLEGO");
+				System.out.println(ListaCurso.size());
+			}					
+				
+			if(ListaCurso!=null) {			
+				// AGREGO ALUMNOS
+				NegocioCurso.AgregarAlumnosAlCurso(ListaCurso);
+			}
+			
+			// OBTENGO DATOS DEL CURSO
+			Curso CursoDatos = NegocioCurso.ObtenerUnCurso(new Curso(new Materia(MateriaId), new Semestre(SemestreId), Anio, new Profesor(LegajoDocente)));
+			request.setAttribute("NuevoCurso", CursoDatos);
+
+			// OBTENGO LOS ALUMNOS QUE ESTAN EN EL CURSO
+			ArrayList<Curso> CursoAlumnosLista = NegocioCurso.ObtenerAlumnosPorCurso(CursoDatos);
+			request.setAttribute("CursoAlumnosLista", CursoAlumnosLista);
+
+			// OBTENGO LOS ALUMNOS QUE NO ESTAN EN EL CURSO NI ESTAN DADOS DE BAJA
+			ArrayList<Alumno> AlumnosNoEstanEnElCurso = NegocioCurso.ObtenerAlumnosNoEstanEnElCurso(CursoDatos);
+			request.setAttribute("AlumnosNoEstanEnElCurso", AlumnosNoEstanEnElCurso);
+
+			// VOY A ADM_CURSOS_AGREGAR_ALUMNOS
+			RequestDispatcher rd = request.getRequestDispatcher("/adm_cursos_agregar_alumnos.jsp");
+			rd.forward(request, response);
 		}
 	}
 }
