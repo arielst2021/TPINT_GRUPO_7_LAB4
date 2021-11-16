@@ -1,4 +1,4 @@
-<%-- <%@page import="entidades.Profesor2"%> --%>
+<%@page import="entidades.Profesor"%>
 <%@page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -7,6 +7,22 @@
 
 <!-- EN CASO DE QUE EXISTA UNA SESION INICIADA REDIRECCIONO A ADMINISTRADOR.JSP O -->
 <!-- PROFESOR.JSP, NO TIENE CASO MOSTRAR ESTE FORMULARIO CUANDO HAY UNA SESION INICIADA -->
+
+<%
+	if (session.getAttribute("perfil") != null) {
+	Profesor Profesor = new Profesor();
+	Profesor = (Profesor) session.getAttribute("perfil");
+
+	if (Profesor.getPerfil().getId() == 1) {
+		//REDIRIGIR A PAGINA ADMINISTRADOR -->
+		response.sendRedirect("adm_inicio.jsp");
+	}
+	if (Profesor.getPerfil().getId() == 2) {
+		//REDIRIGIR A PAGINA DOCENTE -->
+		response.sendRedirect("prof_inicio.jsp");
+	}
+}
+%>
 
 <!DOCTYPE html>
 <html lang="es">
