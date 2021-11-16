@@ -57,157 +57,195 @@ B O D Y
 		}
 	%>
 
-	<!-- M A I N  -->
-	<main id="main" class="main">
-	<section class="section">
-		<div class="row">
-			<div class="col-lg-12">
-				<div class="card">
-					<div class="card-body">
-						<%!Curso Curso = new Curso();%>
-						<%
-							// 							listaCursos
+	<div class="row">
+		<div class="col-12">
+			<div class="card">
+				<div class="card-body">
 
-							Curso Curso = null;
-							if (request.getAttribute("NuevoCurso") != null) {
+					<!-- M A I N  -->
+					<main id="main" class="main">
+					<section class="section">
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="card">
+									<div class="card-body">
+										<%!Curso Curso = new Curso();%>
+										<%
+											// 							listaCursos
 
-								Curso = (Curso) request.getAttribute("NuevoCurso");
-							}
-						%>
-						<%
-							if (Curso != null) {
-						%>
-						<h5 class="card-title">Alumnos actualmente en el curso</h5>
-						<hr>						
-						<div class="row bg-light">
-							<div class="col-md-6 text-left">
-								<div class="bg-light py-2">
-									<div>
-										<p>
-											<strong>Materia: </strong><%=Curso.getMateria().getNombre().toString()%></p>
-										<p>
-											<strong>Período: </strong><%=Curso.getSemestre().getNombre()%></p>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-6 text-left">
-								<div class="bg-light py-2">
-									<div>
-										<p>
-											<strong>Año: </strong><%=Curso.getAnio()%></p>
-										<p>
-											<strong>Profesor/a: </strong><%=Curso.getProfesor().getPersona().getNombre()%>
-											<%=Curso.getProfesor().getPersona().getApellido()%></p>
-									</div>
-								</div>
-							</div>
-						</div>
-						<%
-							}
-						%>
-						
-						<!-- INICIO DE LA TABLA CON LOS ALUMNOS QUE ACTUALENTE ESTAN EN EL CURSO-->
-						<form action="ProfCursoServlet" method="post">
+											Curso Curso = null;
+											if (request.getAttribute("NuevoCurso") != null) {
 
-							<table id="myTable2" class="table table-striped"
-								style="width: 100%">
-								<thead>
-									<tr>
-										<th scope="col">Apellido y Nombre</th>
+												Curso = (Curso) request.getAttribute("NuevoCurso");
+											}
+										%>
+										<%
+											if (Curso != null) {
+										%>
+										<h5 class="card-title text-success"> Curso</h5>
+										<hr>
+										<div class="row">
+											<div class="col-md-6 text-left">
+												<div class="py-2">
+													<div>
+														<p>
+															<strong>Materia: </strong><%=Curso.getMateria().getNombre().toString()%></p>
+														<p>
+															<strong>Período: </strong><%=Curso.getSemestre().getNombre()%></p>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-6 text-left">
+												<div class="py-2">
+													<div>
+														<p>
+															<strong>Año: </strong><%=Curso.getAnio()%></p>
+														<p>
+															<strong>Profesor/a: </strong><%=Curso.getProfesor().getPersona().getNombre()%>
+															<%=Curso.getProfesor().getPersona().getApellido()%></p>
+													</div>
+												</div>
+											</div>
+										</div>
+										<%
+											}
+										%>
 
-									</tr>
-								</thead>
-								<%
+										<!-- INICIO DE LA TABLA CON LOS ALUMNOS QUE ACTUALENTE ESTAN EN EL CURSO-->
+
+
+										<%
 									ArrayList<Curso> CursoAlumnosLista = null;
 									if (request.getAttribute("CursoAlumnosLista") != null) {
 										CursoAlumnosLista = (ArrayList<Curso>) request.getAttribute("CursoAlumnosLista");
+										
+										if(CursoAlumnosLista.size() == 0){%>
+										<br>
+										<h5 class="text-primary align-middle text-center">Curso
+											sin alumnos asignados</h5>
+										<hr>
+										<%	
 									}
-								%>
-								<%
+										else{
+											
+											%>
+
+										<table id="myTable2" class="table table-striped"
+											style="width: 100%">
+											<thead>
+												<tr>
+													<th scope="col">Apellido y Nombre</th>
+
+												</tr>
+											</thead>
+
+											<%
 									if (CursoAlumnosLista != null) {
 										for (Curso item : CursoAlumnosLista) {
 								%>
 
-								<tr>
-									<td class="text-primary align-middle"><span
-										class="text-uppercase fw-bold"><%=item.getAlumno().getPersona().getApellido()%>
-									</span>, <%=item.getAlumno().getPersona().getNombre()%></td>
+											<tr>
+												<td class="text-primary align-middle"><span
+													class="text-uppercase fw-bold"><%=item.getAlumno().getPersona().getApellido()%>
+												</span>, <%=item.getAlumno().getPersona().getNombre()%></td>
 
 
-									<%
+												<%}
 										}
 										}
 									%>
-								</tr>
+											</tr>
 
-							</table>
+										</table>
 
 
-						<br>
-						<hr>
 
-						<h5 class="card-title">Agregar Alumnos</h5>
-						<hr>
-						<!-- INICIO DE LA TABLA CON LOS ALUMNOS QUE NO ESTAN EL EL CURSO -->
-							<table id="myTable" class="table table-striped"
-								style="width: 100%">
-								<thead>
-									<tr>
-										<th scope="col">Apellido y Nombre</th>
 
-										<th scope="col">Selecionar Alumno</th>
-									</tr>
-								</thead>
-								<%
-									ArrayList<Alumno> AlumnosNoEstanEnElCurso = null;
-									if (request.getAttribute("AlumnosNoEstanEnElCurso") != null) {
-										AlumnosNoEstanEnElCurso = (ArrayList<Alumno>) request.getAttribute("AlumnosNoEstanEnElCurso");
-									}
-								%>
-								<%
-									if (AlumnosNoEstanEnElCurso != null) {
-										for (Alumno item : AlumnosNoEstanEnElCurso) {
+
+
+
+
+
+										<%
+										}
 								%>
 
-								<tr>
-									<td class="text-primary align-middle"><span
-										class="text-uppercase fw-bold"><%=item.getPersona().getApellido() %>
-									</span>, <%=item.getPersona().getNombre() %></td>
 
-									<td>
+										<br>
+										<h5 class="card-title text-success">Agregar Alumnos</h5>
+										<hr>
+										<!-- INICIO DE LA TABLA CON LOS ALUMNOS QUE NO ESTAN EL EL CURSO -->
+										<form action="ProfCursoServlet" method="post">
+											<table id="myTable" class="table table-striped"
+												style="width: 100%">
+												<thead>
+													<tr>
+														<th scope="col">Apellido y Nombre</th>
 
-									<input type="checkbox" name="alumnoSeleccionado" value="<%=item.getLegajo()%>"> Agregar Alumno
-									</td>
-															
-									<%
-										}
-										}
-									%>
-								</tr>
-									<tfoot>
-										<tr>
-											<th></th>
+														<th scope="col">Selecionar Alumno</th>
+													</tr>
+												</thead>
+												<%
+													ArrayList<Alumno> AlumnosNoEstanEnElCurso = null;
+													if (request.getAttribute("AlumnosNoEstanEnElCurso") != null) {
+														AlumnosNoEstanEnElCurso = (ArrayList<Alumno>) request.getAttribute("AlumnosNoEstanEnElCurso");
+														
+													}
+												%>
+												<%
+													if (AlumnosNoEstanEnElCurso != null) {
+														for (Alumno item : AlumnosNoEstanEnElCurso) {
+												%>
 
-											<th>
-												<input type="submit" name="btnAgregarAlumnosAlCurso" 
-												class="btn btn-primary" style="float: right" value="Agregar Alumnos">	
-											</th>
-										</tr>
-									</tfoot>
-							</table>
-						</form>
+												<tr>
+													<td class="text-primary align-middle"><span
+														class="text-uppercase fw-bold"><%=item.getPersona().getApellido()%>
+													</span>, <%=item.getPersona().getNombre()%></td>
+
+													<td><input type="checkbox" name="alumnoSeleccionado"
+														value="<%=item.getLegajo()%>"> Agregar Alumno</td>
+
+													<%
+														}
+														}
+													%>
+												</tr>
+												<tfoot>
+													<tr>
+														<th></th>
+
+														<th><input type="submit"
+															name="btnAgregarAlumnosAlCurso" class="btn btn-primary"
+															style="float: right" value="Agregar Alumnos"></th>
+													</tr>
+												</tfoot>
+											</table>
+										</form>
 
 
 
 
-						<!-- FIN DE LA TABLA -->
-					</div>
+
+										<!-- FIN DE LA TABLA -->
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+					</main>
+
 				</div>
 			</div>
 		</div>
-	</section>
-	</main>
+	</div>
+
 	<!-- F O O T E R  -->
+	<jsp:include page="footer.jsp"></jsp:include>
+
+
+
+
+
 
 	<script type="text/javascript"
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

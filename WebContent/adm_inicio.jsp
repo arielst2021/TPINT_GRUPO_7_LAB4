@@ -13,7 +13,7 @@
 		Profesor = (Profesor) session.getAttribute("perfil");
 		if (Profesor.getPerfil().getId() == 2) {
 			//REDIRIGIR A PAGINA PROFESOR
-			response.sendRedirect("prof_inicio.jsp");
+			response.sendRedirect("index.jsp");
 		}
 	} else {
 		response.sendRedirect("index.jsp");

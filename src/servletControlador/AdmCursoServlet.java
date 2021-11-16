@@ -123,7 +123,6 @@ public class AdmCursoServlet extends HttpServlet {
 				} else {
 
 					// EN CASO DE DATOS DUPLICADOS O ERROR AL AGREGAR
-
 					RequestDispatcher rd = request.getRequestDispatcher("/adm_cursos_agregar.jsp");
 					rd.forward(request, response);
 				}
