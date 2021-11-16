@@ -190,25 +190,13 @@ public class AdmCursoServlet extends HttpServlet {
 			int SemestreId = Integer.parseInt(request.getParameter("txtSemestreId"));
 			Year Anio = Year.of(Integer.parseInt(request.getParameter("txtAnio")));
 			int LegajoDocente = Integer.parseInt(request.getParameter("txtLegajoDocente"));
-			
-			System.out.println(MateriaId);
-			System.out.println(SemestreId);
-			System.out.println(Anio);
-			System.out.println(LegajoDocente);
-			System.out.println("ALUMNO: "+ request.getParameter("txtAlumnoLegajo"));
-			
+		
 			// OBTENGO EL LEGAJO DEL ALUMNO
 			String []LegajoAlumno = request.getParameterValues("txtAlumnoLegajo");		
 			//
 			for(int i = 0; i < LegajoAlumno.length; i++) {	
-//				ListaCurso = new ArrayList<Curso>();
 				int alumno = Integer.parseInt(LegajoAlumno[i]);
-				System.out.println("ALUMNO: --->"+ alumno);
 				ListaCurso.add(new Curso(new Materia(MateriaId), new Semestre(SemestreId), Anio, new Profesor(LegajoDocente), new Alumno(alumno)));
-				
-
-				System.out.println("ACALLEGO");
-				System.out.println(ListaCurso.size());
 			}					
 				
 			if(ListaCurso!=null) {			

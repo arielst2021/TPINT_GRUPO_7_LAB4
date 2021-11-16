@@ -363,15 +363,11 @@ public class CursoDaoImpl implements CursoDao {
 				statement.setInt(4, miCurso.getProfesor().getLegajo());				
 				statement.setInt(5, miCurso.getAlumno().getLegajo());	
 				
-				System.out.println("IMLEMENTACION");
 				if (statement.executeUpdate() > 0) {
 					conexion.commit();
 					isInsertExitoso = true;
-					
-					System.out.println(isInsertExitoso);
 				}
 				else {
-					System.out.println("ERROR");
 				}
 			}
 		} catch (SQLException e) {

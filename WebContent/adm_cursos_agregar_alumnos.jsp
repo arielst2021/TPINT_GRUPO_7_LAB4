@@ -82,7 +82,7 @@ B O D Y
 										<%
 											if (Curso != null) {
 										%>
-										<h5 class="card-title text-success"> Curso</h5>
+										<h5 class="card-title text-success">Listado de alumnos en el curso</h5>
 										<hr>
 										<div class="row">
 											<div class="col-md-6 text-left">
