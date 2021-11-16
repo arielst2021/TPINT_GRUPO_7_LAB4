@@ -184,7 +184,7 @@ N A V B A R
 
                  
                     <div class="col-12">
-                      <button class="btn btn-primary w-100" type="submit"  name ="btnregistrar">Crear cuenta</button>
+                      <button class="btn btn-primary w-100" type="submit"  name ="btnregistrar">Crear profesor</button>
                       
                     </div>
                     <div class="col-12">
