@@ -50,145 +50,147 @@ N A V B A R
 
 	<main id="main" class="main">
 	<section class="section">
-	<form action="AdmCursoServlet" method="post">
-		<div class="row">
-			<div class="col-lg-12">
+		<form action="AdmCursoServlet" method="post">
+			<div class="row">
+				<div class="col-lg-12">
 
-				<div class="card">
-					<div class="card-body">
-						<p></p>
-						<h5 class="card-title">Agregar Nuevo Curso</h5>
-						<hr>
+					<div class="card">
+						<div class="card-body">
+							<p></p>
+							<h5 class="card-title">Agregar Nuevo Curso</h5>
+							<hr>
 
-						<div class="row mb-3">
-							<label class="col-sm-2 col-form-label">Materia</label>
-							<div class="col-sm-10">
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label">Materia</label>
+								<div class="col-sm-10">
+
+									<%
+										List<Materia> listaMaterias = null;
+										if (request.getAttribute("listaMaterias") != null) {
+											listaMaterias = (List<Materia>) request.getAttribute("listaMaterias");
+										}
+									%>
+									<select class="form-select" aria-label="Default select example"
+										name="txtMateriaId">
+										<%
+											if (listaMaterias != null)
+												for (Materia itemMateria : listaMaterias) {
+										%>
+										<option value="<%=itemMateria.getId()%>"><%=itemMateria.getNombre()%></option>
+										<%
+											}
+										%>
+									</select>
+								</div>
+							</div>
+
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label">Semestre</label>
+								<div class="col-sm-10">
+
+
+									<%
+										List<Semestre> listaSemestres = null;
+										if (request.getAttribute("listaSemestres") != null) {
+											listaSemestres = (List<Semestre>) request.getAttribute("listaSemestres");
+										}
+									%>
+
+
+									<select class="form-select" aria-label="Default select example"
+										name="txtSemestreId">
+										<%
+											if (listaSemestres != null)
+												for (Semestre itemSemestre : listaSemestres) {
+										%>
+										<option value="<%=itemSemestre.getId()%>"><%=itemSemestre.getNombre()%></option>
+										<%
+											}
+										%>
+									</select>
+								</div>
+							</div>
+
+							<div class="row mb-3">
+								<label for="inputText" class="col-sm-2 col-form-label">Año</label>
+								<div class="col-sm-10">
+
+
+									<select class="form-select" aria-label="Default select example"
+										name="txtAnio">
+										<%
+											for (int i = 2010; i <= 2050; i++) {
+										%>
+										<option><%=i%></option>
+										<%
+											}
+										%>
+									</select>
+								</div>
+							</div>
+							<br>
+
+							<h6 class="card-title">Seleccione un profesor</h6>
+							<hr>
+							<table id="myTable" class="table table-striped"
+								style="width: 100%">
+								<thead>
+									<tr>
+										<th scope="col">Leg.</th>
+										<th scope="col">DNI</th>
+										<th scope="col">Apellido y Nombre</th>
+										<th scope="col">Acción</th>
+									</tr>
+								</thead>
 
 								<%
-				List<Materia> listaMaterias = null;
-				if(request.getAttribute("listaMaterias")!=null)
-				{
-					listaMaterias = (List<Materia>) request.getAttribute("listaMaterias");
-				}
-				%>
-								<select class="form-select" aria-label="Default select example" name="materiaSeleccionada">
-									<%
-				if(listaMaterias!=null)
-					for(Materia item : listaMaterias) {
-				%>
-									<option value="<%=item.getId()%>"><%=item.getNombre()%></option>
-									<%
-				}
-				%>
-								</select>
-							</div>
-						</div>
-
-						<div class="row mb-3">
-							<label class="col-sm-2 col-form-label">Semestre</label>
-							<div class="col-sm-10">
-
+									ArrayList<Profesor> listaProfesores = null;
+									if (request.getAttribute("listaProfesores") != null) {
+										listaProfesores = (ArrayList<Profesor>) request.getAttribute("listaProfesores");
+									}
+								%>
 
 								<%
-				List<Semestre> listaSemestres = null;
-				if(request.getAttribute("listaSemestres")!=null)
-				{
-					listaSemestres = (List<Semestre>) request.getAttribute("listaSemestres");
-				}
-				%>
-
-
-								<select class="form-select" aria-label="Default select example" name="semestreSeleccionado">
-									<%
-				if(listaSemestres!=null)
-					for(Semestre item : listaSemestres) {
-				%>
-									<option value="<%=item.getId()%>"><%=item.getNombre()%></option>
-				<%
-				}
-				%>
-								</select>
-							</div>
-						</div>
-
-						<div class="row mb-3">
-							<label for="inputText" class="col-sm-2 col-form-label">Año</label>
-							<div class="col-sm-10">
-
-
-								<select class="form-select" aria-label="Default select example" name="anioSeleccionado">
-									<%
-					for(int i =2010; i<=2050;i++) {
-				%>
-									<option><%=i%></option>
-									<%
-				}
-				%>
-								</select>
-							</div>
-						</div>
-						<br>
-
-						<h6 class="card-title">Seleccione un profesor</h6>
-						<hr>
-						<table id="myTable" class="table table-striped"
-							style="width: 100%">
-							<thead>
+									if (listaProfesores != null) {
+										for (Profesor itemProfesor : listaProfesores) {
+								%>
 								<tr>
-									<th scope="col">Leg.</th>
-									<th scope="col">DNI</th>
-									<th scope="col">Apellido y Nombre</th>
-									<th scope="col">Acción</th>
+
+									<td><%=itemProfesor.getLegajo()%></td>
+									<td><%=itemProfesor.getPersona().getDni()%></td>
+									<td><%=itemProfesor.getPersona().getApellido()%>, <%=itemProfesor.getPersona().getNombre()%></td>
+									<td><input type="radio" name="txtProfesorLegajo"
+										value="<%=itemProfesor.getLegajo()%>"> Agregar Profesor</td>
+
 								</tr>
-							</thead>
-
-							<%
-								ArrayList<Profesor> listaProfesores = null;
-								if (request.getAttribute("listaProfesores") != null) {
-									listaProfesores = (ArrayList<Profesor>) request.getAttribute("listaProfesores");
-								}
-							%>
-
-							<%
-								if (listaProfesores != null) {
-									for (Profesor item : listaProfesores) {
-							%>
-							<tr>
-
-								<td><%=item.getLegajo()%></td>
-								<td><%=item.getPersona().getDni()%></td>
-								<td><%=item.getPersona().getApellido()%>, <%=item.getPersona().getNombre()%></td>
-								<td><input type="radio" name="profesorSeleccionado" value="<%=item.getLegajo()%>"> Agregar Profesor
-								</td>
-
-							</tr>
-							<%
+								<%
 									}
 									}
 								%>
 
 
-						</table>
-						<!-- FIN DE LA TABLA -->
-						<br>
-						<hr>
-						<!-- BOTON DE AGREGAR-->
-						<div class="row mb-3">
-							<label class="col-sm-2 col-form-label"></label>
-							<div class="col-sm-10">
+							</table>
+							<!-- FIN DE LA TABLA -->
+							<br>
+							<hr>
+							<!-- BOTON DE AGREGAR-->
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label"></label>
+								<div class="col-sm-10">
 
 									<input type="submit" class="btn btn-primary"
-										style="float: right" name="agregarNuevoCurso" value="Agregar nuevo curso">
+										style="float: right" name="agregarNuevoCurso"
+										value="Agregar nuevo curso">
 
 
+								</div>
 							</div>
 						</div>
-					</div>
 
+					</div>
 				</div>
 			</div>
-		</div>
-	</form>
+		</form>
 	</section>
 	</main>
 	<script type="text/javascript"
@@ -203,14 +205,18 @@ N A V B A R
 		src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
 
 	<script>
-	//IDIOMAS ESPAÑOL DEL DATATABLE   
-	$(document).ready(function() {
-		$('#myTable').DataTable({ 
-		"language": {
-			"url": "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
-			}
-		});
-	});
-</script>
+		//IDIOMAS ESPAÑOL DEL DATATABLE   
+		$(document)
+				.ready(
+						function() {
+							$('#myTable')
+									.DataTable(
+											{
+												"language" : {
+													"url" : "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
+												}
+											});
+						});
+	</script>
 </body>
 </html>

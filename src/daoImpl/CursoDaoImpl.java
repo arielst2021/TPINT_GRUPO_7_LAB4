@@ -321,7 +321,6 @@ public class CursoDaoImpl implements CursoDao {
 			while (miResultSet.next()) {
 				String AlumnoNombre = miResultSet.getString("alu_nombre");
 				
-				System.out.println("lelgue auiaaaaaaaaaaaaa");
 				String AlumnoApellido = miResultSet.getString("alu_apellido");
 				int AlumnoLegajo = miResultSet.getInt("alu_legajo");
 				int AlumnoEstado = miResultSet.getInt("alu_estado_id");
