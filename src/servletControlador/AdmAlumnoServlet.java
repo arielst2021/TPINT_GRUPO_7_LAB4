@@ -21,9 +21,11 @@ import entidades.Estado;
 import entidades.Persona;
 import entidades.Provincia;
 import negocio.NegocioAlumno;
+import negocio.NegocioCurso;
 import negocio.NegocioEstado;
 import negocio.NegocioProvincia;
 import negocioImpl.NegocioAlumnoImpl;
+import negocioImpl.NegocioCursoImpl;
 import negocioImpl.NegocioProvinciaImpl;
 
 
@@ -102,6 +104,19 @@ public class AdmAlumnoServlet extends HttpServlet {
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		if (request.getParameter("Param").equals("ListarAlumnos")) {
+
+			NegocioAlumno NegocioAlumno = new NegocioAlumnoImpl();
+			
+			// OBTENER ALUMNOS		
+			ArrayList<Alumno> ListaAlumnos = NegocioAlumno.obtenerAlumnosTodos();
+
+			request.setAttribute("ListaAlumnos", ListaAlumnos);
+
+			RequestDispatcher rd = request.getRequestDispatcher("/adm_alumnos_listar.jsp");
+			rd.forward(request, response);
+
+		}
 	
 		
 	}

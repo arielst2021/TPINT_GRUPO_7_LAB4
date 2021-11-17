@@ -3,8 +3,20 @@
 <%@page import="java.util.*"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="entidades.Alumno"%>
-<%@page import="negocio.NegocioAlumno"%>
+<%@page import="entidades.Profesor"%>
+<%@page import="entidades.Profesor"%>
 <%@page import="negocioImpl.NegocioAlumnoImpl"%>
+
+<%!Profesor Profesor = new Profesor();%>
+
+<%
+	if (session.getAttribute("perfil") != null) {
+		Profesor = (Profesor) session.getAttribute("perfil");
+	} else {
+		response.sendRedirect("index.jsp");
+	}
+%>
+
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -19,11 +31,24 @@
 </head>
 
 <body>
-<%
-	NegocioAlumno Na = new NegocioAlumnoImpl();
-%>
- 
- 
+<body style="background-color: #F6F9FF">
+
+	<!-- N A V B A R  -->
+	<%
+		if (session.getAttribute("perfil") != null) {
+	%>
+	<jsp:include page="logout.jsp"></jsp:include>
+	<jsp:include page="navBar.jsp"></jsp:include>
+	<%
+		} else {
+	%>
+	<jsp:include page="login.jsp"></jsp:include>
+	<%
+		}
+	%>
+
+
+
  	<!--
 ----------------------------------------------------
 N A V B A R
@@ -50,10 +75,13 @@ N A V B A R
             <div class="card-body">
               <h5 class="card-title">Lista de Alumnos</h5>
               <!-- Tabla -->
-              <%
-              ArrayList<Alumno> alumnoTodos = Na.obtenerAlumnosTodos();
-              %>
-              <table class="table datatable">
+							<%
+								ArrayList<Alumno> ListaAlumnos = null;
+								if (request.getAttribute("ListaAlumnos") != null) {
+									ListaAlumnos = (ArrayList<Alumno>) request.getAttribute("ListaAlumnos");
+								}
+							%>
+						<table id="myTable" class="table table-striped">
                 <thead>
                   <tr>
                     <th scope="col">Legajo</th>
@@ -67,9 +95,9 @@ N A V B A R
                 </thead>
                 <tbody>
                   <% 
-                  if(alumnoTodos != null)
+                  if(ListaAlumnos != null)
                   {
-                	  for (Alumno alum : alumnoTodos){
+                	  for (Alumno alum : ListaAlumnos){
                      	 %>
                     	 <tr>
 
@@ -170,11 +198,8 @@ N A V B A R
   </main>
 
   <!-- ======= Footer ======= -->
-  <footer id="footer" class="footer">
-    <div class="copyright">
-      Trabajo practico <strong><span>Laboratorio 4</span></strong>
-    </div>
-  </footer>
+	<jsp:include page="footer.jsp"></jsp:include>
+
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 

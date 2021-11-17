@@ -28,7 +28,7 @@
 				role="button" aria-expanded="false">Alumnos</a>
 				<ul class="dropdown-menu">
 					<li><a class="dropdown-item" href="#">Agregar alumnos</a></li>
-					<li><a class="dropdown-item" href="#">Listar alumnos</a></li>
+					<li><a class="dropdown-item" href="AdmAlumnoServlet?Param=ListarAlumnos">Listar alumnos</a></li>
 				</ul></li>
 			<li class="nav-item dropdown"><a
 				class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
