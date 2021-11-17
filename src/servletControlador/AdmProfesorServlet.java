@@ -53,14 +53,14 @@ public class AdmProfesorServlet extends HttpServlet {
 		
 		if(request.getParameter("Param")!=null)
 		{
-			if(request.getParameter("Param").equals("4")) {
+			if(request.getParameter("Param").equals("AgregarProfesores")) {
 				
 				// OBTENGO LISTA DE PROVINCIAS
 				NegocioProvincia negocioProvincia = new NegocioProvinciaImpl();
 				List<Provincia> ListaProvincia= negocioProvincia.listaProvincias();
 				request.setAttribute("ListaProvincia", ListaProvincia);
 				
-				RequestDispatcher rd = request.getRequestDispatcher("/registro.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("/adm_alumnos_agregar.jsp");
 				rd.forward(request, response);	        
 			}	
 		}		
@@ -119,7 +119,7 @@ public class AdmProfesorServlet extends HttpServlet {
 			profesor.setPersona(persona);
 			negocioprofesor.guardarprofesor(profesor);
 
-			RequestDispatcher miRequestDispatcher = request.getRequestDispatcher("/registro.jsp");
+			RequestDispatcher miRequestDispatcher = request.getRequestDispatcher("/adm_alumnos_agregar.jsp");
 			miRequestDispatcher.forward(request, response);
 		}
 	}

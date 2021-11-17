@@ -1,172 +1,216 @@
+<%@page import="entidades.Estado"%>
+<%@page import="entidades.Materia"%>
+<%@page import="entidades.Semestre"%>
+<%@page import="entidades.Profesor"%>
+<%@page import="entidades.Provincia"%>
+<%@page import="java.util.*"%>
+<%@page import="java.time.Year"%>
+<%@page session="true"%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+	pageEncoding="ISO-8859-1"%>
+
+<%!Profesor Profesor = new Profesor();%>
+
+<%
+	if (session.getAttribute("perfil") != null) {
+		Profesor = (Profesor) session.getAttribute("perfil");
+	} else {
+		response.sendRedirect("index.jsp");
+	}
+%>
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Agregar Profesor</title>
-<!--
-----------------------------------------------------
-	 C S S - BOOTSTRAP, CUSTOM STYLES 
----------------------------------------------------- -->
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Agregar Profesor</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+<link href="Recursos/css/estilos.css" type ="text/css" rel="StyleSheet"/>
+
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css" />
+
 </head>
 
-<body style="background-color: #F6F9FF">
+<body>
+<!--
+----------------------------------------------------
+N A V B A R
+---------------------------------------------------- -->
+	<%
+		if (session.getAttribute("perfil") != null) {
+	%>
+	<jsp:include page="logout.jsp"></jsp:include>
+	<jsp:include page="navBar.jsp"></jsp:include>
+	<%
+		} else {
+	%>
+	<jsp:include page="login.jsp"></jsp:include>
+	<%
+		}
+	%>
+  <main>
+    <div >
 
-  <!-- ======= Header ======= -->
-  
-  <!-- End Header -->
+      <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
 
-  <!-- ======= Sidebar ======= -->
+              <div class="rojo">
+                
+                 
+<%-- 	             <jsp:include page="navTabs.jsp"></jsp:include> --%>
+                  
+                </a>
+              </div><!-- End Logo -->
 
-  
-  <!-- End Sidebar-->
+              <div class="card mb-3">
 
-  <main id="main" class="main">
+                <div class="card-body">
 
-    <section class="section">
-      <div class="row">
-        <div class="col-lg-6">
-
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Agregar Alumno</h5>
-
-              <!-- General Form Elements -->
-              <form>
-                <div class="row mb-3">
-                  <label for="inputText" class="col-sm-2 col-form-label">DNI</label>
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control">
+                  <div class="pt-4 pb-2">
+                    <h5  >Crear  usuario profesor</h5>
+                   
+                    <p class="text-center small">Ingrese los datos personales para crear una usuario</p>
                   </div>
-                </div>
 
-                <div class="row mb-3">
-                  <label for="inputText" class="col-sm-2 col-form-label">Nombre</label>
+                  <form class="row g-3 needs-validation"   action="AdmProfesorServlet" method="post">
+                    <div class="col-12">
+                      <label for="yourName" class="form-label">Nombre</label>
+                      <input type="text" name="name" class="form-control" id="Nombre" required>
+                      
+                    </div>
+                     <div class="col-12">
+                      <label for="Apellido" class="form-label">Apellido</label>
+                      <input type="text" name="apellido" class="form-control" id="Apellido" required>
+                      
+                    </div>
+                     <div class="col-12">
+                      <label for="Dni" class="form-label">Dni</label>
+                      <input type="text" name="dni" class="form-control" id="dni" required>
+                      
+                    </div>
+                     <div class="col-12">
+                      <label for="nacimiento" class="form-label">Fecha de nacimiento</label>
+                      <input type="date" name="nacimiento" class="form-control" id="nacimiento" required>
+                     
+                      
+                    </div>
+
+                    <div class="col-12">
+                      <label for="Direccion" class="form-label">Direccion</label>
+                      <input type="text" name="direccion" class="form-control" id="direccion" required>
+                      
+                    </div>
+                    
+                     <div class="col-12">
+                      <label for="Provincia" class="form-label">Provincia</label>
+                      <select name=provincias>
+                      <%
+				List<Provincia> ListaProvincia = null;
+				if(request.getAttribute("ListaProvincia")!=null)
+				{
+					ListaProvincia = (List<Provincia>) request.getAttribute("ListaProvincia");
+				}
+				%>
+                           
+                           <%
+                           if(ListaProvincia!=null)
+                           for(Provincia  p : ListaProvincia){
+                        	   
+                           %>
+                           
+                            <option value="<%=p.getId() %>"><%=p.getNombre() %></option>
+                            
+                            <%
+                            
+                           }
+                            %>
+
+                      
+                      </select>
+                      
+                    </div>
+                    <div class="col-12">
+                      <label for="Mail" class="form-label">Mail</label>
+                      <input type="email" name="mail" class="form-control" id="mail" required>
+                      
+                    </div>
+                     <div class="col-12">
+                      <label for="Telefono" class="form-label">Telefono</label>
+                      <input type="text" name="telefono" class="form-control" id="telefono" required>
+                      
+                    </div>
+                    
+                     <div class="col-12">
+                  <label class="col-sm-2 col-form-label">Estado</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control">
-                  </div>
-                </div>
-
-                <div class="row mb-3">
-                  <label for="inputText" class="col-sm-2 col-form-label">Apellido</label>
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control">
-                  </div>
-                </div>
-
-                <div class="row mb-3">
-                  <label for="inputDate" class="col-sm-2 col-form-label">Fecha Nac.</label>
-                  <div class="col-sm-10">
-                    <input type="date" class="form-control">
-                  </div>
-                </div>
-
-                <div class="row mb-3">
-                  <label for="inputText" class="col-sm-2 col-form-label">Dirección</label>
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control">
-                  </div>
-                </div>
-
-
-
-                <div class="row mb-3">
-                  <label class="col-sm-2 col-form-label">Provincia</label>
-                  <div class="col-sm-10">
-                    <select class="form-select" aria-label="Default select example">
-                      <option selected>--Seleccione una provincia--</option>
-                      <option value="1">Buenos Aires</option>
-                      <option value="2">Entre Ríos</option>
-                      <option value="3">Salta</option>
+                    <select class="form-select" aria-label="Default select example"  name=estado>
+                      <option selected>--Seleccione un estado--</option>
+                      <option value="1">Activo</option>
+                      <option value="2">Inactivo</option>
                     </select>
                   </div>
-                </div>
-
-                <div class="row mb-3">
-                  <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
-                  <div class="col-sm-10">
-                    <input type="email" class="form-control">
-                  </div>
-                </div>
-
-                <div class="row mb-3">
-                  <label for="inputEmail" class="col-sm-2 col-form-label">Teléfono</label>
-                  <div class="col-sm-10">
-                    <input type="email" class="form-control">
-                  </div>
-                </div>
-
-
-                <div class="row mb-3">
+                </div>  
+                
+                
+                   <div class="col-12">
                   <label class="col-sm-2 col-form-label">Perfil</label>
                   <div class="col-sm-10">
-                    <select class="form-select" aria-label="Default select example">
+                    <select class="form-select" aria-label="Default select example"  name=perfil>
                       <option selected>--Seleccione un perfil--</option>
                       <option value="1">Administrador</option>
                       <option value="2">Docente</option>
                     </select>
                   </div>
                 </div>
+                    
+                    
 
-                <div class="row mb-3">
-                  <label for="inputEmail" class="col-sm-2 col-form-label">Nombre de usuario</label>
-                  <div class="col-sm-10">
-                    <input type="email" class="form-control">
-                  </div>
+                   
+
+                    <div class="col-12">
+                      <label for="yourPassword" class="form-label">Contraseña</label>
+                      <input type="password" name="password" class="form-control" id="yourPassword" required>
+                     
+                    </div>
+
+                 
+                    <div class="col-12">
+                      <button class="btn btn-primary w-100" type="submit"  name ="btnregistrar">Crear profesor</button>
+                      
+                    </div>
+                    <div class="col-12">
+                      
+                    </div>
+                     </form>
+                  
+
                 </div>
+              </div>
 
-                <div class="row mb-3">
-                  <label for="inputEmail" class="col-sm-2 col-form-label">Contraseña</label>
-                  <div class="col-sm-10">
-                    <input type="email" class="form-control">
-                  </div>
-                </div>
-                
-                <div class="row mb-3">
-                  <label class="col-sm-2 col-form-label">Estado</label>
-                  <div class="col-sm-10">
-                    <select class="form-select" aria-label="Default select example">
-                      <option selected>--Seleccione un estado--</option>
-                      <option value="1">Activo</option>
-                      <option value="2">Inactivo</option>
-                    </select>
-                  </div>
-                </div>                
-
-                <!-- BOTON DE AGREGAR-->
-                <div class="row mb-3">
-                  <label class="col-sm-2 col-form-label"></label>
-                  <div class="col-sm-10">
-                    <button type="submit" class="btn btn-primary" style="float: right">Agregar profesor</button>
-                  </div>
-                </div>
-
-              </form><!-- End General Form Elements -->
+          
 
             </div>
           </div>
-
         </div>
 
-        <div class="col-lg-6">
+      </section>
 
-
-        </div>
-      </div>
-    </section>
-
+    </div>
   </main><!-- End #main -->
+  
+	<!-- F O O T E R  -->
+	<jsp:include page="footer.jsp"></jsp:include>  
 
-  <!-- ======= Footer ======= -->
-  <footer id="footer" class="footer">
-
-  </footer><!-- End Footer -->
-
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 	<script type="text/javascript"
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script type="text/javascript"
@@ -178,5 +222,7 @@
 	<script type="text/javascript"
 		src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
 
+
 </body>
+
 </html>
