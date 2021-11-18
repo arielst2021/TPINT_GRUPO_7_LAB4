@@ -47,4 +47,10 @@ public class NegocioProfesorImpl implements NegocioProfesor{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public boolean BajaProfesor(String Legajo) {
+		
+		return dao.BajaProfesor(Legajo);
+	}
 }

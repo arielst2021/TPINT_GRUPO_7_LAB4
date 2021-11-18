@@ -6,10 +6,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.sql.Date;
 
 
 import dao.ProfesorDao;
+import entidades.Curso;
 import entidades.Estado;
 import entidades.Perfil;
 import entidades.Persona;
@@ -19,11 +21,12 @@ import entidades.Provincia;
 public class ProfesorDaoImpl implements ProfesorDao {
 	private static final String iniciarSesion = "SELECT pro_perfil_id, per_nombre, pro_estado_id, est_nombre, pro_nombre, pro_apellido, pro_legajo FROM profesores INNER JOIN perfiles ON perfiles.per_id=profesores.pro_perfil_id INNER JOIN estados ON estados.est_id=profesores.pro_estado_id WHERE pro_usuario = ? AND pro_contrasenia = ? AND pro_estado_id = 1";
 	private static final String obtenerTodosLosProfesores = "SELECT pro_legajo, pro_dni, pro_nombre, pro_apellido, pro_fechanac, pro_direccion, pro_provincia_id, prov_nombre, pro_email, pro_telefono, pro_estado_id, est_nombre, pro_perfil_id, per_nombre, pro_usuario, pro_contrasenia FROM profesores INNER JOIN provincias ON provincias.prov_id=profesores.pro_provincia_id INNER JOIN perfiles ON perfiles.per_id=profesores.pro_perfil_id INNER JOIN estados ON estados.est_id= profesores.pro_estado_id WHERE pro_estado_id=1 AND pro_perfil_id=2";
+	private static final String BajaProfesor = "UPDATE profesores SET pro_estado_id = ? WHERE pro_legajo = ?";
 	//
 	private Connection miConnection = null;
 	private PreparedStatement miPreparedStatement = null;
 	private ResultSet miResultSet = null;
-
+	
 	 @Override
 	 public int guardarprofesor(Profesor profesor) {
 	 String agregarprofesor = "INSERT INTO profesores(pro_dni, pro_nombre,pro_apellido,pro_fechanac,pro_direccion,pro_provincia_id,pro_email,pro_telefono,pro_estado_id,pro_perfil_id,pro_usuario,pro_contrasenia) values (?,?,?,?,?,?,?,?,?,?,?,?);";
@@ -34,11 +37,6 @@ public class ProfesorDaoImpl implements ProfesorDao {
 	 LocalDate locald = persona.getFechaNacimiento();
 	 Date date = Date.valueOf(locald); // Magic happens here!
 	 
-
-	 
-	
-	
-	
 	 Connection conexion = Conexion.getConexion().getSQLConexion();
 	 try {
 	 PreparedStatement statement = (PreparedStatement)
@@ -183,5 +181,33 @@ public class ProfesorDaoImpl implements ProfesorDao {
 			e.printStackTrace();
 		}
 		return Profesor;
+	}
+
+	@Override
+	public boolean BajaProfesor(String Legajo) {
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean isInsertExitoso = false;
+		try {
+			statement = conexion.prepareStatement(BajaProfesor);
+			statement.setInt(1, 2);
+			statement.setInt(2, Integer.parseInt(Legajo));
+			
+			if(statement.executeUpdate()>0)
+			{
+				isInsertExitoso = true;
+			}
+			
+			System.out.println(isInsertExitoso);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			try {
+				conexion.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
+		return isInsertExitoso;
 	}
 }

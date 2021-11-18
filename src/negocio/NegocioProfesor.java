@@ -11,4 +11,5 @@ public interface NegocioProfesor {
 	public Profesor iniciarSesion(String userUsuario, String passUsuario);
 	public ArrayList<Profesor> listaProfesores();
 	public List<Provincia> obtenerprovincias();
+	public boolean BajaProfesor(String Legajo);
 }

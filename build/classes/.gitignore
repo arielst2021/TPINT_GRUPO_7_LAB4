@@ -1,6 +1,5 @@
-/dao/
-/daoImpl/
-/negocioImpl/
 /servletControlador/
+/daoImpl/
+/dao/
 /negocio/
-/entidades/
+/negocioImpl/

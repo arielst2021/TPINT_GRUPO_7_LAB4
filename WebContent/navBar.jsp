@@ -35,7 +35,7 @@
 				role="button" aria-expanded="false">Profesores</a>
 				<ul class="dropdown-menu">
 					<li><a class="dropdown-item" href="AdmProfesorServlet?Param=AgregarProfesores">Agregar profesores</a></li>
-					<li><a class="dropdown-item" href="#">Listar profesores</a></li>
+					<li><a class="dropdown-item" href="AdmProfesorServlet?Param=ListarProfesores">Listar profesores</a></li>
 				</ul></li>
 			<li class="nav-item dropdown"><a
 				class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"

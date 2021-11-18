@@ -63,7 +63,20 @@ public class AdmProfesorServlet extends HttpServlet {
 				RequestDispatcher rd = request.getRequestDispatcher("/adm_alumnos_agregar.jsp");
 				rd.forward(request, response);	        
 			}	
-		}		
+			
+			if(request.getParameter("Param").equals("ListarProfesores")) {
+				
+				// OBTENGO LISTA DE PROVINCIAS
+				NegocioProfesor negocioProfesor = new NegocioProfesorImpl();
+				
+				List<Profesor> ListaProfesor = negocioProfesor.listaProfesores();
+				request.setAttribute("ListaProfesor", ListaProfesor);
+				
+				RequestDispatcher rd = request.getRequestDispatcher("/adm_profesores_listar.jsp");
+				rd.forward(request, response);	        
+			}	
+		}
+		
 	}
 
 	/**
@@ -120,6 +133,19 @@ public class AdmProfesorServlet extends HttpServlet {
 			negocioprofesor.guardarprofesor(profesor);
 
 			RequestDispatcher miRequestDispatcher = request.getRequestDispatcher("/adm_alumnos_agregar.jsp");
+			miRequestDispatcher.forward(request, response);
+		}
+		
+		if (request.getParameter("EstadoProfesor") != null) {
+
+			String string = request.getParameter("LegajoProfesor");
+			NegocioProfesor NegocioProfesor = new NegocioProfesorImpl();
+			NegocioProfesor.BajaProfesor(string);
+			
+			List<Profesor> ListaProfesor = NegocioProfesor.listaProfesores();
+			request.setAttribute("ListaProfesor", ListaProfesor);
+			
+			RequestDispatcher miRequestDispatcher = request.getRequestDispatcher("/adm_profesores_listar.jsp");
 			miRequestDispatcher.forward(request, response);
 		}
 	}
