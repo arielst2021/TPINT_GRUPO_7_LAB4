@@ -94,7 +94,7 @@ N A V B A R
                     </div>
                      <div class="col-12">
                       <label for="Dni" class="form-label">Dni</label>
-                      <input type="text" name="dni" class="form-control" id="dni" required>
+                      <input type="number" name="dni" class="form-control" id="dni" required>
                       
                     </div>
                      <div class="col-12">
@@ -145,7 +145,7 @@ N A V B A R
                     </div>
                      <div class="col-12">
                       <label for="Telefono" class="form-label">Telefono</label>
-                      <input type="text" name="telefono" class="form-control" id="telefono" required>
+                      <input type="number" name="telefono" class="form-control" id="telefono" required>
                       
                     </div>
                     
