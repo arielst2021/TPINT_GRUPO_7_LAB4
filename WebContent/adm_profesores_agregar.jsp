@@ -81,7 +81,7 @@ N A V B A R
                     <p class="text-center small">Ingrese los datos personales para crear una usuario</p>
                   </div>
 
-                  <form class="row g-3 needs-validation"   action="AdmProfesorServlet" method="post">
+                  <form class="row g-3 needs-validation"  name="fvalida"  action="AdmProfesorServlet" method="post" onsubmit=" return valida_envia()">
                     <div class="col-12">
                       <label for="yourName" class="form-label">Nombre</label>
                       <input type="text" name="name" class="form-control" id="Nombre" required>
@@ -153,7 +153,7 @@ N A V B A R
                   <label class="col-sm-2 col-form-label">Estado</label>
                   <div class="col-sm-10">
                     <select class="form-select" aria-label="Default select example"  name=estado>
-                      <option selected>--Seleccione un estado--</option>
+                      
                       <option value="1">Activo</option>
                       <option value="2">Inactivo</option>
                     </select>
@@ -165,7 +165,7 @@ N A V B A R
                   <label class="col-sm-2 col-form-label">Perfil</label>
                   <div class="col-sm-10">
                     <select class="form-select" aria-label="Default select example"  name=perfil>
-                      <option selected>--Seleccione un perfil--</option>
+                      
                       <option value="1">Administrador</option>
                       <option value="2">Docente</option>
                     </select>
@@ -177,7 +177,7 @@ N A V B A R
                    
 
                     <div class="col-12">
-                      <label for="yourPassword" class="form-label">Contraseña</label>
+                      <label for="yourPassword" class="form-label">Contraseña-origni</label>
                       <input type="password" name="password" class="form-control" id="yourPassword" required>
                      
                     </div>
@@ -206,10 +206,10 @@ N A V B A R
 
     </div>
   </main><!-- End #main -->
-
+  
 	<!-- F O O T E R  -->
-	<jsp:include page="footer.jsp"></jsp:include>
-	
+	<jsp:include page="footer.jsp"></jsp:include>  
+
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 	<script type="text/javascript"
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -221,7 +221,92 @@ N A V B A R
 		src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 	<script type="text/javascript"
 		src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
+<script> 
+function valida_envia(){
+	
+	
+	if(document.fvalida.password.value.length<6||document.fvalida.password.value.length>20){
+		
+		
+		alert("El campo 'Contraseña' debe tener entre 6 y 60 caracteres ")
+		document.fvalida.password.focus()
+		return false;
+	}
+	
+	if (document.fvalida.name.value.length>20 ||document.fvalida.name.value.length==0){
+  		alert("El campo nombre debe tener entre 1 y 20 caracteres")
+  		document.fvalida.name.focus()
+  		return false;
+	}
+	
+	if(document.fvalida.apellido.value.length>20||document.fvalida.apellido.value.length==0){
+		
+		alert("El campo apellido debe tener entre 1 y 20 caracteres")
+  		document.fvalida.apellido.focus()
+  		return false ;
+		
+		
+	}
+	
+	if(document.fvalida.dni.value.length==0||document.fvalida.dni.value.length>8){
+		
+		
+		
+		alert("El campo 'DNI' debe tener entre 1 y 8 caracteres numericos")
+		document.fvalida.dni.focus()
+		return false;
+		
+	}
+	
+	if(document.fvalida.direccion.value.length==0||document.fvalida.direccion.value.length>20){
+		
+		
+		alert("El campo 'DIRECCION' debe tener entre 1 y 20 caracteres ")
+		document.fvalida.dni.focus()
+		return false;
+	}
+	
+	
 
+    if(document.fvalida.mail.value.length==0||document.fvalida.mail.value.length>20){
+		
+		
+		alert("El campo 'MAIL' debe tener entre 1 y 20 caracteres ")
+		document.fvalida.mail.focus()
+		return false;
+          	} 
+	
+	
+     if(document.fvalida.telefono.value.length==0||document.fvalida.telefono.value.length>20){
+	
+	
+	alert("El campo 'TELEFONO' debe tener entre 1 y 20 caracteres numericos")
+	document.fvalida.telefono.focus()
+	return false;
+       }
+
+	
+
+
+
+
+
+       alert("Profesor cargado correctamente !")
+		return true;
+		
+		
+		
+		
+		
+		
+		
+	
+}
+
+
+
+
+</script>
 
 </body>
 
