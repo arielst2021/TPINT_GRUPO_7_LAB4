@@ -53,27 +53,22 @@
 ----------------------------------------------------
 N A V B A R
 ---------------------------------------------------- -->
-	
+	<div class="row">
+		<div class="col-12">
+			<div class="card">
+				<div class="card-body">
+
+					<!-- M A I N  -->
   <main id="main" class="main">
-
-    <div class="pagetitle">
-      <h1>Lista de Alumnos</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.jsp">Inicio</a></li>
-          <li class="breadcrumb-item">Administracion</li>
-          <li class="breadcrumb-item active">Alumnos</li>
-        </ol>
-      </nav>
-    </div>
-
     <section class="section">
       <div class="row">
         <div class="col-lg-12">
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Lista de Alumnos</h5>
+              <h5 class="card-title">Listado de alumnos</h5>
+              <hr>
+              <br>
               <!-- Tabla -->
 							<%
 								ArrayList<Alumno> ListaAlumnos = null;
@@ -101,21 +96,16 @@ N A V B A R
                      	 %>
                     	 <tr>
 
-                    	 <td><%=alum.getLegajo()%></td>
-                    	 <td><%=alum.getPersona().getNombre()%> <%=alum.getPersona().getApellido()%></td>
-                    	 <td><%=alum.getPersona().getDni()%></td>
-                    	 <td><%=alum.getPersona().getProvincia().getNombre()%></td>
-                    	 <td><%=alum.getEstado().getNombre()%></td>
-                    	 <td><%=alum.getPersona().getFechaNacimiento().getDayOfMonth()%>-<%=alum.getPersona().getFechaNacimiento().getMonthValue()%>-<%=alum.getPersona().getFechaNacimiento().getYear()%></td>
+                    	 <td class="align-middle"><%=alum.getLegajo()%></td>
+                    	 <td class="align-middle text-primary"><span class="text-uppercase fw-bold"><%=alum.getPersona().getApellido()%></span>, <%=alum.getPersona().getNombre()%></td>
+                    	 <td class="align-middle"><%=alum.getPersona().getDni()%></td>
+                    	 <td class="align-middle"><%=alum.getPersona().getProvincia().getNombre()%></td>
+                    	 <td class="align-middle"><%=alum.getEstado().getNombre()%></td>
+                    	 <td class="align-middle"><%=alum.getPersona().getFechaNacimiento().getDayOfMonth()%>-<%=alum.getPersona().getFechaNacimiento().getMonthValue()%>-<%=alum.getPersona().getFechaNacimiento().getYear()%></td>
                         <td>
                         	<form action="AdmAlumnoServlet" method="post">
 								<input type="hidden" id="txtLegajoAlumno" name="txtLegajoAlumno" value="<%=alum.getLegajo()%>" >
-																
-								<input type="submit" name="btnIrEditarAlumno" value="Datos" class="btn btn-warning">
-							</form>
-							<form action="AdmAlumnoServlet" method="post">
-								<input type="hidden" id="txtLegajoAlumno" name="txtLegajoAlumno" value="<%=alum.getLegajo()%>" >
-																
+								<input type="submit" name="btnIrEditarAlumno" value="Datos" class="btn btn-warning">															
 								<input type="submit" name="btnEditarEstado" value="Estado" class="btn btn-danger">
 							</form>
                         </td>
@@ -197,6 +187,11 @@ N A V B A R
     </div>
   </main>
 
+				</div>
+			</div>
+		</div>
+	</div>
+	
   <!-- ======= Footer ======= -->
 	<jsp:include page="footer.jsp"></jsp:include>
 
