@@ -39,6 +39,7 @@ public class AdmAlumnoServlet extends HttpServlet {
 
     public AdmAlumnoServlet() {
         this.negocioA = new NegocioAlumnoImpl();
+        this.negocioP = new NegocioProvinciaImpl();
 
     }
 
@@ -48,8 +49,7 @@ public class AdmAlumnoServlet extends HttpServlet {
     		Alumno alum = negocioA.obtenerAlumnoLegajo(Legajo);
     		
     		//OBTENGO LISTADO DE PROVINCIAS
-			NegocioProvincia NegocioProvincia = new NegocioProvinciaImpl();
-			ArrayList<Provincia> lista = NegocioProvincia.listaProvincias();
+			ArrayList<Provincia> lista = negocioP.listaProvincias();
 			request.setAttribute("listarProvincias", lista);    		
 
     		request.setAttribute("AlumnoEditar", alum);
@@ -61,8 +61,16 @@ public class AdmAlumnoServlet extends HttpServlet {
     	if (request.getParameter("btnEditarEstado") != null){
     		int Legajo = Integer.parseInt(request.getParameter("txtLegajoAlumno"));
     		int resp = negocioA.modificarAlumnoEstado(Legajo);
-    		RequestDispatcher dispatcher = request.getRequestDispatcher("/adm_alumnos_listar.jsp");
-    		dispatcher.forward(request, response);
+
+
+			// OBTENER ALUMNOS		
+			ArrayList<Alumno> ListaAlumnos = negocioA.obtenerAlumnosTodos();
+
+			request.setAttribute("ListaAlumnos", ListaAlumnos);
+
+			RequestDispatcher rd = request.getRequestDispatcher("/adm_alumnos_listar.jsp");
+			rd.forward(request, response);
+			
     	}
     	
     	if (request.getParameter("btnEditarAlumno") != null){
@@ -90,9 +98,15 @@ public class AdmAlumnoServlet extends HttpServlet {
 			Estado estAlumno = new Estado();
 			estAlumno.setIdEstado(Integer.parseInt(request.getParameter("txtEstado")));
 			alum.setEstado(estAlumno);
+			
 			int resp = negocioA.modificarAlumno(alum);
-    		RequestDispatcher dispatcher = request.getRequestDispatcher("/adm_alumnos_listar.jsp");
-    		dispatcher.forward(request, response);
+			
+			// OBTENER ALUMNOS		
+			ArrayList<Alumno> ListaAlumnos = negocioA.obtenerAlumnosTodos();
+			request.setAttribute("ListaAlumnos", ListaAlumnos);
+
+			RequestDispatcher rd = request.getRequestDispatcher("/adm_alumnos_listar.jsp");
+			rd.forward(request, response);
     	}
     	
     	if (request.getParameter("btnCancelarEditarAlumno") != null){
@@ -105,11 +119,9 @@ public class AdmAlumnoServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		if (request.getParameter("Param").equals("ListarAlumnos")) {
-
-			NegocioAlumno NegocioAlumno = new NegocioAlumnoImpl();
 			
 			// OBTENER ALUMNOS		
-			ArrayList<Alumno> ListaAlumnos = NegocioAlumno.obtenerAlumnosTodos();
+			ArrayList<Alumno> ListaAlumnos = negocioA.obtenerAlumnosTodos();
 
 			request.setAttribute("ListaAlumnos", ListaAlumnos);
 

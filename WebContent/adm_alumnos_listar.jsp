@@ -80,11 +80,11 @@ N A V B A R
                 <thead>
                   <tr>
                     <th scope="col">Legajo</th>
-                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido y nombre</th>
                     <th scope="col">Dni</th>
                     <th scope="col">Provincia</th>
                     <th scope="col">Estado</th>
-                    <th scope="col">Fecha Nacimiento</th>
+                    <th scope="col">Fecha Nac.</th>
                     <th scope="col">Modificar</th>
                   </tr>
                 </thead>
@@ -120,71 +120,76 @@ N A V B A R
       </div>
     </section>
   
-    <!-- Modal Editar Estado Alumnos -->
-    <div class="modal fade" id="estadoAlumnoModal" tabindex="-1">
-      <div class="modal-dialog modal-md">
-        <div class="modal-content">
-          <div class="modal-body">
-            <div class="card-body">
-              <div class="pt-4 pb-2">
-                <h5 class="card-title text-center pb-0 fs-4">Editar Estado</h5>
-                <p class="text-center small">Información del alumno</p>
-              </div>
-              <div class="container text-center">
-              <div class="row pb-2">
-                <div class="col-4">Legajo</div>
-                <div class="col-8">1</div>
-              </div>
+<!--     Modal Editar Estado Alumnos -->
+<!--     <div class="modal fade" id="estadoAlumnoModal" tabindex="-1"> -->
+<!--       <div class="modal-dialog modal-md"> -->
+<!--         <div class="modal-content"> -->
+<!--           <div class="modal-body"> -->
+<!--             <div class="card-body"> -->
+<!--               <div class="pt-4 pb-2"> -->
+<!--                 <h5 class="card-title text-center pb-0 fs-4">Editar Estado</h5> -->
+<!--                 <p class="text-center small">Información del alumno</p> -->
+<!--               </div> -->
+<!--               <div class="container text-center"> -->
+<!--               <div class="row pb-2"> -->
+<!--                 <div class="col-4">Legajo</div> -->
+<!--                 <div class="col-8">1</div> -->
+<!--               </div> -->
 
-              <div class="row pb-2">
-                <div class="col-4 label ">Nombre</div>
-                <div class="col-8">Javier Gomez</div>
-              </div>
+<!--               <div class="row pb-2"> -->
+<!--                 <div class="col-4 label ">Nombre</div> -->
+<!--                 <div class="col-8">Javier Gomez</div> -->
+<!--               </div> -->
 
-              <div class="row pb-2">
-                <div class="col-4 label">DNI</div>
-                <div class="col-8">36666666</div>
-              </div>
+<!--               <div class="row pb-2"> -->
+<!--                 <div class="col-4 label">DNI</div> -->
+<!--                 <div class="col-8">36666666</div> -->
+<!--               </div> -->
 
-              <div class="row pb-2">
-                <div class="col-4 label">Nacimiento</div>
-                <div class="col-8">	09/06/1996</div>
-              </div>
+<!--               <div class="row pb-2"> -->
+<!--                 <div class="col-4 label">Nacimiento</div> -->
+<!--                 <div class="col-8">	09/06/1996</div> -->
+<!--               </div> -->
 
-              <div class="row pb-2">
-                <div class="col-4 label">Provincia</div>
-                <div class="col-8">Buenos Aires</div>
-              </div>
+<!--               <div class="row pb-2"> -->
+<!--                 <div class="col-4 label">Provincia</div> -->
+<!--                 <div class="col-8">Buenos Aires</div> -->
+<!--               </div> -->
 
-              <div class="row pb-2">
-                <div class="col-4 label">Direccion</div>
-                <div class="col-8">Calle 100</div>
-              </div>
+<!--               <div class="row pb-2"> -->
+<!--                 <div class="col-4 label">Direccion</div> -->
+<!--                 <div class="col-8">Calle 100</div> -->
+<!--               </div> -->
 
-              <div class="row pb-2">
-                <div class="col-4 label">Email</div>
-                <div class="col-8">javiergomez@gmail.com</div>
-              </div>
+<!--               <div class="row pb-2"> -->
+<!--                 <div class="col-4 label">Email</div> -->
+<!--                 <div class="col-8">javiergomez@gmail.com</div> -->
+<!--               </div> -->
 
-              <div class="row pb-2">
-                <div class="col-4 label">Estado</div>
-                <div class="col-8">
-                  <select class="form-select" aria-label="Default select example">
-                    <option selected>Activo</option>
-                    <option value="1">Baja</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-          </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btn-danger">Modificar Estado</button>
-          </div>
-        </div>
-      </div>
-    </div>
+<!--               <div class="row pb-2"> -->
+<!--                 <div class="col-4 label">Estado</div> -->
+<!--                 <div class="col-8"> -->
+<!--                   <select class="form-select" aria-label="Default select example"> -->
+<!--                     <option selected>Activo</option> -->
+<!--                     <option value="1">Baja</option> -->
+<!--                   </select> -->
+<!--                 </div> -->
+<!--               </div> -->
+<!--             </div> -->
+<!--           </div> -->
+<!--           </div> -->
+<!--           <div class="modal-footer"> -->
+<!--             <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button> -->
+<!--             <button type="button" class="btn btn-danger">Modificar Estado</button> -->
+<!--           </div> -->
+<!--         </div> -->
+<!--       </div> -->
+<!--     </div> -->
+ 
+ 
+ 
+ 
+ 
   </main>
 
 				</div>

@@ -60,7 +60,7 @@ public class AdmProfesorServlet extends HttpServlet {
 				List<Provincia> ListaProvincia= negocioProvincia.listaProvincias();
 				request.setAttribute("ListaProvincia", ListaProvincia);
 				
-				RequestDispatcher rd = request.getRequestDispatcher("/adm_alumnos_agregar.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("/adm_profesores_agregar.jsp");
 				rd.forward(request, response);	        
 			}	
 			

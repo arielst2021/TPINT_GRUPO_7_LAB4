@@ -156,7 +156,8 @@ N A V B A R
 		</div>
 	</div>
 
-	<!-- ======= Footer ======= -->
+	<!-- F O O T E R  -->
+	<jsp:include page="footer.jsp"></jsp:include>
 
 	<script type="text/javascript"
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
