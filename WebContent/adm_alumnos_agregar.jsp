@@ -153,7 +153,7 @@ N A V B A R
                   <label class="col-sm-2 col-form-label">Estado</label>
                   <div class="col-sm-10">
                     <select class="form-select" aria-label="Default select example"  name=estado>
-                      <option value="0">--Seleccione un estado--</option>
+                      
                       <option value="1">Activo</option>
                       <option value="2">Inactivo</option>
                     </select>
@@ -165,7 +165,7 @@ N A V B A R
                   <label class="col-sm-2 col-form-label">Perfil</label>
                   <div class="col-sm-10">
                     <select class="form-select" aria-label="Default select example"  name=perfil>
-                      <option value="0">--Seleccione un perfil--</option>
+                      
                       <option value="1">Administrador</option>
                       <option value="2">Docente</option>
                     </select>
@@ -308,7 +308,7 @@ if(document.fvalida.password.value.length<6||document.fvalida.password.value.len
 	document.fvalida.password.focus()
 	return false;
 }
-		
+alert("Profesor cargado correctamente !")
 		return true;
 		
 		
