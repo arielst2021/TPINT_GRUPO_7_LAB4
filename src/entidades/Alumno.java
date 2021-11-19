@@ -11,6 +11,12 @@ public class Alumno {
 	public Alumno(int Legajo) {
 		this.Legajo = Legajo;
 	}
+	
+//	public Alumno(int Legajo, Estado Estado) {
+//		this.Legajo = Legajo;
+//		this.Estado = Estado;
+//	}
+
 
 	public Alumno(int Legajo, Persona Persona, Estado Estado) {
 		this.Legajo = Legajo;

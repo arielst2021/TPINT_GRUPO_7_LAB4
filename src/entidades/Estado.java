@@ -12,6 +12,10 @@ public class Estado {
 
 	}
 	
+	public Estado(String Nombre) {
+		this.Nombre = Nombre;
+	}
+	
 	public Estado(int Id, String Nombre) {
 		this.Id = Id;
 		this.Nombre = Nombre;

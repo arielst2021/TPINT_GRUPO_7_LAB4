@@ -1,19 +1,13 @@
 <%@page import="entidades.Alumno"%>
 <%@page import="entidades.Curso"%>
-<%@page import="entidades.Estado"%>
-<%@page import="entidades.Materia"%>
-<%@page import="entidades.Semestre"%>
 <%@page import="entidades.Profesor"%>
 <%@page import="java.util.*"%>
 <%@page import="java.time.Year"%>
 <%@page session="true"%>
-
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 
 <%!Profesor Profesor = new Profesor();%>
-<%!Curso curso = null;%>
-
 <%
 	if (session.getAttribute("perfil") != null) {
 		Profesor = (Profesor) session.getAttribute("perfil");
@@ -35,6 +29,9 @@ H E A D
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css" />
+<!-- 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css"/> -->
+<!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.11.3/datatables.min.css"/> -->
+ 
 </head>
 
 <!--
@@ -69,11 +66,8 @@ B O D Y
 							<div class="col-lg-12">
 								<div class="card">
 									<div class="card-body">
-										<%!Curso Curso = new Curso();%>
+										<%!Curso Curso = null;%>
 										<%
-											// 							listaCursos
-
-											Curso Curso = null;
 											if (request.getAttribute("NuevoCurso") != null) {
 
 												Curso = (Curso) request.getAttribute("NuevoCurso");
@@ -125,8 +119,8 @@ B O D Y
 										
 										if(CursoAlumnosLista.size() == 0){%>
 										<br>
-										<h5 class="text-primary align-middle text-center">Curso
-											sin alumnos asignados</h5>
+										<h5 class="text-primary align-middle text-center">Curso sin alumnos asignados</h5>
+											<br>
 										<hr>
 										<%	
 									}
@@ -134,11 +128,14 @@ B O D Y
 											
 											%>
 
-										<table id="myTable2" class="table table-striped"
+										<table id="myTable2" class="table table-striped table-hover border-primary"
 											style="width: 100%">
-											<thead>
+											 <thead class="table-success">
 												<tr>
 													<th scope="col">Apellido y Nombre</th>
+													<th scope="col" class=" text-center">Nro. Legajo</th>
+													<th scope="col" class=" text-center">DNI</th>
+													<th scope="col" class=" text-center">Estado</th>
 
 												</tr>
 											</thead>
@@ -152,9 +149,23 @@ B O D Y
 												<td class="text-primary align-middle"><span
 													class="text-uppercase fw-bold"><%=item.getAlumno().getPersona().getApellido()%>
 												</span>, <%=item.getAlumno().getPersona().getNombre()%></td>
+												<td class="align-middle text-center"><%=item.getAlumno().getLegajo()%></td>	
+												<td class="align-middle text-center"><%=item.getAlumno().getPersona().getDni()%></td>
+												<%
+												if(item.getAlumno().getEstado().getNombre().equals("Activo")){
+																																			
+												%>
+												<td class="align-middle text-center"> <span class="badge bg-success text-wrap"><%=item.getAlumno().getEstado().getNombre()%></span></td>												
 
 
-												<%}
+												<%
+												}
+												else{%>
+												<td class="align-middle text-center"> <span class="badge bg-danger text-wrap"><%=item.getAlumno().getEstado().getNombre()%></span></td>
+													<%
+												}
+										
+										}
 										}
 										}
 									%>
@@ -179,23 +190,35 @@ B O D Y
 										<h5 class="card-title text-success">Agregar Alumnos</h5>
 										<hr>
 										<!-- INICIO DE LA TABLA CON LOS ALUMNOS QUE NO ESTAN EL EL CURSO -->
-
-											<table id="myTable" class="table table-striped"
-												style="width: 100%">
-												<thead>
-													<tr>
-														<th scope="col">Apellido y Nombre</th>
-
-														<th scope="col">Selecionar Alumno</th>
-													</tr>
-												</thead>
 												<%
 													ArrayList<Alumno> AlumnosNoEstanEnElCurso = null;
 													if (request.getAttribute("AlumnosNoEstanEnElCurso") != null) {
 														AlumnosNoEstanEnElCurso = (ArrayList<Alumno>) request.getAttribute("AlumnosNoEstanEnElCurso");
 														
+														if(AlumnosNoEstanEnElCurso.size() == 0){%>
+														<br>
+														<h5 class="text-primary align-middle text-center">No existen
+												alumnos que puedan ser asignados a este curso</h5>
+												<br>
+														<hr>
+														<%	
 													}
-												%>
+														else{
+															
+															%>
+											<table id="myTable" class="table table-striped table-hover border-primary"
+												style="width: 100%">
+												<thead class="table-primary">
+													<tr>
+													<th scope="col">Apellido y Nombre</th>
+													<th scope="col" class=" text-center">Nro. Legajo</th>
+													<th scope="col" class=" text-center">DNI</th>
+													<th scope="col" class=" text-center">Estado</th>
+
+														<th scope="col" class=" text-center">Seleccionar</th>
+													</tr>
+												</thead>
+
 												<%
 													if (AlumnosNoEstanEnElCurso != null) {
 														for (Alumno item : AlumnosNoEstanEnElCurso) {
@@ -203,29 +226,47 @@ B O D Y
 
 												<tr>
 													<td class="text-primary align-middle"><span
-														class="text-uppercase fw-bold"><%=item.getPersona().getApellido()%>
-													</span>, <%=item.getPersona().getNombre()%></td>
-
-													<td><input type="checkbox" id="txtAlumnoLegajo" name="txtAlumnoLegajo"
-														value="<%=item.getLegajo()%>"> Agregar Alumno</td>
+														class="text-uppercase fw-bold"><%=item.getPersona().getApellido()%></span>, <%=item.getPersona().getNombre()%>
+													</td>
+													
+													<td class="align-middle text-center"><%=item.getLegajo()%></td>	
+												    <td class="align-middle text-center"><%=item.getPersona().getDni()%></td>
+													<%
+													if(item.getEstado().getNombre().equals("Activo")){
+																																				
+													%>
+													<td class="align-middle text-center"> <span class="badge bg-success text-wrap"><%=item.getEstado().getNombre()%></span></td>												
+													<%
+													}
+													else{
+													%>
+													<td class="align-middle text-center"> <span class="badge bg-danger text-wrap"><%=item.getEstado().getNombre()%></span></td>
+													<%
+													}
+													%>											
+													<td class=" text-center"><input type="checkbox" id="txtAlumnoLegajo" name="txtAlumnoLegajo"
+														value="<%=item.getLegajo()%>">
+													</td>
 
 													<%
+														}
+													}
 														}
 														}
 													%>
 												</tr>
+												
 												<tfoot>
-													<tr>
-														<th></th>
 
-														<th><input type="submit"
-															name="btnAgregarAlumnosAlCurso" class="btn btn-primary"
-															style="float: right" value="Agregar Alumnos"></th>
-													</tr>
 												</tfoot>
 											</table>
+											<br>
 										
 
+<input
+															type="submit"
+															name="btnAgregarAlumnosAlCurso" class="btn btn-primary"
+															style="float: right" value="Agregar Alumnos">
 
 
 
@@ -262,20 +303,23 @@ B O D Y
 		src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 	<script type="text/javascript"
 		src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
+		
 
-	<script>
-		//IDIOMAS ESPAÑOL DEL DATATABLE   
-		$(document)
-				.ready(
-						function() {
-							$('#myTable')
-									.DataTable(
-											{
-												"language" : {
-													"url" : "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
-												}
-											});
-						});
-	</script>
+<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/js/bootstrap.bundle.min.js"></script> -->
+<!-- <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.11.3/datatables.min.js"></script>	 -->
+
+<script>
+//IDIOMAS ESPAÑOL DEL DATATABLE   
+$(document).ready(function() {
+	$('#myTable').DataTable({ 
+	      pageLength: 5,
+	      lengthMenu: [[5, 10, 20, -1], [5, 10, 20, "Todos"]],
+	"language": {
+		"url": "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
+		}
+	});
+});
+</script>
+
 </body>
 </html>

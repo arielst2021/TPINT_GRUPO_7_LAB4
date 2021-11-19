@@ -15,7 +15,7 @@ public class Conexion {
 	private Conexion() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			this.connection = DriverManager.getConnection(URL,USER,PASS);
+			this.connection = DriverManager.getConnection(URL, USER, PASS);
 			this.connection.setAutoCommit(false);
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -20,6 +20,12 @@ public class Persona {
 		this.Nombre = Nombre;
 		this.Apellido = Apellido;
 	}
+	
+	public Persona(String Dni, String Nombre, String Apellido) {
+		this.Dni = Dni;
+		this.Nombre = Nombre;
+		this.Apellido = Apellido;
+	}
 
 	public Persona(String Dni, String Nombre, String Apellido, LocalDate FechaNacimiento, String Direccion,
 			Provincia Provincia, String Email, String Telefono) {

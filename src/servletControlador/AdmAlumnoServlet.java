@@ -128,8 +128,7 @@ public class AdmAlumnoServlet extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/adm_alumnos_listar.jsp");
 			rd.forward(request, response);
 
-		}
-	
+		}	
 		
 	}
 	

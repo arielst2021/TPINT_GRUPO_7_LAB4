@@ -183,7 +183,7 @@ public class AdmCursoServlet extends HttpServlet {
 		// AGREGA ALUMNOS AL CURSO
 		if (request.getParameter("btnAgregarAlumnosAlCurso") != null) {
 
-			ArrayList<Curso> ListaCurso = new ArrayList<Curso>();
+			ArrayList<Curso> ListaCurso = null;
 			NegocioCurso NegocioCurso = new NegocioCursoImpl();
 			
 			int MateriaId = Integer.parseInt(request.getParameter("txtMateriaId"));			
@@ -194,10 +194,14 @@ public class AdmCursoServlet extends HttpServlet {
 			// OBTENGO EL LEGAJO DEL ALUMNO
 			String []LegajoAlumno = request.getParameterValues("txtAlumnoLegajo");		
 			//
+			
+			if(LegajoAlumno != null) {
+				ListaCurso = new ArrayList<Curso>();
 			for(int i = 0; i < LegajoAlumno.length; i++) {	
 				int alumno = Integer.parseInt(LegajoAlumno[i]);
 				ListaCurso.add(new Curso(new Materia(MateriaId), new Semestre(SemestreId), Anio, new Profesor(LegajoDocente), new Alumno(alumno)));
-			}					
+			}	
+			}
 				
 			if(ListaCurso!=null) {			
 				// AGREGO ALUMNOS
