@@ -9,6 +9,11 @@
 <!-- PROFESOR.JSP, NO TIENE CASO MOSTRAR ESTE FORMULARIO CUANDO HAY UNA SESION INICIADA -->
 
 <%
+	// EVITAR EL BOTON DE ATRAS
+	response.setHeader("Cache-Control","no-cache, no-store, must-revalidate");
+	response.setHeader("Pragma","no-cache");
+	response.setHeader("Expires","0");
+	//
 	if (session.getAttribute("perfil") != null) {
 	Profesor Profesor = new Profesor();
 	Profesor = (Profesor) session.getAttribute("perfil");
@@ -34,6 +39,23 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css" />
+	
+<script type="text/javascript">
+    var msg = '<%=session.getAttribute("Mensaje")%>';
+
+            if (msg != "null") {
+                alert(msg);
+            }
+       <%
+		session.setAttribute("Mensaje", null);
+       
+       %>
+</script>	
+	
+	
+	
+	
+	
 </head>
 
 <body style="background-color: #F6F9FF">

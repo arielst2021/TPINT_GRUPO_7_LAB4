@@ -9,6 +9,11 @@
 
 <%!Profesor Profesor = new Profesor();%>
 <%
+	// EVITAR EL BOTON DE ATRAS
+	response.setHeader("Cache-Control","no-cache, no-store, must-revalidate");
+	response.setHeader("Pragma","no-cache");
+	response.setHeader("Expires","0");
+
 	if (session.getAttribute("perfil") != null) {
 		Profesor = (Profesor) session.getAttribute("perfil");
 	} else {

@@ -9,20 +9,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import entidades.Alumno;
 import entidades.Curso;
-import entidades.Estado;
+
 import entidades.Materia;
 import entidades.Profesor;
 import entidades.Semestre;
 import negocio.NegocioCurso;
-import negocio.NegocioEstado;
+
 import negocio.NegocioMateria;
 import negocio.NegocioProfesor;
 import negocio.NegocioSemestre;
 import negocioImpl.NegocioCursoImpl;
-import negocioImpl.NegocioEstadoImpl;
+
 import negocioImpl.NegocioMateriaImpl;
 import negocioImpl.NegocioProfesorImpl;
 import negocioImpl.NegocioSemestreImpl;
@@ -80,6 +81,7 @@ public class AdmCursoServlet extends HttpServlet {
 			NegocioCurso NegocioCurso = new NegocioCursoImpl();
 			Curso Curso = null;
 			Curso CursoDatos = null;
+			boolean CursoAgregado = false;
 
 			// OBTENGO LISTA DE PROFESORES
 			NegocioProfesor NegocioProfesor = new NegocioProfesorImpl();
@@ -96,15 +98,35 @@ public class AdmCursoServlet extends HttpServlet {
 			ArrayList<Semestre> listaSemestres = NegocioSemestre.obtenerSemestres();
 			request.setAttribute("listaSemestres", listaSemestres);
 
+			// OBTENGO LOS DATOS DE LA VISTA ADM_CURSOS_AGREGAR
+			String MateriaId = request.getParameter("txtMateriaId");
+			String SemestreId = request.getParameter("txtSemestreId");
+			String Anio = request.getParameter("txtAnio");
+			String ProfesorLegajo = request.getParameter("txtProfesorLegajo");
+
+			if (MateriaId != null && SemestreId != null && Anio != null && ProfesorLegajo != null) {
+				try {
+					int Materia = Integer.parseInt(request.getParameter("txtMateriaId"));
+					int Semestre = Integer.parseInt(request.getParameter("txtSemestreId"));
+					Year Fecha = Year.of(Integer.parseInt(request.getParameter("txtAnio")));
+					int Profesor = Integer.parseInt(request.getParameter("txtProfesorLegajo"));
+
+					Curso = new Curso(new Materia(Materia), new Semestre(Semestre), Fecha, new Profesor(Profesor));
+
+					CursoAgregado = NegocioCurso.AgregarNuevoCurso(Curso);
+
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+			}
+			if (CursoAgregado) {}
+			
+			
+			
+			
+			
+
 			try {
-
-				// OBTENGO LOS DATOS DE LA VISTA ADM_CURSOS_AGREGAR
-				int MateriaId = Integer.parseInt(request.getParameter("txtMateriaId"));
-				int SemestreId = Integer.parseInt(request.getParameter("txtSemestreId"));
-				Year Anio = Year.of(Integer.parseInt(request.getParameter("txtAnio")));
-				int ProfesorLegajo = Integer.parseInt(request.getParameter("txtProfesorLegajo"));
-
-				Curso = new Curso(new Materia(MateriaId), new Semestre(SemestreId), Anio, new Profesor(ProfesorLegajo));
 
 				if (Curso != null && NegocioCurso.AgregarNuevoCurso(Curso)) {
 
@@ -124,6 +146,13 @@ public class AdmCursoServlet extends HttpServlet {
 					RequestDispatcher rd = request.getRequestDispatcher("/adm_cursos_agregar_alumnos.jsp");
 					rd.forward(request, response);
 				} else {
+
+					String Mensaje = "CURSO NO AGREGADO";
+
+					HttpSession session = request.getSession();
+					session.setAttribute("Mensaje", Mensaje);
+
+					System.out.println(Mensaje);
 
 					// EN CASO DE DATOS DUPLICADOS O ERROR AL AGREGAR
 					RequestDispatcher rd = request.getRequestDispatcher("/adm_cursos_agregar.jsp");
@@ -179,37 +208,39 @@ public class AdmCursoServlet extends HttpServlet {
 				rd.forward(request, response);
 			}
 		}
-		
+
 		// AGREGA ALUMNOS AL CURSO
 		if (request.getParameter("btnAgregarAlumnosAlCurso") != null) {
 
 			ArrayList<Curso> ListaCurso = null;
 			NegocioCurso NegocioCurso = new NegocioCursoImpl();
-			
-			int MateriaId = Integer.parseInt(request.getParameter("txtMateriaId"));			
+
+			int MateriaId = Integer.parseInt(request.getParameter("txtMateriaId"));
 			int SemestreId = Integer.parseInt(request.getParameter("txtSemestreId"));
 			Year Anio = Year.of(Integer.parseInt(request.getParameter("txtAnio")));
 			int LegajoDocente = Integer.parseInt(request.getParameter("txtLegajoDocente"));
-		
+
 			// OBTENGO EL LEGAJO DEL ALUMNO
-			String []LegajoAlumno = request.getParameterValues("txtAlumnoLegajo");		
+			String[] LegajoAlumno = request.getParameterValues("txtAlumnoLegajo");
 			//
-			
-			if(LegajoAlumno != null) {
+
+			if (LegajoAlumno != null) {
 				ListaCurso = new ArrayList<Curso>();
-			for(int i = 0; i < LegajoAlumno.length; i++) {	
-				int alumno = Integer.parseInt(LegajoAlumno[i]);
-				ListaCurso.add(new Curso(new Materia(MateriaId), new Semestre(SemestreId), Anio, new Profesor(LegajoDocente), new Alumno(alumno)));
-			}	
+				for (int i = 0; i < LegajoAlumno.length; i++) {
+					int alumno = Integer.parseInt(LegajoAlumno[i]);
+					ListaCurso.add(new Curso(new Materia(MateriaId), new Semestre(SemestreId), Anio,
+							new Profesor(LegajoDocente), new Alumno(alumno)));
+				}
 			}
-				
-			if(ListaCurso!=null) {			
+
+			if (ListaCurso != null) {
 				// AGREGO ALUMNOS
 				NegocioCurso.AgregarAlumnosAlCurso(ListaCurso);
 			}
-			
+
 			// OBTENGO DATOS DEL CURSO
-			Curso CursoDatos = NegocioCurso.ObtenerUnCurso(new Curso(new Materia(MateriaId), new Semestre(SemestreId), Anio, new Profesor(LegajoDocente)));
+			Curso CursoDatos = NegocioCurso.ObtenerUnCurso(
+					new Curso(new Materia(MateriaId), new Semestre(SemestreId), Anio, new Profesor(LegajoDocente)));
 			request.setAttribute("NuevoCurso", CursoDatos);
 
 			// OBTENGO LOS ALUMNOS QUE ESTAN EN EL CURSO
