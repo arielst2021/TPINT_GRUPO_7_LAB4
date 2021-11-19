@@ -119,7 +119,14 @@ public class AdmCursoServlet extends HttpServlet {
 					// TODO: handle exception
 				}
 			}
-			if (CursoAgregado) {}
+			if (!CursoAgregado) {
+				
+				String Mensaje = "NO SE PUEDE AGREGAR EL CURSO";
+
+				HttpSession session = request.getSession();
+				session.setAttribute("Mensaje", Mensaje);					
+				
+			}
 			
 			
 			
