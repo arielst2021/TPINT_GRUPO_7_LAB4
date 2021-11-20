@@ -27,7 +27,7 @@ public class NegocioCursoImpl implements NegocioCurso{
 		return dao.AgregarNotasCurso(Curso);
 	}
 	@Override
-	public boolean AgregarNuevoCurso(Curso Curso) {
+	public int AgregarNuevoCurso(Curso Curso) {
 		return dao.AgregarNuevoCurso(Curso);
 	}
 

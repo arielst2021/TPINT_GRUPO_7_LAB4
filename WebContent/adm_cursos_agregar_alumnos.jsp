@@ -31,7 +31,17 @@ H E A D
 	href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css" />
 <!-- 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css"/> -->
 <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.11.3/datatables.min.css"/> -->
- 
+
+<script type="text/javascript">
+    var msg = '<%=session.getAttribute("Mensaje")%>';
+            if (msg != "null") {
+                alert(msg);
+            }
+       <%
+		session.setAttribute("Mensaje", null);
+       
+       %>
+</script>
 </head>
 
 <!--
@@ -128,7 +138,7 @@ B O D Y
 											
 											%>
 
-										<table id="myTable2" class="table table-striped table-hover border-primary"
+										<table id="myTable1" class="table table-striped table-hover border-success"
 											style="width: 100%">
 											 <thead class="table-success">
 												<tr>
@@ -146,7 +156,7 @@ B O D Y
 								%>
 
 											<tr>
-												<td class="text-primary align-middle"><span
+												<td class="text-success align-middle"><span
 													class="text-uppercase fw-bold"><%=item.getAlumno().getPersona().getApellido()%>
 												</span>, <%=item.getAlumno().getPersona().getNombre()%></td>
 												<td class="align-middle text-center"><%=item.getAlumno().getLegajo()%></td>	
@@ -187,7 +197,7 @@ B O D Y
 
 
 										<br>
-										<h5 class="card-title text-success">Agregar Alumnos</h5>
+										<h5 class="card-title text-primary">Agregar Alumnos</h5>
 										<hr>
 										<!-- INICIO DE LA TABLA CON LOS ALUMNOS QUE NO ESTAN EL EL CURSO -->
 												<%
@@ -320,6 +330,7 @@ $(document).ready(function() {
 	});
 });
 </script>
+
 
 </body>
 </html>

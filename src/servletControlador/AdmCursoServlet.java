@@ -77,26 +77,14 @@ public class AdmCursoServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		if (request.getParameter("agregarNuevoCurso") != null) {
+			
+			String paginaDestino = "/adm_cursos_agregar.jsp";
+			String Mensaje = null;
 
 			NegocioCurso NegocioCurso = new NegocioCursoImpl();
 			Curso Curso = null;
 			Curso CursoDatos = null;
-			boolean CursoAgregado = false;
-
-			// OBTENGO LISTA DE PROFESORES
-			NegocioProfesor NegocioProfesor = new NegocioProfesorImpl();
-			ArrayList<Profesor> lista = NegocioProfesor.listaProfesores();
-			request.setAttribute("listaProfesores", lista);
-
-			// OBTENGO LISTA DE MATERIAS
-			NegocioMateria NegocioMateria = new NegocioMateriaImpl();
-			ArrayList<Materia> listaMaterias = NegocioMateria.obtenerMaterias();
-			request.setAttribute("listaMaterias", listaMaterias);
-
-			// OBTENGO LISTA DE SEMESTRES
-			NegocioSemestre NegocioSemestre = new NegocioSemestreImpl();
-			ArrayList<Semestre> listaSemestres = NegocioSemestre.obtenerSemestres();
-			request.setAttribute("listaSemestres", listaSemestres);
+			int CursoAgregado = 0;
 
 			// OBTENGO LOS DATOS DE LA VISTA ADM_CURSOS_AGREGAR
 			String MateriaId = request.getParameter("txtMateriaId");
@@ -119,59 +107,61 @@ public class AdmCursoServlet extends HttpServlet {
 					// TODO: handle exception
 				}
 			}
-			if (!CursoAgregado) {
+			if (CursoAgregado==1) {	
 				
-				String Mensaje = "NO SE PUEDE AGREGAR EL CURSO";
+				//MENSAJE
+				Mensaje = "CURSO AGREGADO EXITOSAMENTE";
+				
+				System.out.println(Mensaje);
+				
+				// OBTENGO DATOS DEL CURSO
+				CursoDatos = NegocioCurso.ObtenerUnCurso(Curso);
+				request.setAttribute("NuevoCurso", CursoDatos);
 
-				HttpSession session = request.getSession();
-				session.setAttribute("Mensaje", Mensaje);					
+				// OBTENGO LOS ALUMNOS QUE ESTAN EN EL CURSO
+				ArrayList<Curso> CursoAlumnosLista = NegocioCurso.ObtenerAlumnosPorCurso(CursoDatos);
+				request.setAttribute("CursoAlumnosLista", CursoAlumnosLista);
+
+				// OBTENGO LOS ALUMNOS QUE NO ESTAN EN EL CURSO NI ESTAN DADOS DE BAJA
+				ArrayList<Alumno> AlumnosNoEstanEnElCurso = NegocioCurso.ObtenerAlumnosNoEstanEnElCurso(CursoDatos);
+				request.setAttribute("AlumnosNoEstanEnElCurso", AlumnosNoEstanEnElCurso);
+				
+				//
+				paginaDestino = "/adm_cursos_agregar_alumnos.jsp";
 				
 			}
-			
-			
-			
-			
-			
-
-			try {
-
-				if (Curso != null && NegocioCurso.AgregarNuevoCurso(Curso)) {
-
-					// OBTENGO DATOS DEL CURSO
-					CursoDatos = NegocioCurso.ObtenerUnCurso(Curso);
-					request.setAttribute("NuevoCurso", CursoDatos);
-
-					// OBTENGO LOS ALUMNOS QUE ESTAN EN EL CURSO
-					ArrayList<Curso> CursoAlumnosLista = NegocioCurso.ObtenerAlumnosPorCurso(CursoDatos);
-					request.setAttribute("CursoAlumnosLista", CursoAlumnosLista);
-
-					// OBTENGO LOS ALUMNOS QUE NO ESTAN EN EL CURSO NI ESTAN DADOS DE BAJA
-					ArrayList<Alumno> AlumnosNoEstanEnElCurso = NegocioCurso.ObtenerAlumnosNoEstanEnElCurso(CursoDatos);
-					request.setAttribute("AlumnosNoEstanEnElCurso", AlumnosNoEstanEnElCurso);
-
-					// VOY A ADM_CURSOS_AGREGAR_ALUMNOS
-					RequestDispatcher rd = request.getRequestDispatcher("/adm_cursos_agregar_alumnos.jsp");
-					rd.forward(request, response);
-				} else {
-
-					String Mensaje = "CURSO NO AGREGADO";
-
-					HttpSession session = request.getSession();
-					session.setAttribute("Mensaje", Mensaje);
-
-					System.out.println(Mensaje);
-
-					// EN CASO DE DATOS DUPLICADOS O ERROR AL AGREGAR
-					RequestDispatcher rd = request.getRequestDispatcher("/adm_cursos_agregar.jsp");
-					rd.forward(request, response);
+			else {
+				if(CursoAgregado==0) {
+				Mensaje = "HUBO UN ERROR AL INTENTAR AGREGAR EL CURSO";
 				}
+				if(CursoAgregado==-1) {
+				Mensaje = "CURSO DUPLICADO, NO SE AGREGÓ EL CURSO";
+				}
+				
+				System.out.println(Mensaje);
+				System.out.println(CursoAgregado);
+				
+				// OBTENGO LISTA DE PROFESORES
+				NegocioProfesor NegocioProfesor = new NegocioProfesorImpl();
+				ArrayList<Profesor> lista = NegocioProfesor.listaProfesores();
+				request.setAttribute("listaProfesores", lista);
 
-			} catch (Exception e) {
+				// OBTENGO LISTA DE MATERIAS
+				NegocioMateria NegocioMateria = new NegocioMateriaImpl();
+				ArrayList<Materia> listaMaterias = NegocioMateria.obtenerMaterias();
+				request.setAttribute("listaMaterias", listaMaterias);
 
-				RequestDispatcher rd = request.getRequestDispatcher("/adm_cursos_agregar.jsp");
-				rd.forward(request, response);
+				// OBTENGO LISTA DE SEMESTRES
+				NegocioSemestre NegocioSemestre = new NegocioSemestreImpl();
+				ArrayList<Semestre> listaSemestres = NegocioSemestre.obtenerSemestres();
+				request.setAttribute("listaSemestres", listaSemestres);
 			}
-
+			
+			HttpSession session = request.getSession();
+			session.setAttribute("Mensaje", Mensaje);
+			
+			RequestDispatcher rd = request.getRequestDispatcher(paginaDestino);
+			rd.forward(request, response);
 		}
 
 		// VIENE DE ADM_CURSOS_LISTAR

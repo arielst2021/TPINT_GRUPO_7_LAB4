@@ -30,14 +30,15 @@
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css" />
 	
-	<script type="text/javascript">
+<script type="text/javascript">
     var msg = '<%=session.getAttribute("Mensaje")%>';
-
             if (msg != "null") {
                 alert(msg);
             }
-       
-</script>	
+       <%
+		session.setAttribute("Mensaje", null);      
+       %>
+</script>
 	
 	
 </head>
@@ -147,16 +148,17 @@ N A V B A R
 											</div>
 											<br>
 
-											<h6 class="card-title">Seleccione un profesor</h6>
+											<h5 class="card-title text-success">Seleccione un profesor</h5>
 											<hr>
-											<table id="myTable" class="table table-striped"
+											<table id="myTable" class="table table-striped table-hover border-success"
 												style="width: 100%">
-												<thead>
+												<thead class="table-success">
 													<tr>
-														<th scope="col">Leg.</th>
-														<th scope="col">DNI</th>
-														<th scope="col">Apellido y Nombre</th>
-														<th scope="col">Acción</th>
+														<th scope="col" class="text-left">Apellido y Nombre</th>
+														<th scope="col" class="text-center">Nro. Legajo</th>
+														<th scope="col" class="text-center">DNI</th>
+														<th scope="col" class="text-center">Estado</th>
+														<th scope="col" class="text-center">Seleccionar</th>
 													</tr>
 												</thead>
 
@@ -172,13 +174,27 @@ N A V B A R
 														for (Profesor itemProfesor : listaProfesores) {
 												%>
 												<tr>
+													<td class="text-success align-middle"><span
+													class="text-uppercase fw-bold"><%=itemProfesor.getPersona().getApellido()%>
+												</span>, <%=itemProfesor.getPersona().getNombre()%></td>
+													<td class="align-middle text-center"><%=itemProfesor.getLegajo()%></td>
+													<td class="align-middle text-center"><%=itemProfesor.getPersona().getDni()%></td>													
+													<%
+																									if(itemProfesor.getEstado().getNombre().equals("Activo")){
+																																			
+												%>
+												<td class="align-middle text-center"> <span class="badge bg-success text-wrap"><%=itemProfesor.getEstado().getNombre()%></span></td>												
 
-													<td><%=itemProfesor.getLegajo()%></td>
-													<td><%=itemProfesor.getPersona().getDni()%></td>
-													<td><%=itemProfesor.getPersona().getApellido()%>, <%=itemProfesor.getPersona().getNombre()%></td>
-													<td><input type="radio" name="txtProfesorLegajo"
-														value="<%=itemProfesor.getLegajo()%>"> Agregar
-														Profesor</td>
+
+												<%
+												}
+												else{%>
+												<td class="align-middle text-center"> <span class="badge bg-danger text-wrap"><%=itemProfesor.getEstado().getNombre()%></span></td>
+													<%
+												}
+													%>
+													<td class="align-middle text-center"><input type="radio" name="txtProfesorLegajo"
+														value="<%=itemProfesor.getLegajo()%>"></td>
 
 												</tr>
 												<%
@@ -236,6 +252,8 @@ N A V B A R
 //IDIOMAS ESPAÑOL DEL DATATABLE   
 $(document).ready(function() {
 	$('#myTable').DataTable({ 
+	      pageLength: 5,
+	      lengthMenu: [[5, 10, 20, -1], [5, 10, 20, "Todos"]],
 	"language": {
 		"url": "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
 		}

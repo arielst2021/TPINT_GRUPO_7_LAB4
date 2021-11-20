@@ -12,7 +12,7 @@ public interface CursoDao {
 	//
 	public boolean AgregarNotasCurso(ArrayList<Curso> Curso);
 	//
-	public boolean AgregarNuevoCurso(Curso Curso);
+	public int AgregarNuevoCurso(Curso Curso);
 	//
 	public Curso ObtenerUnCurso(Curso Curso);
 	//

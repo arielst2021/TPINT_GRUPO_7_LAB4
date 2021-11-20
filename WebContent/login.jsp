@@ -42,13 +42,11 @@
 	
 <script type="text/javascript">
     var msg = '<%=session.getAttribute("Mensaje")%>';
-
             if (msg != "null") {
                 alert(msg);
             }
        <%
-		session.setAttribute("Mensaje", null);
-       
+		session.setAttribute("Mensaje", null);     
        %>
 </script>	
 	
