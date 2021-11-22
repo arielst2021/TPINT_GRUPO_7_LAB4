@@ -25,23 +25,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Agregar Curso</title>
 
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css" />
-	
-<script type="text/javascript">
-    var msg = '<%=session.getAttribute("Mensaje")%>';
-            if (msg != "null") {
-                alert(msg);
-            }
-       <%
-		session.setAttribute("Mensaje", null);      
-       %>
-</script>
-	
-	
+<!-- SWEETALERT2 -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- BOOTSTRAP5 -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css" />
+
 </head>
+
+<body>
 
 
 	<!--
@@ -60,6 +53,40 @@ N A V B A R
 	<%
 		}
 	%>
+	
+	<script type="text/javascript">
+    var msg = '<%=session.getAttribute("Mensaje")%>';
+		if (msg != "null") {
+			if (msg == '1' ) {
+				Swal.fire({
+					title : '¡Correcto!',
+					text : "¡Curso agregado exitosamente!",
+					icon : 'success',
+					confirmButtonText : 'OK'
+				})
+			}
+			if (msg == '0') {
+				Swal.fire({
+					title : '¡Error!',
+					text : "¡Hubo un error al intentar agregar el curso!",
+					icon : 'error',
+					confirmButtonText : 'OK'
+				})
+				<%session.setAttribute("Mensaje", null);%>
+			}
+			if (msg == '-1') {
+				Swal.fire({
+					title : '¡Error!',
+					text : "¡Curso duplicado, no se agregó el curso!",
+					icon : 'error',
+					confirmButtonText : 'OK'
+				})
+				<%session.setAttribute("Mensaje", null);%>
+			}
+		}
+		
+	</script>
+
 
 	<div class="row">
 		<div class="col-12">
@@ -236,18 +263,11 @@ N A V B A R
 	<!-- F O O T E R  -->
 	<jsp:include page="footer.jsp"></jsp:include>
 
-
-	<script type="text/javascript"
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script type="text/javascript"
-		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
-	<script type="text/javascript"
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
-	<script type="text/javascript"
-		src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-	<script type="text/javascript"
-		src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
-
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
+	
 <script>
 //IDIOMAS ESPAÑOL DEL DATATABLE   
 $(document).ready(function() {

@@ -109,8 +109,8 @@ public class AdmCursoServlet extends HttpServlet {
 			}
 			if (CursoAgregado==1) {	
 				
-				//MENSAJE
-				Mensaje = "CURSO AGREGADO EXITOSAMENTE";
+				//MENSAJE "Curso agregado exitosamente";
+				Mensaje = "1";
 				
 				System.out.println(Mensaje);
 				
@@ -132,10 +132,12 @@ public class AdmCursoServlet extends HttpServlet {
 			}
 			else {
 				if(CursoAgregado==0) {
-				Mensaje = "HUBO UN ERROR AL INTENTAR AGREGAR EL CURSO";
+				//MENSAJE "Hubo un error al intentar agregar el curso";
+				Mensaje = "0";
 				}
 				if(CursoAgregado==-1) {
-				Mensaje = "CURSO DUPLICADO, NO SE AGREGÓ EL CURSO";
+				//MENSAJE "Curso duplicado, no se agregó el curso";
+				Mensaje = "-1";				
 				}
 				
 				System.out.println(Mensaje);
