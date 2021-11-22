@@ -134,10 +134,10 @@ public class CursoDaoImpl implements CursoDao {
 	}
 
 	@Override
-	public boolean AgregarNotasCurso(ArrayList<Curso> Curso) {
+	public int AgregarNotasCurso(ArrayList<Curso> Curso) {
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
-		boolean isInsertExitoso = false;
+		int NotasAgregadas = 0;
 		try {
 			statement = conexion.prepareStatement(AgregarNotasCurso);
 			Iterator<Curso> iterador = Curso.iterator();
@@ -157,10 +157,11 @@ public class CursoDaoImpl implements CursoDao {
 				statement.setInt(10, miCurso.getAlumno().getLegajo());
 				if (statement.executeUpdate() > 0) {
 					conexion.commit();
-					isInsertExitoso = true;
+					NotasAgregadas = 1;
 				}
 			}
 		} catch (SQLException e) {
+			NotasAgregadas = -1;
 			e.printStackTrace();
 			try {
 				conexion.rollback();
@@ -168,7 +169,7 @@ public class CursoDaoImpl implements CursoDao {
 				e1.printStackTrace();
 			}
 		}
-		return isInsertExitoso;
+		return NotasAgregadas;
 	}
 
 	@Override

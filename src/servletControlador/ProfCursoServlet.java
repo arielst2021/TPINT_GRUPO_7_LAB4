@@ -117,6 +117,9 @@ public class ProfCursoServlet extends HttpServlet {
 		}
 		
 		if (request.getParameter("btnGuardarNotas") != null) {
+			
+			int NotasAgregadas = 0;
+			String Mensaje = "0";
 
 			ArrayList<Curso> Curso = new ArrayList<Curso>();
 			NegocioCurso NegocioCurso = new NegocioCursoImpl();
@@ -162,11 +165,28 @@ public class ProfCursoServlet extends HttpServlet {
 			}
 			
 			if(Curso!=null) {			
-				NegocioCurso.AgregarNotasCurso(Curso);
+				// AGREGO NOTAS
+				NotasAgregadas = NegocioCurso.AgregarNotasCurso(Curso);
+				
+				if (NotasAgregadas==1) {						
+					//MENSAJE "Notas/s agregada/s exitosamente";
+					Mensaje = "1";}
+				if (NotasAgregadas==0) {	
+					
+					//MENSAJE "Hubo un error al intentar agregar Nota/s al curso";
+					Mensaje = "0";
+				}
+				if (NotasAgregadas==-1) {	
+					//MENSAJE "Nota/s duplicada/s, no se agregó/agregaron Notas";
+					Mensaje = "-1";		
+				}
 			}
 			
 			Curso CursoLista = new Curso(Materia, Semestre, Anio, Profesor);
 
+			HttpSession session = request.getSession();
+			session.setAttribute("Mensaje", Mensaje);
+			
 			ArrayList<Curso> lista = NegocioCurso.ObtenerAlumnosPorCurso(CursoLista);				
 			request.setAttribute("listaAlumnosPorCursos", lista);
 

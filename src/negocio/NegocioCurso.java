@@ -10,7 +10,7 @@ public interface NegocioCurso {
 	//
 	public ArrayList<Curso> ObtenerAlumnosPorCurso(Curso Curso);
 	//
-	public boolean AgregarNotasCurso(ArrayList<Curso> Curso);
+	public int AgregarNotasCurso(ArrayList<Curso> Curso);
 	//
 	public int AgregarNuevoCurso(Curso Curso);
 	//
@@ -21,4 +21,7 @@ public interface NegocioCurso {
 	public ArrayList<Alumno> ObtenerAlumnosNoEstanEnElCurso(Curso Curso);
 	//
 	public int AgregarAlumnosAlCurso(ArrayList<Curso> Curso);
+	//
+	public static void main(String[] args) {
+	}
 }

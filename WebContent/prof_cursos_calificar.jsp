@@ -26,13 +26,16 @@
 H E A D
 ---------------------------------------------------- -->
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Mis Cursos - Calificaciones</title>
 
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css" />
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<title>Calificar Alumnos</title>
+	<!-- SWEETALERT2 -->
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<!-- BOOTSTRAP5 -->
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css" />
+
 </head>
 
 <script type="text/javascript">
@@ -72,6 +75,37 @@ B O D Y
 		}
 	%>
 
+	<script type="text/javascript">
+    var msg = '<%=session.getAttribute("Mensaje")%>';
+		if (msg != "null") {
+			if (msg == '1' ) {
+				Swal.fire({
+					title : '¡Correcto!',
+					text : "¡Notas/s agregada/s o modificada/s exitosamente!",
+					icon : 'success',
+					confirmButtonText : 'OK'
+				})
+			}
+			if (msg == '0') {
+				Swal.fire({
+					title : '¡Error!',
+					text : "¡Hubo un error al intentar agregar Nota/s al curso!",
+					icon : 'error',
+					confirmButtonText : 'OK'
+				})
+			}
+			if (msg == '-1') {
+				Swal.fire({
+					title : '¡Error!',
+					text : "¡Nota/s duplicada/s, no se agregó/agregaron Notas!",
+					icon : 'error',
+					confirmButtonText : 'OK'
+				})
+			}			
+		}
+		<%session.setAttribute("Mensaje", null);%>
+	</script>
+	
 	<div class="row">
 		<div class="col-12">
 			<div class="card">
@@ -161,23 +195,23 @@ B O D Y
 													<!-- AGREGO UN JAVASCRIPT PARA PERMITIR EL INGRESO DE VALORES NUMÉRICOS Y UN DISEÑO DE PATRÓN DE ETIQUETAS HTML PARA SOLO VALORES NUMÉRICOS  -->
 													<!-- EL ATRIBUTO PATTERN ESPECIFICA UNA EXPRESIÓN REGULAR CON LA QUE <INPUT>SE VERIFICA EL VALOR DEL ELEMENTO AL ENVIAR EL FORMULARIO. -->
 
-													<td><input type="text" id="nota" name="Nota1"
+													<td class="align-middle text-center"><input type="text" id="nota" name="Nota1"
 														class="form-control" onkeypress="return valideKey(event)"
 														pattern="^\d{1,2}+(\.\d{1})?$"
 														value="<%=item.getNotaPrimerParcial()%>"></td>
-													<td><input type="text" id="nota" name="Nota2"
+													<td class="text-center"><input type="text" id="nota" name="Nota2"
 														class="form-control" onkeypress="return valideKey(event)"
 														pattern="^\d{1,2}+(\.\d{1})?$"
 														value="<%=item.getNotaPrimerRecuperatorio()%>"></td>
-													<td><input type="text" id="nota" name="Nota3"
+													<td class="text-center"><input type="text" id="nota" name="Nota3"
 														class="form-control" onkeypress="return valideKey(event)"
 														pattern="^\d{1,2}+(\.\d{1})?$"
 														value="<%=item.getNotaSegundoParcial()%>"></td>
-													<td><input type="text" id="nota" name="Nota4"
+													<td class="text-center"><input type="text" id="nota" name="Nota4"
 														class="form-control" onkeypress="return valideKey(event)"
 														pattern="^\d{1,2}+(\.\d{1})?$"
 														value="<%=item.getNotaSegundoRecuperatorio()%>"></td>
-													<td><select
+													<td class="text-center"><select
 														class="form-select form-select selectpicker"
 														name="estadoAlumno">
 															<%
@@ -229,18 +263,12 @@ B O D Y
 	<!-- F O O T E R  -->
 	<jsp:include page="footer.jsp"></jsp:include>
 
-	<script type="text/javascript"
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script type="text/javascript"
-		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
-	<script type="text/javascript"
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
-	<script type="text/javascript"
-		src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-	<script type="text/javascript"
-		src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
-
-	<script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
+	
+<script>
 //IDIOMAS ESPAÑOL DEL DATATABLE   
 $(document).ready(function() {
 	$('#myTable').DataTable({ 
@@ -252,5 +280,6 @@ $(document).ready(function() {
 	});
 });
 </script>
+
 </body>
 </html>
