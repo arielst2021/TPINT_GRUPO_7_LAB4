@@ -47,7 +47,7 @@ public class NegocioCursoImpl implements NegocioCurso{
 	}
 
 	@Override
-	public boolean AgregarAlumnosAlCurso(ArrayList<Curso> Curso) {
+	public int AgregarAlumnosAlCurso(ArrayList<Curso> Curso) {
 		return dao.AgregarAlumnosAlCurso(Curso);
 	}
 }

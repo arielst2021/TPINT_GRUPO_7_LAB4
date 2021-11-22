@@ -64,10 +64,34 @@ B O D Y
 					confirmButtonText : 'OK'
 				})
 			}
+			if (msg == '2' ) {
+				Swal.fire({
+					title : '¡Correcto!',
+					text : "¡Alumno/s agregado/s exitosamente!",
+					icon : 'success',
+					confirmButtonText : 'OK'
+				})
+			}
+			if (msg == '0') {
+				Swal.fire({
+					title : '¡Error!',
+					text : "¡Hubo un error al intentar agregar el/los alumno/s al curso!",
+					icon : 'error',
+					confirmButtonText : 'OK'
+				})
+			}
+			if (msg == '-1') {
+				Swal.fire({
+					title : '¡Error!',
+					text : "¡Alumno/s duplicado/s, no se agregó/agregaron al curso!",
+					icon : 'error',
+					confirmButtonText : 'OK'
+				})
+			}
+			<%session.setAttribute("Mensaje", null);%>
 		}
-	<%session.setAttribute("Mensaje", null);%>
-		
 	</script>
+	
 	<div class="row">
 		<div class="col-12">
 			<div class="card">

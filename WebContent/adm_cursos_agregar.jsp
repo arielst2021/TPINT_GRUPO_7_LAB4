@@ -21,26 +21,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Agregar Curso</title>
-
-<!-- SWEETALERT2 -->
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<!-- BOOTSTRAP5 -->
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css" />
-
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<title>Agregar Curso</title>
+	
+	<!-- SWEETALERT2 -->
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<!-- BOOTSTRAP5 -->
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css" />
 </head>
 
 <body>
 
-
-	<!--
-----------------------------------------------------
-N A V B A R
----------------------------------------------------- -->
+<!-- N A V B A R -->
 	<%
 		if (session.getAttribute("perfil") != null) {
 	%>
@@ -84,9 +78,7 @@ N A V B A R
 				<%session.setAttribute("Mensaje", null);%>
 			}
 		}
-		
 	</script>
-
 
 	<div class="row">
 		<div class="col-12">

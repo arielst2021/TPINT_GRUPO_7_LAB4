@@ -20,6 +20,6 @@ public interface CursoDao {
 	//	
 	public ArrayList<Alumno> ObtenerAlumnosNoEstanEnElCurso(Curso Curso);
 	//
-	public boolean AgregarAlumnosAlCurso(ArrayList<Curso> Curso);
+	public int AgregarAlumnosAlCurso(ArrayList<Curso> Curso);
 	
 }

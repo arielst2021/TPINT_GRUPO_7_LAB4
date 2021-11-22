@@ -69,7 +69,6 @@ public class AdmCursoServlet extends HttpServlet {
 
 			RequestDispatcher rd = request.getRequestDispatcher("/adm_cursos_listar.jsp");
 			rd.forward(request, response);
-
 		}
 	}
 
@@ -111,9 +110,7 @@ public class AdmCursoServlet extends HttpServlet {
 				
 				//MENSAJE "Curso agregado exitosamente";
 				Mensaje = "1";
-				
-				System.out.println(Mensaje);
-				
+							
 				// OBTENGO DATOS DEL CURSO
 				CursoDatos = NegocioCurso.ObtenerUnCurso(Curso);
 				request.setAttribute("NuevoCurso", CursoDatos);
@@ -139,9 +136,6 @@ public class AdmCursoServlet extends HttpServlet {
 				//MENSAJE "Curso duplicado, no se agregó el curso";
 				Mensaje = "-1";				
 				}
-				
-				System.out.println(Mensaje);
-				System.out.println(CursoAgregado);
 				
 				// OBTENGO LISTA DE PROFESORES
 				NegocioProfesor NegocioProfesor = new NegocioProfesorImpl();
@@ -208,9 +202,12 @@ public class AdmCursoServlet extends HttpServlet {
 			}
 		}
 
-		// AGREGA ALUMNOS AL CURSO
+		// AGREGAR ALUMNOS AL CURSO
 		if (request.getParameter("btnAgregarAlumnosAlCurso") != null) {
-
+			
+			int AlumnosAgregados = 0;
+			String Mensaje = "0";
+			//
 			ArrayList<Curso> ListaCurso = null;
 			NegocioCurso NegocioCurso = new NegocioCursoImpl();
 
@@ -234,9 +231,26 @@ public class AdmCursoServlet extends HttpServlet {
 
 			if (ListaCurso != null) {
 				// AGREGO ALUMNOS
-				NegocioCurso.AgregarAlumnosAlCurso(ListaCurso);
+				AlumnosAgregados = NegocioCurso.AgregarAlumnosAlCurso(ListaCurso);
+				
+				if (AlumnosAgregados==2) {	
+					
+					//MENSAJE "Alumno/s agregado/s exitosamente";
+					Mensaje = "2";}
+				if (AlumnosAgregados==0) {	
+					
+					//MENSAJE "Hubo un error al intentar agregar el/los alumno/s al curso";
+					Mensaje = "0";
+				}
+				if (AlumnosAgregados==-1) {	
+					//MENSAJE "Alumno/s duplicado/s, no se agregó/agregaron al curso";
+					Mensaje = "-1";		
+				}
 			}
 
+			HttpSession session = request.getSession();
+			session.setAttribute("Mensaje", Mensaje);
+			
 			// OBTENGO DATOS DEL CURSO
 			Curso CursoDatos = NegocioCurso.ObtenerUnCurso(
 					new Curso(new Materia(MateriaId), new Semestre(SemestreId), Anio, new Profesor(LegajoDocente)));
