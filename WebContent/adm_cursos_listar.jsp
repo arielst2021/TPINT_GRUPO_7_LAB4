@@ -24,14 +24,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Listado de cursos</title>
-<!--
-----------------------------------------------------
-	 C S S - BOOTSTRAP, CUSTOM STYLES 
----------------------------------------------------- -->
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css" />
+	<!-- SWEETALERT2 -->
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<!-- BOOTSTRAP5 -->
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css" />
 </head>
 
 <body style="background-color: #F6F9FF">
@@ -68,9 +66,8 @@ N A V B A R
 										<h5 class="card-title">Listado de Cursos</h5>
 										<hr>
 										<!-- INICIO DE LA TABLA -->
-										<table id="myTable" class="table table-striped"
-											style="width: 100%">
-											<thead>
+										<table id="myTable" class="table table-striped table-hover border-success" style="width: 100%">
+										<thead class="table-success">
 												<tr>
 													<th scope="col">Cód.</th>
 													<th scope="col">Materia</th>
@@ -159,26 +156,22 @@ N A V B A R
 	<!-- F O O T E R  -->
 	<jsp:include page="footer.jsp"></jsp:include>
 
-	<script type="text/javascript"
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script type="text/javascript"
-		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
-	<script type="text/javascript"
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
-	<script type="text/javascript"
-		src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-	<script type="text/javascript"
-		src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
 
-	<script>
-//IDIOMAS ESPAÑOL DEL DATATABLE   
-$(document).ready(function() {
-	$('#myTable').DataTable({ 
-	"language": {
-		"url": "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
-		}
+<script>
+	//IDIOMAS ESPAÑOL DEL DATATABLE   
+	$(document).ready(
+		function() {
+			$('#myTable').DataTable( {
+				pageLength : 5,
+				lengthMenu : [[ 5, 10, 20, -1 ],[ 5, 10, 20, "Todos" ] ],
+				"language" : {"url" : "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
+			}
+		});
 	});
-});
 </script>
 </body>
 </html>

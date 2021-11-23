@@ -22,8 +22,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<title>Agregar Curso</title>
-	
+	<title>Agregar Curso</title>	
 	<!-- SWEETALERT2 -->
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -32,7 +31,7 @@
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css" />
 </head>
 
-<body>
+<body style="background-color: #F6F9FF">
 
 <!-- N A V B A R -->
 	<%
@@ -87,7 +86,7 @@
 
 					<main id="main" class="main">
 					<section class="section">
-						<form action="AdmCursoServlet" method="post">
+						<form action="AdmCursoServlet" id="formulario" method="post">
 							<div class="row">
 								<div class="col-lg-12">
 
@@ -212,7 +211,7 @@
 													<%
 												}
 													%>
-													<td class="align-middle text-center"><input type="radio" name="txtProfesorLegajo"
+													<td class="align-middle text-center"><input type="radio" name="txtProfesorLegajo" id="txtProfesorLegajo"
 														value="<%=itemProfesor.getLegajo()%>"></td>
 
 												</tr>
@@ -273,5 +272,28 @@ $(document).ready(function() {
 });
 </script>
 
+<script type="text/javascript">
+function onSubmit() 
+{ 
+  var fields = $("input[name='txtProfesorLegajo']").serializeArray(); 
+  if (fields.length == 0) 
+  {
+	  Swal.fire({
+		title : '¡Error!',
+		text : "¡Debe seleccionar un profesor para crear el curso!",
+		icon : 'error',
+		confirmButtonText : 'OK'
+		})
+    return false;
+  } 
+  else 
+  { 
+    return true; 
+  }
+}
+//REGISTRA EL EVENTO EN EL FORMULARIO, NO EL BOTÓN DE ENVIAR
+$('#formulario').submit(onSubmit)
+
+</script>
 </body>
 </html>

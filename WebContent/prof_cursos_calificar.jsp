@@ -113,147 +113,151 @@ B O D Y
 
 					<!-- M A I N  -->
 					<main id="main" class="main">
-					<section class="section">
-						<div class="row">
-							<div class="col-lg-12">
-								<div class="card">
-									<div class="card-body">
-										<%!Curso Curso = new Curso();%>
-										<%
-											if (session.getAttribute("DatosDelCurso") != null) {
-												Curso = (Curso) session.getAttribute("DatosDelCurso");
-											}
-										%>
-							<br>						
-							<h5 class="card-title text-success">Calificaciones de los alumnos</h5>
-							<hr>	
-										<div class="row">
-											<div class="col-md-6 text-left">
-												
+						<section class="section">
+							<div class="row">
+								<div class="col-lg-12">
+									<div class="card">
+										<div class="card-body">
+											<%!Curso Curso = new Curso();%>
+											<%
+												if (session.getAttribute("DatosDelCurso") != null) {
+													Curso = (Curso) session.getAttribute("DatosDelCurso");
+												}
+											%>
+											<br>
+											<h5 class="card-title text-success">Calificaciones de los
+												alumnos</h5>
+											<hr>
+											<div class="row">
+												<div class="col-md-6 text-left">
+	
 													<div>
-														
-															<strong class="text-success">Materia: </strong><%=Curso.getMateria().getNombre()%>
-												<br>
-															<strong class="text-success">Período: </strong><%=Curso.getSemestre().getNombre()%>
+	
+														<strong class="text-success">Materia: </strong><%=Curso.getMateria().getNombre()%>
+														<br> <strong class="text-success">Período: </strong><%=Curso.getSemestre().getNombre()%>
 													</div>
-												
-											</div>
-											<div class="col-md-6 text-left">
-											
+	
+												</div>
+												<div class="col-md-6 text-left">
+	
 													<div>
-														
-															<strong class="text-success">Año: </strong><%=Curso.getAnio()%>
-														<br>
-															<strong class="text-success">Profesor/a: </strong><%=Profesor.getPersona().getNombre()%>
-															<%=Profesor.getPersona().getApellido()%>
+	
+														<strong class="text-success">Año: </strong><%=Curso.getAnio()%>
+														<br> <strong class="text-success">Profesor/a:
+														</strong><%=Profesor.getPersona().getNombre()%>
+														<%=Profesor.getPersona().getApellido()%>
 													</div>
-												
+	
+												</div>
 											</div>
-										</div>
-										<hr>
-										<!-- INICIO DE LA TABLA -->
-										<form action="ProfCursoServlet" method="post">
-											<table id="myTable"
-												class="table table-striped table-hover border-success table-fit"
-												style="width: 100%">
-												<thead class="table-success">
-													<tr>
-														<th style="width: 40%" scope="col">Apellido y Nombre</th>
-														<th style="width: 10%" scope="col">Parcial 1</th>
-														<th style="width: 10%" scope="col">Recup. 1</th>
-														<th style="width: 10%" scope="col">Parcial 2</th>
-														<th style="width: 10%" scope="col">Recup. 2</th>
-														<th style="width: 20%" scope="col">Estado</th>
-													</tr>
-												</thead>
-												<%
-													ArrayList<Curso> listaAlumnosPorCursos = null;
-													if (request.getAttribute("listaAlumnosPorCursos") != null) {
-														listaAlumnosPorCursos = (ArrayList<Curso>) request.getAttribute("listaAlumnosPorCursos");
-													}
-												%>
-												<%
-													if (listaAlumnosPorCursos != null) {
-														for (Curso item : listaAlumnosPorCursos) {
-												%>
-
-												<tr>
-													<td class="text-primary align-middle"><input
-														type="hidden" id="txtMateriaId" name="txtMateriaId"
-														value="<%=Curso.getMateria().getId()%>"> <input
-														type="hidden" id="txtSemestreId" name="txtSemestreId"
-														value="<%=Curso.getSemestre().getId()%>"> <input
-														type="hidden" id="txtAnio" name="txtAnio"
-														value="<%=Curso.getAnio()%>"> <input type="hidden"
-														id="txtLegajoDocente" name="txtLegajoDocente"
-														value="<%=Profesor.getLegajo()%>"> <input
-														type="hidden" id="txtLegajoAlumno" name="txtLegajoAlumno"
-														value="<%=item.getAlumno().getLegajo()%>"> <span
-														class="text-uppercase fw-bold"><%=item.getAlumno().getPersona().getApellido()%></span>,
-														<%=item.getAlumno().getPersona().getNombre()%></td>
-
-													<!-- AGREGO UN JAVASCRIPT PARA PERMITIR EL INGRESO DE VALORES NUMÉRICOS Y UN DISEÑO DE PATRÓN DE ETIQUETAS HTML PARA SOLO VALORES NUMÉRICOS  -->
-													<!-- EL ATRIBUTO PATTERN ESPECIFICA UNA EXPRESIÓN REGULAR CON LA QUE <INPUT>SE VERIFICA EL VALOR DEL ELEMENTO AL ENVIAR EL FORMULARIO. -->
-
-													<td class="align-middle text-center"><input type="text" id="nota" name="Nota1"
-														class="form-control" onkeypress="return valideKey(event)"
-														pattern="^\d{1,2}+(\.\d{1})?$"
-														value="<%=item.getNotaPrimerParcial()%>"></td>
-													<td class="text-center"><input type="text" id="nota" name="Nota2"
-														class="form-control" onkeypress="return valideKey(event)"
-														pattern="^\d{1,2}+(\.\d{1})?$"
-														value="<%=item.getNotaPrimerRecuperatorio()%>"></td>
-													<td class="text-center"><input type="text" id="nota" name="Nota3"
-														class="form-control" onkeypress="return valideKey(event)"
-														pattern="^\d{1,2}+(\.\d{1})?$"
-														value="<%=item.getNotaSegundoParcial()%>"></td>
-													<td class="text-center"><input type="text" id="nota" name="Nota4"
-														class="form-control" onkeypress="return valideKey(event)"
-														pattern="^\d{1,2}+(\.\d{1})?$"
-														value="<%=item.getNotaSegundoRecuperatorio()%>"></td>
-													<td class="text-center"><select
-														class="form-select form-select selectpicker"
-														name="estadoAlumno">
-															<%
-																ArrayList<Estado> listaEstados = null;
-																		if (request.getAttribute("listaEstados") != null) {
-																			listaEstados = (ArrayList<Estado>) request.getAttribute("listaEstados");
-																		}
-															%>
-															<%
-																if (listaAlumnosPorCursos != null) {
-																			for (Estado item2 : listaEstados) {
-																				if (item2.getNombre().equals("Libre") || item2.getNombre().equals("Regular")
-																						|| item2.getNombre().equals("Sin calificar")) {
-
-																					// POR MEDIO DEL ATRIBUTO SELECTED ESTABLEZCO LA OPCIÓN INICIALMENTE SELECCIONADA
-															%>
-															<option value="<%=item2.getId()%>"
-																<%if (item.getEstado().getId() == item2.getId()) {%>
-																selected <%}%>><%=item2.getNombre()%></option>
-															<%
-																}
-																			}
-																		}
-															%>
-													</select></td>
+											<hr>
+											<!-- INICIO DE LA TABLA -->
+											<form action="ProfCursoServlet" method="post">
+												<table id="myTable"
+													class="table table-striped table-hover border-success table-fit"
+													style="width: 100%">
+													<thead class="table-success">
+														<tr>
+															<th style="width: 40%" scope="col">Apellido y Nombre</th>
+															<th style="width: 10%" scope="col">Parcial 1</th>
+															<th style="width: 10%" scope="col">Recup. 1</th>
+															<th style="width: 10%" scope="col">Parcial 2</th>
+															<th style="width: 10%" scope="col">Recup. 2</th>
+															<th style="width: 20%" scope="col">Estado</th>
+														</tr>
+													</thead>
 													<%
-														}
+														ArrayList<Curso> listaAlumnosPorCursos = null;
+														if (request.getAttribute("listaAlumnosPorCursos") != null) {
+															listaAlumnosPorCursos = (ArrayList<Curso>) request.getAttribute("listaAlumnosPorCursos");
 														}
 													%>
-												</tr>
-											</table>
-											<br>
-											<hr>
-											<input type="submit" name="btnGuardarNotas"
-												class="btn btn-primary" style="float: right" value="Guardar">
-										</form>
-										<!-- FIN DE LA TABLA -->
+													<%
+														if (listaAlumnosPorCursos != null) {
+															for (Curso item : listaAlumnosPorCursos) {
+													%>
+	
+													<tr>
+														<td class="text-primary align-middle"><input
+															type="hidden" id="txtMateriaId" name="txtMateriaId"
+															value="<%=Curso.getMateria().getId()%>"> <input
+															type="hidden" id="txtSemestreId" name="txtSemestreId"
+															value="<%=Curso.getSemestre().getId()%>"> <input
+															type="hidden" id="txtAnio" name="txtAnio"
+															value="<%=Curso.getAnio()%>"> <input type="hidden"
+															id="txtLegajoDocente" name="txtLegajoDocente"
+															value="<%=Profesor.getLegajo()%>"> <input
+															type="hidden" id="txtLegajoAlumno" name="txtLegajoAlumno"
+															value="<%=item.getAlumno().getLegajo()%>"> <span
+															class="text-uppercase fw-bold"><%=item.getAlumno().getPersona().getApellido()%></span>,
+															<%=item.getAlumno().getPersona().getNombre()%></td>
+	
+														<!-- AGREGO UN JAVASCRIPT PARA PERMITIR EL INGRESO DE VALORES NUMÉRICOS Y UN DISEÑO DE PATRÓN DE ETIQUETAS HTML PARA SOLO VALORES NUMÉRICOS  -->
+														<!-- EL ATRIBUTO PATTERN ESPECIFICA UNA EXPRESIÓN REGULAR CON LA QUE <INPUT>SE VERIFICA EL VALOR DEL ELEMENTO AL ENVIAR EL FORMULARIO. -->
+	
+														<td class="align-middle text-center"><input
+															type="text" id="nota" name="Nota1" class="form-control"
+															onkeypress="return valideKey(event)"
+															pattern="^\d{1,2}+(\.\d{1})?$"
+															value="<%=item.getNotaPrimerParcial()%>"></td>
+														<td class="text-center"><input type="text" id="nota"
+															name="Nota2" class="form-control"
+															onkeypress="return valideKey(event)"
+															pattern="^\d{1,2}+(\.\d{1})?$"
+															value="<%=item.getNotaPrimerRecuperatorio()%>"></td>
+														<td class="text-center"><input type="text" id="nota"
+															name="Nota3" class="form-control"
+															onkeypress="return valideKey(event)"
+															pattern="^\d{1,2}+(\.\d{1})?$"
+															value="<%=item.getNotaSegundoParcial()%>"></td>
+														<td class="text-center"><input type="text" id="nota"
+															name="Nota4" class="form-control"
+															onkeypress="return valideKey(event)"
+															pattern="^\d{1,2}+(\.\d{1})?$"
+															value="<%=item.getNotaSegundoRecuperatorio()%>"></td>
+														<td class="text-center"><select
+															class="form-select form-select selectpicker"
+															name="estadoAlumno">
+																<%
+																	ArrayList<Estado> listaEstados = null;
+																			if (request.getAttribute("listaEstados") != null) {
+																				listaEstados = (ArrayList<Estado>) request.getAttribute("listaEstados");
+																			}
+																%>
+																<%
+																	if (listaAlumnosPorCursos != null) {
+																				for (Estado item2 : listaEstados) {
+																					if (item2.getNombre().equals("Libre") || item2.getNombre().equals("Regular")
+																							|| item2.getNombre().equals("Sin calificar")) {
+	
+																						// POR MEDIO DEL ATRIBUTO SELECTED ESTABLEZCO LA OPCIÓN INICIALMENTE SELECCIONADA
+																%>
+																<option value="<%=item2.getId()%>"
+																	<%if (item.getEstado().getId() == item2.getId()) {%>
+																	selected <%}%>><%=item2.getNombre()%></option>
+																<%
+																	}
+																				}
+																			}
+																%>
+														</select></td>
+														<%
+															}
+															}
+														%>
+													</tr>
+												</table>
+												<br>
+												<hr>
+												<input type="submit" name="btnGuardarNotas"
+													class="btn btn-primary" style="float: right" value="Guardar">
+											</form>
+											<!-- FIN DE LA TABLA -->
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-					</section>
+						</section>
 					</main>
 				</div>
 			</div>

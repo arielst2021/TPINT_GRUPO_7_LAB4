@@ -20,23 +20,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<title>Cursos - Agregar Alumnos</title>
 	<!-- SWEETALERT2 -->
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<!-- BOOTSTRAP5 -->
 	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css" />
-	
-
 </head>
 
-<!--
-----------------------------------------------------
-B O D Y
----------------------------------------------------- -->
 <body style="background-color: #F6F9FF">
 
 	<!-- N A V B A R  -->
@@ -321,24 +312,19 @@ B O D Y
 	<script type="text/javascript"
 		src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
 
-	<script>
-		//IDIOMAS ESPAÑOL DEL DATATABLE   
-		$(document)
-				.ready(
-						function() {
-							$('#myTable')
-									.DataTable(
-											{
-												pageLength : 5,
-												lengthMenu : [
-														[ 5, 10, 20, -1 ],
-														[ 5, 10, 20, "Todos" ] ],
-												"language" : {
-													"url" : "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
-												}
-											});
-						});
-	</script>
+<script>
+	//IDIOMAS ESPAÑOL DEL DATATABLE   
+	$(document).ready(
+		function() {
+			$('#myTable').DataTable(
+				{
+					pageLength : 5,
+					lengthMenu : [[ 5, 10, 20, -1 ],[ 5, 10, 20, "Todos" ] ],
+					"language" : {"url" : "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
+				}
+		});
+	});
+</script>
 
 <script type="text/javascript">
 function onSubmit() 
@@ -359,7 +345,6 @@ function onSubmit()
     return true; 
   }
 }
-
 //REGISTRA EL EVENTO EN EL FORMULARIO, NO EL BOTÓN DE ENVIAR
 $('#formulario').submit(onSubmit)
 
