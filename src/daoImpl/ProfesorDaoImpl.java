@@ -36,7 +36,7 @@ public class ProfesorDaoImpl implements ProfesorDao {
 	 
 	 LocalDate locald = persona.getFechaNacimiento();
 	 Date date = Date.valueOf(locald); // Magic happens here!
-	 
+	 int profesoragregado=0;
 	 Connection conexion = Conexion.getConexion().getSQLConexion();
 	 try {
 	 PreparedStatement statement = (PreparedStatement)
@@ -56,11 +56,14 @@ public class ProfesorDaoImpl implements ProfesorDao {
 	
 	 if (statement.executeLargeUpdate() > 0) {
 	 conexion.commit();
-	 return 1;
+	 profesoragregado= 1;
 	
 	 }
 	 } catch (SQLException e) {
+		 
+		 
 	 e.printStackTrace();
+	 profesoragregado= -1;
 	 try {
 	 conexion.rollback();
 	 } catch (SQLException e1) {
@@ -68,7 +71,7 @@ public class ProfesorDaoImpl implements ProfesorDao {
 	 }
 	 }
 	
-	 return 0;
+	 return profesoragregado;
 	 }
 
 	@Override

@@ -84,7 +84,7 @@ public class AdmProfesorServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if (request.getParameter("btnregistrar") != null) {
-
+			int profesoragregado = 0;
 			String string = request.getParameter("nacimiento");
 			SimpleDateFormat formato = new SimpleDateFormat(string);
 			Date fecha = null;
@@ -130,9 +130,17 @@ public class AdmProfesorServlet extends HttpServlet {
 			persona.setFechaNacimiento(date);
 			persona.setProvincia(provincia);
 			profesor.setPersona(persona);
-			negocioprofesor.guardarprofesor(profesor);
-
-			RequestDispatcher miRequestDispatcher = request.getRequestDispatcher("/adm_alumnos_agregar.jsp");
+			profesoragregado=negocioprofesor.guardarprofesor(profesor);
+            
+			request.setAttribute("respuestadb", profesoragregado);
+			
+			NegocioProvincia negocioProvincia = new NegocioProvinciaImpl();
+			List<Provincia> ListaProvincia= negocioProvincia.listaProvincias();
+			request.setAttribute("ListaProvincia", ListaProvincia);
+			
+			
+			
+			RequestDispatcher miRequestDispatcher = request.getRequestDispatcher("/adm_profesores_agregar.jsp");
 			miRequestDispatcher.forward(request, response);
 		}
 		

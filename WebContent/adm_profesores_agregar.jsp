@@ -22,6 +22,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
@@ -56,6 +59,38 @@ N A V B A R
 		}
 	%>
   <main>
+  
+  <script type="text/javascript">
+    var msg = '<%=request.getAttribute("respuestadb")%>';
+		if (msg != "null") {
+			if (msg == '1' ) {
+				Swal.fire({
+					title : '¡Correcto!',
+					text : "¡Profesor agregado exitosamente!",
+					icon : 'success',
+					confirmButtonText : 'OK'
+				})
+			}
+			if (msg == '0') {
+				Swal.fire({
+					title : '¡Error!',
+					text : "¡Hubo un error al intentar agregar el Profesor!",
+					icon : 'error',
+					confirmButtonText : 'OK'
+				})
+				<%session.setAttribute("Mensaje", null);%>
+			}
+			if (msg == '-1') {
+				Swal.fire({
+					title : '¡Error!',
+					text : "¡Profesor duplicado, no se agregó el curso!",
+					icon : 'error',
+					confirmButtonText : 'OK'
+				})
+				<%session.setAttribute("Mensaje", null);%>
+			}
+		}
+	</script>
     <div >
 
       <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
@@ -177,7 +212,7 @@ N A V B A R
                    
 
                     <div class="col-12">
-                      <label for="yourPassword" class="form-label">Contraseña-origni</label>
+                      <label for="yourPassword" class="form-label">Contraseña</label>
                       <input type="password" name="password" class="form-control" id="yourPassword" required>
                      
                     </div>
@@ -291,7 +326,7 @@ function valida_envia(){
 
 
 
-       alert("Profesor cargado correctamente !")
+      
 		return true;
 		
 		
