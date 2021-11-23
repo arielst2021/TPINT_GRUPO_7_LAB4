@@ -33,32 +33,26 @@
 <html lang="es">
 <head>
 <title>Login</title>
-
-<!-- SWEETALERT2 -->
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<!-- BOOTSTRAP5 -->
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css" />
-	
-<script type="text/javascript">
-    var msg = '<%=session.getAttribute("Mensaje")%>';
-            if (msg != "null") {
-                alert(msg);
-            }
-       <%
-		session.setAttribute("Mensaje", null);     
-       %>
-</script>	
-	
-	
-	
-	
-	
-</head>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<!-- BOOTSTRAP5 -->
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css" />
 
 <body style="background-color: #F6F9FF">
-
+	<script type="text/javascript">
+    var msg = '<%=session.getAttribute("Mensaje")%>';
+		if (msg != "null") {
+			Swal.fire({
+				title : '¡Error!',
+				text : msg,
+				icon : 'error',
+				confirmButtonText : 'OK'
+			})
+		}
+		<%session.setAttribute("Mensaje", null);%>
+	</script>
+	
 	<main>
 	<div class="container">
 

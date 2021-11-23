@@ -18,8 +18,7 @@ import negocioImpl.NegocioProfesorImpl;
 public class InicioServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public InicioServlet() {
-	}
+	public InicioServlet() {}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -30,7 +29,7 @@ public class InicioServlet extends HttpServlet {
 
 		// INGRESA EL USUARIO CON SU USER Y PASS
 		if (request.getParameter("btnIngresarUsuario") != null) {
-			
+
 			String paginaDestino = "index.jsp";
 			NegocioProfesor NegocioProfesor = new NegocioProfesorImpl();
 			Profesor Profesor = null;
@@ -57,15 +56,11 @@ public class InicioServlet extends HttpServlet {
 					session.setAttribute("perfil", Profesor);
 				} catch (Exception e) {
 					//
-					String Mensaje = "NO EXISTE USUARIO";
+					String Mensaje = "¡Acceso inválido! Por favor, inténtelo otra vez.";
 
 					HttpSession session = request.getSession();
-					session.setAttribute("Mensaje", Mensaje);					
-
-					System.out.println("NO EXISTE USUARIO");
-
+					session.setAttribute("Mensaje", Mensaje);
 				}
-
 			}
 			RequestDispatcher dispatcher = request.getRequestDispatcher(paginaDestino);
 			dispatcher.forward(request, response);
@@ -79,5 +74,4 @@ public class InicioServlet extends HttpServlet {
 			response.sendRedirect("index.jsp");
 		}
 	}
-
 }
