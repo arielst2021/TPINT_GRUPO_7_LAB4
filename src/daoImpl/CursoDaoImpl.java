@@ -155,9 +155,10 @@ public class CursoDaoImpl implements CursoDao {
 				//
 				statement.setInt(9, miCurso.getProfesor().getLegajo());
 				statement.setInt(10, miCurso.getAlumno().getLegajo());
-				if (statement.executeUpdate() > 0) {
+				
+				NotasAgregadas = statement.executeUpdate();
+				if (NotasAgregadas > 0) {
 					conexion.commit();
-					NotasAgregadas = 1;
 				}
 			}
 		} catch (SQLException e) {
@@ -171,7 +172,7 @@ public class CursoDaoImpl implements CursoDao {
 		}
 		return NotasAgregadas;
 	}
-
+	
 	@Override
 	public int AgregarNuevoCurso(Curso Curso) {
 

@@ -20,7 +20,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>Cursos - Agregar Alumnos</title>
 	<!-- SWEETALERT2 -->
@@ -29,8 +28,6 @@
 	<!-- BOOTSTRAP5 -->
 	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css" />
-	
-
 </head>
 
 <!--
@@ -96,8 +93,7 @@ B O D Y
 		<div class="col-12">
 			<div class="card">
 				<div class="card-body">
-					<form action="AdmCursoServlet" id="formulario"  method="post">
-
+					<form action="AdmCursoServlet" method="post">
 					<!-- M A I N  -->
 					<main id="main" class="main">
 					<section class="section">
@@ -254,9 +250,8 @@ B O D Y
 												%>
 
 												<tr>
-													<td class="align-middle"><span
-														class="text-primary text-uppercase fw-bold"><%=item.getPersona().getApellido()%></span>, <span
-														class="text-primary"><%=item.getPersona().getNombre()%></span>
+													<td class="text-primary align-middle"><span
+														class="text-uppercase fw-bold"><%=item.getPersona().getApellido()%></span>, <%=item.getPersona().getNombre()%>
 													</td>
 													
 													<td class="align-middle text-center"><%=item.getLegajo()%></td>	
@@ -274,15 +269,8 @@ B O D Y
 													<%
 													}
 													%>											
-													<td class=" text-center">
-															<input 
-																type="checkbox"
-																id="txtAlumnoLegajo"
-																name="txtAlumnoLegajo"
-																class="checkbox checkbox-success"
-
-																value="<%=item.getLegajo()%>">
-														
+													<td class=" text-center"><input type="checkbox" id="txtAlumnoLegajo" name="txtAlumnoLegajo"
+														value="<%=item.getLegajo()%>">
 													</td>
 
 													<%
@@ -301,7 +289,7 @@ B O D Y
 										
 
 <input
-															type="submit" id="btnAgregarAlumnosAlCurso"
+															type="submit"
 															name="btnAgregarAlumnosAlCurso" class="btn btn-primary"
 															style="float: right" value="Agregar Alumnos">
 
@@ -341,31 +329,6 @@ $(document).ready(function() {
 		}
 	});
 });
-</script>
-
-<script type="text/javascript">
-function onSubmit() 
-{ 
-  var fields = $("input[name='txtAlumnoLegajo']").serializeArray(); 
-  if (fields.length == 0) 
-  {
-	  Swal.fire({
-		title : '¡Error!',
-		text : "¡Debe seleccionar al menos un alumno para agregar al curso!",
-		icon : 'error',
-		confirmButtonText : 'OK'
-		})
-    return false;
-  } 
-  else 
-  { 
-    return true; 
-  }
-}
-
-//REGISTRA EL EVENTO EN EL FORMULARIO, NO EL BOTÓN DE ENVIAR
-$('#formulario').submit(onSubmit)
-
 </script>
 
 </body>

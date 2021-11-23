@@ -168,7 +168,7 @@ public class ProfCursoServlet extends HttpServlet {
 				// AGREGO NOTAS
 				NotasAgregadas = NegocioCurso.AgregarNotasCurso(Curso);
 				
-				if (NotasAgregadas==1) {						
+				if (NotasAgregadas > 0) {						
 					//MENSAJE "Notas/s agregada/s exitosamente";
 					Mensaje = "1";}
 				if (NotasAgregadas==0) {	
