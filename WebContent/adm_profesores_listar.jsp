@@ -70,6 +70,7 @@ N A V B A R
                                             <th scope="col">Apellido</th>
                                             <th scope="col">DNI</th>
                                             <th scope="col">Email</th>
+                                            <th scope="col">Estado</th>
                                             <th scope="col">Acciones</th>
                                         </tr>
                                     </thead>
@@ -100,13 +101,17 @@ N A V B A R
                                                     <td>
                                                         <%=item.getPersona().getEmail() %>
                                                     </td>
+                                                    <td>
+                                                        <%= item.getEstado().getNombre() %>
+                                                    </td>
                                                  	
                                                     <td>
                                                     	<form action="AdmProfesorServlet" method="post">
                                                     	<input type="hidden" name="LegajoProfesor" value="<%=item.getLegajo() %>">
+                                                    	<input type="hidden" name="EstadoProfesor" value="<%=item.getEstado().getId() %>">
  														<input type="submit" name="EditarProfesor" value="Editar" class="btn btn-primary">
  															
- 														<input type="submit" name="EstadoProfesor" value="Estado" class="btn btn-danger">
+ 														<input type="submit" name="EditarEstado" value="Estado" class="btn btn-danger">
                                                     	
                                                     	</form>
                                                     </td>

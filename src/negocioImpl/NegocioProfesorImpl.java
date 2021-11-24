@@ -31,8 +31,13 @@ public class NegocioProfesorImpl implements NegocioProfesor{
 
 
 	@Override
-	public ArrayList<Profesor> listaProfesores() {
-		return dao.listaProfesores();
+	public ArrayList<Profesor> listaTodosProfesores() {
+		return dao.listaTodosProfesores();
+	}
+	
+	@Override
+	public ArrayList<Profesor> listaProfesoresActivos() {
+		return dao.listaProfesoresActivos();
 	}
 //	public List<Provincia> obtenerprovincias() {
 //		
@@ -49,8 +54,8 @@ public class NegocioProfesorImpl implements NegocioProfesor{
 	}
 
 	@Override
-	public boolean BajaProfesor(String Legajo) {
+	public int BajaProfesor(Profesor ObjProfesor) {
 		
-		return dao.BajaProfesor(Legajo);
+		return dao.BajaProfesor(ObjProfesor);
 	}
 }

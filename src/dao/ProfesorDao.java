@@ -6,7 +6,8 @@ import entidades.Profesor;
 
 public interface ProfesorDao {
 	public Profesor iniciarSesion(String userProfesor, String passProfesor);
-	public ArrayList<Profesor> listaProfesores();
+	public ArrayList<Profesor> listaTodosProfesores();
+	public ArrayList<Profesor> listaProfesoresActivos();
 	public int guardarprofesor(Profesor profesor);
-	public boolean BajaProfesor(String Legajo);
+	public int BajaProfesor(Profesor ObjProfesor);
 }

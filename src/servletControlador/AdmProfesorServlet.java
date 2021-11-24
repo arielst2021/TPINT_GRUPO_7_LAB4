@@ -69,7 +69,7 @@ public class AdmProfesorServlet extends HttpServlet {
 				// OBTENGO LISTA DE PROVINCIAS
 				NegocioProfesor negocioProfesor = new NegocioProfesorImpl();
 				
-				List<Profesor> ListaProfesor = negocioProfesor.listaProfesores();
+				List<Profesor> ListaProfesor = negocioProfesor.listaTodosProfesores();
 				request.setAttribute("ListaProfesor", ListaProfesor);
 				
 				RequestDispatcher rd = request.getRequestDispatcher("/adm_profesores_listar.jsp");
@@ -144,18 +144,22 @@ public class AdmProfesorServlet extends HttpServlet {
 			miRequestDispatcher.forward(request, response);
 		}
 		
-		if (request.getParameter("EstadoProfesor") != null) {
+		if (request.getParameter("EditarEstado") != null) {
 
 			String string = request.getParameter("LegajoProfesor");
+			String estado = request.getParameter("EstadoProfesor");
 			NegocioProfesor NegocioProfesor = new NegocioProfesorImpl();
-			NegocioProfesor.BajaProfesor(string);
 			
-			List<Profesor> ListaProfesor = NegocioProfesor.listaProfesores();
+			NegocioProfesor.BajaProfesor(new Profesor(Integer.parseInt(string),new Estado(Integer.parseInt(estado))));
+	
+			List<Profesor> ListaProfesor = NegocioProfesor.listaTodosProfesores();
 			request.setAttribute("ListaProfesor", ListaProfesor);
 			
 			RequestDispatcher miRequestDispatcher = request.getRequestDispatcher("/adm_profesores_listar.jsp");
 			miRequestDispatcher.forward(request, response);
 		}
+		
+		
 	}
 
 }

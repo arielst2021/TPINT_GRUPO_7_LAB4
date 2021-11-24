@@ -29,6 +29,13 @@ public class Profesor {
 		this.Usuario = Usuario;
 		this.Contrasenia = Contrasenia;
 	}
+	
+	public Profesor(int Legajo, Estado Estado) {
+		
+		this.Legajo = Legajo;
+		this.Estado = Estado;
+		
+	}
 
 	public int getLegajo() {
 		return Legajo;
@@ -57,7 +64,7 @@ public class Profesor {
 	public Perfil getPerfil() {
 		return Perfil;
 	}
-
+	
 	public void setPerfil(Perfil Perfil) {
 		this.Perfil = Perfil;
 	}

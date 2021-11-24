@@ -43,7 +43,7 @@ public class AdmCursoServlet extends HttpServlet {
 
 			// OBTENGO LISTA DE PROFESORES
 			NegocioProfesor NegocioProfesor = new NegocioProfesorImpl();
-			ArrayList<Profesor> lista = NegocioProfesor.listaProfesores();
+			ArrayList<Profesor> lista = NegocioProfesor.listaProfesoresActivos();
 			request.setAttribute("listaProfesores", lista);
 
 			// OBTENGO LISTA DE MATERIAS
@@ -139,7 +139,7 @@ public class AdmCursoServlet extends HttpServlet {
 				
 				// OBTENGO LISTA DE PROFESORES
 				NegocioProfesor NegocioProfesor = new NegocioProfesorImpl();
-				ArrayList<Profesor> lista = NegocioProfesor.listaProfesores();
+				ArrayList<Profesor> lista = NegocioProfesor.listaProfesoresActivos();
 				request.setAttribute("listaProfesores", lista);
 
 				// OBTENGO LISTA DE MATERIAS

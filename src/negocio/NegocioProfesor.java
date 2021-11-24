@@ -9,7 +9,8 @@ public interface NegocioProfesor {
 	
 	public int guardarprofesor (Profesor profesor);
 	public Profesor iniciarSesion(String userUsuario, String passUsuario);
-	public ArrayList<Profesor> listaProfesores();
+	public ArrayList<Profesor> listaTodosProfesores();
+	public ArrayList<Profesor> listaProfesoresActivos();
 	public List<Provincia> obtenerprovincias();
-	public boolean BajaProfesor(String Legajo);
+	public int BajaProfesor(Profesor ObjProfesor);
 }
