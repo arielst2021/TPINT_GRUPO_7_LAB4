@@ -23,6 +23,7 @@ public class ProfesorDaoImpl implements ProfesorDao {
 	private static final String iniciarSesion = "SELECT pro_perfil_id, per_nombre, pro_estado_id, est_nombre, pro_nombre, pro_apellido, pro_legajo FROM profesores INNER JOIN perfiles ON perfiles.per_id=profesores.pro_perfil_id INNER JOIN estados ON estados.est_id=profesores.pro_estado_id WHERE pro_usuario = ? AND pro_contrasenia = ? AND pro_estado_id = 1";
 	private static final String obtenerTodosLosProfesoresActivos = "SELECT pro_legajo, pro_dni, pro_nombre, pro_apellido, pro_fechanac, pro_direccion, pro_provincia_id, prov_nombre, pro_email, pro_telefono, pro_estado_id, est_nombre, pro_perfil_id, per_nombre, pro_usuario, pro_contrasenia FROM profesores INNER JOIN provincias ON provincias.prov_id=profesores.pro_provincia_id INNER JOIN perfiles ON perfiles.per_id=profesores.pro_perfil_id INNER JOIN estados ON estados.est_id= profesores.pro_estado_id WHERE pro_estado_id=1 AND pro_perfil_id=2";
 	private static final String obtenerTodosLosProfesores = "SELECT pro_legajo, pro_dni, pro_nombre, pro_apellido, pro_fechanac, pro_direccion, pro_provincia_id, prov_nombre, pro_email, pro_telefono, pro_estado_id, est_nombre, pro_perfil_id, per_nombre, pro_usuario, pro_contrasenia FROM profesores INNER JOIN provincias ON provincias.prov_id=profesores.pro_provincia_id INNER JOIN perfiles ON perfiles.per_id=profesores.pro_perfil_id INNER JOIN estados ON estados.est_id= profesores.pro_estado_id WHERE pro_perfil_id=2";
+	private static final String obtenerProfesorPorLegajo = "SELECT pro_legajo, pro_dni, pro_nombre, pro_apellido, pro_fechanac, pro_direccion, pro_provincia_id, prov_nombre, pro_email, pro_telefono, pro_estado_id, est_nombre, pro_perfil_id, per_nombre, pro_usuario, pro_contrasenia FROM profesores INNER JOIN provincias ON provincias.prov_id=profesores.pro_provincia_id INNER JOIN perfiles ON perfiles.per_id=profesores.pro_perfil_id INNER JOIN estados ON estados.est_id= profesores.pro_estado_id WHERE pro_legajo= ?";
 
 	private Connection miConnection = null;
 	private PreparedStatement miPreparedStatement = null;
@@ -269,6 +270,66 @@ public class ProfesorDaoImpl implements ProfesorDao {
 			}
 		}
 		return 0;
+	}
+
+	@Override
+	public Profesor ProfePorLegajo(String legajo) {
+
+		Profesor Profesor = new Profesor();
+
+		try {
+			// 1. OBTENER UNA CONEXIÓN A LA BASE DE DATOS
+			miConnection = Conexion.getConexion().getSQLConexion();
+
+			// 2. PREPARAR DECLARACIÓN // 3. ESTABLECER LOS PARÁMETROS
+			miPreparedStatement = miConnection.prepareStatement(obtenerProfesorPorLegajo);
+			
+			// 3. ESTABLECER LOS PARÁMETROS
+						miPreparedStatement.setString(1, legajo);
+			// 4. EJECUTAR CONSULTA SQL
+			miResultSet = miPreparedStatement.executeQuery();
+
+			// 5. AGREGAR EL CONJUNTO DE RESULTADOS EN UN ARRAY
+			while (miResultSet.next()) {
+				int legajoProfesor = miResultSet.getInt("pro_legajo");
+				String dniProfesor = miResultSet.getString("pro_dni");
+				String nombreProfesor = miResultSet.getString("pro_nombre");
+				String apellidoProfesor = miResultSet.getString("pro_apellido");
+				// FECHA NACIMIENTO
+				int anio = Integer.parseInt(miResultSet.getString("pro_fechanac").substring(0, 4));
+				int mes = Integer.parseInt(miResultSet.getString("pro_fechanac").substring(5, 7));
+				int dia = Integer.parseInt(miResultSet.getString("pro_fechanac").substring(8, 10));
+				LocalDate fechaNacimientoProfesor = LocalDate.of(anio, mes, dia);
+				//
+				String direccionProfesor = miResultSet.getString("pro_direccion");
+				//
+				int idProvincia = miResultSet.getInt("pro_provincia_id");
+				String nombreProvincia = miResultSet.getString("prov_nombre");
+				//
+				String emailProfesor = miResultSet.getString("pro_email");
+				String telefonoProfesor = miResultSet.getString("pro_telefono");
+				//
+				int idEstado = miResultSet.getInt("pro_estado_id");
+				String nombreEstado = miResultSet.getString("est_nombre");
+				//
+				int idPerfil = miResultSet.getInt("pro_perfil_id");
+				String nombrePerfil = miResultSet.getString("per_nombre");
+				//
+				String usuarioProfesor = miResultSet.getString("pro_usuario");
+				String contraseniaProfesor = miResultSet.getString("pro_contrasenia");
+				//
+				// Agrego el profesor
+				Profesor = new Profesor(legajoProfesor,
+						new Persona(dniProfesor, nombreProfesor, apellidoProfesor, fechaNacimientoProfesor,
+								direccionProfesor, new Provincia(idProvincia, nombreProvincia), emailProfesor,
+								telefonoProfesor),
+						new Estado(idEstado, nombreEstado), new Perfil(idPerfil, nombrePerfil), usuarioProfesor,
+						contraseniaProfesor);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return Profesor;
 	}
 	
 //	@Override

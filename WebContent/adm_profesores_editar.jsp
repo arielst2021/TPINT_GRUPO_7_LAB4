@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@page import="entidades.Profesor"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -25,7 +26,10 @@
 
   
   <!-- End Sidebar-->
-
+<% if(request.getAttribute("EditarProfesor") != null){
+            	 				 Profesor profe = (Profesor) request.getAttribute("EditarProfesor");
+            	  			
+            	  			%>
   <main id="main" class="main">
 
     <section class="section">
@@ -42,8 +46,10 @@
                 <div class="row mb-3">
                   <label for="inputText" class="col-sm-2 col-form-label">Legajo</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" disabled>
-                  </div>
+                  	
+                  	
+                    <input type="text" class="form-control" disabled value =<%=profe.getLegajo()%> >
+                 </div>
                 </div>
               
    
@@ -170,6 +176,7 @@
     </section>
 
   </main><!-- End #main -->
+   <% } %>
 
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">

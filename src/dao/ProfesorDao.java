@@ -10,4 +10,5 @@ public interface ProfesorDao {
 	public ArrayList<Profesor> listaProfesoresActivos();
 	public int guardarprofesor(Profesor profesor);
 	public int BajaProfesor(Profesor ObjProfesor);
+	public Profesor ProfePorLegajo(String legajo);
 }

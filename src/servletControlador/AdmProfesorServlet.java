@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import entidades.Persona;
+import entidades.Alumno;
 import entidades.Estado;
 import entidades.Provincia;
 import entidades.Perfil;
@@ -156,6 +157,21 @@ public class AdmProfesorServlet extends HttpServlet {
 			request.setAttribute("ListaProfesor", ListaProfesor);
 			
 			RequestDispatcher miRequestDispatcher = request.getRequestDispatcher("/adm_profesores_listar.jsp");
+			miRequestDispatcher.forward(request, response);
+		}
+		if (request.getParameter("EditarProfesor") != null) {
+			
+			String Legajo = request.getParameter("LegajoProfesor");
+    		
+			NegocioProfesor NegocioProfesor = new NegocioProfesorImpl();
+    		Profesor profe = new Profesor();
+    		profe = NegocioProfesor.ProfePorLegajo(Legajo);
+    		//OBTENGO LISTADO DE PROVINCIAS
+//			ArrayList<Provincia> lista = negocioP.listaProvincias();
+//			request.setAttribute("listarProvincias", lista);    		
+
+    		request.setAttribute("EditarProfesor", profe);
+			RequestDispatcher miRequestDispatcher = request.getRequestDispatcher("/adm_profesores_editar.jsp");
 			miRequestDispatcher.forward(request, response);
 		}
 		

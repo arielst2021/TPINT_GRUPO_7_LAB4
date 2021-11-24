@@ -52,10 +52,18 @@ public class NegocioProfesorImpl implements NegocioProfesor{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
 
 	@Override
 	public int BajaProfesor(Profesor ObjProfesor) {
 		
 		return dao.BajaProfesor(ObjProfesor);
+	}
+
+	@Override
+	public Profesor ProfePorLegajo(String Legajo) {
+		// TODO Auto-generated method stub
+		
+		return dao.ProfePorLegajo(Legajo);
 	}
 }
