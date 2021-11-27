@@ -117,7 +117,6 @@ public class ProfesorDaoImpl implements ProfesorDao {
 				Profesor2.setPerfil(Perfil);
 				Profesor2.setEstado(Estado);
 				Profesor2.setPersona(Persona);
-				System.out.println("hola");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
