@@ -105,52 +105,68 @@ public class ProfCursoServlet extends HttpServlet {
 		
 		if (request.getParameter("btnGuardarNotas") != null) {
 			
+			Curso CursoLista = null;
 			int NotasAgregadas = 0;
 			String Mensaje = "0";
 
 			ArrayList<Curso> Curso = new ArrayList<Curso>();
 			NegocioCurso NegocioCurso = new NegocioCursoImpl();
 			
-			int MateriaId = Integer.parseInt(request.getParameter("txtMateriaId"));			
-			int SemestreId = Integer.parseInt(request.getParameter("txtSemestreId"));
-			Year Anio = Year.of(Integer.parseInt(request.getParameter("txtAnio")));
-			int LegajoDocente = Integer.parseInt(request.getParameter("txtLegajoDocente"));
-			
-			String []Nota1 = request.getParameterValues("Nota1");
-			String []Nota2 = request.getParameterValues("Nota2");
-			String []Nota3 = request.getParameterValues("Nota3");
-			String []Nota4 = request.getParameterValues("Nota4");
-			String []EstadoId = request.getParameterValues("estadoAlumno");
-			
-			String []LegajoAlumno = request.getParameterValues("txtLegajoAlumno");
-			//
-			Materia Materia = new Materia();
-			Materia.setId(MateriaId);
-			Semestre Semestre = new Semestre();
-			Semestre.setId(SemestreId);
-			//
-			Profesor Profesor = new Profesor();
-			Profesor.setLegajo(LegajoDocente);
-					
-			for(int i = 0; i < LegajoAlumno.length; i++) {			
+			// DATOS DEL CURSO
+			if(request.getParameter("txtMateriaId") != null && request.getParameter("txtSemestreId") != null && request.getParameter("txtAnio") != null && request.getParameter("txtLegajoDocente") != null) {
 				try {
-					Float notaDecimal1 = Float.parseFloat(Nota1[i]);
-					Float notaDecimal2 = Float.parseFloat(Nota2[i]);
-					Float notaDecimal3 = Float.parseFloat(Nota3[i]);
-					Float notaDecimal4 = Float.parseFloat(Nota4[i]);
-					int EstadoNuevo = Integer.parseInt(EstadoId[i]);
-					if(notaDecimal1 >= 0 && notaDecimal1 <= 10 && notaDecimal2 >= 0 && notaDecimal2 <= 10 && notaDecimal3 >= 0 && notaDecimal3 <= 10 && notaDecimal4 >= 0 && notaDecimal4 <= 10) { // LA NOTA INGRESADA DEBE SER ENTRE 0 Y 10
-						Alumno Alumno = new Alumno();
-						Alumno.setLegajo(Integer.parseInt(LegajoAlumno[i]));
-						Estado Estado = new Estado();
-						Estado.setIdEstado(EstadoNuevo);
-						Curso.add(new Curso(Materia,Semestre,Anio, Profesor, Alumno, notaDecimal1, notaDecimal2, notaDecimal3, notaDecimal4, Estado));
-					}					
+					int MateriaId = Integer.parseInt(request.getParameter("txtMateriaId"));			
+					int SemestreId = Integer.parseInt(request.getParameter("txtSemestreId"));
+					Year Anio = Year.of(Integer.parseInt(request.getParameter("txtAnio")));
+					int LegajoDocente = Integer.parseInt(request.getParameter("txtLegajoDocente"));
+					
+					// DATOS DEL CURSO
+					CursoLista = new Curso(new Materia(MateriaId), new Semestre(SemestreId),Anio, new Profesor(LegajoDocente));
+					
+					// DATOS DEL ALUMNO (Y SUS NOTAS)
+					if(request.getParameter("Nota1") != null && request.getParameter("Nota2") != null &&
+					   request.getParameter("Nota3") != null && request.getParameter("Nota4") != null &&
+					   request.getParameter("estadoAlumno") != null && request.getParameter("txtLegajoAlumno") != null) {
+						
+						try {
+							String []Nota1 = request.getParameterValues("Nota1");
+							String []Nota2 = request.getParameterValues("Nota2");
+							String []Nota3 = request.getParameterValues("Nota3");
+							String []Nota4 = request.getParameterValues("Nota4");
+							String []EstadoId = request.getParameterValues("estadoAlumno");
+							
+							String []LegajoAlumno = request.getParameterValues("txtLegajoAlumno");
+							
+							for(int i = 0; i < LegajoAlumno.length; i++) {			
+								try {
+									Float notaDecimal1 = Float.parseFloat(Nota1[i]);
+									Float notaDecimal2 = Float.parseFloat(Nota2[i]);
+									Float notaDecimal3 = Float.parseFloat(Nota3[i]);
+									Float notaDecimal4 = Float.parseFloat(Nota4[i]);
+									int EstadoNuevo = Integer.parseInt(EstadoId[i]);
+									if(notaDecimal1 >= 0 && notaDecimal1 <= 10 && notaDecimal2 >= 0 && notaDecimal2 <= 10 && notaDecimal3 >= 0 && notaDecimal3 <= 10 && notaDecimal4 >= 0 && notaDecimal4 <= 10) { // LA NOTA INGRESADA DEBE SER ENTRE 0 Y 10
+										Alumno Alumno = new Alumno();
+										Alumno.setLegajo(Integer.parseInt(LegajoAlumno[i]));
+										Estado Estado = new Estado();
+										Estado.setIdEstado(EstadoNuevo);
+										Curso.add(new Curso(new Materia(MateriaId), new Semestre(SemestreId),Anio, new Profesor(LegajoDocente), Alumno, notaDecimal1, notaDecimal2, notaDecimal3, notaDecimal4, Estado));
+									}					
+								} catch (Exception e) {
+									// SI EL VALOR INGRESADO EN EL TEXT NO ES VALIDO NO SE AGREGA LA NOTA EN LA BASE DE DATOS
+								}
+							}
+							
+						} catch (Exception e) {
+							// TODO: handle exception
+						}
+						
+						
+					}
 				} catch (Exception e) {
-					// SI EL VALOR INGRESADO EN EL TEXT NO ES VALIDO NO SE AGREGA LA NOTA EN LA BASE DE DATOS
-				}
+					
+				}				
 			}
-			
+		
 			if(Curso!=null) {			
 				// AGREGO NOTAS
 				NotasAgregadas = NegocioCurso.AgregarNotasCurso(Curso);
@@ -169,8 +185,6 @@ public class ProfCursoServlet extends HttpServlet {
 				}
 			}
 			
-			Curso CursoLista = new Curso(Materia, Semestre, Anio, Profesor);
-
 			HttpSession session = request.getSession();
 			session.setAttribute("Mensaje", Mensaje);
 			

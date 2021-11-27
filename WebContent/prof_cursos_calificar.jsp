@@ -118,6 +118,7 @@ B O D Y
 								<div class="col-lg-12">
 									<div class="card">
 										<div class="card-body">
+										<form action="ProfCursoServlet" method="post">
 											<%!Curso Curso = new Curso();%>
 											<%
 												if (session.getAttribute("DatosDelCurso") != null) {
@@ -147,12 +148,16 @@ B O D Y
 														</strong><%=Profesor.getPersona().getNombre()%>
 														<%=Profesor.getPersona().getApellido()%>
 													</div>
-	
+													
+													<!-- OBTENGO LOS DATOS DEL CURSO -->
+														<input type="hidden" id="txtMateriaId" name="txtMateriaId" value="<%=Curso.getMateria().getId()%>">
+														<input type="hidden" id="txtSemestreId" name="txtSemestreId" value="<%=Curso.getSemestre().getId()%>">
+														<input type="hidden" id="txtAnio" name="txtAnio" value="<%=Curso.getAnio()%>">
+														<input type="hidden" id="txtLegajoDocente" name="txtLegajoDocente" value="<%=Profesor.getLegajo()%>">
 												</div>
 											</div>
 											<hr>
 											<!-- INICIO DE LA TABLA -->
-											<form action="ProfCursoServlet" method="post">
 												<table id="myTable"
 													class="table table-striped table-hover border-success table-fit"
 													style="width: 100%">
@@ -178,19 +183,10 @@ B O D Y
 													%>
 	
 													<tr>
-														<td class="text-primary align-middle"><input
-															type="hidden" id="txtMateriaId" name="txtMateriaId"
-															value="<%=Curso.getMateria().getId()%>"> <input
-															type="hidden" id="txtSemestreId" name="txtSemestreId"
-															value="<%=Curso.getSemestre().getId()%>"> <input
-															type="hidden" id="txtAnio" name="txtAnio"
-															value="<%=Curso.getAnio()%>"> <input type="hidden"
-															id="txtLegajoDocente" name="txtLegajoDocente"
-															value="<%=Profesor.getLegajo()%>"> <input
-															type="hidden" id="txtLegajoAlumno" name="txtLegajoAlumno"
-															value="<%=item.getAlumno().getLegajo()%>"> <span
-															class="text-uppercase fw-bold"><%=item.getAlumno().getPersona().getApellido()%></span>,
-															<%=item.getAlumno().getPersona().getNombre()%></td>
+														<td class="text-primary align-middle">
+														<!-- OBTENGO EL LEGAJO DEL ALUMNO -->
+														<input type="hidden" id="txtLegajoAlumno" name="txtLegajoAlumno" value="<%=item.getAlumno().getLegajo()%>">
+														<span class="text-uppercase fw-bold"><%=item.getAlumno().getPersona().getApellido()%></span>, <%=item.getAlumno().getPersona().getNombre()%></td>
 	
 														<!-- AGREGO UN JAVASCRIPT PARA PERMITIR EL INGRESO DE VALORES NUMÉRICOS Y UN DISEÑO DE PATRÓN DE ETIQUETAS HTML PARA SOLO VALORES NUMÉRICOS  -->
 														<!-- EL ATRIBUTO PATTERN ESPECIFICA UNA EXPRESIÓN REGULAR CON LA QUE <INPUT>SE VERIFICA EL VALOR DEL ELEMENTO AL ENVIAR EL FORMULARIO. -->
