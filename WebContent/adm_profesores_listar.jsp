@@ -49,6 +49,12 @@ N A V B A R
 	<%
 		}
 	%>
+        
+	<div class="row">
+		<div class="col-12">
+			<div class="card">
+				<div class="card-body">
+				        
         <main id="main" class="main">
             <section class="section">
                 <div class="row">
@@ -101,10 +107,22 @@ N A V B A R
                                                     <td>
                                                         <%=item.getPersona().getEmail() %>
                                                     </td>
-                                                    <td>
+<%--                                                     <td>
                                                         <%= item.getEstado().getNombre() %>
-                                                    </td>
-                                                 	
+                                                    </td> --%>
+<%
+															if (item.getEstado().getNombre().equals("Activo")) {
+														%>
+														<td class="align-middle text-center"><span
+															class="badge bg-success text-wrap"><%=item.getEstado().getNombre()%></span></td>
+														<%
+															} else {
+														%>
+														<td class="align-middle text-center"><span
+															class="badge bg-danger text-wrap"><%=item.getEstado().getNombre()%></span></td>
+														<%
+															}
+														%>                                                 	
                                                     <td>
                                                     	<form action="AdmProfesorServlet" method="post">
                                                     	<input type="hidden" name="LegajoProfesor" value="<%=item.getLegajo() %>">
@@ -133,7 +151,12 @@ N A V B A R
                 
             </section>
         </main>
-        <!-- End #main -->
+					<!-- End #main -->
+
+				</div>
+			</div>
+		</div>
+	</div>
 
         <!-- ======= Footer ======= -->
 

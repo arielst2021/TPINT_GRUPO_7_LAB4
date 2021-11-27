@@ -66,7 +66,7 @@ N A V B A R
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Listado de alumnos</h5>
+              <h5 class="card-title text-success">Listado de alumnos</h5>
               <hr>
               <br>
               <!-- Tabla -->
@@ -100,7 +100,20 @@ N A V B A R
                     	 <td class="align-middle text-primary"><span class="text-uppercase fw-bold"><%=alum.getPersona().getApellido()%></span>, <%=alum.getPersona().getNombre()%></td>
                     	 <td class="align-middle"><%=alum.getPersona().getDni()%></td>
                     	 <td class="align-middle"><%=alum.getPersona().getProvincia().getNombre()%></td>
-                    	 <td class="align-middle"><%=alum.getEstado().getNombre()%></td>
+<%--                     	 <td class="align-middle"><%=alum.getEstado().getNombre()%></td> --%>
+<%
+															if (alum.getEstado().getNombre().equals("Activo")) {
+														%>
+														<td class="align-middle text-center"><span
+															class="badge bg-success text-wrap"><%=alum.getEstado().getNombre()%></span></td>
+														<%
+															} else {
+														%>
+														<td class="align-middle text-center"><span
+															class="badge bg-danger text-wrap"><%=alum.getEstado().getNombre()%></span></td>
+														<%
+															}
+														%>  
                     	 <td class="align-middle"><%=alum.getPersona().getFechaNacimiento().getDayOfMonth()%>-<%=alum.getPersona().getFechaNacimiento().getMonthValue()%>-<%=alum.getPersona().getFechaNacimiento().getYear()%></td>
                         <td>
                         	<form action="AdmAlumnoServlet" method="post">

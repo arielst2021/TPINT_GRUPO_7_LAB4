@@ -60,10 +60,7 @@ N A V B A R
 
 								<div class="card">
 									<div class="card-body">
-										<%-- 						<p><%=Profesor.getPersona().getNombre()%> --%>
-										<%-- 							<%=Profesor.getPersona().getApellido()%> --%>
-										<!-- 						</p> -->
-										<h5 class="card-title">Listado de Cursos</h5>
+										<h5 class="card-title text-primary">Listado de Cursos</h5>
 										<hr>
 										<!-- INICIO DE LA TABLA -->
 										<table id="myTable" class="table table-striped table-hover border-success" style="width: 100%">
@@ -123,7 +120,7 @@ N A V B A R
 															value="<%=item.getProfesor().getPersona().getNombre()%>">
 														<input type="submit" name="btnAgregarAlumnos"
 															value="Agregar Alumnos"
-															class="btn btn-sm btn-outline-primary waves-effect">
+															class="btn btn-sm btn-primary waves-effect">
 													</form>
 
 												</td>

@@ -125,8 +125,8 @@ B O D Y
 												}
 											%>
 											<br>
-											<h5 class="card-title text-success">Calificaciones de los
-												alumnos</h5>
+											<h3 class="card-title text-primary">Calificaciones de los
+												alumnos</h3>
 											<hr>
 											<div class="row">
 												<div class="col-md-6 text-left">

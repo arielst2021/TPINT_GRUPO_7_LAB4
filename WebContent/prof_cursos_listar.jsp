@@ -62,10 +62,11 @@ N A V B A R
 	
 									<div class="card">
 										<div class="card-body">
-											<h5 class="card-title text-success">
+											<h3 class="card-title text-primary">
 												Cursos del Profesor/a
 												<%=Profesor.getPersona().getNombre()%>
-												<%=Profesor.getPersona().getApellido()%></h5>
+												<%=Profesor.getPersona().getApellido()%>
+											</h3>
 											<hr>
 											<!-- INICIO DE LA TABLA -->
 											<table id="myTable"
