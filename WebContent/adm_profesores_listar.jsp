@@ -18,18 +18,16 @@
     <html>
 
 
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-        <title>Mis Cursos</title>
-        <!--
-----------------------------------------------------
-	 C S S - BOOTSTRAP, CUSTOM STYLES 
----------------------------------------------------- -->
-        <link rel="stylesheet" type="text/css"
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css"
-            href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css" />
-    </head>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Listado de profesores</title>
+	<!-- SWEETALERT2 -->
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<!-- BOOTSTRAP5 -->
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css" />
+</head>
 
     <body style="background-color: #F6F9FF">
 
@@ -62,22 +60,20 @@ N A V B A R
 
                         <div class="card">
                             <div class="card-body">
-                                <p></p>
-                                <h5 class="card-title">Listado de profesores</h5>
+                                <h3 class="card-title text-primary">Listado de profesores</h3>
                                 <hr>
                                 <!-- INICIO DE LA TABLA -->
-
-
-                                <table id="myTable" class="table table-striped" style="width: 100%">
-                                    <thead>
+											<table id="myTable"
+												class="table table-striped table-hover border-success"
+												style="width: 100%">
+												<thead class="table-success">
                                         <tr>
                                             <th scope="col">Legajo</th>
-                                            <th scope="col">Nombre</th>
-                                            <th scope="col">Apellido</th>
+                    						<th scope="col">Apellido y nombre</th>
                                             <th scope="col">DNI</th>
                                             <th scope="col">Email</th>
                                             <th scope="col">Estado</th>
-                                            <th scope="col">Acciones</th>
+                                            <th scope="col">Modificar</th>
                                         </tr>
                                     </thead>
 
@@ -92,33 +88,25 @@ N A V B A R
 
                                                 <tr>
 
-                                                    <td>
+                                                    <td class="align-middle">
                                                         <%=item.getLegajo() %>
-                                                    </td>
-                                                    <td>
-                                                        <%=item.getPersona().getNombre() %>
-                                                    </td>
-                                                    <td>
-                                                        <%=item.getPersona().getApellido() %>
-                                                    </td>
-                                                    <td>
+                    	 <td class="align-middle text-primary"><span class="text-uppercase fw-bold"><%=item.getPersona().getApellido()%></span>, <%=item.getPersona().getNombre()%></td>
+
+                                                    <td class="align-middle">
                                                         <%=item.getPersona().getDni() %>
                                                     </td>
-                                                    <td>
+                                                    <td class="align-middle">
                                                         <%=item.getPersona().getEmail() %>
                                                     </td>
-<%--                                                     <td>
-                                                        <%= item.getEstado().getNombre() %>
-                                                    </td> --%>
 <%
 															if (item.getEstado().getNombre().equals("Activo")) {
 														%>
-														<td class="align-middle text-center"><span
+														<td class="align-middle"><span
 															class="badge bg-success text-wrap"><%=item.getEstado().getNombre()%></span></td>
 														<%
 															} else {
 														%>
-														<td class="align-middle text-center"><span
+														<td class="align-middle"><span
 															class="badge bg-danger text-wrap"><%=item.getEstado().getNombre()%></span></td>
 														<%
 															}
@@ -127,7 +115,7 @@ N A V B A R
                                                     	<form action="AdmProfesorServlet" method="post">
                                                     	<input type="hidden" name="LegajoProfesor" value="<%=item.getLegajo() %>">
                                                     	<input type="hidden" name="EstadoProfesor" value="<%=item.getEstado().getId() %>">
- 														<input type="submit" name="EditarProfesor" value="Editar" class="btn btn-primary">
+ 														<input type="submit" name="EditarProfesor" value="Datos" class="btn btn-warning">
  															
  														<input type="submit" name="EditarEstado" value="Estado" class="btn btn-danger">
                                                     	
@@ -157,10 +145,9 @@ N A V B A R
 			</div>
 		</div>
 	</div>
-
-        <!-- ======= Footer ======= -->
-
+	<!-- ======= Footer ======= -->
 	<jsp:include page="footer.jsp"></jsp:include>
+	
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script type="text/javascript"
             src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>

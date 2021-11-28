@@ -119,7 +119,7 @@ N A V B A R
 																id="txtLegajo" name="txtLegajo"
 																value="<%=Profesor.getLegajo()%>"> <input
 																type="submit" name="btnObtenerAlumnosPorCurso"
-																value="Ver Alumnos" class="btn btn-sm btn-success">
+																value="Ver Alumnos" class="btn btn-success">
 														</form>
 	
 													</td>

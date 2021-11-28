@@ -103,7 +103,7 @@ N A V B A R
                  
 <%-- 	             <jsp:include page="navTabs.jsp"></jsp:include> --%>
                   
-                </a>
+               
               </div><!-- End Logo -->
 
               <div class="card mb-3">
@@ -256,91 +256,68 @@ N A V B A R
 		src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 	<script type="text/javascript"
 		src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
+		
 <script> 
-function valida_envia(){
-	
-	
-	if(document.fvalida.password.value.length<6||document.fvalida.password.value.length>20){
-		
-		
-		alert("El campo 'Contraseña' debe tener entre 6 y 60 caracteres ")
-		document.fvalida.password.focus()
-		return false;
-	}
-	
-	if (document.fvalida.name.value.length>20 ||document.fvalida.name.value.length==0){
-  		alert("El campo nombre debe tener entre 1 y 20 caracteres")
-  		document.fvalida.name.focus()
-  		return false;
-	}
-	
-	if(document.fvalida.apellido.value.length>20||document.fvalida.apellido.value.length==0){
-		
-		alert("El campo apellido debe tener entre 1 y 20 caracteres")
-  		document.fvalida.apellido.focus()
-  		return false ;
-		
-		
-	}
-	
-	if(document.fvalida.dni.value.length==0||document.fvalida.dni.value.length>8){
-		
-		
-		
-		alert("El campo 'DNI' debe tener entre 1 y 8 caracteres numericos")
-		document.fvalida.dni.focus()
-		return false;
-		
-	}
-	
-	if(document.fvalida.direccion.value.length==0||document.fvalida.direccion.value.length>20){
-		
-		
-		alert("El campo 'DIRECCION' debe tener entre 1 y 20 caracteres ")
-		document.fvalida.dni.focus()
-		return false;
-	}
-	
-	
+	function valida_envia() {
 
-    if(document.fvalida.mail.value.length==0||document.fvalida.mail.value.length>20){
+		if (document.fvalida.password.value.length<6||document.fvalida.password.value.length>20) {
+
+			alert("El campo 'Contraseña' debe tener entre 6 y 60 caracteres ")
+			document.fvalida.password.focus()
+			return false;
+		}
+
+		if (document.fvalida.name.value.length > 20
+				|| document.fvalida.name.value.length == 0) {
+			alert("El campo nombre debe tener entre 1 y 20 caracteres")
+			document.fvalida.name.focus()
+			return false;
+		}
+
+		if (document.fvalida.apellido.value.length > 20
+				|| document.fvalida.apellido.value.length == 0) {
+
+			alert("El campo apellido debe tener entre 1 y 20 caracteres")
+			document.fvalida.apellido.focus()
+			return false;
+
+		}
+
+		if (document.fvalida.dni.value.length == 0
+				|| document.fvalida.dni.value.length > 8) {
+
+			alert("El campo 'DNI' debe tener entre 1 y 8 caracteres numericos")
+			document.fvalida.dni.focus()
+			return false;
+
+		}
+
+		if (document.fvalida.direccion.value.length == 0
+				|| document.fvalida.direccion.value.length > 20) {
+
+			alert("El campo 'DIRECCION' debe tener entre 1 y 20 caracteres ")
+			document.fvalida.dni.focus()
+			return false;
+		}
+
+		if (document.fvalida.mail.value.length == 0
+				|| document.fvalida.mail.value.length > 20) {
+
+			alert("El campo 'MAIL' debe tener entre 1 y 20 caracteres ")
+			document.fvalida.mail.focus()
+			return false;
+		}
+
+		if (document.fvalida.telefono.value.length == 0
+				|| document.fvalida.telefono.value.length > 20) {
+
+			alert("El campo 'TELEFONO' debe tener entre 1 y 20 caracteres numericos")
+			document.fvalida.telefono.focus()
+			return false;
+		}
 		
-		
-		alert("El campo 'MAIL' debe tener entre 1 y 20 caracteres ")
-		document.fvalida.mail.focus()
-		return false;
-          	} 
-	
-	
-     if(document.fvalida.telefono.value.length==0||document.fvalida.telefono.value.length>20){
-	
-	
-	alert("El campo 'TELEFONO' debe tener entre 1 y 20 caracteres numericos")
-	document.fvalida.telefono.focus()
-	return false;
-       }
-
-	
-
-
-
-
-
-      
 		return true;
-		
-		
-		
-		
-		
-		
-		
-	
-}
-
-
-
-
+	}
 </script>
 
 </body>

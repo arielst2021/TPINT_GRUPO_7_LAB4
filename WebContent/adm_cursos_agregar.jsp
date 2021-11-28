@@ -92,8 +92,7 @@
 
 									<div class="card">
 										<div class="card-body">
-											<p></p>
-												<h5 class="card-title text-success">Agregar Nuevo Curso</h5>
+												<h3 class="card-title text-primary">Agregar Nuevo Curso</h3>
 											<hr>
 
 											<div class="row mb-3">

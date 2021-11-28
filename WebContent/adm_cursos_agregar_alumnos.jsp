@@ -105,8 +105,8 @@
 												<%
 													if (Curso != null) {
 												%>
-												<h5 class="card-title text-success">Listado de alumnos
-													en el curso</h5>
+												<h3 class="card-title text-primary">Listado de alumnos
+													en el curso</h3>
 												<hr>
 												<div class="row">
 													<div class="col-md-6 text-left">

@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -129,6 +130,16 @@ public class AdmAlumnoServlet extends HttpServlet {
 			rd.forward(request, response);
 
 		}	
+		if(request.getParameter("Param").equals("AgregarAlumnos")) {
+			
+			// OBTENGO LISTA DE PROVINCIAS
+			NegocioProvincia negocioProvincia = new NegocioProvinciaImpl();
+			List<Provincia> ListaProvincia= negocioProvincia.listaProvincias();
+			request.setAttribute("ListaProvincia", ListaProvincia);
+			
+			RequestDispatcher rd = request.getRequestDispatcher("/adm_alumnos_agregar.jsp");
+			rd.forward(request, response);	        
+		}
 		
 	}
 	

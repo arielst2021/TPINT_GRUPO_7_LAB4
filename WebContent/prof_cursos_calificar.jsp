@@ -125,7 +125,6 @@ B O D Y
 													Curso = (Curso) session.getAttribute("DatosDelCurso");
 												}
 											%>
-											<br>
 											<h3 class="card-title text-primary">Calificaciones de los
 												alumnos</h3>
 											<hr>

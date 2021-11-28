@@ -60,7 +60,7 @@ N A V B A R
 
 								<div class="card">
 									<div class="card-body">
-										<h5 class="card-title text-primary">Listado de Cursos</h5>
+										<h3 class="card-title text-primary">Listado de Cursos</h3>
 										<hr>
 										<!-- INICIO DE LA TABLA -->
 										<table id="myTable" class="table table-striped table-hover border-success" style="width: 100%">
@@ -90,11 +90,11 @@ N A V B A R
 
 											<tr>
 
-												<td><%=item.getMateria().getId()%></td>
-												<td><%=item.getMateria().getNombre()%></td>
-												<td><%=item.getSemestre().getNombre()%></td>																						
+												<td class="align-middle"><%=item.getMateria().getId()%></td>
+												<td class="align-middle"><%=item.getMateria().getNombre()%></td>
+												<td class="align-middle"><%=item.getSemestre().getNombre()%></td>																						
 												<td class="text-primary align-middle"><span class="text-uppercase fw-bold"><%=item.getProfesor().getPersona().getApellido()%></span>, <%=item.getProfesor().getPersona().getNombre()%></td>
-												<td><%=item.getAnio()%></td>
+												<td class="align-middle"><%=item.getAnio()%></td>
 												<td>
 
 													<form action="AdmCursoServlet" method="post">
@@ -120,7 +120,7 @@ N A V B A R
 															value="<%=item.getProfesor().getPersona().getNombre()%>">
 														<input type="submit" name="btnAgregarAlumnos"
 															value="Agregar Alumnos"
-															class="btn btn-sm btn-primary waves-effect">
+															class="btn btn-primary">
 													</form>
 
 												</td>
@@ -163,8 +163,6 @@ N A V B A R
 	$(document).ready(
 		function() {
 			$('#myTable').DataTable( {
-				pageLength : 5,
-				lengthMenu : [[ 5, 10, 20, -1 ],[ 5, 10, 20, "Todos" ] ],
 				"language" : {"url" : "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
 			}
 		});
