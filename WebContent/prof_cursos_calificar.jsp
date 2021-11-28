@@ -22,7 +22,7 @@
 		response.sendRedirect("index.jsp");
 	}
 %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <!--
 ----------------------------------------------------
@@ -41,27 +41,7 @@ H E A D
 
 </head>
 
-<script type="text/javascript">
-// 	function valideKey(evt) {
-
-// 		// EL CÓDIGO ES LA REPRESENTACIÓN DECIMAL ASCII DE LA TECLA PRESIONADA.
-// 		var code = (evt.which) ? evt.which : evt.keyCode;
-
-// 		if (code == 46) { // PUNTO
-// 			return true;
-// 		} else if (code >= 48 && code <= 57) { // ES NUMERO.
-// 			return true;
-// 		} else { // OTRAS TECLAS.
-// 			return false;
-// 		}
-// 	}
-</script>
-
-</head>
-<!--
-----------------------------------------------------
-B O D Y
----------------------------------------------------- -->
+<!-- B O D Y -->
 <body style="background-color: #F6F9FF">
 
 	<!-- N A V B A R  -->
@@ -114,8 +94,8 @@ B O D Y
 			<div class="card">
 				<div class="card-body">
 
-					<!-- M A I N  -->
-					<main id="main" class="main">
+					<!-- INICIO MAIN  -->
+					<div id="main" class="main">
 						<section class="section">
 							<div class="row">
 								<div class="col-lg-12">
@@ -248,7 +228,8 @@ B O D Y
 								</div>
 							</div>
 						</section>
-					</main>
+					</div>
+					<!-- FIN MAIN  -->
 				</div>
 			</div>
 		</div>
