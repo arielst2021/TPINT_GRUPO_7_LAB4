@@ -22,26 +22,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<title>Agregar Profesor</title>
+	<!-- SWEETALERT2 -->
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <title>Agregar Profesor</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
-
-<link href="Recursos/css/estilos.css" type ="text/css" rel="StyleSheet"/>
-
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css" />
-
+	<!-- BOOTSTRAP5 -->
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css" />
 </head>
 
-<body>
+<body style="background-color: #F6F9FF">
 <!--
 ----------------------------------------------------
 N A V B A R
@@ -58,8 +48,7 @@ N A V B A R
 	<%
 		}
 	%>
-  <main>
-  
+ 
   <script type="text/javascript">
     var msg = '<%=request.getAttribute("respuestadb")%>';
 		if (msg != "null") {
@@ -91,6 +80,11 @@ N A V B A R
 			}
 		}
 	</script>
+	
+	
+<!-- INICIO MAIN -->			        
+<div id="main" class="main">	
+	
     <div >
 
       <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
@@ -148,6 +142,7 @@ N A V B A R
                      <div class="col-12">
                       <label for="Provincia" class="form-label">Provincia</label>
                       <select name=provincias>
+<%! @SuppressWarnings("unchecked") %>                      
                       <%
 				List<Provincia> ListaProvincia = null;
 				if(request.getAttribute("ListaProvincia")!=null)
@@ -240,7 +235,8 @@ N A V B A R
       </section>
 
     </div>
-  </main><!-- End #main -->
+  </div>
+<!-- FIN MAIN -->
   
 	<!-- F O O T E R  -->
 	<jsp:include page="footer.jsp"></jsp:include>  

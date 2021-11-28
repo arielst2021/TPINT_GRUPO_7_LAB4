@@ -27,7 +27,9 @@
 ----------------------------------------------------
 N A V B A R
 ---------------------------------------------------- -->
-	<main id="main" class="main">
+
+<!-- INICIO MAIN -->			        
+<div id="main" class="main">	
 	<div class="container">
 		<div class="col-lg-12">
 			<div class="card">
@@ -74,6 +76,7 @@ N A V B A R
 								<div class="col-8">
 									<select class="form-select" aria-label="Default select example" name="txtProvincia">	
 										<!-- CARGA PROVINCIAS -->
+<%! @SuppressWarnings("unchecked") %>										
 										<% 		 
 										ArrayList<Provincia> lista = null;
 			  							if (request.getAttribute("listarProvincias") != null) {
@@ -123,8 +126,8 @@ N A V B A R
 			</div>
 		</div>
 	</div>
-	</main>
-	<!-- End #main -->
+</div>
+<!-- FIN MAIN -->
 
 	<!-- ======= Footer ======= -->
 

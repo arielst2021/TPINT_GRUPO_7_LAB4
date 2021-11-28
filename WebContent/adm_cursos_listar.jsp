@@ -22,7 +22,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Listado de cursos</title>
 	<!-- SWEETALERT2 -->
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -52,8 +51,8 @@ N A V B A R
 			<div class="card">
 				<div class="card-body">
 
-
-					<main id="main" class="main">
+				<!-- INICIO MAIN  -->
+				<div id="main" class="main">
 					<section class="section">
 						<div class="row">
 							<div class="col-lg-12">
@@ -74,7 +73,7 @@ N A V B A R
 													<th scope="col">Acciones</th>
 												</tr>
 											</thead>
-
+<%! @SuppressWarnings("unchecked") %>
 											<%
 												ArrayList<Curso> listarCursos = null;
 												if (request.getAttribute("listaCursos") != null) {
@@ -139,11 +138,8 @@ N A V B A R
 							</div>
 						</div>
 					</section>
-					</main>
-
-
-
-					<!-- End #main -->
+				</div>
+				<!-- FIN MAIN -->
 
 				</div>
 			</div>
@@ -159,14 +155,15 @@ N A V B A R
 	<script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
 
 <script>
-	//IDIOMAS ESPAÑOL DEL DATATABLE   
-	$(document).ready(
-		function() {
-			$('#myTable').DataTable( {
-				"language" : {"url" : "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
-			}
-		});
+//IDIOMAS ESPAÑOL DEL DATATABLE   
+$(document).ready(function() {
+	$('#myTable').DataTable({ 
+	"language": {
+		"url": "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
+		}
 	});
+});
 </script>
+
 </body>
 </html>

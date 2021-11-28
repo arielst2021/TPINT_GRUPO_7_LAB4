@@ -25,20 +25,16 @@
 
 <!DOCTYPE html>
 <html>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Agregar Alumno</title>
-<!-- SWEETALERT2 -->
-<script type="text/javascript"
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<!-- BOOTSTRAP5 -->
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css" />
+	<!-- SWEETALERT2 -->
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<!-- BOOTSTRAP5 -->
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css" />
 </head>
 
-<body>
+<body style="background-color: #F6F9FF">
 	<!-- N A V B A R -->
 	<%
 		if (session.getAttribute("perfil") != null) {
@@ -80,8 +76,7 @@
 			<div class="card">
 				<div class="card-body">
 
-					<!-- inicio #main -->
-
+					<!-- INICIO MAIN -->			        
 					<div id="main" class="main">
 						<div class="card">
 							<div class="card-body">
@@ -139,6 +134,7 @@
 											<section>
 												<div class="mb-3">
 													<label>Provincia</label>
+<%! @SuppressWarnings("unchecked") %>													
 													<%
 														List<Provincia> ListaProvincia = null;
 														if (request.getAttribute("ListaProvincia") != null) {
@@ -195,8 +191,8 @@
 							<!-- FIN FORM -->
 						</div>
 
-					</div>
-					<!-- Fin #main -->
+				  </div>
+				<!-- FIN MAIN -->
 
 				</div>
 			</div>

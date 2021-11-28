@@ -89,8 +89,9 @@
 				<div class="card-body">
 					<!-- INICIO FORM  -->
 					<form action="AdmCursoServlet" id="formulario" method="post">
-						<!-- M A I N  -->
-						<main id="main" class="main">
+					
+						<!-- INICIO MAIN  -->
+						<div id="main" class="main">
 							<section class="section">
 								<div class="row">
 									<div class="col-lg-12">
@@ -144,7 +145,7 @@
 												<%
 													}
 												%>
-	
+<%! @SuppressWarnings("unchecked") %>
 												<!-- INICIO DE LA TABLA CON LOS ALUMNOS QUE ACTUALENTE ESTAN EN EL CURSO-->
 												<%
 													ArrayList<Curso> CursoAlumnosLista = null;
@@ -292,8 +293,8 @@
 									</div>
 								</div>
 							</section>
-						</main>
-						<!-- FIN FORM -->
+						</div>
+						<!-- FIN MAIN -->
 					</form>
 				</div>
 			</div>
@@ -313,17 +314,14 @@
 		src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
 
 <script>
-	//IDIOMAS ESPAÑOL DEL DATATABLE   
-	$(document).ready(
-		function() {
-			$('#myTable').DataTable(
-				{
-					pageLength : 5,
-					lengthMenu : [[ 5, 10, 20, -1 ],[ 5, 10, 20, "Todos" ] ],
-					"language" : {"url" : "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
-				}
-		});
+//IDIOMAS ESPAÑOL DEL DATATABLE   
+$(document).ready(function() {
+	$('#myTable').DataTable({ 
+	"language": {
+		"url": "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
+		}
 	});
+});
 </script>
 
 <script type="text/javascript">

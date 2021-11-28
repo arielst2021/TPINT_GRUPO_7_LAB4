@@ -1,6 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -11,7 +12,7 @@
 	<footer id="footer" class="footer">
 	<br>
 	<div class="copyright text-center">
-		TP Integrador de <strong><span>Laboratorio de computación IV</span></strong>
+		TP Integrador de <strong><span>Laboratorio de computaciÃ³n IV</span></strong>
 	</div>
 	</footer>
 

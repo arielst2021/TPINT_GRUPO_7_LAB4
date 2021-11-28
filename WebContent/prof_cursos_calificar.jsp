@@ -101,7 +101,7 @@ H E A D
 								<div class="col-lg-12">
 									<div class="card">
 										<div class="card-body">
-										<form action="ProfCursoServlet" method="post">
+										<form action="ProfCursoServlet" method="post">									
 											<%!Curso Curso = new Curso();%>
 											<%
 												if (session.getAttribute("DatosDelCurso") != null) {
@@ -153,6 +153,7 @@ H E A D
 															<th style="width: 20%" scope="col">Estado</th>
 														</tr>
 													</thead>
+<%! @SuppressWarnings("unchecked") %>													
 													<%
 														ArrayList<Curso> listaAlumnosPorCursos = null;
 														if (request.getAttribute("listaAlumnosPorCursos") != null) {

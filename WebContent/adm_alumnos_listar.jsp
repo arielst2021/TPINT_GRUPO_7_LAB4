@@ -17,10 +17,8 @@
 	}
 %>
 
-
-    <!DOCTYPE html>
-    <html>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<!DOCTYPE html>
+<html>
 <title>Listado de alumnos</title>
 	<!-- SWEETALERT2 -->
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -57,8 +55,8 @@ N A V B A R
 			<div class="card">
 				<div class="card-body">
 
-					<!-- M A I N  -->
-  <main id="main" class="main">
+<!-- INICIO MAIN -->			        
+<div id="main" class="main">	
     <section class="section">
       <div class="row">
         <div class="col-lg-12">
@@ -67,6 +65,7 @@ N A V B A R
             <div class="card-body">
               <h3 class="card-title text-primary">Listado de alumnos</h3>
               <hr>
+<%! @SuppressWarnings("unchecked") %>              
 							<%
 								ArrayList<Alumno> ListaAlumnos = null;
 								if (request.getAttribute("ListaAlumnos") != null) {
@@ -198,38 +197,33 @@ N A V B A R
 <!--       </div> -->
 <!--     </div> -->
  
- 
- 
- 
- 
-  </main>
+</div>
+<!-- FIN MAIN -->
 
 				</div>
 			</div>
 		</div>
 	</div>
 	
-	<!-- ======= Footer ======= -->
+	<!-- F O O T E R  -->
 	<jsp:include page="footer.jsp"></jsp:include>
-	
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script type="text/javascript"
-            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
-        <script type="text/javascript"
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-        <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
 
-        <script>
-            //IDIOMAS ESPAÑOL DEL DATATABLE   
-            $(document).ready(function () {
-                $('#myTable').DataTable({
-                    "language": {
-                        "url": "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
-                    }
-                });
-            });
-        </script>
-    </body>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
+	
+<script>
+//IDIOMAS ESPAÑOL DEL DATATABLE   
+$(document).ready(function() {
+	$('#myTable').DataTable({ 
+	"language": {
+		"url": "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
+		}
+	});
+});
+</script>
+
+</body>
 
 </html>

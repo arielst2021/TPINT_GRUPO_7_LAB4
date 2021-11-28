@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@page import="entidades.Profesor"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -18,19 +19,11 @@
 
 <body style="background-color: #F6F9FF">
 
-  <!-- ======= Header ======= -->
-  
-  <!-- End Header -->
-
-  <!-- ======= Sidebar ======= -->
-
-  
-  <!-- End Sidebar-->
 <% if(request.getAttribute("EditarProfesor") != null){
-            	 				 Profesor profe = (Profesor) request.getAttribute("EditarProfesor");
-            	  			
-            	  			%>
-  <main id="main" class="main">
+	Profesor profe = (Profesor) request.getAttribute("EditarProfesor");       	  			
+%>
+<!-- INICIO MAIN -->			        
+<div id="main" class="main">
 
     <section class="section">
       <div class="row">
@@ -175,7 +168,8 @@
       </div>
     </section>
 
-  </main><!-- End #main -->
+  </div>
+<!-- FIN MAIN -->
    <% } %>
 
   <!-- ======= Footer ======= -->
