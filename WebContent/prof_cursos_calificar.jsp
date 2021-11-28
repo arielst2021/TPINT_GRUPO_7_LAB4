@@ -270,9 +270,7 @@ B O D Y
 <script>
 //IDIOMAS ESPAÑOL DEL DATATABLE   
 $(document).ready(function() {
-	$('#myTable').DataTable({ 
-	      pageLength: 5,
-	      lengthMenu: [[5, 10, 20, -1], [5, 10, 20, "Todos"]],
+	$('#myTable').DataTable({
 	"language": {
 		"url": "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
 		}
