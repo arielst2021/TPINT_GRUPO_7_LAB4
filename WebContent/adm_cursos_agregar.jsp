@@ -92,7 +92,7 @@
 
 									<div class="card">
 										<div class="card-body">
-												<h3 class="card-title text-primary">Agregar Nuevo Curso</h3>
+												<h3 class="card-title text-primary">Agregar Curso</h3>
 											<hr>
 
 											<div class="row mb-3">
@@ -231,7 +231,7 @@
 
 													<input type="submit" class="btn btn-primary"
 														style="float: right" name="agregarNuevoCurso"
-														value="Agregar nuevo curso">
+														value="Agregar curso">
 
 
 												</div>
