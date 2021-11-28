@@ -173,20 +173,20 @@ H E A D
 														<!-- AGREGO UN JAVASCRIPT PARA PERMITIR EL INGRESO DE VALORES NUMÉRICOS Y UN DISEÑO DE PATRÓN DE ETIQUETAS HTML PARA SOLO VALORES NUMÉRICOS  -->
 														<!-- EL ATRIBUTO PATTERN ESPECIFICA UNA EXPRESIÓN REGULAR CON LA QUE <INPUT>SE VERIFICA EL VALOR DEL ELEMENTO AL ENVIAR EL FORMULARIO. -->
 	
-														<td class="align-middle text-center"><input
-															type="text" id="nota" name="Nota1" class="form-control" onkeypress="return filterFloat(event,this);"
+														<td class="align-middle"><input
+															type="text" id="nota" name="Nota1" class="form-control text-primary fw-bold" onkeypress="return filterFloat(event,this);"
 															value="<%=item.getNotaPrimerParcial()%>"></td>
-														<td class="align-middle text-center"><input
-															type="text" id="nota" name="Nota2" class="form-control" onkeypress="return filterFloat(event,this);"
+														<td class="align-middle"><input
+															type="text" id="nota" name="Nota2" class="form-control text-primary fw-bold" onkeypress="return filterFloat(event,this);"
 															value="<%=item.getNotaPrimerRecuperatorio()%>"></td>
-														<td class="align-middle text-center"><input
-															type="text" id="nota" name="Nota3" class="form-control" onkeypress="return filterFloat(event,this);"
+														<td class="align-middle"><input
+															type="text" id="nota" name="Nota3" class="form-control text-primary fw-bold" onkeypress="return filterFloat(event,this);"
 															value="<%=item.getNotaSegundoParcial()%>"></td>
-														<td class="align-middle text-center"><input
-															type="text" id="nota" name="Nota4" class="form-control" onkeypress="return filterFloat(event,this);"
+														<td class="align-middle"><input
+															type="text" id="nota" name="Nota4" class="form-control text-primary fw-bold" onkeypress="return filterFloat(event,this);"
 															value="<%=item.getNotaSegundoRecuperatorio()%>"></td>
 														<td class="text-center"><select
-															class="form-select form-select selectpicker"
+															class="form-select selectpicker text-primary fw-bold"
 															name="estadoAlumno">
 																<%
 																	ArrayList<Estado> listaEstados = null;
@@ -200,11 +200,18 @@ H E A D
 																					if (item2.getNombre().equals("Libre") || item2.getNombre().equals("Regular")
 																							|| item2.getNombre().equals("Sin calificar")) {
 	
-																						// POR MEDIO DEL ATRIBUTO SELECTED ESTABLEZCO LA OPCIÓN INICIALMENTE SELECCIONADA
+																// POR MEDIO DEL ATRIBUTO SELECTED ESTABLEZCO LA OPCIÓN INICIALMENTE SELECCIONADA
 																%>
 																<option value="<%=item2.getId()%>"
-																	<%if (item.getEstado().getId() == item2.getId()) {%>
-																	selected <%}%>><%=item2.getNombre()%></option>
+																	<%
+																	if (item.getEstado().getId() == item2.getId()){
+																	%>
+																	selected
+																	<%
+																	}
+																	%>>
+																	<%=item2.getNombre()%>
+																</option>
 																<%
 																	}
 																				}
