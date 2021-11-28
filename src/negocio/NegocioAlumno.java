@@ -10,6 +10,6 @@ import entidades.Alumno;
 		public Alumno obtenerAlumnoLegajo(int Legajo);
 		public int modificarAlumno(Alumno alu);
 		public int modificarAlumnoEstado(int Legajo);
-	
+		int GuardarAlumno(Alumno alumno);
+		boolean verificar(String dni);
 }
-

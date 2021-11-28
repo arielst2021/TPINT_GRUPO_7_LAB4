@@ -92,7 +92,7 @@
 									crear un alumno</p>
 								<hr>
 							</div>
-
+							<!-- INICIO FORM -->
 							<form class="form" name="fvalida"  action="AdmAlumnoServlet" method="post" onsubmit=" return valida_envia()">
 								<div class="row">
 									<!-- INICIO DE COLUMNA UNO -->
@@ -147,7 +147,7 @@
 															ListaProvincia = (List<Provincia>) request.getAttribute("ListaProvincia");
 														}
 													%>
-													<select class="form-select form-control" name="provincias>">
+													<select class="form-select form-control" name="provincias">
 														<%
 															if (ListaProvincia != null)
 																for (Provincia p : ListaProvincia) {
@@ -194,6 +194,7 @@
 									<!-- FIN DE COLUMNA DOS -->
 								</div>
 							</form>
+							<!-- FIN FORM -->
 						</div>
 
 					</div>

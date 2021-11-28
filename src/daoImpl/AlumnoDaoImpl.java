@@ -1,6 +1,7 @@
 package daoImpl;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -258,5 +259,72 @@ public class AlumnoDaoImpl implements AlumnoDao {
 			}
 		}
 		return 0;
+	}
+	
+	@Override
+	public int GuardarAlumno(Alumno alumno) {
+		
+		 String agregarAlumno = "INSERT INTO `laboratorio4`.`alumnos` (`alu_dni`, `alu_nombre`, `alu_apellido`, `alu_fechanac`, `alu_direccion`, `alu_provincia_id`, `alu_email`, `alu_telefono`, `alu_estado_id`) VALUES (?, ?, ?, ?,?,?,?,?,'1');";
+		 Alumno alum = new Alumno();
+		 Persona persona =alumno.getPersona();
+		 
+		 LocalDate LocalDate = persona.getFechaNacimiento();
+		 Date date = Date.valueOf(LocalDate);
+		 int aux=0;
+		 Connection connection = Conexion.getConexion().getSQLConexion();
+		 try {
+		 PreparedStatement statement = (PreparedStatement)
+		 connection.prepareStatement(agregarAlumno);
+		 statement.setString(1, persona.getDni());
+		 statement.setString(2, persona.getNombre());
+		 statement.setString(3, persona.getApellido());
+		 statement.setDate(4,date);
+		 statement.setString(5, persona.getDireccion());
+		 statement.setInt(6, persona.getProvincia().getId());
+		 statement.setString(7, persona.getEmail());
+		 statement.setString(8, persona.getTelefono());
+		
+		 if (statement.executeLargeUpdate() > 0) {
+		 connection.commit();
+		 aux= 1;
+		
+		 }
+		 } catch (SQLException e) {
+		 e.printStackTrace();
+		 aux= -1;
+		 try {
+		 connection.rollback();
+		 } catch (SQLException e1) {
+		 e1.printStackTrace();
+		 }
+		 }
+		
+		 return aux;
+	}
+
+	@Override
+	public boolean verificar(String dni) {
+		boolean aux = false;
+		String str = "SELECT * FROM laboratorio4.alumnos WHERE alu_dni=" + dni;
+
+		Connection con = Conexion.getConexion().getSQLConexion();
+		try {
+			PreparedStatement ps = con.prepareStatement(str);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()) {
+				aux=true;
+			}
+			else {
+				aux=false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			try {
+				con.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
+		return aux;
 	}
 }
