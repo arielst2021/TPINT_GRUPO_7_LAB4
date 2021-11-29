@@ -29,6 +29,7 @@ import negocio.NegocioEstado;
 import negocio.NegocioProvincia;
 import negocioImpl.NegocioAlumnoImpl;
 import negocioImpl.NegocioCursoImpl;
+import negocioImpl.NegocioEstadoImpl;
 import negocioImpl.NegocioProvinciaImpl;
 
 
@@ -43,6 +44,7 @@ public class AdmAlumnoServlet extends HttpServlet {
     public AdmAlumnoServlet() {
         this.negocioA = new NegocioAlumnoImpl();
         this.negocioP = new NegocioProvinciaImpl();
+        this.negocioE = new NegocioEstadoImpl();
 
     }
 
@@ -53,6 +55,7 @@ public class AdmAlumnoServlet extends HttpServlet {
 			
     		int aux=0;
     		String nacimiento  = request.getParameter("nacimiento");
+    		System.out.println(nacimiento);
     		SimpleDateFormat DateFormat = new SimpleDateFormat(nacimiento);
     		Date fecha = null;
     		
@@ -122,8 +125,12 @@ public class AdmAlumnoServlet extends HttpServlet {
     		Alumno alum = negocioA.obtenerAlumnoLegajo(Legajo);
     		
     		//OBTENGO LISTADO DE PROVINCIAS
-			ArrayList<Provincia> lista = negocioP.listaProvincias();
-			request.setAttribute("listarProvincias", lista);    		
+			ArrayList<Provincia> listaProvincias = negocioP.listaProvincias();
+			request.setAttribute("listarProvincias", listaProvincias);
+			
+    		//OBTENGO LISTADO DE ESTADOS
+			ArrayList<Estado> listaEstados = negocioE.obtenerEstados();
+			request.setAttribute("listarEstados", listaEstados);   
 
     		request.setAttribute("AlumnoEditar", alum);
     		RequestDispatcher dispatcher = request.getRequestDispatcher("/adm_alumnos_editar.jsp");

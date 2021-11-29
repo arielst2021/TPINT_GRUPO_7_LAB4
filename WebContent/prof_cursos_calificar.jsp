@@ -186,39 +186,36 @@ H E A D
 														<td class="align-middle"><input
 															type="text" id="nota" name="Nota4" class="form-control text-primary fw-bold" onkeypress="return filterFloat(event,this);"
 															value="<%=item.getNotaSegundoRecuperatorio()%>"></td>
-														<td class="text-center"><select
-															class="form-select selectpicker text-primary fw-bold"
-															name="estadoAlumno">
-																<%
-																	ArrayList<Estado> listaEstados = null;
-																			if (request.getAttribute("listaEstados") != null) {
-																				listaEstados = (ArrayList<Estado>) request.getAttribute("listaEstados");
-																			}
-																%>
-																<%
-																	if (listaAlumnosPorCursos != null) {
-																				for (Estado item2 : listaEstados) {
-																					if (item2.getNombre().equals("Libre") || item2.getNombre().equals("Regular")
-																							|| item2.getNombre().equals("Sin calificar")) {
-	
-																// POR MEDIO DEL ATRIBUTO SELECTED ESTABLEZCO LA OPCIÓN INICIALMENTE SELECCIONADA
-																%>
-																<option value="<%=item2.getId()%>"
+														<td class="text-center">
+															<select
+																class="form-select selectpicker text-primary fw-bold"
+																name="estadoAlumno">
 																	<%
-																	if (item.getEstado().getId() == item2.getId()){
-																	%>
-																	selected
-																	<%
-																	}
-																	%>>
-																	<%=item2.getNombre()%>
-																</option>
-																<%
-																	}
+																		ArrayList<Estado> listaEstados = null;
+																				if (request.getAttribute("listaEstados") != null) {
+																					listaEstados = (ArrayList<Estado>) request.getAttribute("listaEstados");
 																				}
-																			}
-																%>
-														</select></td>
+																	%>
+																	<%
+																		if (listaAlumnosPorCursos != null) {
+																					for (Estado item2 : listaEstados) {
+																						if (item2.getNombre().equals("Libre") || item2.getNombre().equals("Regular")
+																								|| item2.getNombre().equals("Sin calificar")) {
+	
+																	// POR MEDIO DEL ATRIBUTO SELECTED ESTABLEZCO LA OPCIÓN INICIALMENTE SELECCIONADA
+																	%>
+																	<option value="<%=item2.getId()%>"
+																		<%if (item.getEstado().getId() == item2.getId()) {%>
+																		selected <%}%>>
+																		<%=item2.getNombre()%>
+																	</option>
+																	<%
+																		}
+																					}
+																				}
+																	%>
+															</select>
+														</td>
 														<%
 															}
 															}
