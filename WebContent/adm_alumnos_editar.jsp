@@ -54,6 +54,7 @@ N A V B A R
 							</div>
 							<div class="row pb-2">
 								<div class="col-4 label ">Nombre</div>
+								<div class="col-8"><%=alum.getLegajo()%></div>
 								<div class="col-8"><input type="text" name="txtNombre" class="form-control" required value=<%=alum.getPersona().getNombre()%>></div>
 							</div>
 							<div class="row pb-2">
