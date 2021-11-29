@@ -36,49 +36,47 @@
 
               <!-- General Form Elements -->
               
-                <form>
-                <div class="row mb-3">
-                  <label for="inputText" class="col-sm-2 col-form-label">Legajo</label>
-                  <div class="col-sm-10">
-                  	
-                  	
-                    <input type="text" class="form-control" disabled value =<%=profe.getLegajo()%> >
-                 </div>
-                </div>
-              
+                <form action="AdmProfesorServlet" method="post" >
+               
+              <div class="row mb-3">
+								 <label for="inputText" class="col-sm-2 col-form-label">Legajo</label>
+								<div class="col-sm-10"><%=profe.getLegajo()%></div>
+								<input type="hidden" name="txtLegajo" class="form-control" value=<%=profe.getLegajo()%>>
+								
+							</div>
    
                 <div class="row mb-3">
                   <label for="inputText" class="col-sm-2 col-form-label">DNI</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" disabled value =<%=profe.getPersona().getDni() %>>
+                    <input name = "txtDni" type="text" class="form-control" disabled value =<%=profe.getPersona().getDni() %>>
                   </div>
                 </div>
 
                 <div class="row mb-3">
                   <label for="inputText" class="col-sm-2 col-form-label">Nombre</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" value =<%=profe.getPersona().getNombre() %>>
+                    <input name = "txtNombre" type="text" class="form-control" value =<%=profe.getPersona().getNombre() %>>
                   </div>
                 </div>
 
                 <div class="row mb-3">
                   <label for="inputText" class="col-sm-2 col-form-label">Apellido</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" value =<%=profe.getPersona().getApellido() %>>
+                    <input name = "txtApellido" type="text" class="form-control" value =<%=profe.getPersona().getApellido() %>>
                   </div>
                 </div>
 
                 <div class="row mb-3">
                   <label for="inputDate" class="col-sm-2 col-form-label">Fecha Nac.</label>
                   <div class="col-sm-10">
-                    <input type="date" class="form-control" value =<%=profe.getPersona().getFechaNacimiento() %>>
+                    <input name = "txtFechaNacimiento" type="date" class="form-control" value =<%=profe.getPersona().getFechaNacimiento() %>>
                   </div>
                 </div>
 
                 <div class="row mb-3">
                   <label for="inputText" class="col-sm-2 col-form-label">Dirección</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" value =<%=profe.getPersona().getDireccion() %>>
+                    <input name = "txtDireccion" type="text" class="form-control" value =<%=profe.getPersona().getDireccion() %>>
                   </div>
                 </div>
 
@@ -87,7 +85,7 @@
                 <div class="row mb-3">
                   <label class="col-sm-2 col-form-label">Provincia</label>
                   <div class="col-sm-10">
-                    <select class="form-select" aria-label="Default select example" name="txtProvincia">	
+                    <select name = "txtProvincia" class="form-select" aria-label="Default select example" name="txtProvincia">	
 										<!-- CARGA PROVINCIAS -->
 										 <%
     List<Provincia> ListaProvincia = null;
@@ -114,14 +112,14 @@
                 <div class="row mb-3">
                   <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
                   <div class="col-sm-10">
-                    <input type="email" class="form-control" value =<%=profe.getPersona().getEmail() %>>
+                    <input name = "txtEmail" type="email" class="form-control" value =<%=profe.getPersona().getEmail() %>>
                   </div>
                 </div>
 
                 <div class="row mb-3">
                   <label for="inputText" class="col-sm-2 col-form-label">Telefono</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" value =<%=profe.getPersona().getTelefono() %>>
+                    <input name = "txtTelefono" type="text" class="form-control" value =<%=profe.getPersona().getTelefono() %>>
                   </div>
                 </div>
 
@@ -131,14 +129,14 @@
                   <div class="col-sm-10">
                   	
                   	
-                    <input type="text" class="form-control" disabled value =<%=profe.getPerfil().getNombrePerfil()%> >
+                    <input name = "txtPerfil" type="text" class="form-control" disabled value =<%=profe.getPerfil().getNombrePerfil()%> >
                  </div>
                 </div>
 
                 <div class="row mb-3">
                   <label for="inputText" class="col-sm-2 col-form-label">Nombre de usuario</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" value =<%=profe.getUsuario() %>>
+                    <input name = "txtUsuario" type="text" class="form-control" value =<%=profe.getUsuario() %>>
                   </div>
                 </div>
 
@@ -161,7 +159,7 @@
                 <div class="row mb-3">
                   <label class="col-sm-2 col-form-label"></label>
                   <div class="col-sm-10">
-                    <button type="submit" class="btn btn-primary" style="float: right">Guardar Cambios</button>
+                    <button type="submit" class="btn btn-primary" style="float: right" name="btnEditarProfesor">Guardar Cambios</button>
                   </div>
                 </div>
 

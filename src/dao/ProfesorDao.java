@@ -11,4 +11,5 @@ public interface ProfesorDao {
 	public int guardarprofesor(Profesor profesor);
 	public int BajaProfesor(Profesor ObjProfesor);
 	public Profesor ProfePorLegajo(String legajo);
+	public int ModificarProfesor(Profesor objProfesor);
 }

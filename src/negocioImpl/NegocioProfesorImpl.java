@@ -66,4 +66,10 @@ public class NegocioProfesorImpl implements NegocioProfesor{
 		
 		return dao.ProfePorLegajo(Legajo);
 	}
+
+	@Override
+	public int ModificarProfesor(Profesor ObjProfesor) {
+		
+		return dao.ModificarProfesor(ObjProfesor);
+	}
 }

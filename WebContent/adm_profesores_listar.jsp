@@ -72,6 +72,7 @@ N A V B A R
                                             <th scope="col">Email</th>
                                             <th scope="col">Provincia</th>
                                             <th scope="col">Fecha de Nacimiento</th>
+                                            <th scope="col">Usuario</th>
                                             <th scope="col">Estado</th>
                                             <th scope="col">Modificar</th>
                                         </tr>
@@ -104,7 +105,10 @@ N A V B A R
                                                     <td class="align-middle">
                                                         <%=item.getPersona().getFechaNacimiento() %>
                                                     </td>
-<%
+                                                   	<td class="align-middle">
+                                                        <%=item.getUsuario() %>
+                                                    </td>
+                                                    	<%
 															if (item.getEstado().getNombre().equals("Activo")) {
 														%>
 														<td class="align-middle"><span

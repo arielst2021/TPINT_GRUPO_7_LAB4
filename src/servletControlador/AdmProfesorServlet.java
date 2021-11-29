@@ -30,7 +30,7 @@ import negocio.NegocioProvincia;
 
 import negocioImpl.NegocioProfesorImpl;
 import negocioImpl.NegocioProvinciaImpl;
-
+import java.util.*;
 
 /**
  * Servlet implementation class ProfesorServlet
@@ -176,6 +176,41 @@ public class AdmProfesorServlet extends HttpServlet {
 			RequestDispatcher miRequestDispatcher = request.getRequestDispatcher("/adm_profesores_editar.jsp");
 			miRequestDispatcher.forward(request, response);
 		}
+		
+		if (request.getParameter("btnEditarProfesor") != null){
+    		Profesor Profe = new Profesor();
+    		Persona per = new Persona();
+    		NegocioProfesor NegocioP = new NegocioProfesorImpl();
+    		
+    		// Se valida que el DNI ya no este en uso
+
+    		// Persona2
+    		System.out.println(request.getParameter("txtNombre"));
+    		System.out.println(request.getParameter("txtLegajo"));
+    		Profe.setLegajo(Integer.parseInt(request.getParameter("txtLegajo")));
+    		per.setNombre(request.getParameter("txtNombre"));
+    		per.setApellido(request.getParameter("txtApellido"));
+    		per.setDni(request.getParameter("txtDni"));
+    		per.setDireccion(request.getParameter("txtDireccion"));
+    		per.setEmail(request.getParameter("txtEmail"));
+    		per.setTelefono(request.getParameter("txtTelefono"));
+    		Profe.setUsuario(request.getParameter("txtUsuario"));
+            
+			// Provincia
+			Provincia provProfeno = new Provincia();
+			provProfeno.setId(Integer.parseInt(request.getParameter("txtProvincia")));
+			per.setProvincia(provProfeno);
+			Profe.setPersona(per);
+    	
+			int resp = NegocioP.ModificarProfesor(Profe);			
+			
+			
+			List<Profesor> ListaProfesor = NegocioP.listaTodosProfesores();
+			request.setAttribute("ListaProfesor", ListaProfesor);
+			
+			RequestDispatcher rd = request.getRequestDispatcher("/adm_profesores_listar.jsp");
+			rd.forward(request, response);	  
+    	}
 		
 		
 	}

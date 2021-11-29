@@ -331,6 +331,44 @@ public class ProfesorDaoImpl implements ProfesorDao {
 		}
 		return Profesor;
 	}
+
+	
+	@Override
+	public int ModificarProfesor(Profesor objProfesor) {
+		int GraboExitosamente = 0;
+		 String str = "UPDATE laboratorio4.profesores SET  pro_nombre=?, pro_apellido=?, pro_direccion=?, pro_provincia_id=?, pro_email=?, pro_telefono=?, pro_usuario=? WHERE pro_legajo=?";
+		Connection con = Conexion.getConexion().getSQLConexion();
+		System.out.println(str);
+		try {
+			PreparedStatement ps = con.prepareStatement(str);
+			// Se ordenan los campos para el statement
+			
+	        ps.setString(1, objProfesor.getPersona().getNombre());
+	        ps.setString(2, objProfesor.getPersona().getApellido());
+	        ps.setString(3, objProfesor.getPersona().getDireccion());
+	        ps.setInt(4, objProfesor.getPersona().getProvincia().getId());
+	        ps.setString(5, objProfesor.getPersona().getEmail());
+	        ps.setString(6, objProfesor.getPersona().getTelefono());
+	        ps.setString(7, objProfesor.getUsuario());
+	        ps.setInt(8, objProfesor.getLegajo());
+			if (ps.executeLargeUpdate() > 0) {
+				System.out.println("Modificado");
+				con.commit();
+				return GraboExitosamente = 1;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			try {
+				con.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
+		System.out.println("NO Modificado");
+		return GraboExitosamente;
+		
+	}
 	
 //	@Override
 //	public boolean BajaProfesor(String Legajo) {

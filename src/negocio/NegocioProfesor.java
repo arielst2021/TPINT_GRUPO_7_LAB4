@@ -13,5 +13,7 @@ public interface NegocioProfesor {
 	public ArrayList<Profesor> listaProfesoresActivos();
 	public List<Provincia> obtenerprovincias();
 	public int BajaProfesor(Profesor ObjProfesor);
+	public int ModificarProfesor(Profesor ObjProfesor);
 	public Profesor ProfePorLegajo(String Legajo);
+	
 }
