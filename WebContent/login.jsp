@@ -33,13 +33,15 @@
 <html lang="es">
 <head>
 <title>Login</title>
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-	<!-- BOOTSTRAP5 -->
-	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css" />
-
+	<link rel="stylesheet" type="text/css"
+		href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" type="text/css"
+		href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css"
+		href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css" />
+</head>
 <body style="background-color: #F6F9FF">
+
 	<script type="text/javascript">
     var msg = '<%=session.getAttribute("Mensaje")%>';
 		if (msg != "null") {
@@ -53,7 +55,8 @@
 		<%session.setAttribute("Mensaje", null);%>
 	</script>
 	
-	<main>
+<!-- INICIO MAIN  -->
+<div id="main" class="main">
 	<div class="container">
 
 		<section
@@ -62,7 +65,6 @@
 				<div class="row justify-content-center">
 					<div
 						class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
-
 
 						<div class="card mb-3">
 
@@ -111,7 +113,8 @@
 		</section>
 
 	</div>
-	</main>
+</div>
+<!-- FIN MAIN  -->
 
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>

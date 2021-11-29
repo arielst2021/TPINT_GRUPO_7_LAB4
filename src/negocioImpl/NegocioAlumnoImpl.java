@@ -33,5 +33,13 @@ public class NegocioAlumnoImpl implements NegocioAlumno {
 	public int modificarAlumnoEstado(int Legajo) {
 		return alumnoDao.modificarAlumnoEstado(Legajo);
 	}
+	@Override
+	public int GuardarAlumno(Alumno alumno) {
+		return alumnoDao.GuardarAlumno(alumno);
+	}
+	@Override
+	public boolean verificar(String dni) {
+		return alumnoDao.verificar(dni);
+	}
 }
 

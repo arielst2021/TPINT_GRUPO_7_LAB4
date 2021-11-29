@@ -17,21 +17,18 @@
 	}
 %>
 
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
-<head>
-
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css" />
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Lista de Alumnos</title>
+<title>Listado de alumnos</title>
+	<!-- SWEETALERT2 -->
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<!-- BOOTSTRAP5 -->
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css" />
 </head>
 
-<body>
-<body style="background-color: #F6F9FF">
+    <body style="background-color: #F6F9FF">
 
 	<!-- N A V B A R  -->
 	<%
@@ -58,26 +55,28 @@ N A V B A R
 			<div class="card">
 				<div class="card-body">
 
-					<!-- M A I N  -->
-  <main id="main" class="main">
+<!-- INICIO MAIN -->			        
+<div id="main" class="main">	
     <section class="section">
       <div class="row">
         <div class="col-lg-12">
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title text-success">Listado de alumnos</h5>
+              <h3 class="card-title text-primary">Listado de alumnos</h3>
               <hr>
-              <br>
-              <!-- Tabla -->
+<%! @SuppressWarnings("unchecked") %>              
 							<%
 								ArrayList<Alumno> ListaAlumnos = null;
 								if (request.getAttribute("ListaAlumnos") != null) {
 									ListaAlumnos = (ArrayList<Alumno>) request.getAttribute("ListaAlumnos");
 								}
 							%>
-						<table id="myTable" class="table table-striped">
-                <thead>
+                                <!-- INICIO DE LA TABLA -->
+											<table id="myTable"
+												class="table table-striped table-hover border-success"
+												style="width: 100%">
+												<thead class="table-success">
                   <tr>
                     <th scope="col">Legajo</th>
                     <th scope="col">Apellido y nombre</th>
@@ -100,7 +99,6 @@ N A V B A R
                     	 <td class="align-middle text-primary"><span class="text-uppercase fw-bold"><%=alum.getPersona().getApellido()%></span>, <%=alum.getPersona().getNombre()%></td>
                     	 <td class="align-middle"><%=alum.getPersona().getDni()%></td>
                     	 <td class="align-middle"><%=alum.getPersona().getProvincia().getNombre()%></td>
-<%--                     	 <td class="align-middle"><%=alum.getEstado().getNombre()%></td> --%>
 <%
 															if (alum.getEstado().getNombre().equals("Activo")) {
 														%>
@@ -199,35 +197,23 @@ N A V B A R
 <!--       </div> -->
 <!--     </div> -->
  
- 
- 
- 
- 
-  </main>
+</div>
+<!-- FIN MAIN -->
 
 				</div>
 			</div>
 		</div>
 	</div>
 	
-  <!-- ======= Footer ======= -->
+	<!-- F O O T E R  -->
 	<jsp:include page="footer.jsp"></jsp:include>
 
-
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-
-	<script type="text/javascript"
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script type="text/javascript"
-		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
-	<script type="text/javascript"
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
-	<script type="text/javascript"
-		src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-	<script type="text/javascript"
-	src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
-		<script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
+	
+<script>
 //IDIOMAS ESPAÑOL DEL DATATABLE   
 $(document).ready(function() {
 	$('#myTable').DataTable({ 
@@ -237,6 +223,7 @@ $(document).ready(function() {
 	});
 });
 </script>
+
 </body>
 
 </html>

@@ -5,7 +5,6 @@
 <%@page import="java.util.*"%>
 
 <%@page session="true"%>
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 
@@ -21,7 +20,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>Agregar Curso</title>	
 	<!-- SWEETALERT2 -->
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -84,7 +82,8 @@
 			<div class="card">
 				<div class="card-body">
 
-					<main id="main" class="main">
+				<!-- INICIO MAIN  -->
+				<div id="main" class="main">
 					<section class="section">
 						<form action="AdmCursoServlet" id="formulario" method="post">
 							<div class="row">
@@ -92,14 +91,13 @@
 
 									<div class="card">
 										<div class="card-body">
-											<p></p>
-												<h5 class="card-title text-success">Agregar Nuevo Curso</h5>
+												<h3 class="card-title text-primary">Agregar Curso</h3>
 											<hr>
 
 											<div class="row mb-3">
 												<label class="col-sm-2 col-form-label">Materia</label>
 												<div class="col-sm-10">
-
+<%! @SuppressWarnings("unchecked") %>
 													<%
 														List<Materia> listaMaterias = null;
 														if (request.getAttribute("listaMaterias") != null) {
@@ -232,7 +230,7 @@
 
 													<input type="submit" class="btn btn-primary"
 														style="float: right" name="agregarNuevoCurso"
-														value="Agregar nuevo curso">
+														value="Agregar curso">
 
 
 												</div>
@@ -244,7 +242,8 @@
 							</div>
 						</form>
 					</section>
-					</main>
+				</div>
+				<!-- FIN MAIN  -->
 
 				</div>
 			</div>
@@ -263,8 +262,6 @@
 //IDIOMAS ESPAÑOL DEL DATATABLE   
 $(document).ready(function() {
 	$('#myTable').DataTable({ 
-	      pageLength: 5,
-	      lengthMenu: [[5, 10, 20, -1], [5, 10, 20, "Todos"]],
 	"language": {
 		"url": "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
 		}

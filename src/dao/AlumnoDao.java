@@ -10,4 +10,6 @@ public interface AlumnoDao {
 	public Alumno obtenerAlumnoLegajo(int Legajo);
 	public int modificarAlumno(Alumno alum);
 	public int modificarAlumnoEstado(int Legajo);
+	public int GuardarAlumno(Alumno alumno);
+	public boolean verificar(String dni);
 }

@@ -3,9 +3,12 @@ package servletControlador;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.Year;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -26,6 +29,7 @@ import negocio.NegocioEstado;
 import negocio.NegocioProvincia;
 import negocioImpl.NegocioAlumnoImpl;
 import negocioImpl.NegocioCursoImpl;
+import negocioImpl.NegocioEstadoImpl;
 import negocioImpl.NegocioProvinciaImpl;
 
 
@@ -40,17 +44,93 @@ public class AdmAlumnoServlet extends HttpServlet {
     public AdmAlumnoServlet() {
         this.negocioA = new NegocioAlumnoImpl();
         this.negocioP = new NegocioProvinciaImpl();
+        this.negocioE = new NegocioEstadoImpl();
 
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	
+    	if(request.getParameter("btnAgregarAlumno")!=null) {
+
+			
+    		int aux=0;
+    		String nacimiento  = request.getParameter("nacimiento");
+    		System.out.println(nacimiento);
+    		SimpleDateFormat DateFormat = new SimpleDateFormat(nacimiento);
+    		Date fecha = null;
+    		
+    		try {
+    			fecha = (Date)DateFormat.parse(nacimiento);
+    		}
+    		catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+			System.out.println(DateFormat.toString());
+    		}
+    		
+
+			Date input = new Date();
+			LocalDate date = input.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+			int idprovincia = Integer.parseInt(request.getParameter("provincias"));
+
+			NegocioAlumno NegAlumno = new NegocioAlumnoImpl();
+			Alumno alumno = new Alumno();
+			Provincia provincia= new Provincia();
+			Estado estado= new Estado();
+			Persona persona= new Persona();
+			
+			estado.setIdEstado(Integer.parseInt(request.getParameter("estado")));
+			provincia.setId(idprovincia);
+			
+			
+			persona.setNombre(request.getParameter("name"));
+			persona.setApellido(request.getParameter("apellido"));
+			persona.setDni(request.getParameter("dni"));
+			persona.setFechaNacimiento(date);
+			persona.setDireccion(request.getParameter("direccion"));
+			persona.setProvincia(provincia);
+			persona.setEmail(request.getParameter("mail"));
+			persona.setTelefono(request.getParameter("telefono"));
+			alumno.setEstado(estado);
+			
+			
+			
+			alumno.setPersona(persona);
+			
+			if(NegAlumno.verificar(persona.getDni())==false) {
+				aux=NegAlumno.GuardarAlumno(alumno);
+				request.setAttribute("respuestadb", aux);
+				String Mensaje="1";
+				HttpSession session = request.getSession();
+				session.setAttribute("Mensaje", Mensaje);
+			}
+			else {
+				String Mensaje="0";
+				HttpSession session = request.getSession();
+				session.setAttribute("Mensaje", Mensaje);
+			}
+			
+			NegocioProvincia negocioProvincia = new NegocioProvinciaImpl();
+			List<Provincia> ListaProvincia= negocioProvincia.listaProvincias();
+			request.setAttribute("ListaProvincia", ListaProvincia);
+			RequestDispatcher RequestDispatcher = request.getRequestDispatcher("/adm_alumnos_agregar.jsp");
+			RequestDispatcher.forward(request, response);
+		}
+    	
+    	
+    	
     	if (request.getParameter("btnIrEditarAlumno") != null) {
     		int Legajo = Integer.parseInt(request.getParameter("txtLegajoAlumno"));
     		Alumno alum = negocioA.obtenerAlumnoLegajo(Legajo);
     		
     		//OBTENGO LISTADO DE PROVINCIAS
-			ArrayList<Provincia> lista = negocioP.listaProvincias();
-			request.setAttribute("listarProvincias", lista);    		
+			ArrayList<Provincia> listaProvincias = negocioP.listaProvincias();
+			request.setAttribute("listarProvincias", listaProvincias);
+			
+    		//OBTENGO LISTADO DE ESTADOS
+			ArrayList<Estado> listaEstados = negocioE.obtenerEstados();
+			request.setAttribute("listarEstados", listaEstados);   
 
     		request.setAttribute("AlumnoEditar", alum);
     		RequestDispatcher dispatcher = request.getRequestDispatcher("/adm_alumnos_editar.jsp");
@@ -129,6 +209,16 @@ public class AdmAlumnoServlet extends HttpServlet {
 			rd.forward(request, response);
 
 		}	
+		if(request.getParameter("Param").equals("AgregarAlumnos")) {
+			
+			// OBTENGO LISTA DE PROVINCIAS
+			NegocioProvincia negocioProvincia = new NegocioProvinciaImpl();
+			List<Provincia> ListaProvincia= negocioProvincia.listaProvincias();
+			request.setAttribute("ListaProvincia", ListaProvincia);
+			
+			RequestDispatcher rd = request.getRequestDispatcher("/adm_alumnos_agregar.jsp");
+			rd.forward(request, response);	        
+		}
 		
 	}
 	

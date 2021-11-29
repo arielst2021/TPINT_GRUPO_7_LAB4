@@ -7,14 +7,17 @@
 <%@page import="java.time.Year"%>
 <%@page session="true"%>
 
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-
+<%@page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+	
 <%!Profesor Profesor = new Profesor();%>
-
 <%
 	if (session.getAttribute("perfil") != null) {
 		Profesor = (Profesor) session.getAttribute("perfil");
+		if (Profesor.getPerfil().getId() == 1) {
+			//REDIRIGIR A PAGINA ADMINISTRADOR -->
+			response.sendRedirect("index.jsp");
+		}
 	} else {
 		response.sendRedirect("index.jsp");
 	}
@@ -38,27 +41,7 @@ H E A D
 
 </head>
 
-<script type="text/javascript">
-	function valideKey(evt) {
-
-		// EL CÓDIGO ES LA REPRESENTACIÓN DECIMAL ASCII DE LA TECLA PRESIONADA.
-		var code = (evt.which) ? evt.which : evt.keyCode;
-
-		if (code == 46) { // PUNTO
-			return true;
-		} else if (code >= 48 && code <= 57) { // ES NUMERO.
-			return true;
-		} else { // OTRAS TECLAS.
-			return false;
-		}
-	}
-</script>
-
-</head>
-<!--
-----------------------------------------------------
-B O D Y
----------------------------------------------------- -->
+<!-- B O D Y -->
 <body style="background-color: #F6F9FF">
 
 	<!-- N A V B A R  -->
@@ -80,24 +63,24 @@ B O D Y
 		if (msg != "null") {
 			if (msg == '1' ) {
 				Swal.fire({
-					title : '¡Correcto!',
-					text : "¡Notas/s agregada/s o modificada/s exitosamente!",
+					title : 'Â¡Correcto!',
+					text : 'Â¡Notas/s agregada/s o modificada/s exitosamente!',
 					icon : 'success',
 					confirmButtonText : 'OK'
 				})
 			}
 			if (msg == '0') {
 				Swal.fire({
-					title : '¡Error!',
-					text : "¡Hubo un error al intentar agregar Nota/s al curso!",
+					title : 'Â¡Error!',
+					text : "Â¡Hubo un error al intentar agregar Nota/s al curso!",
 					icon : 'error',
 					confirmButtonText : 'OK'
 				})
 			}
 			if (msg == '-1') {
 				Swal.fire({
-					title : '¡Error!',
-					text : "¡Nota/s duplicada/s, no se agregó/agregaron Notas!",
+					title : 'Â¡Error!',
+					text : "Â¡Nota/s duplicada/s, no se agregÃ³/agregaron Notas!",
 					icon : 'error',
 					confirmButtonText : 'OK'
 				})
@@ -111,21 +94,20 @@ B O D Y
 			<div class="card">
 				<div class="card-body">
 
-					<!-- M A I N  -->
-					<main id="main" class="main">
+					<!-- INICIO MAIN  -->
+					<div id="main" class="main">
 						<section class="section">
 							<div class="row">
 								<div class="col-lg-12">
 									<div class="card">
 										<div class="card-body">
-										<form action="ProfCursoServlet" method="post">
+										<form action="ProfCursoServlet" method="post">									
 											<%!Curso Curso = new Curso();%>
 											<%
 												if (session.getAttribute("DatosDelCurso") != null) {
 													Curso = (Curso) session.getAttribute("DatosDelCurso");
 												}
 											%>
-											<br>
 											<h3 class="card-title text-primary">Calificaciones de los
 												alumnos</h3>
 											<hr>
@@ -135,7 +117,7 @@ B O D Y
 													<div>
 	
 														<strong class="text-success">Materia: </strong><%=Curso.getMateria().getNombre()%>
-														<br> <strong class="text-success">Período: </strong><%=Curso.getSemestre().getNombre()%>
+														<br> <strong class="text-success">PerÃ­odo: </strong><%=Curso.getSemestre().getNombre()%>
 													</div>
 	
 												</div>
@@ -143,7 +125,7 @@ B O D Y
 	
 													<div>
 	
-														<strong class="text-success">Año: </strong><%=Curso.getAnio()%>
+														<strong class="text-success">AÃ±o: </strong><%=Curso.getAnio()%>
 														<br> <strong class="text-success">Profesor/a:
 														</strong><%=Profesor.getPersona().getNombre()%>
 														<%=Profesor.getPersona().getApellido()%>
@@ -171,6 +153,7 @@ B O D Y
 															<th style="width: 20%" scope="col">Estado</th>
 														</tr>
 													</thead>
+<%! @SuppressWarnings("unchecked") %>													
 													<%
 														ArrayList<Curso> listaAlumnosPorCursos = null;
 														if (request.getAttribute("listaAlumnosPorCursos") != null) {
@@ -188,55 +171,51 @@ B O D Y
 														<input type="hidden" id="txtLegajoAlumno" name="txtLegajoAlumno" value="<%=item.getAlumno().getLegajo()%>">
 														<span class="text-uppercase fw-bold"><%=item.getAlumno().getPersona().getApellido()%></span>, <%=item.getAlumno().getPersona().getNombre()%></td>
 	
-														<!-- AGREGO UN JAVASCRIPT PARA PERMITIR EL INGRESO DE VALORES NUMÉRICOS Y UN DISEÑO DE PATRÓN DE ETIQUETAS HTML PARA SOLO VALORES NUMÉRICOS  -->
-														<!-- EL ATRIBUTO PATTERN ESPECIFICA UNA EXPRESIÓN REGULAR CON LA QUE <INPUT>SE VERIFICA EL VALOR DEL ELEMENTO AL ENVIAR EL FORMULARIO. -->
+														<!-- AGREGO UN JAVASCRIPT PARA PERMITIR EL INGRESO DE VALORES NUMÃ‰RICOS Y UN DISEÃ‘O DE PATRÃ“N DE ETIQUETAS HTML PARA SOLO VALORES NUMÃ‰RICOS  -->
+														<!-- EL ATRIBUTO PATTERN ESPECIFICA UNA EXPRESIÃ“N REGULAR CON LA QUE <INPUT>SE VERIFICA EL VALOR DEL ELEMENTO AL ENVIAR EL FORMULARIO. -->
 	
-														<td class="align-middle text-center"><input
-															type="text" id="nota" name="Nota1" class="form-control"
-															onkeypress="return valideKey(event)"
-															pattern="^\d{1,2}+(\.\d{1})?$"
+														<td class="align-middle"><input
+															type="text" id="nota" name="Nota1" class="form-control text-primary fw-bold" onkeypress="return filterFloat(event,this);"
 															value="<%=item.getNotaPrimerParcial()%>"></td>
-														<td class="text-center"><input type="text" id="nota"
-															name="Nota2" class="form-control"
-															onkeypress="return valideKey(event)"
-															pattern="^\d{1,2}+(\.\d{1})?$"
+														<td class="align-middle"><input
+															type="text" id="nota" name="Nota2" class="form-control text-primary fw-bold" onkeypress="return filterFloat(event,this);"
 															value="<%=item.getNotaPrimerRecuperatorio()%>"></td>
-														<td class="text-center"><input type="text" id="nota"
-															name="Nota3" class="form-control"
-															onkeypress="return valideKey(event)"
-															pattern="^\d{1,2}+(\.\d{1})?$"
+														<td class="align-middle"><input
+															type="text" id="nota" name="Nota3" class="form-control text-primary fw-bold" onkeypress="return filterFloat(event,this);"
 															value="<%=item.getNotaSegundoParcial()%>"></td>
-														<td class="text-center"><input type="text" id="nota"
-															name="Nota4" class="form-control"
-															onkeypress="return valideKey(event)"
-															pattern="^\d{1,2}+(\.\d{1})?$"
+														<td class="align-middle"><input
+															type="text" id="nota" name="Nota4" class="form-control text-primary fw-bold" onkeypress="return filterFloat(event,this);"
 															value="<%=item.getNotaSegundoRecuperatorio()%>"></td>
-														<td class="text-center"><select
-															class="form-select form-select selectpicker"
-															name="estadoAlumno">
-																<%
-																	ArrayList<Estado> listaEstados = null;
-																			if (request.getAttribute("listaEstados") != null) {
-																				listaEstados = (ArrayList<Estado>) request.getAttribute("listaEstados");
-																			}
-																%>
-																<%
-																	if (listaAlumnosPorCursos != null) {
-																				for (Estado item2 : listaEstados) {
-																					if (item2.getNombre().equals("Libre") || item2.getNombre().equals("Regular")
-																							|| item2.getNombre().equals("Sin calificar")) {
-	
-																						// POR MEDIO DEL ATRIBUTO SELECTED ESTABLEZCO LA OPCIÓN INICIALMENTE SELECCIONADA
-																%>
-																<option value="<%=item2.getId()%>"
-																	<%if (item.getEstado().getId() == item2.getId()) {%>
-																	selected <%}%>><%=item2.getNombre()%></option>
-																<%
-																	}
+														<td class="text-center">
+															<select
+																class="form-select selectpicker text-primary fw-bold"
+																name="estadoAlumno">
+																	<%
+																		ArrayList<Estado> listaEstados = null;
+																				if (request.getAttribute("listaEstados") != null) {
+																					listaEstados = (ArrayList<Estado>) request.getAttribute("listaEstados");
 																				}
-																			}
-																%>
-														</select></td>
+																	%>
+																	<%
+																		if (listaAlumnosPorCursos != null) {
+																					for (Estado item2 : listaEstados) {
+																						if (item2.getNombre().equals("Libre") || item2.getNombre().equals("Regular")
+																								|| item2.getNombre().equals("Sin calificar")) {
+	
+																	// POR MEDIO DEL ATRIBUTO SELECTED ESTABLEZCO LA OPCIÃ“N INICIALMENTE SELECCIONADA
+																	%>
+																	<option value="<%=item2.getId()%>"
+																		<%if (item.getEstado().getId() == item2.getId()) {%>
+																		selected <%}%>>
+																		<%=item2.getNombre()%>
+																	</option>
+																	<%
+																		}
+																					}
+																				}
+																	%>
+															</select>
+														</td>
 														<%
 															}
 															}
@@ -254,7 +233,8 @@ B O D Y
 								</div>
 							</div>
 						</section>
-					</main>
+					</div>
+					<!-- FIN MAIN  -->
 				</div>
 			</div>
 		</div>
@@ -269,17 +249,65 @@ B O D Y
 	<script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
 	
 <script>
-//IDIOMAS ESPAÑOL DEL DATATABLE   
+//IDIOMAS ESPAÃ‘OL DEL DATATABLE   
 $(document).ready(function() {
-	$('#myTable').DataTable({ 
-	      pageLength: 5,
-	      lengthMenu: [[5, 10, 20, -1], [5, 10, 20, "Todos"]],
+	$('#myTable').DataTable({
 	"language": {
 		"url": "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
 		}
 	});
 });
 </script>
+
+<!-- 	SOLO NUMEROS CON 1 PUNTO Y MAXIMO 1 DECIMAL -->
+	<script type="text/javascript">
+		function filterFloat(evt, input) {
+			// TECLA RETROCESO = 8, TECLA ENTER = 13, â€˜0â€² = 48, â€˜9â€² = 57, â€˜.â€™ = 46, â€˜-â€™ = 43
+			var key = window.Event ? evt.which : evt.keyCode;
+			var chark = String.fromCharCode(key);
+			var tempValue = input.value + chark;
+			if (key >= 48 && key <= 57) {
+				if (filter(tempValue) === false) {
+					return false;
+				} else {
+					return true;
+				}
+			} else {
+				if (key == 8 || key == 13 || key == 0) {
+					return true;
+				} else if (key == 46) {
+					if (filter(tempValue) === false) {
+						return false;
+					} else {
+						return true;
+					}
+				} else {
+					return false;
+				}
+			}
+		}
+
+		function filter(__val__) {
+			var preg = /^\d{1,2}(\.\d{0,1})?$/;
+			if (preg.test(__val__) === true) {
+				if ((__val__) >= 0 && (__val__) <= 10) {
+					return true;
+				} else {
+					Swal.fire({
+						title : 'Â¡Error!',
+						text : 'Solo ingresar valores entre 0.0 y 10.0',
+						icon : 'error',
+						confirmButtonText : 'OK'
+					})
+					return false;
+				}
+
+			} else {
+				return false;
+			}
+
+		}
+	</script>
 
 </body>
 </html>

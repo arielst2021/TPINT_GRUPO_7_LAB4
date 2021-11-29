@@ -20,19 +20,11 @@
 
 <body style="background-color: #F6F9FF">
 
-  <!-- ======= Header ======= -->
-  
-  <!-- End Header -->
-
-  <!-- ======= Sidebar ======= -->
-
-  
-  <!-- End Sidebar-->
 <% if(request.getAttribute("EditarProfesor") != null){
-            	 				 Profesor profe = (Profesor) request.getAttribute("EditarProfesor");
-            	  			
-            	  			%>
-  <main id="main" class="main">
+	Profesor profe = (Profesor) request.getAttribute("EditarProfesor");       	  			
+%>
+<!-- INICIO MAIN -->			        
+<div id="main" class="main">
 
     <section class="section">
       <div class="row">
@@ -84,7 +76,7 @@
                 </div>
 
                 <div class="row mb-3">
-                  <label for="inputText" class="col-sm-2 col-form-label">Dirección</label>
+                  <label for="inputText" class="col-sm-2 col-form-label">Direcciï¿½n</label>
                   <div class="col-sm-10">
                     <input type="text" class="form-control" value =<%=profe.getPersona().getDireccion() %>>
                   </div>
@@ -116,7 +108,7 @@
                 </div>
 
                 <div class="row mb-3">
-                  <label for="inputText" class="col-sm-2 col-form-label">Teléfono</label>
+                  <label for="inputText" class="col-sm-2 col-form-label">Telï¿½fono</label>
                   <div class="col-sm-10">
                     <input type="text" class="form-control" value =<%=profe.getPersona().getTelefono() %>>
                   </div>
@@ -142,7 +134,7 @@
                 </div>
 
                 <div class="row mb-3">
-                  <label for="inputPasswordl" class="col-sm-2 col-form-label">Contraseña</label>
+                  <label for="inputPasswordl" class="col-sm-2 col-form-label">Contraseï¿½a</label>
                   <div class="col-sm-10">
                     <input type="password" class="form-control">
                   </div>
@@ -181,7 +173,8 @@
       </div>
     </section>
 
-  </main><!-- End #main -->
+  </div>
+<!-- FIN MAIN -->
    <% } %>
 
   <!-- ======= Footer ======= -->
