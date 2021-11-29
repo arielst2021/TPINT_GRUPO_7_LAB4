@@ -71,6 +71,8 @@ public class AdmAlumnoServlet extends HttpServlet {
         			persona.setTelefono(request.getParameter("telefono"));
         			alumno.setEstado(estado);
         			alumno.setPersona(persona);
+        			
+        			System.out.println(negocioA.verificar(persona.getDni()));
         			//
         			if(negocioA.verificar(persona.getDni())==false) {
         				aux=negocioA.GuardarAlumno(alumno);
@@ -87,6 +89,10 @@ public class AdmAlumnoServlet extends HttpServlet {
 			
 			List<Provincia> ListaProvincia= negocioP.listaProvincias();
 			request.setAttribute("ListaProvincia", ListaProvincia);
+			
+    		//OBTENGO LISTADO DE ESTADOS
+			ArrayList<Estado> listaEstados = negocioE.obtenerEstados();
+			request.setAttribute("listarEstados", listaEstados);   
 			
 			RequestDispatcher RequestDispatcher = request.getRequestDispatcher("/adm_alumnos_agregar.jsp");
 			RequestDispatcher.forward(request, response);
@@ -219,7 +225,6 @@ public class AdmAlumnoServlet extends HttpServlet {
 			
 			// OBTENER ALUMNOS		
 			ArrayList<Alumno> ListaAlumnos = negocioA.obtenerAlumnosTodos();
-
 			request.setAttribute("ListaAlumnos", ListaAlumnos);
 
 			RequestDispatcher rd = request.getRequestDispatcher("/adm_alumnos_listar.jsp");
@@ -229,9 +234,12 @@ public class AdmAlumnoServlet extends HttpServlet {
 		if(request.getParameter("Param").equals("AgregarAlumnos")) {
 			
 			// OBTENGO LISTA DE PROVINCIAS
-			NegocioProvincia negocioProvincia = new NegocioProvinciaImpl();
-			List<Provincia> ListaProvincia= negocioProvincia.listaProvincias();
+			List<Provincia> ListaProvincia= negocioP.listaProvincias();
 			request.setAttribute("ListaProvincia", ListaProvincia);
+			
+    		//OBTENGO LISTADO DE ESTADOS
+			ArrayList<Estado> listaEstados = negocioE.obtenerEstados();
+			request.setAttribute("listarEstados", listaEstados);   
 			
 			RequestDispatcher rd = request.getRequestDispatcher("/adm_alumnos_agregar.jsp");
 			rd.forward(request, response);	        

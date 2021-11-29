@@ -96,32 +96,32 @@
 
 
 												<div class="mb-3">
-													<label>Nombre</label> <input
-														class="form-control" type="text" name="name"
+													<label class="fw-bold">Nombre</label> <input
+														class="form-control text-primary" type="text" name="name"
 														id="Nombre" placeholder="" required>
 												</div>
 
 												<div class="mb-3">
-													<label>Apellido</label> <input
-														class="form-control" type="text" name="apellido"
+													<label class="fw-bold">Apellido</label> <input
+														class="form-control text-primary" type="text" name="apellido"
 														id="apellido" placeholder="" required>
 												</div>
 
 												<div class="mb-3">
-													<label>DNI</label> <input
-														class="form-control" type="number" name="dni"
-														id="dni" placeholder="" required>
+													<label class="fw-bold">DNI</label> <input
+														class="form-control text-primary" type="text" name="dni"
+														id="dni" placeholder="" required onkeypress="return valideKey(event);" />
 												</div>
 
 												<div class="mb-3">
-													<label>Fecha de nacimiento</label> <input
-														class="form-control" type="date" name="nacimiento"
+													<label class="fw-bold">Fecha de nacimiento</label> <input
+														class="form-control text-primary" type="date" name="nacimiento"
 														id="nacimiento" placeholder="" required>
 												</div>
 
 												<div class="mb-3">
-													<label>Direccion</label> <input
-														class="form-control" type="text" name="direccion"
+													<label class="fw-bold">Direccion</label> <input
+														class="form-control text-primary" type="text" name="direccion"
 														id="direccion" placeholder="" required>
 												</div>
 
@@ -134,7 +134,7 @@
 										<div class="card-body">
 											<section>
 												<div class="mb-3">
-													<label>Provincia</label>
+													<label class="fw-bold">Provincia</label>
 <%! @SuppressWarnings("unchecked") %>													
 													<%
 														List<Provincia> ListaProvincia = null;
@@ -142,7 +142,7 @@
 															ListaProvincia = (List<Provincia>) request.getAttribute("ListaProvincia");
 														}
 													%>
-													<select class="form-select form-control" name="provincias">
+													<select class="form-select form-control text-primary" name="provincias">
 														<%
 															if (ListaProvincia != null)
 																for (Provincia p : ListaProvincia) {
@@ -155,23 +155,39 @@
 												</div>
 
 												<div class="mb-3">
-													<label>Mail</label> <input
-														class="form-control" type="text" name="mail"
+													<label class="fw-bold">Mail</label> <input
+														class="form-control text-primary" type="text" name="mail"
 														id="mail" placeholder="" required>
 												</div>
 
 												<div class="mb-3">
-													<label>Telefono</label> <input
-														class="form-control" type="number" name="telefono"
+													<label class="fw-bold">Telefono</label> <input
+														class="form-control text-primary" type="number" name="telefono"
 														id="telefono" placeholder="" required>
 												</div>
 
 												<div class="mb-3">
-													<label>Estado</label>
-													<select class="form-select"
-														aria-label="form-select form-control" name="estado">
-														<option value="1">Activo</option>
-														<option value="2">Inactivo</option>
+													<label class="fw-bold">Estado</label> <select
+														class="form-select form-control text-primary"
+														name="estado">
+														<%
+															List<Estado> ListaEstado = null;
+															if (request.getAttribute("listarEstados") != null) {
+																ListaEstado = (List<Estado>) request.getAttribute("listarEstados");
+															}
+														%>
+														<%
+															if (ListaEstado != null) {
+																for (Estado e : ListaEstado) {
+																	if (e.getNombre().equals("Activo") || e.getNombre().equals("Inactivo")) {
+														// 
+														%>
+														<option value="<%=e.getId()%>"><%=e.getNombre()%></option>
+														<%
+															}
+																}
+															}
+														%>
 													</select>
 												</div>
 
@@ -218,20 +234,12 @@
 			return false;
 		}
 
-		if (document.fvalida.dni.value.length == 0
-				|| document.fvalida.dni.value.length > 8) {
+		if (document.fvalida.dni.value.length != 8) {
 
 			alert("El campo 'DNI' debe tener entre 1 y 8 caracteres numericos")
 			document.fvalida.dni.focus()
 			return false;
-		}
-		
-		var RegExp=/^\d{8}(?:[-\s]\d{4})?$/
-			if(!RegExp.exec(document.formulario.dni.value)){
-				alert("El campo 'DNI' debe tener entre 1 y 8 caracteres numericos")
-				document.formulario.dni.focus()
-				return false;
-			}
+		}		
 
 		if (document.fvalida.direccion.value.length == 0
 				|| document.fvalida.direccion.value.length > 20) {
@@ -259,6 +267,22 @@
 		
 		return true;
 	}
+</script>
+
+	<script type="text/javascript">
+function valideKey(evt){
+			
+// code is the decimal ASCII representation of the pressed key.
+var code = (evt.which) ? evt.which : evt.keyCode;
+	if(code==8) { // backspace.
+		return true;
+	}
+	else if(code>=48 && code<=57) { // is a number.
+		return true;
+	} else { // other keys.
+		return false;
+	}
+}
 </script>
 
 	<!-- F O O T E R  -->
