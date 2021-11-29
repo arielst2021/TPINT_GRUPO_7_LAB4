@@ -1,13 +1,7 @@
 <%@page import="entidades.Alumno"%>
 <%@page import="entidades.Provincia"%>
 <%@page import="entidades.Estado"%>
-<%@page import="java.util.ArrayList"%>
 <%@page import="entidades.Profesor"%>
-
-<%@page import="java.text.SimpleDateFormat"%>
-<%@page import="java.util.Date"%>
-<%@page import="java.time.LocalDate"%>
-
 <%@page import="java.util.*"%>
 <%@page session="true"%>
 
@@ -52,9 +46,10 @@
 		}
 	%>
 
-							<% if(request.getAttribute("AlumnoEditar") != null){
-            	 				 Alumno alum = (Alumno) request.getAttribute("AlumnoEditar");
-            	  			%>
+	<%
+		if (request.getAttribute("AlumnoEditar") != null) {
+			Alumno alum = (Alumno) request.getAttribute("AlumnoEditar");
+	%>
 
 	<div class="row">
 		<div class="col-12">
@@ -279,28 +274,10 @@
 				alert("El campo 'TELEFONO' de ser por ejemplo: 1144440000")
 				document.formulario.txtTelefono.focus()
 				return false;
-			}
-		
-// 		var RegExp = /^([0-9]{2})\-([0-9]{2})\-([0-9]{4})$/
-// 			if(!RegExp.exec(document.formulario.txtNacimiento.value)){
-// 				alert("El campo 'FECHA' de ser por ejemplo: ")
-// 				document.formulario.txtNacimiento.focus()
-// 				return false;
-// 			}
-		
+			}	
 		return true;
 	}
 </script>
 
-<script>
-//IDIOMAS ESPAÑOL DEL DATATABLE   
-$(document).ready(function() {
-	$('#myTable').DataTable({ 
-	"language": {
-		"url": "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
-		}
-	});
-});
-</script>
 </body>
 </html>

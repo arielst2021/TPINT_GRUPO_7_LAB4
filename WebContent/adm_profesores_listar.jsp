@@ -29,10 +29,39 @@
 
 <body style="background-color: #F6F9FF">
 
-<!--
-----------------------------------------------------
-N A V B A R
----------------------------------------------------- -->
+<!-- N A V B A R -->
+
+	<script type="text/javascript">
+    var msg = '<%=session.getAttribute("Mensaje")%>';
+		if (msg != "null") {
+			if (msg == '1' ) {
+				Swal.fire({
+					title : '¡Correcto!',
+					text : "¡Profesor modificado exitosamente!",
+					icon : 'success',
+					confirmButtonText : 'OK'
+				})
+			}
+			if (msg == '0') {
+				Swal.fire({
+					title : '¡Error!',
+					text : "¡Hubo un error al intentar modificar el profesor!",
+					icon : 'error',
+					confirmButtonText : 'OK'
+				})
+			}
+			if (msg == '-1') {
+				Swal.fire({
+					title : '¡Error!',
+					text : "¡Hubo un error interno al intentar modificar el profesor!",
+					icon : 'error',
+					confirmButtonText : 'OK'
+				})
+			}
+			<%session.setAttribute("Mensaje", null);%>			
+		}
+	</script>
+	
 	<%
 		if (session.getAttribute("perfil") != null) {
 	%>
@@ -71,7 +100,7 @@ N A V B A R
                                             <th scope="col">DNI</th>
                                             <th scope="col">Email</th>
                                             <th scope="col">Provincia</th>
-                                            <th scope="col">Fecha de Nacimiento</th>
+                                            <th scope="col">Fecha Nac.</th>
                                             <th scope="col">Usuario</th>
                                             <th scope="col">Estado</th>
                                             <th scope="col">Modificar</th>
@@ -102,9 +131,11 @@ N A V B A R
                                                     <td class="align-middle">
                                                         <%=item.getPersona().getProvincia().getNombre() %>
                                                     </td>
-                                                    <td class="align-middle">
-                                                        <%=item.getPersona().getFechaNacimiento() %>
-                                                    </td>
+													<td class="align-middle">
+														<%=item.getPersona().getFechaNacimiento().getDayOfMonth()%>-
+														<%=item.getPersona().getFechaNacimiento().getMonthValue()%>-
+														<%=item.getPersona().getFechaNacimiento().getYear()%>
+													</td>
                                                    	<td class="align-middle">
                                                         <%=item.getUsuario() %>
                                                     </td>

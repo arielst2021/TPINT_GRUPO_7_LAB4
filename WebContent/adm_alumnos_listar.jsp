@@ -56,7 +56,6 @@
 				})
 			}
 			<%session.setAttribute("Mensaje", null);%>			
-			<%session.setAttribute("Mensaje", null);%>
 		}
 	</script>
 	

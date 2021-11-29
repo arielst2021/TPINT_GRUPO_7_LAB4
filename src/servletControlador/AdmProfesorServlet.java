@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -20,6 +21,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import entidades.Materia;
 import entidades.Profesor;
@@ -84,6 +86,8 @@ public class AdmProfesorServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
 		if (request.getParameter("btnregistrar") != null) {
 			int profesoragregado = 0;
 			String string = request.getParameter("nacimiento");
@@ -178,41 +182,88 @@ public class AdmProfesorServlet extends HttpServlet {
 		}
 		
 		if (request.getParameter("btnEditarProfesor") != null){
-    		Profesor Profe = new Profesor();
-    		Persona per = new Persona();
-    		NegocioProfesor NegocioP = new NegocioProfesorImpl();
+			Profesor Profe = null;
+			int ProfesorModificado = 0;
+			String Mensaje = null;
+			
+			NegocioProfesor NegocioP = new NegocioProfesorImpl();
+			//
     		
-    		// Se valida que el DNI ya no este en uso
-
-    		// Persona2
-    		System.out.println(request.getParameter("txtNombre"));
-    		System.out.println(request.getParameter("txtLegajo"));
-    		Profe.setLegajo(Integer.parseInt(request.getParameter("txtLegajo")));
-    		per.setNombre(request.getParameter("txtNombre"));
-    		per.setApellido(request.getParameter("txtApellido"));
-    		per.setDni(request.getParameter("txtDni"));
-    		per.setDireccion(request.getParameter("txtDireccion"));
-    		per.setEmail(request.getParameter("txtEmail"));
-    		per.setTelefono(request.getParameter("txtTelefono"));
-    		Profe.setUsuario(request.getParameter("txtUsuario"));
-            
-			// Provincia
-			Provincia provProfeno = new Provincia();
-			provProfeno.setId(Integer.parseInt(request.getParameter("txtProvincia")));
-			per.setProvincia(provProfeno);
-			Profe.setPersona(per);
-    	
-			int resp = NegocioP.ModificarProfesor(Profe);			
+    		if(request.getParameter("txtLegajo") != null && request.getParameter("txtNombre") != null && request.getParameter("txtApellido") != null
+    			&& request.getParameter("txtDni")  != null && request.getParameter("txtDireccion") != null && request.getParameter("txtTelefono")  != null
+    			&& request.getParameter("txtProvincia")  != null && request.getParameter("txtUsuario") != null && request.getParameter("txtEmail") != null
+    			&& request.getParameter("txtNacimiento")  != null) {
+    			try {
+    				
+    	    		// USO DE FECHA
+    	    		DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd"); 
+    	    		LocalDate FechaNacimiento = LocalDate.parse(request.getParameter("txtNacimiento"), formato); 
+    	    		
+    	    		Persona per = new Persona();
+    	    		Profe = new Profesor();
+    	    		
+    	    		// SETEA AL ALUMNO CON LOS DATOS
+    	    		per.setFechaNacimiento(FechaNacimiento);
+    	    		Profe.setLegajo(Integer.parseInt(request.getParameter("txtLegajo")));
+    	    		Profe.setUsuario(request.getParameter("txtUsuario"));
+    	    		per.setNombre(request.getParameter("txtNombre"));
+    	    		per.setApellido(request.getParameter("txtApellido"));
+    	    		per.setDni(request.getParameter("txtDni"));
+    	    		per.setDireccion(request.getParameter("txtDireccion"));
+    	    		per.setEmail(request.getParameter("txtEmail"));
+    	    		per.setTelefono(request.getParameter("txtTelefono"));
+    				// Provincia
+    				Provincia provProfesor = new Provincia();
+    				provProfesor.setId(Integer.parseInt(request.getParameter("txtProvincia")));
+    				per.setProvincia(provProfesor);
+    				Profe.setPersona(per);
+    				
+    				// SE GRABAN LOS CAMBIOS EN LA BASE DE DATOS
+    				ProfesorModificado = NegocioP.ModificarProfesor(Profe);
+    				
+    				
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+    		}
+			if (ProfesorModificado==1) {	
+				//MENSAJE "Profesor modificado exitosamente";
+				Mensaje = "1";	
+			}
 			
+			if (ProfesorModificado==0) {	
+				
+				//MENSAJE "Hubo un error al intentar modificar el profesor";
+				Mensaje = "0";	
+			}
 			
+			if (ProfesorModificado==-1) {	
+				
+				//MENSAJE "Hubo un error interno al intentar modificar el profesor";
+				Mensaje = "0";	
+			}
+			
+			HttpSession session = request.getSession();
+			session.setAttribute("Mensaje", Mensaje);
+			
+			// OBTENER PROFESORES		
 			List<Profesor> ListaProfesor = NegocioP.listaTodosProfesores();
 			request.setAttribute("ListaProfesor", ListaProfesor);
 			
 			RequestDispatcher rd = request.getRequestDispatcher("/adm_profesores_listar.jsp");
-			rd.forward(request, response);	  
+			rd.forward(request, response);
     	}
 		
-		
+    	if (request.getParameter("btnCancelarEditarProfesor") != null){
+    		
+    		NegocioProfesor NegocioP = new NegocioProfesorImpl();
+    		
+			// OBTENER PROFESORES		
+			List<Profesor> ListaProfesor = NegocioP.listaTodosProfesores();
+			request.setAttribute("ListaProfesor", ListaProfesor);
+			
+			RequestDispatcher rd = request.getRequestDispatcher("/adm_profesores_listar.jsp");
+			rd.forward(request, response);	
+    	}		
 	}
-
 }

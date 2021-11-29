@@ -336,9 +336,8 @@ public class ProfesorDaoImpl implements ProfesorDao {
 	@Override
 	public int ModificarProfesor(Profesor objProfesor) {
 		int GraboExitosamente = 0;
-		 String str = "UPDATE laboratorio4.profesores SET  pro_nombre=?, pro_apellido=?, pro_direccion=?, pro_provincia_id=?, pro_email=?, pro_telefono=?, pro_usuario=? WHERE pro_legajo=?";
+		 String str = "UPDATE laboratorio4.profesores SET  pro_nombre=?, pro_apellido=?, pro_direccion=?, pro_provincia_id=?, pro_email=?, pro_telefono=?, pro_usuario=? , pro_fechanac=?  WHERE pro_legajo=?";
 		Connection con = Conexion.getConexion().getSQLConexion();
-		System.out.println(str);
 		try {
 			PreparedStatement ps = con.prepareStatement(str);
 			// Se ordenan los campos para el statement
@@ -350,7 +349,8 @@ public class ProfesorDaoImpl implements ProfesorDao {
 	        ps.setString(5, objProfesor.getPersona().getEmail());
 	        ps.setString(6, objProfesor.getPersona().getTelefono());
 	        ps.setString(7, objProfesor.getUsuario());
-	        ps.setInt(8, objProfesor.getLegajo());
+	        ps.setString(8, objProfesor.getPersona().getFechaNacimiento().toString());
+	        ps.setInt(9, objProfesor.getLegajo());
 			if (ps.executeLargeUpdate() > 0) {
 				System.out.println("Modificado");
 				con.commit();
@@ -358,6 +358,7 @@ public class ProfesorDaoImpl implements ProfesorDao {
 			}
 			
 		} catch (SQLException e) {
+			GraboExitosamente = -1;
 			e.printStackTrace();
 			try {
 				con.rollback();
