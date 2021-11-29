@@ -70,6 +70,8 @@ N A V B A R
                     						<th scope="col">Apellido y nombre</th>
                                             <th scope="col">DNI</th>
                                             <th scope="col">Email</th>
+                                            <th scope="col">Provincia</th>
+                                            <th scope="col">Fecha de Nacimiento</th>
                                             <th scope="col">Estado</th>
                                             <th scope="col">Modificar</th>
                                         </tr>
@@ -95,6 +97,12 @@ N A V B A R
                                                     </td>
                                                     <td class="align-middle">
                                                         <%=item.getPersona().getEmail() %>
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        <%=item.getPersona().getProvincia().getNombre() %>
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        <%=item.getPersona().getFechaNacimiento() %>
                                                     </td>
 <%
 															if (item.getEstado().getNombre().equals("Activo")) {
