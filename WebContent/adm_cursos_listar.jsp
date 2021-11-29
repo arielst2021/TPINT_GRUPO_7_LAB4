@@ -119,7 +119,7 @@ N A V B A R
 															value="<%=item.getProfesor().getPersona().getNombre()%>">
 														<input type="submit" name="btnAgregarAlumnos"
 															value="Agregar Alumnos"
-															class="btn btn-primary">
+															class="btn btn-info">
 													</form>
 
 												</td>

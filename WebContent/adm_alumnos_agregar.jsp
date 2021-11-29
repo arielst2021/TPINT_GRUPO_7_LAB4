@@ -216,7 +216,6 @@
 			alert("El campo apellido debe tener entre 1 y 20 caracteres")
 			document.fvalida.apellido.focus()
 			return false;
-
 		}
 
 		if (document.fvalida.dni.value.length == 0
@@ -225,8 +224,14 @@
 			alert("El campo 'DNI' debe tener entre 1 y 8 caracteres numericos")
 			document.fvalida.dni.focus()
 			return false;
-
 		}
+		
+		var RegExp=/^\d{8}(?:[-\s]\d{4})?$/
+			if(!RegExp.exec(document.formulario.dni.value)){
+				alert("El campo 'DNI' debe tener entre 1 y 8 caracteres numericos")
+				document.formulario.dni.focus()
+				return false;
+			}
 
 		if (document.fvalida.direccion.value.length == 0
 				|| document.fvalida.direccion.value.length > 20) {

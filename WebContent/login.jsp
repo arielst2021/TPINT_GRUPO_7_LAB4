@@ -33,12 +33,12 @@
 <html lang="es">
 <head>
 <title>Login</title>
-	<link rel="stylesheet" type="text/css"
-		href="https://www.w3schools.com/w3css/4/w3.css">
-	<link rel="stylesheet" type="text/css"
-		href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css"
-		href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css" />
+	<!-- SWEETALERT2 -->
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<!-- BOOTSTRAP5 -->
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css" />
 </head>
 <body style="background-color: #F6F9FF">
 

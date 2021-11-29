@@ -1,16 +1,10 @@
 package servletControlador;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.Year;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,21 +12,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import entidades.Alumno;
-import entidades.Curso;
 import entidades.Estado;
-import entidades.Materia;
 import entidades.Persona;
-import entidades.Profesor;
 import entidades.Provincia;
-import entidades.Semestre;
 import negocio.NegocioAlumno;
-import negocio.NegocioCurso;
 import negocio.NegocioEstado;
 import negocio.NegocioProvincia;
 import negocioImpl.NegocioAlumnoImpl;
-import negocioImpl.NegocioCursoImpl;
 import negocioImpl.NegocioEstadoImpl;
 import negocioImpl.NegocioProvinciaImpl;
 
@@ -49,81 +36,62 @@ public class AdmAlumnoServlet extends HttpServlet {
         this.negocioA = new NegocioAlumnoImpl();
         this.negocioP = new NegocioProvinciaImpl();
         this.negocioE = new NegocioEstadoImpl();
-
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	
-    	if(request.getParameter("btnAgregarAlumno")!=null) {
-
-			
+    	if(request.getParameter("btnAgregarAlumno")!=null) {	
     		int aux=0;
-    		String nacimiento  = request.getParameter("nacimiento");
-    		System.out.println(nacimiento);
-    		SimpleDateFormat DateFormat = new SimpleDateFormat(nacimiento);
-    		Date fecha = null;
-    		
-    		try {
-    			fecha = (Date)DateFormat.parse(nacimiento);
+			String Mensaje = "0";
+    		if(request.getParameter("name") != null && request.getParameter("apellido") != null && request.getParameter("dni") != null
+        			&& request.getParameter("nacimiento")  != null && request.getParameter("provincias") != null && request.getParameter("estado")  != null
+        			&& request.getParameter("direccion")  != null && request.getParameter("mail") != null && request.getParameter("telefono") != null) {
+    			try {
+            		// USO DE FECHA
+            		DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd"); 
+            		LocalDate FechaNacimiento = LocalDate.parse(request.getParameter("nacimiento"), formato);
+        			//
+        			Provincia provincia= new Provincia();
+        			int idprovincia = Integer.parseInt(request.getParameter("provincias"));
+        			provincia.setId(idprovincia);
+        			//
+        			Estado estado= new Estado();
+        			estado.setIdEstado(Integer.parseInt(request.getParameter("estado")));
+        			//
+        			Alumno alumno = new Alumno();
+        			Persona persona= new Persona();
+        			//
+        			persona.setNombre(request.getParameter("name"));
+        			persona.setApellido(request.getParameter("apellido"));
+        			persona.setDni(request.getParameter("dni"));
+        			persona.setFechaNacimiento(FechaNacimiento);
+        			persona.setDireccion(request.getParameter("direccion"));
+        			persona.setProvincia(provincia);
+        			persona.setEmail(request.getParameter("mail"));
+        			persona.setTelefono(request.getParameter("telefono"));
+        			alumno.setEstado(estado);
+        			alumno.setPersona(persona);
+        			//
+        			if(negocioA.verificar(persona.getDni())==false) {
+        				aux=negocioA.GuardarAlumno(alumno);
+        				request.setAttribute("respuestadb", aux);
+        				Mensaje="1";
+        			}			
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
     		}
-    		catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			
-			System.out.println(DateFormat.toString());
-    		}
     		
-
-			Date input = new Date();
-			LocalDate date = input.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-			int idprovincia = Integer.parseInt(request.getParameter("provincias"));
-
-			NegocioAlumno NegAlumno = new NegocioAlumnoImpl();
-			Alumno alumno = new Alumno();
-			Provincia provincia= new Provincia();
-			Estado estado= new Estado();
-			Persona persona= new Persona();
+			HttpSession session = request.getSession();
+			session.setAttribute("Mensaje", Mensaje);
 			
-			estado.setIdEstado(Integer.parseInt(request.getParameter("estado")));
-			provincia.setId(idprovincia);
-			
-			
-			persona.setNombre(request.getParameter("name"));
-			persona.setApellido(request.getParameter("apellido"));
-			persona.setDni(request.getParameter("dni"));
-			persona.setFechaNacimiento(date);
-			persona.setDireccion(request.getParameter("direccion"));
-			persona.setProvincia(provincia);
-			persona.setEmail(request.getParameter("mail"));
-			persona.setTelefono(request.getParameter("telefono"));
-			alumno.setEstado(estado);
-			
-			
-			
-			alumno.setPersona(persona);
-			
-			if(NegAlumno.verificar(persona.getDni())==false) {
-				aux=NegAlumno.GuardarAlumno(alumno);
-				request.setAttribute("respuestadb", aux);
-				String Mensaje="1";
-				HttpSession session = request.getSession();
-				session.setAttribute("Mensaje", Mensaje);
-			}
-			else {
-				String Mensaje="0";
-				HttpSession session = request.getSession();
-				session.setAttribute("Mensaje", Mensaje);
-			}
-			
-			NegocioProvincia negocioProvincia = new NegocioProvinciaImpl();
-			List<Provincia> ListaProvincia= negocioProvincia.listaProvincias();
+			List<Provincia> ListaProvincia= negocioP.listaProvincias();
 			request.setAttribute("ListaProvincia", ListaProvincia);
+			
 			RequestDispatcher RequestDispatcher = request.getRequestDispatcher("/adm_alumnos_agregar.jsp");
 			RequestDispatcher.forward(request, response);
 		}
-    	
-    	
-    	
+    		
     	if (request.getParameter("btnIrEditarAlumno") != null) {
     		int Legajo = Integer.parseInt(request.getParameter("txtLegajoAlumno"));
     		Alumno alum = negocioA.obtenerAlumnoLegajo(Legajo);
@@ -174,7 +142,6 @@ public class AdmAlumnoServlet extends HttpServlet {
     	    		// USO DE FECHA
     	    		DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd"); 
     	    		LocalDate FechaNacimiento = LocalDate.parse(request.getParameter("txtNacimiento"), formato); 
-    	    		System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"+FechaNacimiento);
     	    		
     	    		Persona per = new Persona();
     	    		alum = new Alumno();
@@ -271,14 +238,4 @@ public class AdmAlumnoServlet extends HttpServlet {
 		}
 		
 	}
-	
-	private void obtenerAlumnosTodos(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		ArrayList<Alumno> alumnosTodos = negocioA.obtenerAlumnosTodos();
-		request.setAttribute("alumnosTodos", alumnosTodos);
-		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/adm_alumnos_listar.jsp");
-		dispatcher.forward(request, response);
-	}
-	
-
 }
