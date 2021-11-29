@@ -190,39 +190,31 @@ public class AlumnoDaoImpl implements AlumnoDao {
 
 	@Override
 	public int modificarAlumno(Alumno alu) {
-		int Legajo = alu.getLegajo();
-		String str = "UPDATE laboratorio4.alumnos SET alu_dni=?, alu_nombre=?, alu_apellido=?, alu_direccion=?, alu_provincia_id=?, alu_email=?, alu_telefono=?, alu_estado_id=? WHERE alu_legajo="
-				+ Legajo;
+		int AlumnoModificado = 0;
+		String str = "UPDATE laboratorio4.alumnos SET alu_dni=?, alu_nombre=?, alu_apellido=?, alu_direccion=?, alu_provincia_id=?, alu_email=?, alu_telefono=?, alu_estado_id=?, alu_fechanac=? WHERE alu_legajo=?";
 		Connection con = Conexion.getConexion().getSQLConexion();
-		System.out.println(str);
 		try {
 			PreparedStatement ps = con.prepareStatement(str);
 			// Se ordenan los campos para el statement
 
-			System.out.println(alu.getPersona().getDni());
 			ps.setString(1, alu.getPersona().getDni());
-			System.out.println(alu.getPersona().getNombre());
 			ps.setString(2, alu.getPersona().getNombre());
-			System.out.println(alu.getPersona().getApellido());
 			ps.setString(3, alu.getPersona().getApellido());
-			System.out.println(alu.getPersona().getDireccion());
 			ps.setString(4, alu.getPersona().getDireccion());
-			System.out.println(alu.getPersona().getProvincia().getId());
 			ps.setInt(5, alu.getPersona().getProvincia().getId());
-			System.out.println(alu.getPersona().getEmail());
 			ps.setString(6, alu.getPersona().getEmail());
-			System.out.println(alu.getPersona().getTelefono());
 			ps.setString(7, alu.getPersona().getTelefono());
-			System.out.println(alu.getEstado().getId());
 			ps.setInt(8, alu.getEstado().getId());
+			ps.setString(9, alu.getPersona().getFechaNacimiento().toString());
+			ps.setInt(10, alu.getLegajo());
 
 			if (ps.executeLargeUpdate() > 0) {
-				System.out.println("Modificado");
 				con.commit();
-				return 1;
+				AlumnoModificado = 1;
 			}
 
 		} catch (SQLException e) {
+			AlumnoModificado = -1;
 			e.printStackTrace();
 			try {
 				con.rollback();
@@ -230,8 +222,7 @@ public class AlumnoDaoImpl implements AlumnoDao {
 				e1.printStackTrace();
 			}
 		}
-		System.out.println("NO Modificado");
-		return 0;
+		return AlumnoModificado;
 	}
 
 	@Override

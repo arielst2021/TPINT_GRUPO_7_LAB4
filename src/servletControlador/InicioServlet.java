@@ -36,7 +36,9 @@ public class InicioServlet extends HttpServlet {
 			//
 			String userProfesor = request.getParameter("txtUsuario");
 			String passProfesor = request.getParameter("txtContrasenia");
-
+			System.out.println(userProfesor);
+			System.out.println(passProfesor);
+			
 			if (userProfesor != null && passProfesor != null) {
 				Profesor = new Profesor();
 				Profesor = NegocioProfesor.iniciarSesion(userProfesor, passProfesor);

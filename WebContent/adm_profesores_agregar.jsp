@@ -292,7 +292,7 @@ N A V B A R
 				|| document.fvalida.direccion.value.length > 20) {
 
 			alert("El campo 'DIRECCION' debe tener entre 1 y 20 caracteres ")
-			document.fvalida.dni.focus()
+			document.fvalida.direccion.focus()
 			return false;
 		}
 

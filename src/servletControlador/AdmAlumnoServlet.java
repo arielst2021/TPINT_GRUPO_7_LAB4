@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Year;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -21,8 +22,11 @@ import javax.servlet.http.HttpSession;
 import entidades.Alumno;
 import entidades.Curso;
 import entidades.Estado;
+import entidades.Materia;
 import entidades.Persona;
+import entidades.Profesor;
 import entidades.Provincia;
+import entidades.Semestre;
 import negocio.NegocioAlumno;
 import negocio.NegocioCurso;
 import negocio.NegocioEstado;
@@ -154,42 +158,88 @@ public class AdmAlumnoServlet extends HttpServlet {
     	}
     	
     	if (request.getParameter("btnEditarAlumno") != null){
-    		Alumno alum = new Alumno();
-    		Persona per = new Persona();
+    		Alumno alum = null;
+			int AlumnoModificado = 0;
+			String Mensaje = null;
     		// Se completa el objeto de alumno con los datos del formulario.
     		
     		// Se valida que el DNI ya no este en uso
-
-    		// Persona2
-    		System.out.println(request.getParameter("txtLegajo"));
-    		alum.setLegajo(Integer.parseInt(request.getParameter("txtLegajo")));
-    		per.setNombre(request.getParameter("txtNombre"));
-    		per.setApellido(request.getParameter("txtApellido"));
-    		per.setDni(request.getParameter("txtDni"));
-    		per.setDireccion(request.getParameter("txtDireccion"));
-    		per.setEmail(request.getParameter("txtEmail"));
-    		per.setTelefono(request.getParameter("txtTelefono"));
-			// Provincia
-			Provincia provAlumno = new Provincia();
-			provAlumno.setId(Integer.parseInt(request.getParameter("txtProvincia")));
-			per.setProvincia(provAlumno);
-			alum.setPersona(per);
-    		// Estado
-			Estado estAlumno = new Estado();
-			estAlumno.setIdEstado(Integer.parseInt(request.getParameter("txtEstado")));
-			alum.setEstado(estAlumno);
+    		
+    		if(request.getParameter("txtLegajo") != null && request.getParameter("txtNombre") != null && request.getParameter("txtApellido") != null
+    			&& request.getParameter("txtDni")  != null && request.getParameter("txtDireccion") != null && request.getParameter("txtTelefono")  != null
+    			&& request.getParameter("txtProvincia")  != null && request.getParameter("txtEstado") != null && request.getParameter("txtEmail") != null
+    			&& request.getParameter("txtNacimiento")  != null) {
+    			try {
+    				
+    	    		// USO DE FECHA
+    	    		DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd"); 
+    	    		LocalDate FechaNacimiento = LocalDate.parse(request.getParameter("txtNacimiento"), formato); 
+    	    		System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"+FechaNacimiento);
+    	    		
+    	    		Persona per = new Persona();
+    	    		alum = new Alumno();
+    	    		
+    	    		// SETEA AL ALUMNO CON LOS DATOS
+    	    		per.setFechaNacimiento(FechaNacimiento);
+    	    		alum.setLegajo(Integer.parseInt(request.getParameter("txtLegajo")));
+    	    		per.setNombre(request.getParameter("txtNombre"));
+    	    		per.setApellido(request.getParameter("txtApellido"));
+    	    		per.setDni(request.getParameter("txtDni"));
+    	    		per.setDireccion(request.getParameter("txtDireccion"));
+    	    		per.setEmail(request.getParameter("txtEmail"));
+    	    		per.setTelefono(request.getParameter("txtTelefono"));
+    				// Provincia
+    				Provincia provAlumno = new Provincia();
+    				provAlumno.setId(Integer.parseInt(request.getParameter("txtProvincia")));
+    				per.setProvincia(provAlumno);
+    				alum.setPersona(per);
+    	    		// Estado
+    				Estado estAlumno = new Estado();
+    				estAlumno.setIdEstado(Integer.parseInt(request.getParameter("txtEstado")));
+    				alum.setEstado(estAlumno);
+    				
+    				// SE GRABAN LOS CAMBIOS EN LA BASE DE DATOS
+    				AlumnoModificado = negocioA.modificarAlumno(alum);
+    				
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+    		}
+			if (AlumnoModificado==1) {	
+				
+				//MENSAJE "Alumno modificado exitosamente";
+				Mensaje = "1";	
+			}
 			
-			int resp = negocioA.modificarAlumno(alum);
+			if (AlumnoModificado==0) {	
+				
+				//MENSAJE "Hubo un error al intentar modificar el alumno";
+				Mensaje = "0";	
+			}
+			
+			if (AlumnoModificado==-1) {	
+				
+				//MENSAJE "Hubo un error interno al intentar modificar el alumno";
+				Mensaje = "0";	
+			}
+			
+			HttpSession session = request.getSession();
+			session.setAttribute("Mensaje", Mensaje);
 			
 			// OBTENER ALUMNOS		
 			ArrayList<Alumno> ListaAlumnos = negocioA.obtenerAlumnosTodos();
 			request.setAttribute("ListaAlumnos", ListaAlumnos);
-
+			
 			RequestDispatcher rd = request.getRequestDispatcher("/adm_alumnos_listar.jsp");
 			rd.forward(request, response);
     	}
     	
     	if (request.getParameter("btnCancelarEditarAlumno") != null){
+    		
+			// OBTENER ALUMNOS		
+			ArrayList<Alumno> ListaAlumnos = negocioA.obtenerAlumnosTodos();
+			request.setAttribute("ListaAlumnos", ListaAlumnos);
+			
       		RequestDispatcher dispatcher = request.getRequestDispatcher("/adm_alumnos_listar.jsp");
     		dispatcher.forward(request, response);
     	}

@@ -69,8 +69,10 @@
 								<p class="text-left small">Editar información del alumno. No podrán editarse ni el Nro. de Legajo ni el Nro. de DNI</p>
 								<hr>
 							</div>
+							
 							<!-- INICIO FORM -->
-							<form class="form" name="fvalida"  action="AdmAlumnoServlet" method="post" onsubmit=" return valida_envia()">
+							<form class="form" name="formulario"  action="AdmAlumnoServlet" method="post" onsubmit=" return validarFormulario()">
+
 								<div class="row">
 									<!-- INICIO DE COLUMNA UNO -->
 									<div class="col-md-6 text-left">
@@ -78,10 +80,9 @@
 											<section>
 
 												<div class="mb-3">
-													<div class="col-4">Legajo</div>
-													<div class="form-control"><%=alum.getLegajo()%></div>
-													<input type="hidden" name="txtLegajo" class="form-control"
-														value="<%=alum.getLegajo()%>">
+													<div>Legajo</div>
+													<label class="form-control bg-light"><%=alum.getLegajo()%></label>
+													<div><input type="hidden" name="txtLegajo" class="form-control" value="<%=alum.getLegajo()%>"></div>
 												</div>
 
 												<div class="mb-3">
@@ -93,16 +94,16 @@
 													<div class="col-4 fw-bold">Apellido</div>
 													<div><input type="text" name="txtApellido" class="form-control text-primary" value="<%=alum.getPersona().getApellido()%>" required></div>
 												</div>
-
+												
 												<div class="mb-3">
-													<div class="col-4">DNI</div>
-													<div class="form-control"><%=alum.getPersona().getDni()%></div>													
-													<input type="hidden" name="txtDni" class="form-control"
-													value="<%=alum.getPersona().getDni()%>" disabled></div>
+													<div>DNI</div>
+													<label class="form-control bg-light"><%=alum.getPersona().getDni()%></label>
+													<input type="hidden" name="txtDni" class="form-control" value=<%=alum.getPersona().getDni()%>>
+												</div>
 
 												<div class="mb-3">
 													<div class="col-4 fw-bold">Fecha de nacimiento</div>
-													<div><input type="date" name="txtNacimiento" class="form-control text-primary" value="<%=alum.getPersona().getFechaNacimiento().getYear()%>-<%=alum.getPersona().getFechaNacimiento().getMonthValue()%>-<%=alum.getPersona().getFechaNacimiento().getDayOfMonth()%>" required></div>
+													<div><input type="date" name="txtNacimiento" class="form-control text-primary" value="<%=alum.getPersona().getFechaNacimiento()%>" required></div>
 												</div>										
 
 											</section>
@@ -122,7 +123,7 @@
 												<div class="mb-3">
 													<label class="fw-bold">Provincia</label>
 <%! @SuppressWarnings("unchecked") %>
-													<select class="form-select form-control text-primary" name="provincias">
+													<select class="form-select form-control text-primary" name="txtProvincia">
 														<%
 															List<Provincia> ListaProvincia = null;
 																if (request.getAttribute("listarProvincias") != null) {
@@ -151,35 +152,36 @@
 
 												<div class="mb-3">
 													<div class="col-4 fw-bold">Telefono</div>
-													<div><input type="text" name="txtTelefono" class="form-control text-primary" value="<%=alum.getPersona().getTelefono()%>" required></div>
+													<div><input type="tel" name="txtTelefono" class="form-control text-primary" value="<%=alum.getPersona().getTelefono()%>" required></div>
 												</div>												
 
 												<div class="mb-3">
 													<label class="fw-bold">Estado</label>
-
-													<select class="form-select form-control text-primary" name="provincias">
+													<select
+														class="form-select form-control text-primary"
+														name="txtEstado">
 														<%
 															List<Estado> ListaEstado = null;
 																if (request.getAttribute("listarEstados") != null) {
 																	ListaEstado = (List<Estado>) request.getAttribute("listarEstados");
 																}
 														%>
-																	<%
-																		if (ListaEstado != null) {
-																					for (Estado e : ListaEstado) {
-																						if (e.getNombre().equals("Activo") || e.getNombre().equals("Inactivo")) {
-	
-																							// POR MEDIO DEL ATRIBUTO SELECTED ESTABLEZCO LA OPCIÓN INICIALMENTE SELECCIONADA
-																	%>
+														<%
+															if (ListaEstado != null) {
+																	for (Estado e : ListaEstado) {
+																		if (e.getNombre().equals("Activo") || e.getNombre().equals("Inactivo")) {
+
+														// POR MEDIO DEL ATRIBUTO SELECTED ESTABLEZCO LA OPCIÓN INICIALMENTE SELECCIONADA
+														%>
 														<option value="<%=e.getId()%>"
-															<%if (e.getId() == alum.getEstado().getId()) {%>
-															selected <%}%>>
-															<%=e.getNombre() %>
+															<%if (e.getId() == alum.getEstado().getId()) {%> selected
+															<%}%>>
+															<%=e.getNombre()%>
 														</option>
 														<%
-																						}
-																					}
 															}
+																	}
+																}
 														%>
 													</select>
 												</div>
@@ -187,9 +189,11 @@
 												<div class="mb-3">
 													<label></label>
 													<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+														<button class="btn btn-info me-md-2" type="submit"
+															name="btnCancelarEditarAlumno">Cancelar</button>
 														<button class="btn btn-primary me-md-2" type="submit"
 															name="btnEditarAlumno">Guardar Cambios</button>
-													</div>
+													</div>													
 												</div>
 
 											</section>
@@ -219,6 +223,74 @@
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 	<script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
+
+<script> 
+	function validarFormulario() {
+
+		if (document.formulario.txtNombre.value.length > 20
+				|| document.formulario.txtNombre.value.length == 0) {
+			alert("El campo NOMBRE debe tener entre 1 y 20 caracteres")
+			document.formulario.txtNombre.focus()
+			return false;
+		}
+
+		if (document.formulario.txtApellido.value.length > 20
+				|| document.formulario.txtApellido.value.length == 0) {
+
+			alert("El campo APELLIDO debe tener entre 1 y 20 caracteres")
+			document.formulario.txtApellido.focus()
+			return false;
+
+		}
+
+		if (document.formulario.txtDireccion.value.length == 0
+				|| document.formulario.txtDireccion.value.length > 20) {
+
+			alert("El campo 'DIRECCION' debe tener entre 1 y 20 caracteres ")
+			document.formulario.txtDireccion.focus()
+			return false;
+		}
+
+		if (document.formulario.txtEmail.value.length == 0
+				|| document.formulario.txtEmail.value.length > 20) {
+
+			alert("El campo 'MAIL' debe tener entre 1 y 20 caracteres ")
+			document.formulario.txtEmail.focus()
+			return false;
+		}
+		
+		var RegExp=/^([\da-z_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/
+		if(!RegExp.exec(document.formulario.txtEmail.value)){
+			alert("El campo 'MAIL' de ser por ejemplo: miNombre@gmail.com")
+			document.formulario.txtEmail.focus()
+			return false;
+		}
+
+		if (document.formulario.txtTelefono.value.length == 0
+				|| document.formulario.txtTelefono.value.length > 20) {
+
+			alert("El campo 'TELEFONO' debe tener entre 1 y 20 caracteres numericos")
+			document.formulario.txtTelefono.focus()
+			return false;
+		}
+		
+		var RegExp=/^(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}$/
+			if(!RegExp.exec(document.formulario.txtTelefono.value)){
+				alert("El campo 'TELEFONO' de ser por ejemplo: 1144440000")
+				document.formulario.txtTelefono.focus()
+				return false;
+			}
+		
+// 		var RegExp = /^([0-9]{2})\-([0-9]{2})\-([0-9]{4})$/
+// 			if(!RegExp.exec(document.formulario.txtNacimiento.value)){
+// 				alert("El campo 'FECHA' de ser por ejemplo: ")
+// 				document.formulario.txtNacimiento.focus()
+// 				return false;
+// 			}
+		
+		return true;
+	}
+</script>
 
 <script>
 //IDIOMAS ESPAÑOL DEL DATATABLE   
