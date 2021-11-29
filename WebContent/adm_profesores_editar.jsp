@@ -3,10 +3,10 @@
 <%@page import="entidades.Profesor"%>
 <%@page import="entidades.Provincia"%>
 <%@page import="java.util.ArrayList"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@page import="java.util.*"%>
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Modificar Profesor</title>
 <!--
 ----------------------------------------------------
@@ -76,7 +76,7 @@
                 </div>
 
                 <div class="row mb-3">
-                  <label for="inputText" class="col-sm-2 col-form-label">Direcciï¿½n</label>
+                  <label for="inputText" class="col-sm-2 col-form-label">Dirección</label>
                   <div class="col-sm-10">
                     <input type="text" class="form-control" value =<%=profe.getPersona().getDireccion() %>>
                   </div>
@@ -89,13 +89,24 @@
                   <div class="col-sm-10">
                     <select class="form-select" aria-label="Default select example" name="txtProvincia">	
 										<!-- CARGA PROVINCIAS -->
-										<% 		 
-										ArrayList<Provincia> lista = null;
-			  							if (request.getAttribute("listarProvincias") != null) {
-			  								lista =  (ArrayList<Provincia>) request.getAttribute("listarProvincias");
-			  								}%><%
-										if (lista != null) {for (Provincia prov : lista) {%>
-										<option value="<%=prov.getId()%>"><%=prov.getNombre()%></option><%}}%>
+										 <%
+    List<Provincia> ListaProvincia = null;
+      if (request.getAttribute("ListaProvincia") != null) {
+        ListaProvincia = (List<Provincia>) request.getAttribute("ListaProvincia");
+      }
+  %>
+  <%
+    if (ListaProvincia != null)
+        for (Provincia p : ListaProvincia) {
+  %>
+  <option value="<%=p.getId()%>"
+    <%if (p.getId() == profe.getPersona().getProvincia().getId()) {%>
+    selected <%}%>>
+    <%=p.getNombre()%>
+  </option>
+  <%
+    }
+  %>
 									</select>
                   </div>
                 </div>
@@ -108,22 +119,20 @@
                 </div>
 
                 <div class="row mb-3">
-                  <label for="inputText" class="col-sm-2 col-form-label">Telï¿½fono</label>
+                  <label for="inputText" class="col-sm-2 col-form-label">Telefono</label>
                   <div class="col-sm-10">
                     <input type="text" class="form-control" value =<%=profe.getPersona().getTelefono() %>>
                   </div>
                 </div>
 
-
-                <div class="row mb-3">
-                  <label class="col-sm-2 col-form-label">Perfil</label>
+				
+				<div class="row mb-3">
+                  <label for="inputText" class="col-sm-2 col-form-label">Perfil</label>
                   <div class="col-sm-10">
-                    <select class="form-select" aria-label="Default select example">
-                      <option selected><%=profe.getPerfil().getNombrePerfil() %></option>
-                      <option value="1">Administrador</option>
-                      <option value="2">Docente</option>
-                    </select>
-                  </div>
+                  	
+                  	
+                    <input type="text" class="form-control" disabled value =<%=profe.getPerfil().getNombrePerfil()%> >
+                 </div>
                 </div>
 
                 <div class="row mb-3">
@@ -134,22 +143,19 @@
                 </div>
 
                 <div class="row mb-3">
-                  <label for="inputPasswordl" class="col-sm-2 col-form-label">Contraseï¿½a</label>
+                  <label for="inputPasswordl" class="col-sm-2 col-form-label">Contraseña</label>
                   <div class="col-sm-10">
-                    <input type="password" class="form-control">
+                    <input type="text" class="form-control" disabled value =<%=profe.getContrasenia() %>>
                   </div>
                 </div>
                 
-                <div class="row mb-3">
-                  <label class="col-sm-2 col-form-label">Estado</label>
+               <div class="row mb-3">
+                  <label for="inputPasswordl" class="col-sm-2 col-form-label">Estado</label>
                   <div class="col-sm-10">
-                    <select class="form-select" aria-label="Default select example">
-                      <option selected><%=profe.getEstado().getNombre() %></option>
-                      <option value="1">Activo</option>
-                      <option value="2">Inactivo</option>
-                    </select>
+                    <input type="text" class="form-control" disabled value =<%=profe.getEstado().getNombre() %>>
                   </div>
-                </div>                
+                </div>
+                          
 
                 <!-- BOTON DE AGREGAR-->
                 <div class="row mb-3">
