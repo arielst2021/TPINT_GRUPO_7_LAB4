@@ -166,10 +166,12 @@ public class AdmProfesorServlet extends HttpServlet {
 			NegocioProfesor NegocioProfesor = new NegocioProfesorImpl();
     		Profesor profe = new Profesor();
     		profe = NegocioProfesor.ProfePorLegajo(Legajo);
-    		//OBTENGO LISTADO DE PROVINCIAS
-//			ArrayList<Provincia> lista = negocioP.listaProvincias();
-//			request.setAttribute("listarProvincias", lista);    		
-
+    		// OBTENGO LISTA DE PROVINCIAS
+			NegocioProvincia negocioProvincia = new NegocioProvinciaImpl();
+			List<Provincia> ListaProvincia= negocioProvincia.listaProvincias();
+			request.setAttribute("ListaProvincia", ListaProvincia);	
+			
+			
     		request.setAttribute("EditarProfesor", profe);
 			RequestDispatcher miRequestDispatcher = request.getRequestDispatcher("/adm_profesores_editar.jsp");
 			miRequestDispatcher.forward(request, response);

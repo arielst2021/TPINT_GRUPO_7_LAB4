@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@page import="entidades.Profesor"%>
-
+<%@page import="entidades.Provincia"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.*"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Modificar Profesor</title>
 <!--
 ----------------------------------------------------
@@ -49,102 +50,112 @@
                 <div class="row mb-3">
                   <label for="inputText" class="col-sm-2 col-form-label">DNI</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" disabled>
+                    <input type="text" class="form-control" disabled value =<%=profe.getPersona().getDni() %>>
                   </div>
                 </div>
 
                 <div class="row mb-3">
                   <label for="inputText" class="col-sm-2 col-form-label">Nombre</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" value =<%=profe.getPersona().getNombre() %>>
                   </div>
                 </div>
 
                 <div class="row mb-3">
                   <label for="inputText" class="col-sm-2 col-form-label">Apellido</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" value =<%=profe.getPersona().getApellido() %>>
                   </div>
                 </div>
 
                 <div class="row mb-3">
                   <label for="inputDate" class="col-sm-2 col-form-label">Fecha Nac.</label>
                   <div class="col-sm-10">
-                    <input type="date" class="form-control">
+                    <input type="date" class="form-control" value =<%=profe.getPersona().getFechaNacimiento() %>>
                   </div>
                 </div>
 
                 <div class="row mb-3">
                   <label for="inputText" class="col-sm-2 col-form-label">Dirección</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" value =<%=profe.getPersona().getDireccion() %>>
                   </div>
                 </div>
 
-
+								
 
                 <div class="row mb-3">
                   <label class="col-sm-2 col-form-label">Provincia</label>
                   <div class="col-sm-10">
-                    <select class="form-select" aria-label="Default select example">
-                      <option selected>--Seleccione una provincia--</option>
-                      <option value="1">Buenos Aires</option>
-                      <option value="2">Entre Ríos</option>
-                      <option value="3">Salta</option>
-                    </select>
+                    <select class="form-select" aria-label="Default select example" name="txtProvincia">	
+										<!-- CARGA PROVINCIAS -->
+										 <%
+    List<Provincia> ListaProvincia = null;
+      if (request.getAttribute("ListaProvincia") != null) {
+        ListaProvincia = (List<Provincia>) request.getAttribute("ListaProvincia");
+      }
+  %>
+  <%
+    if (ListaProvincia != null)
+        for (Provincia p : ListaProvincia) {
+  %>
+  <option value="<%=p.getId()%>"
+    <%if (p.getId() == profe.getPersona().getProvincia().getId()) {%>
+    selected <%}%>>
+    <%=p.getNombre()%>
+  </option>
+  <%
+    }
+  %>
+									</select>
                   </div>
                 </div>
 
                 <div class="row mb-3">
                   <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
                   <div class="col-sm-10">
-                    <input type="email" class="form-control">
+                    <input type="email" class="form-control" value =<%=profe.getPersona().getEmail() %>>
                   </div>
                 </div>
 
                 <div class="row mb-3">
-                  <label for="inputEmail" class="col-sm-2 col-form-label">Teléfono</label>
+                  <label for="inputText" class="col-sm-2 col-form-label">Telefono</label>
                   <div class="col-sm-10">
-                    <input type="email" class="form-control">
+                    <input type="text" class="form-control" value =<%=profe.getPersona().getTelefono() %>>
                   </div>
                 </div>
 
-
-                <div class="row mb-3">
-                  <label class="col-sm-2 col-form-label">Perfil</label>
+				
+				<div class="row mb-3">
+                  <label for="inputText" class="col-sm-2 col-form-label">Perfil</label>
                   <div class="col-sm-10">
-                    <select class="form-select" aria-label="Default select example">
-                      <option selected>--Seleccione un perfil--</option>
-                      <option value="1">Administrador</option>
-                      <option value="2">Docente</option>
-                    </select>
-                  </div>
+                  	
+                  	
+                    <input type="text" class="form-control" disabled value =<%=profe.getPerfil().getNombrePerfil()%> >
+                 </div>
                 </div>
 
                 <div class="row mb-3">
-                  <label for="inputEmail" class="col-sm-2 col-form-label">Nombre de usuario</label>
+                  <label for="inputText" class="col-sm-2 col-form-label">Nombre de usuario</label>
                   <div class="col-sm-10">
-                    <input type="email" class="form-control">
+                    <input type="text" class="form-control" value =<%=profe.getUsuario() %>>
                   </div>
                 </div>
 
                 <div class="row mb-3">
-                  <label for="inputEmail" class="col-sm-2 col-form-label">Contraseña</label>
+                  <label for="inputPasswordl" class="col-sm-2 col-form-label">Contraseña</label>
                   <div class="col-sm-10">
-                    <input type="email" class="form-control">
+                    <input type="text" class="form-control" disabled value =<%=profe.getContrasenia() %>>
                   </div>
                 </div>
                 
-                <div class="row mb-3">
-                  <label class="col-sm-2 col-form-label">Estado</label>
+               <div class="row mb-3">
+                  <label for="inputPasswordl" class="col-sm-2 col-form-label">Estado</label>
                   <div class="col-sm-10">
-                    <select class="form-select" aria-label="Default select example">
-                      <option selected>--Seleccione un estado--</option>
-                      <option value="1">Activo</option>
-                      <option value="2">Inactivo</option>
-                    </select>
+                    <input type="text" class="form-control" disabled value =<%=profe.getEstado().getNombre() %>>
                   </div>
-                </div>                
+                </div>
+                          
 
                 <!-- BOTON DE AGREGAR-->
                 <div class="row mb-3">
