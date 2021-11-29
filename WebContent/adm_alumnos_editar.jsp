@@ -129,15 +129,19 @@
 													<div><input type="text" name="txtApellido" class="form-control text-primary" value="<%=alum.getPersona().getApellido()%>" required></div>
 												</div>
 
-												<div class="mb-3">
-													<div class="col-4">DNI</div>
-													<div class="form-control"><%=alum.getPersona().getDni()%></div>													
-													<input type="hidden" name="txtDni" class="form-control"
-													value="<%=alum.getPersona().getDni()%>" disabled></div>
-
+<!-- 												<div class="mb-3"> -->
+<!-- 													<div class="col-4">DNI</div> -->
+<%-- <%-- 													<div class="form-control"><%=alum.getPersona().getDni()%></div>													 --%> 
+<!-- 													<input type="number" name="txtDni" class="form-control" -->
+<%-- 													value="<%=alum.getPersona().getDni()%>" disabled></div> --%>
+							<div class="row pb-2">
+								<div class="col-4 label ">DNI</div>
+								<div class="col-8"><input type="text" name="txtDni" class="form-control" required value=<%=alum.getPersona().getDni()%>></div>
+							</div>
+							
 												<div class="mb-3">
 													<div class="col-4 fw-bold">Fecha de nacimiento</div>
-													<div><input type="date" name="txtNacimiento" class="form-control text-primary" value="<%=alum.getPersona().getFechaNacimiento().getYear()%>-<%=alum.getPersona().getFechaNacimiento().getMonthValue()%>-<%=alum.getPersona().getFechaNacimiento().getDayOfMonth()%>" required></div>
+													<div><input type="date" name="txtNacimiento" class="form-control text-primary" value="<%=alum.getPersona().getFechaNacimiento() %>" required></div>
 												</div>										
 
 											</section>
@@ -157,7 +161,7 @@
 												<div class="mb-3">
 													<label class="fw-bold">Provincia</label>
 <%! @SuppressWarnings("unchecked") %>
-													<select class="form-select form-control text-primary" name="provincias">
+													<select class="form-select form-control text-primary" name="txtProvincia">
 														<%
 															List<Provincia> ListaProvincia = null;
 																if (request.getAttribute("listarProvincias") != null) {
@@ -192,7 +196,7 @@
 												<div class="mb-3">
 													<label class="fw-bold">Estado</label>
 
-													<select class="form-select form-control text-primary" name="provincias">
+													<select class="form-select form-control text-primary" name="txtEstado">
 														<%
 															List<Estado> ListaEstado = null;
 																if (request.getAttribute("listarEstados") != null) {
