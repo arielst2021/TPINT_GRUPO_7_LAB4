@@ -55,54 +55,19 @@
 							<% if(request.getAttribute("AlumnoEditar") != null){
             	 				 Alumno alum = (Alumno) request.getAttribute("AlumnoEditar");
             	  			%>
-							<div class="row pb-4">
-								<div class="col-4">Legajo</div>
-								<div class="col-8"><%=alum.getLegajo()%></div>
-								<input type="hidden" name="txtLegajo" class="form-control" value=<%=alum.getLegajo()%>>
-								
-							</div>
-							<div class="row pb-2">
-								<div class="col-4 label ">Nombre</div>
-								<div class="col-8"><%=alum.getLegajo()%></div>
-								<div class="col-8"><input type="text" name="txtNombre" class="form-control" required value=<%=alum.getPersona().getNombre()%>></div>
-							</div>
-							<div class="row pb-2">
-								<div class="col-4 label ">Apellido</div>
-								<div class="col-8"><input type="text" name="txtApellido" class="form-control" required value=<%=alum.getPersona().getApellido()%>></div>
-							</div>
-							<div class="row pb-2">
-								<div class="col-4 label ">DNI</div>
-								<div class="col-8"><input type="text" name="txtDni" class="form-control" required value=<%=alum.getPersona().getDni()%>></div>
-							</div>
-							<div class="row pb-2">
-								<div class="col-4 label ">Nacimiento</div>
-								<div class="col-8">
-									<input type="text" name="txtNacimiento" class="form-control" required value="<%=alum.getPersona().getFechaNacimiento().getDayOfMonth()%>-<%=alum.getPersona().getFechaNacimiento().getMonthValue()%>-<%=alum.getPersona().getFechaNacimiento().getYear()%>" ></div>
-							</div>
-							<div class="row pb-2">
-								<div class="col-4 label">Provincia</div>
-								<div class="col-8">
-									<select class="form-select" aria-label="Default select example" name="txtProvincia">	
-										<!-- CARGA PROVINCIAS -->
-										<% 		 
-										ArrayList<Provincia> lista = null;
-			  							if (request.getAttribute("listarProvincias") != null) {
-			  								lista =  (ArrayList<Provincia>) request.getAttribute("listarProvincias");
-			  								}%><%
-										if (lista != null) {for (Provincia prov : lista) {%>
-										<option value="<%=prov.getId()%>"><%=prov.getNombre()%></option><%}}%>
-									</select>
-								</div>
-							</div>
-							<div class="row pb-2">
-								<div class="col-4 label">Direccion</div>
-								<div class="col-8">
-									<input type="text" class="form-control" name="txtDireccion" required value=<%=alum.getPersona().getDireccion()%>></div>
-							</div>
-							<div class="row pb-2">
-								<div class="col-4 label">Telefono</div>
-								<div class="col-8">
-									<input type="text" class="form-control" name="txtTelefono" required value=<%=alum.getPersona().getTelefono()%>></div>
+
+	<div class="row">
+		<div class="col-12">
+			<div class="card">
+				<div class="card-body">
+
+					<!-- INICIO MAIN -->			        
+					<div id="main" class="main">
+						<div class="card">
+							<div class="card-body">
+								<h3 class="card-title text-primary">Editar Alumno</h3>
+								<p class="text-left small">Editar información del alumno. No podrán editarse ni el Nro. de Legajo ni el Nro. de DNI</p>
+								<hr>
 							</div>
 							<!-- INICIO FORM -->
 							<form class="form" name="fvalida"  action="AdmAlumnoServlet" method="post" onsubmit=" return valida_envia()">
@@ -129,19 +94,15 @@
 													<div><input type="text" name="txtApellido" class="form-control text-primary" value="<%=alum.getPersona().getApellido()%>" required></div>
 												</div>
 
-<!-- 												<div class="mb-3"> -->
-<!-- 													<div class="col-4">DNI</div> -->
-<%-- <%-- 													<div class="form-control"><%=alum.getPersona().getDni()%></div>													 --%> 
-<!-- 													<input type="number" name="txtDni" class="form-control" -->
-<%-- 													value="<%=alum.getPersona().getDni()%>" disabled></div> --%>
-							<div class="row pb-2">
-								<div class="col-4 label ">DNI</div>
-								<div class="col-8"><input type="text" name="txtDni" class="form-control" required value=<%=alum.getPersona().getDni()%>></div>
-							</div>
-							
+												<div class="mb-3">
+													<div class="col-4">DNI</div>
+													<div class="form-control"><%=alum.getPersona().getDni()%></div>													
+													<input type="hidden" name="txtDni" class="form-control"
+													value="<%=alum.getPersona().getDni()%>" disabled></div>
+
 												<div class="mb-3">
 													<div class="col-4 fw-bold">Fecha de nacimiento</div>
-													<div><input type="date" name="txtNacimiento" class="form-control text-primary" value="<%=alum.getPersona().getFechaNacimiento() %>" required></div>
+													<div><input type="date" name="txtNacimiento" class="form-control text-primary" value="<%=alum.getPersona().getFechaNacimiento().getYear()%>-<%=alum.getPersona().getFechaNacimiento().getMonthValue()%>-<%=alum.getPersona().getFechaNacimiento().getDayOfMonth()%>" required></div>
 												</div>										
 
 											</section>
@@ -154,14 +115,14 @@
 											<section>
 
 												<div class="mb-3">
-													<div class="col-4 fw-bold">Direcciï¿½n</div>
+													<div class="col-4 fw-bold">Dirección</div>
 													<div><input type="text" name="txtDireccion" class="form-control text-primary" value="<%=alum.getPersona().getDireccion()%>" required></div>
 												</div>																			
 											
 												<div class="mb-3">
 													<label class="fw-bold">Provincia</label>
 <%! @SuppressWarnings("unchecked") %>
-													<select class="form-select form-control text-primary" name="txtProvincia">
+													<select class="form-select form-control text-primary" name="provincias">
 														<%
 															List<Provincia> ListaProvincia = null;
 																if (request.getAttribute("listarProvincias") != null) {
@@ -196,7 +157,7 @@
 												<div class="mb-3">
 													<label class="fw-bold">Estado</label>
 
-													<select class="form-select form-control text-primary" name="txtEstado">
+													<select class="form-select form-control text-primary" name="provincias">
 														<%
 															List<Estado> ListaEstado = null;
 																if (request.getAttribute("listarEstados") != null) {
@@ -208,7 +169,7 @@
 																					for (Estado e : ListaEstado) {
 																						if (e.getNombre().equals("Activo") || e.getNombre().equals("Inactivo")) {
 	
-																							// POR MEDIO DEL ATRIBUTO SELECTED ESTABLEZCO LA OPCIï¿½N INICIALMENTE SELECCIONADA
+																							// POR MEDIO DEL ATRIBUTO SELECTED ESTABLEZCO LA OPCIÓN INICIALMENTE SELECCIONADA
 																	%>
 														<option value="<%=e.getId()%>"
 															<%if (e.getId() == alum.getEstado().getId()) {%>
@@ -260,7 +221,7 @@
 	<script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
 
 <script>
-//IDIOMAS ESPAï¿½OL DEL DATATABLE   
+//IDIOMAS ESPAÑOL DEL DATATABLE   
 $(document).ready(function() {
 	$('#myTable').DataTable({ 
 	"language": {
