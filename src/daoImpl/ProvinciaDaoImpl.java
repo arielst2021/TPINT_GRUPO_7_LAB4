@@ -13,7 +13,7 @@ public class ProvinciaDaoImpl implements ProvinciaDao {
 	@Override
 	public ArrayList<Provincia> listaProvincias() {
 		ArrayList<Provincia> provincias = new ArrayList<Provincia>();
-		String str = "SELECT * FROM laboratorio4.provincias;";
+		String str = "SELECT * FROM provincias;";
 		
 
 		// CONEXION
@@ -44,7 +44,7 @@ public class ProvinciaDaoImpl implements ProvinciaDao {
 	@Override
 	public Provincia obtenerProvinciaID(int ID) {
 		Provincia prov = new Provincia();
-		String str = "SELECT * FROM laboratorio4.provincias WHERE prov_id="+ID;
+		String str = "SELECT * FROM provincias WHERE prov_id="+ID;
 		Connection con = Conexion.getConexion().getSQLConexion();
 		try{
 			PreparedStatement ps = con.prepareStatement(str);

@@ -78,10 +78,17 @@ public class AdmAlumnoServlet extends HttpServlet {
         			
         			System.out.println(negocioA.verificar(persona.getDni()));
         			//
-        			if(negocioA.verificar(persona.getDni())==true || negocioProf.verificar(persona.getDni())==true) 
-        				aux=negocioA.GuardarAlumno(alumno);
-        				request.setAttribute("respuestadb", aux);
-        				Mensaje="1";			
+        			if(negocioA.verificar(persona.getDni())==true || negocioProf.verificar(persona.getDni())==true) {
+        				Mensaje = "-2";
+        			}
+        			else if (negocioProf.existeEmail(request.getParameter("mail")) == true
+							|| negocioA.existeEmail(request.getParameter("mail")) == true) {
+        				Mensaje = "-3";
+        			}
+        			else {
+        				aux = negocioA.GuardarAlumno(alumno);
+        				Mensaje = String.valueOf(aux);
+					}
 				} catch (Exception e) {
 					// TODO: handle exception
 				}
@@ -119,20 +126,39 @@ public class AdmAlumnoServlet extends HttpServlet {
 
     	}
     	
-    	if (request.getParameter("btnEditarEstado") != null){
-    		int Legajo = Integer.parseInt(request.getParameter("txtLegajoAlumno"));
-    		int resp = negocioA.modificarAlumnoEstado(Legajo);
+		if (request.getParameter("btnEditarEstado") != null) {
+			String Mensaje = null;
+			int EstadoEditado = 0;
+			if (request.getParameter("txtLegajoAlumno") != null) {
+				try {
+					EstadoEditado = negocioA.modificarAlumnoEstado(Integer.parseInt(request.getParameter("txtLegajoAlumno")));
 
-
-			// OBTENER ALUMNOS		
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+			}
+			if (EstadoEditado==1) {				
+				//MENSAJE "Estado modificado exitosamente";
+				Mensaje = "1";	
+			}		
+			if (EstadoEditado==0) {	
+				//MENSAJE "Hubo un error al intentar modificar el estado";
+				Mensaje = "0";	
+			}	
+			if (EstadoEditado==-1) {	
+				//MENSAJE "Hubo un error interno al intentar modificar el estado";
+				Mensaje = "-1";	
+			}
+			HttpSession session = request.getSession();
+			session.setAttribute("Mensaje", Mensaje);
+			
+			// OBTENER ALUMNOS
 			ArrayList<Alumno> ListaAlumnos = negocioA.obtenerAlumnosTodos();
-
 			request.setAttribute("ListaAlumnos", ListaAlumnos);
 
 			RequestDispatcher rd = request.getRequestDispatcher("/adm_alumnos_listar.jsp");
 			rd.forward(request, response);
-			
-    	}
+		}
     	
     	if (request.getParameter("btnEditarAlumno") != null){
     		Alumno alum = null;

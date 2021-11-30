@@ -61,12 +61,39 @@
 			if (msg == '0') {
 				Swal.fire({
 					title : '¡Error!',
-					text : "¡Alumno ya existente!",
+					text : "¡Hubo un error al intentar agregar el alumno!",
 					icon : 'error',
 					confirmButtonText : 'OK'
 					<%session.setAttribute("Mensaje", null);%>	
 				})
 			}
+			if (msg == '-1') {
+				Swal.fire({
+					title : '¡Error!',
+					text : "¡Hubo un error al intentar agregar el alumno!",
+					icon : 'error',
+					confirmButtonText : 'OK'
+					<%session.setAttribute("Mensaje", null);%>	
+				})
+			}
+			if (msg == '-2') {
+				Swal.fire({
+					title : '¡Error!',
+					text : "¡DNI duplicado, no se agregó el alumno!",
+					icon : 'error',
+					confirmButtonText : 'OK'
+					<%session.setAttribute("Mensaje", null);%>	
+				})
+			}
+			if (msg == '-3') {
+				Swal.fire({
+					title : '¡Error!',
+					text : "¡Email duplicado, no se agregó el alumno!",
+					icon : 'error',
+					confirmButtonText : 'OK'
+					<%session.setAttribute("Mensaje", null);%>	
+				})
+			}			
 			
 		}
 		

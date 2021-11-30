@@ -157,9 +157,8 @@
                                                     	<input type="hidden" name="LegajoProfesor" value="<%=item.getLegajo() %>">
                                                     	<input type="hidden" name="EstadoProfesor" value="<%=item.getEstado().getId() %>">
  														<input type="submit" name="EditarProfesor" value="Datos" class="btn btn-warning">
- 															
  														<input type="submit" name="EditarEstado" value="Estado" class="btn btn-danger">
-                                                    	
+                                                                           	
                                                     	</form>
                                                     </td>
              

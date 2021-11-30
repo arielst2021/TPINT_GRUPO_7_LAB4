@@ -6,13 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.sql.Date;
-
-
 import dao.ProfesorDao;
-import entidades.Alumno;
-import entidades.Curso;
 import entidades.Estado;
 import entidades.Perfil;
 import entidades.Persona;
@@ -32,10 +27,8 @@ public class ProfesorDaoImpl implements ProfesorDao {
 	 @Override
 	 public int guardarprofesor(Profesor profesor) {
 	 String agregarprofesor = "INSERT INTO profesores(pro_dni, pro_nombre,pro_apellido,pro_fechanac,pro_direccion,pro_provincia_id,pro_email,pro_telefono,pro_estado_id,pro_perfil_id,pro_usuario,pro_contrasenia) values (?,?,?,?,?,?,?,?,?,?,?,?);";
-	 Profesor prof = new Profesor();
 	 Persona persona =profesor.getPersona();
 
-	 
 	 LocalDate locald = persona.getFechaNacimiento();
 	 Date date = Date.valueOf(locald); // Magic happens here!
 	 int profesoragregado=0;
@@ -246,9 +239,11 @@ public class ProfesorDaoImpl implements ProfesorDao {
 		return Profesor;
 	}
 	
+	@Override
 	public int BajaProfesor(Profesor ObjProf) {
-		
-		String str = "UPDATE laboratorio4.profesores SET pro_estado_id=? WHERE pro_legajo=" + ObjProf.getLegajo();
+		int Modificar = 0;
+
+		String str = "UPDATE profesores SET pro_estado_id=? WHERE pro_legajo=" + ObjProf.getLegajo();
 		Connection con = Conexion.getConexion().getSQLConexion();
 		int nuevoEstado = 1;
 		if (ObjProf.getEstado().getId() == 1) {
@@ -259,9 +254,10 @@ public class ProfesorDaoImpl implements ProfesorDao {
 			ps.setInt(1, nuevoEstado);
 			if (ps.executeLargeUpdate() > 0) {
 				con.commit();
-				return 1;
+				Modificar = 1;
 			}
 		} catch (SQLException e) {
+			Modificar = -1;
 			e.printStackTrace();
 			try {
 				con.rollback();
@@ -269,9 +265,10 @@ public class ProfesorDaoImpl implements ProfesorDao {
 				e1.printStackTrace();
 			}
 		}
-		return 0;
-	}
-
+		return Modificar;
+	}	
+	
+	
 	@Override
 	public Profesor ProfePorLegajo(String legajo) {
 
@@ -336,7 +333,7 @@ public class ProfesorDaoImpl implements ProfesorDao {
 	@Override
 	public int ModificarProfesor(Profesor objProfesor) {
 		int GraboExitosamente = 0;
-		 String str = "UPDATE laboratorio4.profesores SET  pro_nombre=?, pro_apellido=?, pro_direccion=?, pro_provincia_id=?, pro_email=?, pro_telefono=?, pro_usuario=? , pro_fechanac=?  WHERE pro_legajo=?";
+		 String str = "UPDATE profesores SET  pro_nombre=?, pro_apellido=?, pro_direccion=?, pro_provincia_id=?, pro_email=?, pro_telefono=?, pro_usuario=? , pro_fechanac=?  WHERE pro_legajo=?";
 		Connection con = Conexion.getConexion().getSQLConexion();
 		try {
 			PreparedStatement ps = con.prepareStatement(str);
@@ -374,7 +371,7 @@ public class ProfesorDaoImpl implements ProfesorDao {
 	@Override
 	public boolean verificar(String dni) {
 		boolean aux = false;
-		String str = "SELECT * FROM laboratorio4.profesores WHERE pro_dni=" + dni;
+		String str = "SELECT * FROM profesores WHERE pro_dni=" + dni;
 
 		Connection con = Conexion.getConexion().getSQLConexion();
 		try {
@@ -401,7 +398,7 @@ public class ProfesorDaoImpl implements ProfesorDao {
 	@Override
 	public boolean existeUsuario(String usuario) {
 		boolean aux = false;
-		String str = "SELECT * FROM laboratorio4.profesores WHERE pro_usuario=?";
+		String str = "SELECT * FROM profesores WHERE pro_usuario=?";
 		Connection con = Conexion.getConexion().getSQLConexion();
 		try {
 			PreparedStatement ps = con.prepareStatement(str);
@@ -427,7 +424,7 @@ public class ProfesorDaoImpl implements ProfesorDao {
 	@Override
 	public boolean existeEmail(String email) {
 		boolean aux = false;
-		String str = "SELECT * FROM laboratorio4.profesores WHERE pro_email=?";
+		String str = "SELECT * FROM profesores WHERE pro_email=?";
 		Connection con = Conexion.getConexion().getSQLConexion();
 		try {
 			PreparedStatement ps = con.prepareStatement(str);

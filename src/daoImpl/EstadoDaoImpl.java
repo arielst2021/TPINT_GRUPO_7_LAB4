@@ -48,7 +48,7 @@ public class EstadoDaoImpl implements EstadoDao {
 	@Override
 	public Estado obtenerEstadoAlumno(int ID) {
 		Estado est = new Estado();
-		String str = "SELECT * FROM laboratorio4.estados WHERE est_id="+ID;
+		String str = "SELECT * FROM estados WHERE est_id="+ID;
 		Connection con = Conexion.getConexion().getSQLConexion();
 		try{
 			PreparedStatement ps = con.prepareStatement(str);
