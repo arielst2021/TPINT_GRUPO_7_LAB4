@@ -83,5 +83,8 @@ public class NegocioProfesorImpl implements NegocioProfesor{
 		return dao.existeUsuario(usuario);
 	}
 	
-
+	@Override
+	public boolean existeEmail(String email) {
+		return dao.existeEmail(email);
+	}
 }

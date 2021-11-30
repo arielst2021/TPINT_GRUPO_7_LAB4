@@ -14,4 +14,5 @@ public interface ProfesorDao {
 	public int ModificarProfesor(Profesor objProfesor);
 	public boolean verificar(String dni);
 	public boolean existeUsuario(String usuario);
+	public boolean existeEmail(String email);
 }

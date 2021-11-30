@@ -140,7 +140,11 @@ public class AdmProfesorServlet extends HttpServlet {
     	    		}else if(NegocioP.existeUsuario(request.getParameter("usuario"))==true) {
         	    		request.setAttribute("respuestadb", "-2");
         	    		MensajeRegistrar="-2";
-    	    		}else {
+    	    		}else if(NegocioP.existeEmail(request.getParameter("mail"))==true || NegocioA.existeEmail(request.getParameter("mail"))==true) {
+    	    			request.setAttribute("respuestadb", "-3");
+        	    		MensajeRegistrar="-3";
+    	    		}
+    	    		else {
     	    			ProfesorAgregado = NegocioP.guardarprofesor(profesor);
         	    		request.setAttribute("respuestadb", ProfesorAgregado);
         	    		MensajeRegistrar="1";

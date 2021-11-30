@@ -17,4 +17,5 @@ public interface NegocioProfesor {
 	public Profesor ProfePorLegajo(String Legajo);
 	boolean verificar(String dni);
 	boolean existeUsuario(String usuario);
+	boolean existeEmail(String email);
 }

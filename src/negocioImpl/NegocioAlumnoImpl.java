@@ -41,5 +41,11 @@ public class NegocioAlumnoImpl implements NegocioAlumno {
 	public boolean verificar(String dni) {
 		return alumnoDao.verificar(dni);
 	}
+	
+	@Override
+	public boolean existeEmail(String email) {
+		return alumnoDao.existeEmail(email);
+	}
+
 }
 

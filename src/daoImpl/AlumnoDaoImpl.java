@@ -318,4 +318,30 @@ public class AlumnoDaoImpl implements AlumnoDao {
 		}
 		return aux;
 	}
+	
+	@Override
+	public boolean existeEmail(String email) {
+		boolean aux = false;
+		String str = "SELECT * FROM laboratorio4.alumnos WHERE alu_email=?";
+		Connection con = Conexion.getConexion().getSQLConexion();
+		try {
+			PreparedStatement ps = con.prepareStatement(str);
+			ps.setString(1, email);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()) {
+				aux=true;
+			}
+			else {
+				aux=false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			try {
+				con.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
+		return aux;
+	}
 }

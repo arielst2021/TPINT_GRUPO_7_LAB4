@@ -18,9 +18,11 @@ import entidades.Persona;
 import entidades.Provincia;
 import negocio.NegocioAlumno;
 import negocio.NegocioEstado;
+import negocio.NegocioProfesor;
 import negocio.NegocioProvincia;
 import negocioImpl.NegocioAlumnoImpl;
 import negocioImpl.NegocioEstadoImpl;
+import negocioImpl.NegocioProfesorImpl;
 import negocioImpl.NegocioProvinciaImpl;
 
 
@@ -30,12 +32,14 @@ public class AdmAlumnoServlet extends HttpServlet {
 	private NegocioAlumno negocioA;
 	private NegocioProvincia negocioP; 
 	private NegocioEstado negocioE;
+	private NegocioProfesor negocioProf;
        
 
     public AdmAlumnoServlet() {
         this.negocioA = new NegocioAlumnoImpl();
         this.negocioP = new NegocioProvinciaImpl();
         this.negocioE = new NegocioEstadoImpl();
+        this.negocioProf = new NegocioProfesorImpl();
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -74,11 +78,10 @@ public class AdmAlumnoServlet extends HttpServlet {
         			
         			System.out.println(negocioA.verificar(persona.getDni()));
         			//
-        			if(negocioA.verificar(persona.getDni())==false) {
+        			if(negocioA.verificar(persona.getDni())==true || negocioProf.verificar(persona.getDni())==true) 
         				aux=negocioA.GuardarAlumno(alumno);
         				request.setAttribute("respuestadb", aux);
-        				Mensaje="1";
-        			}			
+        				Mensaje="1";			
 				} catch (Exception e) {
 					// TODO: handle exception
 				}

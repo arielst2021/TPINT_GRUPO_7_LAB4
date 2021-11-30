@@ -87,6 +87,15 @@ N A V B A R
 				})
 				<%session.setAttribute("Mensaje", null);%>
 			}
+			if (msg == '-3') {
+				Swal.fire({
+					title : '¡Error!',
+					text : "¡Email duplicado, no se agregó el profesor!",
+					icon : 'error',
+					confirmButtonText : 'OK'
+				})
+				<%session.setAttribute("Mensaje", null);%>
+			}
 		}
 	</script>
 	

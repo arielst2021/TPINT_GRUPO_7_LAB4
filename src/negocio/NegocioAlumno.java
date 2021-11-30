@@ -12,4 +12,5 @@ import entidades.Alumno;
 		public int modificarAlumnoEstado(int Legajo);
 		int GuardarAlumno(Alumno alumno);
 		boolean verificar(String dni);
+		public boolean existeEmail(String email);
 }

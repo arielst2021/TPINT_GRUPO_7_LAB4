@@ -12,4 +12,5 @@ public interface AlumnoDao {
 	public int modificarAlumnoEstado(int Legajo);
 	public int GuardarAlumno(Alumno alumno);
 	public boolean verificar(String dni);
+	public boolean existeEmail(String email);
 }
