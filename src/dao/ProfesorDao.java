@@ -12,4 +12,6 @@ public interface ProfesorDao {
 	public int BajaProfesor(Profesor ObjProfesor);
 	public Profesor ProfePorLegajo(String legajo);
 	public int ModificarProfesor(Profesor objProfesor);
+	public boolean verificar(String dni);
+	public boolean existeUsuario(String usuario);
 }

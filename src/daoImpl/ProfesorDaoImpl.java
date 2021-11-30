@@ -371,31 +371,56 @@ public class ProfesorDaoImpl implements ProfesorDao {
 		
 	}
 	
-//	@Override
-//	public boolean BajaProfesor(String Legajo) {
-//		PreparedStatement statement;
-//		Connection conexion = Conexion.getConexion().getSQLConexion();
-//		boolean isInsertExitoso = false;
-//		try {
-//			statement = conexion.prepareStatement(BajaProfesor);
-//			statement.setInt(1, 2);
-//			statement.setInt(2, Integer.parseInt(Legajo));
-//			
-//			if(statement.executeUpdate()>0)
-//			{
-//				isInsertExitoso = true;
-//			}
-//			
-//			System.out.println(isInsertExitoso);
-//			
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//			try {
-//				conexion.rollback();
-//			} catch (SQLException e1) {
-//				e1.printStackTrace();
-//			}
-//		}
-//		return isInsertExitoso;
-//	}
+	@Override
+	public boolean verificar(String dni) {
+		boolean aux = false;
+		String str = "SELECT * FROM laboratorio4.profesores WHERE pro_dni=" + dni;
+
+		Connection con = Conexion.getConexion().getSQLConexion();
+		try {
+			PreparedStatement ps = con.prepareStatement(str);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()) {
+				aux=true;
+			}
+			else {
+				aux=false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			try {
+				con.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
+		return aux;
+	}
+	
+
+	@Override
+	public boolean existeUsuario(String usuario) {
+		boolean aux = false;
+		String str = "SELECT * FROM laboratorio4.profesores WHERE pro_usuario=?";
+		Connection con = Conexion.getConexion().getSQLConexion();
+		try {
+			PreparedStatement ps = con.prepareStatement(str);
+			ps.setString(1, usuario);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()) {
+				aux=true;
+			}
+			else {
+				aux=false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			try {
+				con.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
+		return aux;
+	}
 }

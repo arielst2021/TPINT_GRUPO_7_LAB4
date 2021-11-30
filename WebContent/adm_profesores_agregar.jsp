@@ -72,7 +72,16 @@ N A V B A R
 			if (msg == '-1') {
 				Swal.fire({
 					title : '¡Error!',
-					text : "¡Profesor duplicado, no se agregó el curso!",
+					text : "¡DNI duplicado, no se agregó el profesor!",
+					icon : 'error',
+					confirmButtonText : 'OK'
+				})
+				<%session.setAttribute("Mensaje", null);%>
+			}
+			if (msg == '-2') {
+				Swal.fire({
+					title : '¡Error!',
+					text : "¡Usuario duplicado, no se agregó el profesor!",
 					icon : 'error',
 					confirmButtonText : 'OK'
 				})
@@ -111,6 +120,11 @@ N A V B A R
                   </div>
 
                   <form class="row g-3 needs-validation"  name="fvalida"  action="AdmProfesorServlet" method="post" onsubmit=" return valida_envia()">
+                     <div class="col-12">
+                      <label for="usuario" class="form-label">Usuario</label>
+                      <input type="text" name="usuario" class="form-control" id="Usuario" required>
+                      
+                    </div>
                     <div class="col-12">
                       <label for="yourName" class="form-label">Nombre</label>
                       <input type="text" name="name" class="form-control" id="Nombre" required>
@@ -141,7 +155,7 @@ N A V B A R
                     
                      <div class="col-12">
                       <label for="Provincia" class="form-label">Provincia</label>
-                      <select name=provincias>
+                      <select class="form-select form-control" name=provincias>
 <%! @SuppressWarnings("unchecked") %>                      
                       <%
 				List<Provincia> ListaProvincia = null;
@@ -149,22 +163,8 @@ N A V B A R
 				{
 					ListaProvincia = (List<Provincia>) request.getAttribute("ListaProvincia");
 				}
-				%>
-                           
-                           <%
-                           if(ListaProvincia!=null)
-                           for(Provincia  p : ListaProvincia){
-                        	   
-                           %>
-                           
-                            <option value="<%=p.getId() %>"><%=p.getNombre() %></option>
-                            
-                            <%
-                            
-                           }
-                            %>
-
-                      
+				%><%if(ListaProvincia!=null)
+                    for(Provincia  p : ListaProvincia){%><option value="<%=p.getId() %>"><%=p.getNombre() %></option><%} %>
                       </select>
                       
                     </div>
@@ -189,30 +189,11 @@ N A V B A R
                     </select>
                   </div>
                 </div>  
-                
-                
-                   <div class="col-12">
-                  <label class="col-sm-2 col-form-label">Perfil</label>
-                  <div class="col-sm-10">
-                    <select class="form-select" aria-label="Default select example"  name=perfil>
-                      
-                      <option value="1">Administrador</option>
-                      <option value="2">Docente</option>
-                    </select>
-                  </div>
-                </div>
-                    
-                    
-
-                   
-
                     <div class="col-12">
                       <label for="yourPassword" class="form-label">Contraseña</label>
-                      <input type="password" name="password" class="form-control" id="yourPassword" required>
-                     
+                      <input type="password" name="password" class="form-control" id="yourPassword" required> 
                     </div>
 
-                 
                     <div class="col-12">
                       <button class="btn btn-primary w-100" type="submit"  name ="btnregistrar">Crear profesor</button>
                       

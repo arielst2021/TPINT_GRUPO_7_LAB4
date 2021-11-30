@@ -72,4 +72,16 @@ public class NegocioProfesorImpl implements NegocioProfesor{
 		
 		return dao.ModificarProfesor(ObjProfesor);
 	}
+	
+	@Override
+	public boolean verificar(String dni) {
+		return dao.verificar(dni);
+	}
+	
+	@Override
+	public boolean existeUsuario(String usuario) {
+		return dao.existeUsuario(usuario);
+	}
+	
+
 }

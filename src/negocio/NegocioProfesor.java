@@ -15,5 +15,6 @@ public interface NegocioProfesor {
 	public int BajaProfesor(Profesor ObjProfesor);
 	public int ModificarProfesor(Profesor ObjProfesor);
 	public Profesor ProfePorLegajo(String Legajo);
-	
+	boolean verificar(String dni);
+	boolean existeUsuario(String usuario);
 }

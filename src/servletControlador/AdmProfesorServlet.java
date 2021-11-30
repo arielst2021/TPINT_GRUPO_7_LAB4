@@ -25,11 +25,12 @@ import javax.servlet.http.HttpSession;
 
 import entidades.Materia;
 import entidades.Profesor;
-import entidades.Provincia;
-
+import negocio.NegocioAlumno;
+import negocio.NegocioEstado;
 import negocio.NegocioProfesor;
 import negocio.NegocioProvincia;
-
+import negocioImpl.NegocioAlumnoImpl;
+import negocioImpl.NegocioEstadoImpl;
 import negocioImpl.NegocioProfesorImpl;
 import negocioImpl.NegocioProvinciaImpl;
 import java.util.*;
@@ -40,7 +41,10 @@ import java.util.*;
 @WebServlet("/AdmProfesorServlet")
 public class AdmProfesorServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	private NegocioAlumno NegocioA = new NegocioAlumnoImpl();
+	private NegocioProfesor NegocioP = new NegocioProfesorImpl();
+	private NegocioProvincia negocioP = new NegocioProvinciaImpl();
+	private NegocioEstado negocioE = new NegocioEstadoImpl();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -89,64 +93,74 @@ public class AdmProfesorServlet extends HttpServlet {
 		
 		
 		if (request.getParameter("btnregistrar") != null) {
-			int profesoragregado = 0;
-			String string = request.getParameter("nacimiento");
-			SimpleDateFormat formato = new SimpleDateFormat(string);
-			Date fecha = null;
-			try {
+			int ProfesorAgregado = 0;
+			String MensajeRegistrar = "0";
+			if(request.getParameter("name") != null && request.getParameter("apellido") != null && request.getParameter("dni") != null
+        			&& request.getParameter("nacimiento")  != null && request.getParameter("provincias") != null && request.getParameter("estado")  != null
+        			&& request.getParameter("direccion")  != null && request.getParameter("mail") != null && request.getParameter("telefono") != null) 
+			{
+				try {
 
+    	    		// USO DE FECHA
+    	    		DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd"); 
+    	    		LocalDate FechaNacimiento = LocalDate.parse(request.getParameter("nacimiento"), formato);
+    	    		
+    	    		Persona persona = new Persona();
+    	    		Profesor profesor = new Profesor();
+    	    		//
+    	    		Provincia provincia= new Provincia();
+        			int idprovincia = Integer.parseInt(request.getParameter("provincias"));
+        			provincia.setId(idprovincia);
+        			//
+        			Estado estado= new Estado();
+        			estado.setIdEstado(Integer.parseInt(request.getParameter("estado")));
+        			Perfil perfil= new Perfil();
+        			perfil.setCodPerfil(2);
+    	    		// PERSONA -> PROFESOR
+    	    		persona.setNombre(request.getParameter("name"));
+    	    		persona.setApellido(request.getParameter("apellido"));
+        			persona.setDni(request.getParameter("dni"));
+        			persona.setFechaNacimiento(FechaNacimiento);
+        			persona.setDireccion(request.getParameter("direccion"));
+        			persona.setProvincia(provincia);
+        			persona.setEmail(request.getParameter("mail"));
+        			persona.setTelefono(request.getParameter("telefono"));
+    	    		profesor.setPersona(persona);
+    	    		profesor.setEstado(estado);
+    	    		profesor.setUsuario(request.getParameter("usuario"));
+    	    		profesor.setPerfil(perfil);
+    	    		profesor.setContrasenia(request.getParameter("password"));
+
+
+    				// SE VALIDA QUE EL DNI NO HAYA SUDO UTILIZADO NI EN ALGUN ALUMNO NI EN PROFESORES
+    	    		if(NegocioA.verificar(persona.getDni())==true || NegocioP.verificar(persona.getDni())==true) {
+    	    		request.setAttribute("respuestadb", "-1");
+    	    		MensajeRegistrar="-1";
+    	    		System.out.println(NegocioP.existeUsuario(request.getParameter("usuario")));
+    	    		}else if(NegocioP.existeUsuario(request.getParameter("usuario"))==true) {
+        	    		request.setAttribute("respuestadb", "-2");
+        	    		MensajeRegistrar="-2";
+    	    		}else {
+    	    			ProfesorAgregado = NegocioP.guardarprofesor(profesor);
+        	    		request.setAttribute("respuestadb", ProfesorAgregado);
+        	    		MensajeRegistrar="1";
+    	    		}
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
 				
-				fecha = (Date) formato.parse(string);
-				System.out.println("Se pudo castear el date");
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				System.out.println(formato.toString());
-				System.out.println("No se pudo castear el date");
-			}
-
-			
-			Date input = new Date();
-			LocalDate date = input.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-			int idprovincia = Integer.parseInt(request.getParameter("provincias"));
-
-			NegocioProfesor negocioprofesor = new NegocioProfesorImpl();
-			Profesor profesor = new Profesor();
-			Provincia provincia= new Provincia();
-			Perfil perfil= new Perfil();
-			Estado estado= new Estado();
-			Persona persona= new Persona();
-			
-			perfil.setCodPerfil(Integer.parseInt( request.getParameter("perfil")));
-			estado.setIdEstado(Integer.parseInt(request.getParameter("estado")));
-			provincia.setId(idprovincia);
-			
-			
-			persona.setNombre(request.getParameter("name"));
-			persona.setApellido(request.getParameter("apellido"));
-			profesor.setContrasenia(request.getParameter("password"));
-			persona.setDireccion(request.getParameter("direccion"));
-			persona.setDni(request.getParameter("dni"));
-			profesor.setEstado(estado);
-			profesor.setPerfil(perfil);
-			persona.setTelefono(request.getParameter("telefono"));
-			profesor.setUsuario(request.getParameter("dni"));
-			persona.setEmail(request.getParameter("mail"));
-			persona.setFechaNacimiento(date);
-			persona.setProvincia(provincia);
-			profesor.setPersona(persona);
-			profesoragregado=negocioprofesor.guardarprofesor(profesor);
-            
-			request.setAttribute("respuestadb", profesoragregado);
-			
-			NegocioProvincia negocioProvincia = new NegocioProvinciaImpl();
-			List<Provincia> ListaProvincia= negocioProvincia.listaProvincias();
-			request.setAttribute("ListaProvincia", ListaProvincia);
-			
-			
-			
-			RequestDispatcher miRequestDispatcher = request.getRequestDispatcher("/adm_profesores_agregar.jsp");
-			miRequestDispatcher.forward(request, response);
+				HttpSession session = request.getSession();
+				session.setAttribute("Mensaje", MensajeRegistrar);
+				 
+				List<Provincia> ListaProvincia= negocioP.listaProvincias();
+				request.setAttribute("ListaProvincia", ListaProvincia);
+				
+	    		//OBTENGO LISTADO DE ESTADOS
+				ArrayList<Estado> listaEstados = negocioE.obtenerEstados();
+				request.setAttribute("listarEstados", listaEstados); 
+				
+				RequestDispatcher RequestDispatcher = request.getRequestDispatcher("/adm_profesores_agregar.jsp");
+				RequestDispatcher.forward(request, response);
 		}
 		
 		if (request.getParameter("EditarEstado") != null) {
@@ -266,4 +280,5 @@ public class AdmProfesorServlet extends HttpServlet {
 			rd.forward(request, response);	
     	}		
 	}
+}
 }
