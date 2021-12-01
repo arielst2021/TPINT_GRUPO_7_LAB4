@@ -15,7 +15,7 @@ import entidades.Profesor;
 import entidades.Provincia;
 
 public class ProfesorDaoImpl implements ProfesorDao {
-	private static final String iniciarSesion = "SELECT pro_perfil_id, per_nombre, pro_estado_id, est_nombre, pro_nombre, pro_apellido, pro_legajo FROM profesores INNER JOIN perfiles ON perfiles.per_id=profesores.pro_perfil_id INNER JOIN estados ON estados.est_id=profesores.pro_estado_id WHERE pro_usuario = ? AND pro_contrasenia = ? AND pro_estado_id = 1";
+	private static final String iniciarSesion = "SELECT pro_perfil_id, per_nombre, pro_estado_id, est_nombre, pro_nombre, pro_apellido, pro_legajo FROM profesores INNER JOIN perfiles ON perfiles.per_id=profesores.pro_perfil_id INNER JOIN estados ON estados.est_id=profesores.pro_estado_id WHERE pro_usuario = ? AND pro_contrasenia = ? AND pro_estado_id = ?";
 	private static final String obtenerTodosLosProfesoresActivos = "SELECT pro_legajo, pro_dni, pro_nombre, pro_apellido, pro_fechanac, pro_direccion, pro_provincia_id, prov_nombre, pro_email, pro_telefono, pro_estado_id, est_nombre, pro_perfil_id, per_nombre, pro_usuario, pro_contrasenia FROM profesores INNER JOIN provincias ON provincias.prov_id=profesores.pro_provincia_id INNER JOIN perfiles ON perfiles.per_id=profesores.pro_perfil_id INNER JOIN estados ON estados.est_id= profesores.pro_estado_id WHERE pro_estado_id=1 AND pro_perfil_id=2";
 	private static final String obtenerTodosLosProfesores = "SELECT pro_legajo, pro_dni, pro_nombre, pro_apellido, pro_fechanac, pro_direccion, pro_provincia_id, prov_nombre, pro_email, pro_telefono, pro_estado_id, est_nombre, pro_perfil_id, per_nombre, pro_usuario, pro_contrasenia FROM profesores INNER JOIN provincias ON provincias.prov_id=profesores.pro_provincia_id INNER JOIN perfiles ON perfiles.per_id=profesores.pro_perfil_id INNER JOIN estados ON estados.est_id= profesores.pro_estado_id WHERE pro_perfil_id=2";
 	private static final String obtenerProfesorPorLegajo = "SELECT pro_legajo, pro_dni, pro_nombre, pro_apellido, pro_fechanac, pro_direccion, pro_provincia_id, prov_nombre, pro_email, pro_telefono, pro_estado_id, est_nombre, pro_perfil_id, per_nombre, pro_usuario, pro_contrasenia FROM profesores INNER JOIN provincias ON provincias.prov_id=profesores.pro_provincia_id INNER JOIN perfiles ON perfiles.per_id=profesores.pro_perfil_id INNER JOIN estados ON estados.est_id= profesores.pro_estado_id WHERE pro_legajo= ?";
@@ -87,6 +87,7 @@ public class ProfesorDaoImpl implements ProfesorDao {
 			// 3. ESTABLECER LOS PARÁMETROS
 			miPreparedStatement.setString(1, userProfesor);
 			miPreparedStatement.setString(2, passProfesor);
+			miPreparedStatement.setString(3, "1");
 
 			// 4. EJECUTAR CONSULTA SQL
 			miResultSet = miPreparedStatement.executeQuery();
